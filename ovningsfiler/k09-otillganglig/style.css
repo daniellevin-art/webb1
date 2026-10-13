@@ -1,0 +1,17 @@
+body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; }
+*:focus { outline: none; }
+.header { display: flex; align-items: center; gap: 20px; background: #222; padding: 10px; }
+.logga { width: 120px; }
+.nav a { color: #555; margin-right: 10px; text-decoration: none; }
+.sok { background: none; border: none; font-size: 16px; }
+.erbjudande {
+  background: yellow; padding: 10px; font-weight: bold;
+  animation: blinka 0.2s infinite;
+}
+@keyframes blinka { 50% { opacity: 0; } }
+h2, h4, p, table, form, img { margin-left: 20px; margin-right: 20px; }
+.ingress { color: #bbb; }
+input, select { display: block; margin: 8px 0; padding: 6px; border: 1px solid #ccc; }
+.obligatorisk { border-color: red; }
+.knapp { background: #e63946; color: white; padding: 8px 16px; width: 60px; text-align: center; cursor: pointer; }
+.footer { margin-top: 40px; padding: 10px; background: #eee; color: #999; }

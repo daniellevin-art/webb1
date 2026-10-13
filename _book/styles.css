@@ -1,0 +1,56 @@
+/* Små justeringar ovanpå Bootstrap-temat */
+
+.callout-tip .callout-title-container::before { content: ""; }
+
+/* Veckans mål-rutan */
+.mal {
+  border-left: 4px solid #f5b400;
+  padding: 0.75rem 1rem;
+  background: rgba(245, 180, 0, 0.08);
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Lärarblock */
+.larare {
+  border: 2px dashed #6f42c1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+.larare::before {
+  content: "🧑‍🏫 För läraren";
+  display: block;
+  font-weight: 700;
+  color: #6f42c1;
+  margin-bottom: 0.5rem;
+}
+
+/* Filnamn ovanför kodblock */
+div.code-with-filename .code-with-filename-file {
+  font-family: var(--bs-font-monospace);
+  font-size: 0.85em;
+}
+
+table { font-size: 0.95em; }
+
+/* Centralt innehåll-etikett under kapitelrubriken */
+.ci {
+  font-size: 0.85em;
+  color: #6c757d;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+.ci::before { content: "📘 Centralt innehåll: "; font-weight: 600; }
+
+/* Projektarbete */
+.projekt {
+  border-left: 4px solid #198754;
+  padding: 0.75rem 1rem;
+  background: rgba(25, 135, 84, 0.07);
+  border-radius: 0.25rem;
+  margin: 1.5rem 0;
+}
+
+/* Kryssrutor i checklistor */
+ul.task-list { list-style: none; padding-left: 1rem; }

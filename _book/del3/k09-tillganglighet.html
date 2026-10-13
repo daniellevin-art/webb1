@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv" xml:lang="sv"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Tillgänglighet – Webbutveckling 1</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../del3/k10-kvalitet.html" rel="next">
+<link href="../del2/k08-bilder-media.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a1953863e1f72ef3b996ef827f01ca7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-03c9dafadeb5298962e5cbf7f8641a4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f1d7f68b0002ed4784130a8513023e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-03c9dafadeb5298962e5cbf7f8641a4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Inget resultat",
+    "search-matching-documents-text": "matchande dokument",
+    "search-copy-link-title": "Kopiera länk för att söka",
+    "search-hide-matches-text": "Göm ytterligare resultat",
+    "search-more-match-text": "annat resultat i detta dokument",
+    "search-more-matches-text": "fler resultat i detta dokument",
+    "search-clear-button-title": "Rensa",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Verkställ",
+    "search-label": "Sök"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del3/k09-tillganglighet.html">Del 3 – Kvalitet</a></li><li class="breadcrumb-item"><a href="../del3/k09-tillganglighet.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Sök" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Webbutveckling 1</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Skifta mörkt läge"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Sök"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Välkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../kursoversikt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kursöversikt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 1 – Webben</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k01-webbens-historia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Webben som plattform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k02-hur-webben-fungerar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 2 – Bygga webbsidor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k03-html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k04-teckenkodning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Teckenkodning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k05-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CSS – grunderna</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k06-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typsnitt, färg och layoutprinciper</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k07-layout.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Layout och responsiv design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k08-bilder-media.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bilder och media</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 3 – Kvalitet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k09-tillganglighet.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k10-kvalitet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Kvalitet, interoperabilitet och optimering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k11-javascript-dom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">JavaScript och DOM</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k12-sakerhet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 4 – Publicering, ansvar och process</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k13-publicering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k14-lagar-etik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k15-processen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Webbutvecklingsprocessen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k16-slutprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Slutprojekt</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bilagor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/a-verktyg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Verktyg och kom igång</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/b-ordlista.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Ordlista</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/c-fusklapp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Fusklapp: HTML och CSS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/d-mallar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mallar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/e-bedomning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Bedömning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innehållsförteckning</h2>
+   
+  <ul>
+  <li><a href="#vem-gäller-det" id="toc-vem-gäller-det" class="nav-link active" data-scroll-target="#vem-gäller-det"><span class="header-section-number">9.1</span> Vem gäller det?</a></li>
+  <li><a href="#wcag" id="toc-wcag" class="nav-link" data-scroll-target="#wcag"><span class="header-section-number">9.2</span> WCAG</a></li>
+  <li><a href="#det-viktigaste-i-praktiken" id="toc-det-viktigaste-i-praktiken" class="nav-link" data-scroll-target="#det-viktigaste-i-praktiken"><span class="header-section-number">9.3</span> Det viktigaste i praktiken</a>
+  <ul class="collapse">
+  <li><a href="#semantisk-html" id="toc-semantisk-html" class="nav-link" data-scroll-target="#semantisk-html"><span class="header-section-number">9.3.1</span> 1. Semantisk HTML</a></li>
+  <li><a href="#struktur-rubriker-och-landmärken" id="toc-struktur-rubriker-och-landmärken" class="nav-link" data-scroll-target="#struktur-rubriker-och-landmärken"><span class="header-section-number">9.3.2</span> 2. Struktur: rubriker och landmärken</a></li>
+  <li><a href="#tangentbord" id="toc-tangentbord" class="nav-link" data-scroll-target="#tangentbord"><span class="header-section-number">9.3.3</span> 3. Tangentbord</a></li>
+  <li><a href="#text-och-bild" id="toc-text-och-bild" class="nav-link" data-scroll-target="#text-och-bild"><span class="header-section-number">9.3.4</span> 4. Text och bild</a></li>
+  <li><a href="#länkar-och-knappar" id="toc-länkar-och-knappar" class="nav-link" data-scroll-target="#länkar-och-knappar"><span class="header-section-number">9.3.5</span> 5. Länkar och knappar</a></li>
+  <li><a href="#formulär" id="toc-formulär" class="nav-link" data-scroll-target="#formulär"><span class="header-section-number">9.3.6</span> 6. Formulär</a></li>
+  <li><a href="#media-och-rörelse" id="toc-media-och-rörelse" class="nav-link" data-scroll-target="#media-och-rörelse"><span class="header-section-number">9.3.7</span> 7. Media och rörelse</a></li>
+  <li><a href="#begripligt-innehåll" id="toc-begripligt-innehåll" class="nav-link" data-scroll-target="#begripligt-innehåll"><span class="header-section-number">9.3.8</span> 8. Begripligt innehåll</a></li>
+  <li><a href="#aria-med-försiktighet" id="toc-aria-med-försiktighet" class="nav-link" data-scroll-target="#aria-med-försiktighet"><span class="header-section-number">9.3.9</span> ARIA – med försiktighet</a></li>
+  </ul></li>
+  <li><a href="#testa-tillgänglighet" id="toc-testa-tillgänglighet" class="nav-link" data-scroll-target="#testa-tillgänglighet"><span class="header-section-number">9.4</span> Testa tillgänglighet</a></li>
+  <li><a href="#lagen" id="toc-lagen" class="nav-link" data-scroll-target="#lagen"><span class="header-section-number">9.5</span> Lagen</a></li>
+  <li><a href="#labbar" id="toc-labbar" class="nav-link" data-scroll-target="#labbar"><span class="header-section-number">9.6</span> Labbar</a></li>
+  <li><a href="#instuderingsfrågor" id="toc-instuderingsfrågor" class="nav-link" data-scroll-target="#instuderingsfrågor"><span class="header-section-number">9.7</span> Instuderingsfrågor</a></li>
+  <li><a href="#nyckelbegrepp" id="toc-nyckelbegrepp" class="nav-link" data-scroll-target="#nyckelbegrepp"><span class="header-section-number">9.8</span> Nyckelbegrepp</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del3/k09-tillganglighet.html">Del 3 – Kvalitet</a></li><li class="breadcrumb-item"><a href="../del3/k09-tillganglighet.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-tillganglighet" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ci">
+<p>Hur tillgänglighet uppnås även för användare med funktionsnedsättning. Riktlinjer för god praxis och tillgänglighet. Anpassning av kod, bilder och media för att uppnå tillgänglighet.</p>
+</div>
+<div class="mal">
+<p><strong>Kapitlets mål</strong> – efter kapitlet kan du:</p>
+<ul>
+<li>förklara vad digital tillgänglighet är och vem den gäller,</li>
+<li>beskriva WCAG, dess fyra principer och nivåer,</li>
+<li>bygga sidor som fungerar med tangentbord och skärmläsare,</li>
+<li>testa tillgänglighet både manuellt och med verktyg,</li>
+<li>hitta och laga vanliga tillgänglighetsfel,</li>
+<li>förklara vilka krav lagen ställer.</li>
+</ul>
+</div>
+<section id="vem-gäller-det" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="vem-gäller-det"><span class="header-section-number">9.1</span> Vem gäller det?</h2>
+<p><strong>Digital tillgänglighet</strong> betyder att alla ska kunna använda en webbplats, oavsett funktionsförmåga. Det handlar om fler än man tror:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Funktionsnedsättning</th>
+<th>Exempel</th>
+<th>Hjälpmedel eller strategi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Syn</strong></td>
+<td>Blind, synsvag, färgblind</td>
+<td>Skärmläsare, förstoring, hög kontrast, punktskriftsdisplay</td>
+</tr>
+<tr class="even">
+<td><strong>Hörsel</strong></td>
+<td>Döv, hörselskadad</td>
+<td>Undertexter, transkribering, teckenspråk</td>
+</tr>
+<tr class="odd">
+<td><strong>Motorik</strong></td>
+<td>Kan inte använda mus, darrningar</td>
+<td>Tangentbord, röststyrning, kontaktstyrning</td>
+</tr>
+<tr class="even">
+<td><strong>Kognition</strong></td>
+<td>Dyslexi, ADHD, minnessvårigheter</td>
+<td>Tydligt språk, enkel struktur, inga tidsgränser</td>
+</tr>
+</tbody>
+</table>
+<p>Funktionsnedsättningar kan också vara <strong>tillfälliga</strong> (en bruten arm) eller <strong>situationsbundna</strong> (starkt solljus på skärmen, en bebis på armen, en bullrig buss). Det som är nödvändigt för vissa är bra för alla.</p>
+</section>
+<section id="wcag" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="wcag"><span class="header-section-number">9.2</span> WCAG</h2>
+<p><strong>WCAG</strong> (<em>Web Content Accessibility Guidelines</em>) är de internationella riktlinjerna för tillgänglighet, framtagna av W3C. Senaste versionen är <strong>WCAG 2.2</strong> (2023). Riktlinjerna är indelade i fyra principer – <strong>POUR</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Princip</th>
+<th>Betyder</th>
+<th>Exempel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Möjlig att uppfatta</strong> (<em>Perceivable</em>)</td>
+<td>Allt innehåll går att uppfatta med något sinne</td>
+<td>Alt-texter, undertexter, kontrast</td>
+</tr>
+<tr class="even">
+<td><strong>Möjlig att hantera</strong> (<em>Operable</em>)</td>
+<td>Allt går att använda</td>
+<td>Tangentbord, tillräckligt med tid, inga blinkande effekter</td>
+</tr>
+<tr class="odd">
+<td><strong>Begriplig</strong> (<em>Understandable</em>)</td>
+<td>Innehåll och gränssnitt går att förstå</td>
+<td>Tydligt språk, förutsägbar navigering, hjälp vid fel</td>
+</tr>
+<tr class="even">
+<td><strong>Robust</strong> (<em>Robust</em>)</td>
+<td>Fungerar med olika webbläsare och hjälpmedel</td>
+<td>Korrekt, giltig HTML</td>
+</tr>
+</tbody>
+</table>
+<p>Varje princip har <strong>framgångskriterier</strong> på tre nivåer: <strong>A</strong> (grundkrav), <strong>AA</strong> (det som normalt krävs, även i lagen) och <strong>AAA</strong> (högsta nivån). Målet för dina webbplatser är <strong>AA</strong>.</p>
+</section>
+<section id="det-viktigaste-i-praktiken" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="det-viktigaste-i-praktiken"><span class="header-section-number">9.3</span> Det viktigaste i praktiken</h2>
+<p>De flesta tillgänglighetsfel går att undvika med det du redan lärt dig.</p>
+<section id="semantisk-html" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="semantisk-html"><span class="header-section-number">9.3.1</span> 1. Semantisk HTML</h3>
+<p>Rätt element ger rätt beteende gratis. En <code>&lt;button&gt;</code> kan fokuseras med <code>Tab</code>, aktiveras med Enter och mellanslag, och läses upp som “knapp”. En <code>&lt;div&gt;</code> med en klickfunktion kan ingenting av det.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ❌ Ser ut som en knapp, men är det inte --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"knapp"</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"bestall()"</span><span class="dt">&gt;</span>Beställ<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ✅ --&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"button"</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"bestall()"</span><span class="dt">&gt;</span>Beställ<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="struktur-rubriker-och-landmärken" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="struktur-rubriker-och-landmärken"><span class="header-section-number">9.3.2</span> 2. Struktur: rubriker och landmärken</h3>
+<p>Skärmläsaranvändare navigerar ofta med <strong>rubriker</strong> (hoppar mellan dem) och <strong>landmärken</strong> (<code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>). En <code>h1</code> per sida, rubriknivåer i ordning.</p>
+</section>
+<section id="tangentbord" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="tangentbord"><span class="header-section-number">9.3.3</span> 3. Tangentbord</h3>
+<p>Allt som går att göra med mus ska gå att göra med tangentbord:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Tangent</th>
+<th>Gör</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Tab</code> / <code>Shift+Tab</code></td>
+<td>Nästa / föregående länk, knapp eller fält</td>
+</tr>
+<tr class="even">
+<td><code>Enter</code></td>
+<td>Följ länk, tryck på knapp</td>
+</tr>
+<tr class="odd">
+<td><code>Mellanslag</code></td>
+<td>Tryck på knapp, kryssa i ruta, scrolla</td>
+</tr>
+<tr class="even">
+<td>Piltangenter</td>
+<td>Välj i radioknappar och listor</td>
+</tr>
+<tr class="odd">
+<td><code>Esc</code></td>
+<td>Stäng dialog eller meny</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><strong>Fokus ska synas.</strong> Ta aldrig bort <code>outline</code> utan att ersätta den.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">:focus-visible</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">outline</span><span class="ch">:</span> <span class="dv">3</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">var(</span><span class="va">--accent</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">outline-offset</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Ordningen ska vara logisk</strong> – samma som den visuella. Den följer HTML-koden, så ändra inte ordningen bara med CSS.</p></li>
+<li><p><strong>Hoppa till innehållet.</strong> En <em>skip link</em> först på sidan låter tangentbordsanvändare hoppa förbi menyn:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> class</span><span class="op">=</span><span class="st">"hoppa"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#innehall"</span><span class="dt">&gt;</span>Hoppa till innehållet<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span>…<span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">main</span><span class="ot"> id</span><span class="op">=</span><span class="st">"innehall"</span><span class="dt">&gt;</span>…<span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.hoppa</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">position</span><span class="ch">:</span> <span class="dv">absolute</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">left</span><span class="ch">:</span> <span class="dv">-9999</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.hoppa</span><span class="in">:focus</span> {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">left</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">top</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="cn">white</span><span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0.5</span><span class="dt">rem</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+<section id="text-och-bild" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="text-och-bild"><span class="header-section-number">9.3.4</span> 4. Text och bild</h3>
+<ul>
+<li>Alt-texter (kapitel 8).</li>
+<li>Kontrast minst 4,5 : 1 (kapitel 6).</li>
+<li>Information inte bara med färg.</li>
+<li>Textstorlek i <code>rem</code>, sidan fungerar vid 200 % zoom (kapitel 7).</li>
+<li><code>lang</code> på <code>&lt;html&gt;</code>, och på delar med annat språk: <code>&lt;span lang="en"&gt;latte art&lt;/span&gt;</code>.</li>
+</ul>
+</section>
+<section id="länkar-och-knappar" class="level3" data-number="9.3.5">
+<h3 data-number="9.3.5" class="anchored" data-anchor-id="länkar-och-knappar"><span class="header-section-number">9.3.5</span> 5. Länkar och knappar</h3>
+<ul>
+<li>Länktexten ska vara begriplig utan sammanhang: “Se hela menyn” – inte “Klicka här”.</li>
+<li>Länkar <em>går någonstans</em>, knappar <em>gör något</em>.</li>
+<li>Klickytor minst 24 × 24 px (WCAG 2.2), helst 44 × 44.</li>
+</ul>
+</section>
+<section id="formulär" class="level3" data-number="9.3.6">
+<h3 data-number="9.3.6" class="anchored" data-anchor-id="formulär"><span class="header-section-number">9.3.6</span> 6. Formulär</h3>
+<ul>
+<li>Varje fält har en synlig <code>label</code>.</li>
+<li>Instruktioner <em>före</em> fältet, inte bara som <code>placeholder</code> (den försvinner när man skriver och har ofta låg kontrast).</li>
+<li>Felmeddelanden i text, nära fältet, och som förklarar hur man rättar.</li>
+<li><code>autocomplete</code> på personuppgiftsfält.</li>
+</ul>
+</section>
+<section id="media-och-rörelse" class="level3" data-number="9.3.7">
+<h3 data-number="9.3.7" class="anchored" data-anchor-id="media-och-rörelse"><span class="header-section-number">9.3.7</span> 7. Media och rörelse</h3>
+<ul>
+<li><p>Undertexter och transkribering.</p></li>
+<li><p>Inget som blinkar mer än tre gånger per sekund (kan utlösa epileptiska anfall).</p></li>
+<li><p>Användaren ska kunna pausa rörelse. Respektera <code>prefers-reduced-motion</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> <span class="fu">(</span><span class="kw">prefers-reduced-motion</span><span class="ch">:</span> <span class="dv">reduce</span><span class="fu">)</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span> { <span class="kw">animation</span><span class="ch">:</span> <span class="dv">none</span> <span class="at">!important</span><span class="op">;</span> <span class="kw">transition</span><span class="ch">:</span> <span class="dv">none</span> <span class="at">!important</span><span class="op">;</span> }</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ul>
+</section>
+<section id="begripligt-innehåll" class="level3" data-number="9.3.8">
+<h3 data-number="9.3.8" class="anchored" data-anchor-id="begripligt-innehåll"><span class="header-section-number">9.3.8</span> 8. Begripligt innehåll</h3>
+<ul>
+<li><strong>Klarspråk</strong>: korta meningar, vanliga ord, det viktigaste först.</li>
+<li>Konsekvent navigering på alla sidor.</li>
+<li>Inga tidsgränser, eller möjlighet att förlänga dem.</li>
+</ul>
+</section>
+<section id="aria-med-försiktighet" class="level3" data-number="9.3.9">
+<h3 data-number="9.3.9" class="anchored" data-anchor-id="aria-med-försiktighet"><span class="header-section-number">9.3.9</span> ARIA – med försiktighet</h3>
+<p><strong>ARIA</strong> (<em>Accessible Rich Internet Applications</em>) är attribut som ger skärmläsare extra information: <code>aria-label</code>, <code>aria-current</code>, <code>aria-expanded</code>, <code>aria-hidden</code> med flera. Första regeln för ARIA är: <strong>använd inte ARIA om det finns ett HTML-element som gör jobbet.</strong> Fel använd ARIA gör sidan <em>sämre</em>.</p>
+</section>
+</section>
+<section id="testa-tillgänglighet" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="testa-tillgänglighet"><span class="header-section-number">9.4</span> Testa tillgänglighet</h2>
+<p>Ingen metod räcker ensam:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metod</th>
+<th>Hittar</th>
+<th>Hittar inte</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Automatiska verktyg</strong> (Lighthouse, WAVE, axe)</td>
+<td>Saknade alt, låg kontrast, saknade etiketter</td>
+<td>Om alt-texten är <em>bra</em>, om ordningen är logisk, om sidan går att förstå. Hittar bara en del av alla fel</td>
+</tr>
+<tr class="even">
+<td><strong>Tangentbordstest</strong></td>
+<td>Fokusfel, fällor, saknade knappar</td>
+<td>Problem som bara syns för skärmläsare</td>
+</tr>
+<tr class="odd">
+<td><strong>Skärmläsare</strong></td>
+<td>Hur sidan faktiskt låter</td>
+<td>– kräver övning</td>
+</tr>
+<tr class="even">
+<td><strong>Användartest</strong> med personer med funktionsnedsättning</td>
+<td>Riktiga problem</td>
+<td>– det bästa, men mest resurskrävande</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lagen" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="lagen"><span class="header-section-number">9.5</span> Lagen</h2>
+<p>I Sverige finns två lagar som ställer krav på digital tillgänglighet:</p>
+<ul>
+<li><strong>Lagen om tillgänglighet till digital offentlig service</strong> (DOS-lagen, 2018:1937) gäller <strong>offentlig sektor</strong>: myndigheter, kommuner, regioner, skolor. Webbplatser måste uppfylla en europeisk standard som i praktiken betyder <strong>WCAG 2.1 nivå AA</strong>, och ha en <strong>tillgänglighetsredogörelse</strong> som berättar vad som inte är tillgängligt och hur man kan få hjälp. Myndigheten för digital förvaltning (<strong>DIGG</strong>) har tillsyn.</li>
+<li><strong>Lagen om vissa produkters och tjänsters tillgänglighet</strong> (2023:254), som bygger på EU:s tillgänglighetsdirektiv, gäller sedan <strong>28 juni 2025</strong> även många <strong>privata</strong> tjänster, bland annat e-handel, banktjänster och e-böcker. Mycket små företag (mikroföretag) som erbjuder tjänster är undantagna.</li>
+</ul>
+<p>Kapitel 14 tar upp fler lagar.</p>
+</section>
+<section id="labbar" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="labbar"><span class="header-section-number">9.6</span> Labbar</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 9.1 – Tangentbordstestet
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lägg undan musen.</p>
+<ol type="1">
+<li>Gå till en stor webbplats du använder ofta och försök göra något vanligt – söka, lägga en vara i varukorgen, logga in – med bara tangentbordet.</li>
+<li>Notera: Syns fokus hela tiden? Är ordningen logisk? Finns en skip link (tryck <code>Tab</code> direkt när sidan laddats)? Fastnade du någonstans?</li>
+<li>Gör samma test på Kvarnens sida och din egen webbplats. Laga det du hittar.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 9.2 – Lyssna på webben
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Starta en skärmläsare:</p>
+<ul>
+<li><strong>Windows:</strong> ladda ner <strong>NVDA</strong> (gratis, <a href="https://www.nvaccess.org" class="uri">https://www.nvaccess.org</a>). Starta med <code>Ctrl+Alt+N</code>, avsluta med <code>Insert+Q</code>. Använd hörlurar.</li>
+<li><strong>Mac:</strong> <strong>VoiceOver</strong> är inbyggd. Slå på/av med <code>Cmd+F5</code>.</li>
+<li><strong>Mobil:</strong> <em>TalkBack</em> (Android) eller <em>VoiceOver</em> (iPhone) under tillgänglighetsinställningarna. Var försiktig – gesterna ändras när den är på.</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Gör</th>
+<th>NVDA</th>
+<th>VoiceOver (Mac)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Läs nästa</td>
+<td><code>↓</code></td>
+<td><code>Ctrl+Option+→</code></td>
+</tr>
+<tr class="even">
+<td>Nästa rubrik</td>
+<td><code>H</code></td>
+<td><code>Ctrl+Option+Cmd+H</code></td>
+</tr>
+<tr class="odd">
+<td>Lista rubriker/länkar/landmärken</td>
+<td><code>Insert+F7</code></td>
+<td><code>Ctrl+Option+U</code></td>
+</tr>
+<tr class="even">
+<td>Sluta prata</td>
+<td><code>Ctrl</code></td>
+<td><code>Ctrl</code></td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>Lyssna på <code>ovningsfiler/k03-divsoppa</code> (originalet) och på din semantiska version från labb 3.2. Vad är skillnaden?</li>
+<li>Öppna listan över rubriker och landmärken på Kvarnens startsida. Går det att förstå sidans upplägg bara därifrån?</li>
+<li>Lyssna på formuläret. Läses etiketterna upp? Vad händer om du tar bort en <code>label</code>?</li>
+<li>Lyssna på en bild utan alt, en med <code>alt=""</code> och en med bra alt.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 9.3 – Laga den otillgängliga sidan
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Öppna <code>ovningsfiler/k09-otillganglig/index.html</code>. Sidan är en bokningssida för ett gym, och den har <strong>minst 15 tillgänglighetsfel</strong>.</p>
+<ol type="1">
+<li>Leta fel <em>utan</em> automatiska verktyg: läs koden, testa med tangentbord, zooma, och lyssna med skärmläsare. Skriv en lista med varje fel, vilken POUR-princip det bryter mot och hur det ska lagas.</li>
+<li>Kör sedan WAVE och Lighthouse (labb 9.4). Hittade verktygen något du missat? Missade verktygen något du hittat?</li>
+<li>Laga alla fel.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 9.4 – Automatiska verktyg
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Lighthouse:</strong> utvecklarverktygen → fliken <em>Lighthouse</em> → kryssa bara i <em>Accessibility</em> → <em>Analyze</em>. Vilket betyg fick sidan? Läs varje anmärkning.</li>
+<li><strong>WAVE:</strong> installera tillägget <em>WAVE Evaluation Tool</em> eller gå till <a href="https://wave.webaim.org" class="uri">https://wave.webaim.org</a>. Röda ikoner är fel, gula är varningar.</li>
+<li>Kör båda på din egen webbplats. Laga allt som går.</li>
+<li>Fick du 100 i Lighthouse? Betyder det att sidan är helt tillgänglig? Motivera med vad du lärde dig i labb 9.3.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 9.5 – Läs en tillgänglighetsredogörelse
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Hitta tillgänglighetsredogörelsen för din kommun, skolan eller en myndighet (sök efter “tillgänglighetsredogörelse” och namnet, eller titta längst ner på sidan).</li>
+<li>Vilka brister anger de? Varför har de inte åtgärdats?</li>
+<li>Hur kan en användare få innehåll i tillgängligt format eller anmäla brister?</li>
+<li>Hur skulle en tillgänglighetsredogörelse för din egen webbplats se ut? Skriv ett utkast.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Bygg vidare
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">Skip link som syns vid fokus.</label></li>
+<li><label><input type="checkbox">Allt fungerar med tangentbord, fokus syns tydligt.</label></li>
+<li><label><input type="checkbox">Rubriker i ordning och landmärken på alla sidor.</label></li>
+<li><label><input type="checkbox">Bra alt-texter, rätt kontrast, inget bara med färg.</label></li>
+<li><label><input type="checkbox">Formulär med etiketter och begripliga instruktioner.</label></li>
+<li><label><input type="checkbox">Lighthouse Accessibility minst 95, inga fel i WAVE.</label></li>
+<li><label><input type="checkbox">Testad med skärmläsare.</label></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="instuderingsfrågor" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="instuderingsfrågor"><span class="header-section-number">9.7</span> Instuderingsfrågor</h2>
+<ol type="1">
+<li>Vad betyder digital tillgänglighet? Ge exempel på fyra typer av funktionsnedsättningar och ett hjälpmedel för varje.</li>
+<li>Vad är en situationsbunden funktionsnedsättning? Ge två exempel.</li>
+<li>Vad är WCAG? Vilken nivå är normalt målet?</li>
+<li>Förklara de fyra principerna i POUR med ett exempel var.</li>
+<li>Varför är <code>&lt;button&gt;</code> bättre än en <code>&lt;div&gt;</code> med klickfunktion?</li>
+<li>Hur navigerar en skärmläsaranvändare effektivt på en webbsida?</li>
+<li>Vad är en skip link, och vem har nytta av den?</li>
+<li>Varför räcker det inte med <code>placeholder</code> istället för <code>label</code>?</li>
+<li>Vad är ARIA? Vad är den första regeln för ARIA?</li>
+<li>Varför räcker det inte att testa med automatiska verktyg?</li>
+<li>Vilka krav ställer DOS-lagen, och vem gäller den för?</li>
+<li>Vad förändrades 28 juni 2025 för privata företag?</li>
+<li>Ge tre exempel på hur tillgänglighetsanpassningar gör en webbplats bättre för <em>alla</em> användare.</li>
+</ol>
+</section>
+<section id="nyckelbegrepp" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="nyckelbegrepp"><span class="header-section-number">9.8</span> Nyckelbegrepp</h2>
+<p>tillgänglighet · funktionsnedsättning · hjälpmedel · skärmläsare · förstoringsprogram · röststyrning · WCAG · POUR · framgångskriterium · nivå A/AA/AAA · landmärke · fokus · fokusmarkering · tabbordning · skip link · ARIA · klarspråk · <code>prefers-reduced-motion</code> · Lighthouse · WAVE · DOS-lagen · tillgänglighetsredogörelse · DIGG · tillgänglighetsdirektivet</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopierat!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopierat!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../del2/k08-bilder-media.html" class="pagination-link" aria-label="Bilder och media">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bilder och media</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../del3/k10-kvalitet.html" class="pagination-link" aria-label="Kvalitet, interoperabilitet och optimering">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Kvalitet, interoperabilitet och optimering</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

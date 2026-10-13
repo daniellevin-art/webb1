@@ -1,0 +1,248 @@
+# Layout och responsiv design {#sec-layout}
+
+::: ci
+Introduktion till responsiv design. Applikationer som fungerar oberoende av användaragent, operativsystem och hårdvaruplattform.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- placera element i rader och kolumner med Flexbox,
+- bygga rutnät med CSS Grid,
+- förklara vad responsiv design är och varför den behövs,
+- bygga *mobilt först* med media queries,
+- testa en sida på olika skärmstorlekar och riktiga enheter.
+:::
+
+## Varför responsiv design?
+
+Din sida visas på allt från en klocka till en tv. Mobilen står för mer än hälften av all webbtrafik. Förr byggde man ibland en separat mobilsajt (`m.exempel.se`), men det betydde två webbplatser att underhålla.
+
+**Responsiv design** betyder att *en* webbplats anpassar sig efter skärmen. Begreppet myntades 2010 och bygger på tre saker:
+
+1. **Flexibla layouter** – bredder i `%`, `fr` och `max-width`, inte fasta pixlar.
+2. **Flexibla bilder** – bilder som krymper med sin behållare.
+3. **Media queries** – CSS som bara gäller vid vissa förutsättningar, till exempel en minsta skärmbredd.
+
+Och en förutsättning: viewport-taggen i `<head>`.
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+Utan den låtsas mobilen att skärmen är ungefär 980 px bred och krymper hela sidan. Med den använder sidan mobilens riktiga bredd.
+
+## Flexbox – saker på rad
+
+Flexbox lägger ett elements **barn** längs en axel. Du sätter `display: flex` på *föräldern*:
+
+```html
+<header class="sidhuvud">
+  <a href="index.html" class="logga">Kvarnens café</a>
+  <nav>
+    <ul class="meny">
+      <li><a href="index.html">Hem</a></li>
+      <li><a href="meny.html">Meny</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
+```
+
+```css
+.sidhuvud {
+  display: flex;
+  justify-content: space-between;  /* logga till vänster, meny till höger */
+  align-items: center;             /* vertikalt centrerat */
+  flex-wrap: wrap;                 /* får gå till ny rad om det inte får plats */
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.meny {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+```
+
+| Egenskap (på föräldern) | Vanliga värden | Gör |
+|---|---|---|
+| `flex-direction` | `row`, `column` | Axelns riktning |
+| `justify-content` | `flex-start`, `center`, `space-between` | Placering längs axeln |
+| `align-items` | `stretch`, `center`, `flex-start` | Placering tvärs axeln |
+| `flex-wrap` | `nowrap`, `wrap` | Ny rad om det inte får plats |
+| `gap` | `1rem` | Avstånd mellan barnen |
+
+På *barnen* styr `flex` hur de delar på utrymmet:
+
+```css
+.sokfalt { flex: 1; }     /* ta allt utrymme som blir över */
+```
+
+## Grid – rutnät
+
+Grid hanterar rader **och** kolumner. Perfekt för kort och gallerier:
+
+```css
+.kortlista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+```
+
+Raden betyder: "så många kolumner som får plats, var och en minst 15 rem bred, och dela resten lika". Galleriet blir responsivt utan en enda media query.
+
+Fasta kolumner skriver man så här:
+
+```css
+.tva-kolumner {
+  display: grid;
+  grid-template-columns: 2fr 1fr;   /* huvudinnehåll | sidospalt */
+  gap: 2rem;
+}
+```
+
+`fr` (*fraction*) är en andel av det lediga utrymmet.
+
+**Flexbox eller Grid?** Flexbox när innehållet bestämmer – en meny, en rad knappar. Grid när layouten bestämmer – kolumner, gallerier. Ofta används båda.
+
+## Mobilt först
+
+Skriv först CSS för den **minsta** skärmen. Lägg sedan till regler för större skärmar med `min-width`:
+
+```css
+/* Mobil: allt i en kolumn */
+.tva-kolumner {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Från 48 rem (768 px): två kolumner */
+@media (min-width: 48rem) {
+  .tva-kolumner {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+```
+
+Varför mobilt först?
+
+- Mobilversionen är oftast enklast. Det är lättare att lägga till kolumner än att ta bort dem.
+- Det tvingar dig att prioritera innehållet.
+- Mobiler, som ofta har sämre uppkoppling, får mindre CSS att tolka.
+
+Välj **brytpunkter** där *din* layout går sönder, inte efter populära telefonmodeller. Vanliga värden är 40 rem (640 px), 48 rem (768 px) och 64 rem (1 024 px).
+
+### Andra saker att anpassa
+
+- **Pekskärmar.** Klickytor ska vara minst 44 × 44 px. Hover finns inte på en pekskärm – lägg aldrig viktig information bara i `:hover`.
+- **Orientering.** Telefonen kan vändas.
+- **Utskrift.** `@media print { nav, footer { display: none; } }` ger snygga utskrifter av t.ex. menyn.
+- **Användarens inställningar.** `prefers-color-scheme` (kapitel 6) och `prefers-reduced-motion` för den som blir illamående av animationer.
+
+## Oberoende av enhet och plattform
+
+En webbplats ska fungera oavsett **användaragent** (webbläsare), **operativsystem** och **hårdvara**. Responsiv design är en del av det. Annat att tänka på:
+
+- Testa i flera webbläsare. Safari på iPhone använder en annan motor än Chrome.
+- Utgå inte från en snabb dator – mobiler är långsammare och uppkopplingen sämre.
+- Användaren kan ha förstorat texten eller zoomat. Sidan ska fungera vid 200 % textstorlek och när den visas i en smal kolumn (motsvarande 320 px).
+- Inget ska kräva mus. Tangentbord, pekskärm och röststyrning ska också fungera (kapitel 9).
+
+Kapitel 10 handlar om hur man testar det här systematiskt.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 7.1 – Flexbox och Grid som spel
+Spela [Flexbox Froggy](https://flexboxfroggy.com) och [Grid Garden](https://cssgridgarden.com). Båda finns på svenska (välj språk uppe till höger). Kom så långt du hinner – 20 minuter vardera.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 7.2 – Kvarnens header och kort
+1. Bygg om Kvarnens header med Flexbox enligt genomgången.
+2. Gör korten för veckans bakverk till ett Grid med `auto-fill` och `minmax`.
+3. Lägg till en sidfot med tre kolumner (adress, öppettider, sociala medier) som ligger under varandra i mobil.
+4. Inspektera Grid och Flexbox i utvecklarverktygen. Klicka på märket `grid` eller `flex` bredvid elementet – då ritas linjerna ut.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 7.3 – Mobilt först
+1. Öppna enhetsläget i utvecklarverktygen (`Ctrl+Shift+M`, Mac `Cmd+Shift+M`). Välj en smal telefon.
+2. Ta bort alla media queries du har. Fungerar sidan i mobilen? Laga det som går sönder.
+3. Dra långsamt i kanten för att göra fönstret bredare. Var ser layouten dålig ut? Lägg en brytpunkt just där.
+4. Ta bort viewport-taggen tillfälligt. Vad händer i mobilvyn? Sätt tillbaka den.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 7.4 – På riktiga enheter
+1. Se till att datorn och mobilen är på samma wifi.
+2. Ta reda på datorns IP-adress (`ipconfig` i Windows, `ifconfig` eller *Systeminställningar → Nätverk* på Mac).
+3. Starta Live Server. Skriv `http://DIN-IP:5500` i mobilens webbläsare.
+4. Testa sidan i mobilen: går menyn att använda med tummen? Är texten läsbar utan att zooma? Fungerar formuläret – får du rätt tangentbord för e-post och telefon?
+5. Vänd telefonen. Fungerar det fortfarande?
+
+Fungerar inte steg 3 (skolnät blockerar ofta trafik mellan enheter) – gör labben hemma, eller låna en klasskamrats telefon och använd enhetsläget i flera webbläsare.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 7.5 – Zoom och smala skärmar
+1. Öppna din sida i en vanlig datorwebbläsare. Zooma till **200 %** (`Ctrl` + `+`). Går allt att läsa och använda? Försvinner något?
+2. Zooma till **400 %**. Då motsvarar sidan en 320 px bred skärm. Måste du scrolla i sidled? (Det ska du inte behöva, förutom i t.ex. tabeller och kartor.)
+3. I Chrome: *Inställningar → Utseende → Teckenstorlek → Mycket stor*. Växer texten på din sida? Om inte – har du använt `px` för textstorlekar?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+- [ ] Header och meny med Flexbox.
+- [ ] Minst ett Grid (kort, galleri eller kolumner).
+- [ ] Mobilt först med minst en brytpunkt.
+- [ ] Ingen horisontell scroll vid 320 px.
+- [ ] Testad på minst en riktig mobil.
+- [ ] Klickytor minst 44 × 44 px i mobil.
+:::
+
+## Instuderingsfrågor
+
+1. Vad betyder responsiv design? Vilka tre byggstenar består den av?
+2. Vad gör viewport-taggen, och vad händer utan den?
+3. När väljer du Flexbox och när Grid?
+4. Förklara `repeat(auto-fill, minmax(15rem, 1fr))`.
+5. Vad betyder *mobilt först*? Ge två skäl till att arbeta så.
+6. Hur bör man välja brytpunkter?
+7. Varför ska viktig information aldrig ligga bara i `:hover`?
+8. Ge tre exempel på hur användare och enheter kan skilja sig åt, utöver skärmstorlek, som en webbplats behöver fungera för.
+
+## Nyckelbegrepp
+
+responsiv design · viewport · Flexbox · huvudaxel · `justify-content` · `align-items` · `gap` · Grid · `fr` · `auto-fill` · `minmax` · media query · brytpunkt · mobilt först · enhetsläge · pekskärm · klickyta · zoom · användaragent
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: Flexbox + spel. Lektion 2: Grid + spel + labb 7.2. Lektion 3: mobilt först, labb 7.3–7.5.
+
+**Labb 7.4** brukar uppskattas. Om skolnätet isolerar klienter: använd en mobil hotspot från lärarens telefon för demo.
+
+**Vanliga fel**
+
+- `display: flex` sätts på barnen istället för föräldern.
+- `ul` har kvar sin `padding-left` och listpunkter.
+- Media query skrivs före grundregeln och skrivs därför över.
+- Fasta bredder (`width: 1200px`) ger horisontell scroll.
+
+**Facit till instuderingsfrågorna**
+
+1. En webbplats som anpassar sig efter skärmen. Flexibla layouter, flexibla bilder, media queries.
+2. Talar om för mobilen att använda enhetens bredd och inte zooma ut. Utan den visas sidan som en förminskad datorsida (ca 980 px bred).
+3. Flexbox för endimensionellt innehåll (rad eller kolumn) där innehållet bestämmer storleken: menyer, knapprader. Grid för tvådimensionella layouter: gallerier, kolumnlayouter.
+4. Så många kolumner som får plats; varje kolumn minst 15 rem; det lediga utrymmet delas lika (1fr).
+5. Skriv CSS för minsta skärmen först och lägg till för större med `min-width`. Skäl: enklare grundlayout, tvingar fram prioritering av innehåll, mindre CSS för mobilen.
+6. Där designen går sönder när fönstret ändras, inte efter specifika enheter.
+7. Pekskärmar har ingen hover; tangentbordsanvändare kan inte hovra.
+8. T.ex. olika webbläsare (renderingsmotorer), pekskärm/tangentbord/mus, långsam uppkoppling, äldre hårdvara, förstorad text/zoom, mörkt läge, minskade animationer, skärmläsare.
+:::
+:::

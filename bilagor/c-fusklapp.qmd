@@ -1,0 +1,133 @@
+# Fusklapp: HTML och CSS {#sec-fusklapp}
+
+## HTML-mall
+
+```html
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sidans titel – Webbplatsens namn</title>
+    <meta name="description" content="En mening som beskriver sidan.">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+    <header>
+      <a href="index.html">Logga</a>
+      <nav aria-label="Huvudmeny">
+        <ul>
+          <li><a href="index.html" aria-current="page">Hem</a></li>
+          <li><a href="om.html">Om</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="innehall">
+      <h1>Rubrik</h1>
+    </main>
+    <footer>…</footer>
+  </body>
+</html>
+```
+
+## HTML-element
+
+| Kategori | Element |
+|---|---|
+| Struktur | `header` `nav` `main` `section` `article` `aside` `footer` `div` |
+| Rubriker och text | `h1`–`h6` `p` `strong` `em` `small` `blockquote` `br` `hr` `span` |
+| Listor | `ul` `ol` `li` `dl` `dt` `dd` |
+| Länkar och media | `a` `img` `picture` `source` `figure` `figcaption` `video` `audio` `track` `iframe` `svg` |
+| Tabeller | `table` `caption` `thead` `tbody` `tr` `th` `td` |
+| Formulär | `form` `label` `input` `textarea` `select` `option` `button` `fieldset` `legend` |
+| Interaktivt | `details` `summary` `dialog` |
+
+### Vanliga `input`-typer
+
+`text` · `email` · `tel` · `number` · `password` · `search` · `date` · `checkbox` · `radio` · `url` · `file` · `hidden`
+
+## CSS-syntax
+
+```css
+selektor {
+  egenskap: värde;
+}
+```
+
+| Selektor | Väljer |
+|---|---|
+| `p` | alla `p` |
+| `.klass` | element med `class="klass"` |
+| `#id` | elementet med `id="id"` |
+| `nav a` | `a` någonstans i `nav` |
+| `ul > li` | `li` direkt i `ul` |
+| `a:hover`, `a:focus-visible` | länk i hover/fokus |
+| `li:nth-child(odd)` | varannan `li` |
+| `p::first-line` | första raden i `p` |
+
+## Vanliga CSS-egenskaper
+
+| Område | Egenskaper |
+|---|---|
+| Text | `color` `font-family` `font-size` `font-weight` `line-height` `text-align` `text-decoration` `letter-spacing` |
+| Bakgrund | `background-color` `background-image` |
+| Boxmodell | `width` `max-width` `height` `padding` `border` `border-radius` `margin` `box-sizing` |
+| Visning | `display` (`block` `inline` `flex` `grid` `none`) |
+| Flexbox | `flex-direction` `justify-content` `align-items` `flex-wrap` `gap` `flex` |
+| Grid | `grid-template-columns` `grid-template-rows` `gap` `grid-column` `grid-template-areas` |
+| Position | `position` (`relative` `absolute` `fixed` `sticky`) `top` `right` `bottom` `left` `z-index` |
+| Bilder | `object-fit` `aspect-ratio` |
+| Övrigt | `transition` `opacity` `cursor` `outline` |
+
+## Grundstilmall
+
+```css
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bakgrund: #ffffff;
+  --text: #1f1f1f;
+  --accent: #8a4b1f;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bakgrund);
+}
+
+img { max-width: 100%; height: auto; }
+
+.behallare { max-width: 60rem; margin-inline: auto; padding-inline: 1rem; }
+
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+@media (min-width: 48rem) {
+  /* större skärmar */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+```
+
+## Checklista innan publicering
+
+- [ ] Validerar utan fel (HTML och CSS)
+- [ ] `lang`, `charset`, `viewport`, unik `title` och `description` på varje sida
+- [ ] En `h1` per sida, rubriker i ordning
+- [ ] Alla bilder: `alt`, `width`, `height`, optimerade
+- [ ] Alla formulärfält har `label`
+- [ ] Fungerar med tangentbord, fokus syns
+- [ ] Kontrast minst 4,5 : 1
+- [ ] Responsiv, ingen horisontell scroll vid 320 px
+- [ ] Testad i tre webbläsare och i mobil
+- [ ] Inga kakor eller tredjepartsresurser utan samtycke
+- [ ] Bildlicenser och källor angivna
+- [ ] Inga hemligheter i koden

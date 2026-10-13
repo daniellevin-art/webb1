@@ -1,0 +1,133 @@
+# Slutprojekt {#sec-slutprojekt}
+
+::: ci
+Hela kursen: utvecklingsprocessen för ett webbprojekt – målsättning, planering, specifikation, kodning, optimering, testning, dokumentation, publicering och uppföljning.
+:::
+
+::: mal
+**Slutprojektets mål** – du visar att du kan:
+
+- planera och genomföra ett webbprojekt åt en beställare,
+- skapa en webbplats anpassad till syfte, användare och tillgänglighet,
+- kvalitetssäkra, publicera och dokumentera den,
+- arbeta enligt lagar och göra etiska överväganden,
+- utvärdera både processen och resultatet.
+:::
+
+## Uppdraget
+
+Du ska bygga en webbplats åt en **beställare**. Det bästa är en riktig beställare: en förening du är med i, en släktings företag, en skolklubb, ett idrottslag eller en lokal verksamhet. Hittar du ingen kan du välja ett av uppdragen nedan, där läraren spelar beställaren.
+
+### Färdiga uppdrag
+
+**A. Malmö Brädspelsklubb**
+Klubben träffas varje onsdag i ett bibliotek. De vill locka nya medlemmar, visa vilka spel de har och när de träffas, och låta folk anmäla intresse. Målgrupp: 15–70 år. Ordföranden vill kunna uppdatera spellistan själv.
+
+**B. Cykelverkstan på Söder**
+En liten cykelverkstad med två anställda. Kunderna ringer hela dagen för att fråga om priser och öppettider. De vill ha prislista, öppettider, en sida om att hyra cykel och ett formulär för att boka service. Många kunder är turister – innehållet ska finnas på svenska och engelska.
+
+**C. Ungdomens hus – sommarlovsaktiviteter**
+Kommunens fritidsgård vill visa sommarlovets gratisaktiviteter för 13–18-åringar, med anmälan. Eftersom det är en kommunal verksamhet gäller DOS-lagen, och webbplatsen behöver en tillgänglighetsredogörelse.
+
+**D. Ett eget uppdrag**
+Beskriv beställaren och behovet på en halv sida, och få det godkänt av läraren.
+
+## Krav
+
+Webbplatsen ska:
+
+- [ ] ha **4–8 sidor** med gemensam navigering, header och footer,
+- [ ] vara byggd med **egen HTML och CSS** (inte en webbplatsbyggare). Ett CMS får användas för en del, om det motiveras och godkänns,
+- [ ] vara **semantisk** och **validera utan fel**,
+- [ ] vara **responsiv**, mobilt först, och testad på riktiga enheter,
+- [ ] följa en **stilguide** med genomtänkta färger, typsnitt och layout,
+- [ ] ha **optimerade bilder** med alt-texter och tillåtna licenser,
+- [ ] uppfylla **WCAG 2.2 nivå AA** så långt du kan testa,
+- [ ] ha minst ett **formulär** byggt enligt god praxis,
+- [ ] ha minst en **JavaScript-funktion** enligt progressiv förbättring,
+- [ ] **följa lagarna**: integritetspolicy om personuppgifter samlas in, inga kakor utan samtycke, korrekta bildlicenser (och tillgänglighetsredogörelse för uppdrag C),
+- [ ] vara **publicerad** och versionshanterad på GitHub.
+
+## Tidsplan och leveranser
+
+| Vecka | Fas | Leverans – visa för läraren |
+|:-:|---|---|
+| 15 | Förstudie och planering | **Projektplan:** beställare, syfte, SMARTA mål, personas, tidsplan, risker |
+| 16 | Specifikation | **Kravspecifikation** (MoSCoW), **sajtkarta**, **wireframes** för mobil och dator, **stilguide**. Godkänns av beställaren *och* läraren innan du kodar |
+| 17 | Kodning | Struktur och grundlayout för alla sidor. Commits varje lektion |
+| 18 | Kodning och optimering | Allt innehåll, bilder, formulär, JavaScript |
+| 19 | Testning, publicering, dokumentation | **Testprotokoll**, **användartest**, publicerad webbplats, **README**, integritetspolicy |
+| 20 | Redovisning och uppföljning | **Redovisning**, **utvärdering**, beställarens återkoppling |
+
+Skriv **loggbok** varje lektion: vad du gjorde, vilka problem du stötte på, hur du löste dem och vilka beslut du tog. Loggboken är ditt viktigaste underlag när du utvärderar processen.
+
+## Projektmappen
+
+Allt lämnas in samlat i ditt GitHub-repo:
+
+```
+slutprojekt/
+├── README.md               ← start för läsaren: länkar till allt nedan
+├── index.html  …           ← webbplatsen
+├── css/  js/  bilder/  fonts/
+└── dokumentation/
+    ├── projektplan.md
+    ├── kravspecifikation.md
+    ├── sajtkarta.png
+    ├── wireframes/
+    ├── stilguide.html
+    ├── testprotokoll.md
+    ├── anvandartest.md
+    ├── loggbok.md
+    └── utvardering.md
+```
+
+Mallar för alla dokument finns i [Bilaga D](../bilagor/d-mallar.qmd).
+
+## Redovisning
+
+Ungefär 8 minuter + frågor.
+
+1. **Uppdraget** (1 min) – beställare, syfte, målgrupp.
+2. **Demo** (3 min) – visa webbplatsen, gärna i mobilen på storskärm. Visa att den fungerar med tangentbord.
+3. **Ett tekniskt val** (2 min) – visa kod du är nöjd med och förklara varför du gjorde som du gjorde.
+4. **Utvärdering** (2 min) – nådde du målen? Vad lärde du dig? Vad skulle du göra annorlunda?
+
+## Utvärdering
+
+Skriv en utvärdering (1–2 sidor) som besvarar frågorna nedan. Det är här du visar hur väl du kan bedöma ditt eget arbete. Svara inte bara *vad* – förklara *varför*, och ge exempel.
+
+**Resultatet**
+
+1. Uppfyller webbplatsen kravspecifikationen? Gå igenom Must- och Should-kraven ett och ett.
+2. Nåddes de SMARTA målen? Hur vet du det? Om du inte kan mäta det än – hur skulle du göra?
+3. Hur väl är webbplatsen anpassad till **syftet**, **användarna** (dina personas) och **tillgänglighet**? Ge konkreta exempel.
+4. Vad sa beställaren och testpersonerna? Vad har du ändrat efter deras synpunkter?
+5. Vilka lagar har du tagit hänsyn till, och hur? Vilka etiska överväganden har du gjort?
+
+**Processen**
+
+6. Höll tidsplanen? Var avvek den, och varför?
+7. Vilket var det svåraste problemet? Hur löste du det? Vilka källor använde du?
+8. Vilka beslut ändrade du under projektets gång? Var det rätt?
+9. Vad skulle du göra annorlunda i ett nästa projekt – både i arbetssättet och i det tekniska?
+10. Vad behöver beställaren tänka på när det gäller underhåll framåt?
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Se tidsplanen. Godkänn specifikationen vecka 16 innan eleverna börjar koda – det sparar mycket tid och lär ut poängen med processen. Håll korta avstämningar (5 min per elev) varje vecka mot Kanbantavlan och loggboken.
+
+**Riktiga beställare** ger mest motivation men kan bli sena med material. Kräv att eleven har texter och bilder senast vecka 17, annars får platshållartext användas och det noteras som en risk som inträffat – bra underlag för utvärderingen.
+
+**Bedömning:** Se Bilaga E. Slutprojektet täcker alla fyra betygskriterierna (Gy25). Utvärderingen är det viktigaste underlaget för "utvärderar process och resultat med enkla / utvecklade / välutvecklade omdömen". Redovisningens tekniska val och frågor visar "kunskaper om webbens betydelse och funktion".
+
+**Kontrollfrågor vid redovisning (välj 2–3)**
+
+- Vad händer, steg för steg, när någon skriver in din adress?
+- Varför valde du just de här brytpunkterna?
+- Hur testade du tillgängligheten? Vad hittade verktygen inte?
+- Varför sätter din webbplats inga kakor – eller varför gör den det?
+- Visa en commit. Vad ändrade den?
+- Om beställaren vill kunna ändra öppettiderna själv – hur skulle du lösa det?
+:::
+:::

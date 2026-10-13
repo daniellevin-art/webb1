@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Selektordetektiven</title>
+    <style>
+      body { font-family: system-ui, sans-serif; line-height: 1.5; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+      .markerad { outline: 3px solid red; background: #ffe5e5; }
+
+      /*
+        Gissa vilka element varje regel träffar. Skriv ner ditt svar.
+        Avkommentera sedan EN regel i taget (ta bort kommentarstecknen runt den)
+        och se vilka element som blir rödmarkerade.
+      */
+
+      /* Regel 1 */  /* p { outline: 3px solid red; } */
+      /* Regel 2 */  /* .pris { outline: 3px solid red; } */
+      /* Regel 3 */  /* #dagens { outline: 3px solid red; } */
+      /* Regel 4 */  /* nav a { outline: 3px solid red; } */
+      /* Regel 5 */  /* main > p { outline: 3px solid red; } */
+      /* Regel 6 */  /* li:first-child { outline: 3px solid red; } */
+      /* Regel 7 */  /* article h2 { outline: 3px solid red; } */
+      /* Regel 8 */  /* .vegansk.pris { outline: 3px solid red; } */
+      /* Regel 9 */  /* a[href^="https"] { outline: 3px solid red; } */
+      /* Regel 10 */ /* tr:nth-child(even) td { outline: 3px solid red; } */
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Kvarnens café</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Hem</a></li>
+          <li><a href="meny.html">Meny</a></li>
+          <li><a href="https://www.instagram.com">Instagram</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <p>Välkommen till Malmös mysigaste kafé.</p>
+
+      <article id="dagens">
+        <h2>Dagens bakverk</h2>
+        <p>Kardemummaknut <span class="pris">32 kr</span></p>
+        <p>Vegansk morotskaka <span class="vegansk pris">45 kr</span></p>
+        <p class="vegansk">Alla kakor finns som veganska på beställning.</p>
+      </article>
+
+      <section>
+        <h2>Öppettider</h2>
+        <table>
+          <tr><th>Dag</th><th>Tid</th></tr>
+          <tr><td>Måndag</td><td>07–18</td></tr>
+          <tr><td>Tisdag</td><td>07–18</td></tr>
+          <tr><td>Onsdag</td><td>07–18</td></tr>
+        </table>
+      </section>
+
+      <ul>
+        <li>Fritt wifi</li>
+        <li>Hund välkommen</li>
+      </ul>
+      <p>Läs mer på <a href="https://sv.wikipedia.org">Wikipedia</a>.</p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,243 @@
+# Mallar {#sec-mallar}
+
+Kopiera mallarna till Markdown-filer (`.md`) i ditt projekt, eller till ett dokument. Ta bort hjälptexterna i kursiv stil.
+
+## Projektplan
+
+```markdown
+# Projektplan – [projektets namn]
+
+## Beställare
+*Vem? Kontaktperson? Verksamhet?*
+
+## Bakgrund och syfte
+*Varför behövs webbplatsen? Vilket problem löser den?*
+
+## Mål (SMART)
+1. *Specifikt, mätbart, accepterat, realistiskt, tidsatt*
+2.
+3.
+
+## Målgrupper och personas
+### Persona 1: [namn, ålder]
+- Situation:
+- Enhet och förutsättningar:
+- Vill göra på webbplatsen:
+- Kan ha svårt med:
+
+## Avgränsningar
+*Vad ingår inte?*
+
+## Tidsplan
+| Vecka | Milstolpe | Klart när |
+|---|---|---|
+|  |  |  |
+
+## Risker
+| Risk | Sannolikhet (1–3) | Konsekvens (1–3) | Åtgärd |
+|---|---|---|---|
+|  |  |  |  |
+```
+
+## Kravspecifikation
+
+```markdown
+# Kravspecifikation – [projektets namn]
+
+## Funktionella krav
+| Nr | Krav | Prioritet (M/S/C/W) | Hur det testas |
+|---|---|---|---|
+| F1 | Besökaren kan se öppettiderna på startsidan | M | Öppna startsidan i mobil och dator |
+| F2 |  |  |  |
+
+## Icke-funktionella krav
+| Nr | Krav | Prioritet | Hur det testas |
+|---|---|---|---|
+| I1 | Uppfyller WCAG 2.2 AA | M | Tangentbord, skärmläsare, WAVE, Lighthouse |
+| I2 | Validerar utan fel | M | W3C-validatorn |
+| I3 | Fungerar i Chrome, Firefox och Safari (iOS) | M | Testprotokoll |
+| I4 | Startsidan har LCP under 2,5 s | S | Lighthouse, mobil |
+
+## Struktur
+*Sajtkarta (bild eller lista) och innehållsinventering*
+
+## Design
+*Länk till wireframes och stilguide*
+
+## Godkännande
+Beställare: ____________  Datum: ________
+```
+
+## Testprotokoll
+
+```markdown
+# Testprotokoll – [projektets namn]
+
+Testat av: ____  Datum: ____  Version/commit: ____
+
+| Nr | Krav | Testfall | Förväntat resultat | Chrome | Firefox | Mobil (Safari/…) | Kommentar och åtgärd |
+|---|---|---|---|---|---|---|---|
+| 1 | F1 | Öppna startsidan | Öppettider syns utan scroll | ✅ | ✅ | ✅ |  |
+| 2 |  |  |  |  |  |  |  |
+
+## Validering
+- HTML: __ fel (skärmdump)
+- CSS: __ fel (skärmdump)
+
+## Lighthouse (mobil)
+| Sida | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+|  |  |  |  |  |
+
+## Tillgänglighet
+- Tangentbordstest:
+- Skärmläsartest (vilken?):
+- WAVE:
+```
+
+## Användartest
+
+```markdown
+# Användartest
+
+Testperson: (ålder, vana – inget namn)  Enhet:  Datum:
+
+| Uppgift | Klarade? | Tid | Observationer (tvekade, letade, sa …) |
+|---|---|---|---|
+| 1. Ta reda på … |  |  |  |
+| 2. |  |  |  |
+| 3. |  |  |  |
+
+Testpersonens kommentarer efteråt:
+
+Det här ändrar jag:
+```
+
+## Loggbok
+
+```markdown
+# Loggbok
+
+## 2026-__-__
+- **Gjorde:**
+- **Problem:**
+- **Löste det genom:** (källa/länk)
+- **Beslut:**
+- **Nästa gång:**
+```
+
+## Utvärdering
+
+```markdown
+# Utvärdering – [projektets namn]
+
+## Resultatet
+### Kravuppfyllnad
+| Krav | Uppfyllt? | Kommentar |
+|---|---|---|
+
+### Mål
+*Nåddes målen? Hur vet du det?*
+
+### Anpassning till syfte, användare och tillgänglighet
+*Konkreta exempel*
+
+### Återkoppling från beställare och testpersoner
+
+### Lagar och etik
+*Vilka bestämmelser har du följt, och hur? Vilka etiska överväganden har du gjort?*
+
+## Processen
+### Tidsplanen
+### Det svåraste problemet och hur jag löste det
+### Beslut jag ändrade
+### Till nästa gång
+
+## Underhåll
+*Vad behöver beställaren tänka på?*
+```
+
+## README
+
+```markdown
+# [Projektets namn]
+
+Kort beskrivning av webbplatsen och vem den är till för.
+
+**Publicerad:** https://…
+
+## Struktur
+- `index.html` – startsida
+- `css/style.css` – all CSS
+- `js/main.js` – mobilmeny
+- `bilder/` – optimerade bilder (WebP)
+- `dokumentation/` – projektplan, krav, tester, utvärdering
+
+## Publicera en ändring
+1. Ändra filerna
+2. `git add .` → `git commit -m "Beskrivning"` → `git push`
+3. GitHub Pages uppdateras inom någon minut
+
+## Källor och licenser
+| Fil | Upphovsperson | Källa | Licens |
+|---|---|---|---|
+
+## Kända brister
+-
+```
+
+## Integritetspolicy
+
+```markdown
+# Så hanterar vi dina personuppgifter
+
+## Vem ansvarar?
+[Verksamhetens namn], org.nr …, [adress], [e-post]. Vi är personuppgiftsansvariga.
+
+## Vilka uppgifter samlar vi in, och varför?
+| Var | Uppgifter | Varför | Rättslig grund | Hur länge |
+|---|---|---|---|---|
+| Bokningsformuläret | Namn, e-post, telefon, datum | För att hantera din bokning | Avtal | Raderas 30 dagar efter besöket |
+| Nyhetsbrevet | E-post | För att skicka nyhetsbrev | Samtycke | Tills du avslutar prenumerationen |
+
+## Vem får ta del av uppgifterna?
+[T.ex. formulärtjänsten X, som är vårt personuppgiftsbiträde. Uppgifterna lagras inom EU / i … med skydd enligt …]
+
+## Kakor
+[Vi använder inga kakor. / Vi använder följande kakor: …]
+
+## Dina rättigheter
+Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade, invända mot behandlingen och återkalla ditt samtycke. Kontakta oss på [e-post].
+
+Är du missnöjd kan du klaga hos Integritetsskyddsmyndigheten (IMY), imy.se.
+
+*Senast uppdaterad: [datum]*
+```
+
+## Tillgänglighetsredogörelse
+
+Krävs för offentlig sektor (DOS-lagen). Myndigheten DIGG har en mall på sin webbplats, som du bör följa i skarpa projekt. Förenklad version:
+
+```markdown
+# Tillgänglighet för [webbplatsens namn]
+
+[Verksamheten] står bakom den här webbplatsen. Vi vill att så många som möjligt ska kunna använda den.
+
+## Hur tillgänglig är webbplatsen?
+Vi är medvetna om att delar av webbplatsen inte är helt tillgängliga. Se nedan.
+
+## Innehåll som inte är tillgängligt
+- [Brist, och vilket WCAG-kriterium den bryter mot]
+
+## Vad kan du göra om du inte kan använda delar av webbplatsen?
+Kontakta oss på [e-post/telefon] så hjälper vi dig.
+
+## Rapportera brister
+Kontakta oss på [e-post].
+
+## Tillsyn
+Myndigheten för digital förvaltning (DIGG) har tillsyn. Om du inte är nöjd med hur vi hanterar dina synpunkter kan du kontakta DIGG.
+
+## Hur vi testat webbplatsen
+[Metoder och datum]
+```

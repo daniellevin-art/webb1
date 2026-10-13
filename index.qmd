@@ -1,0 +1,55 @@
+# Välkommen {.unnumbered}
+
+I den här kursen lär du dig hur webben fungerar och hur man bygger webbplatser som fungerar för alla: i alla webbläsare, på alla skärmar och för användare med och utan funktionsnedsättning. Kursen avslutas med att du planerar, bygger, testar och publicerar en webbplats åt en beställare.
+
+Kursen är **praktisk**. Det mesta lär du dig genom att göra: skriva kod, undersöka riktiga webbplatser med webbläsarens verktyg, testa och laga. Några delar går inte att lära sig vid tangentbordet, som webbens historia, lagarna och vissa säkerhetsbegrepp. Dem arbetar du med i **projektarbeten** och **instuderingsfrågor**.
+
+## Bokens byggstenar
+
+Varje kapitel innehåller några av de här delarna:
+
+::: mal
+**Kapitlets mål** – vad du ska kunna efter kapitlet. Under kapitelrubriken står också vilken del av det centrala innehållet kapitlet behandlar.
+:::
+
+**Genomgång** – kort teori med kodexempel. Skriv av koden istället för att kopiera den.
+
+::: {.callout-tip icon=false}
+## 🔬 Labb
+Praktiska uppgifter som du gör direkt, ofta i webbläsarens utvecklarverktyg eller i en övningsfil. Labbarna är kursens kärna.
+:::
+
+**Bygg vidare** – nästa steg på *din egen webbplats*. Från kapitel 3 till 10 bygger du en webbplats om ett ämne du själv väljer. I kapitel 13 publicerar du den.
+
+::: projekt
+**Projektarbete** – större uppgifter, ofta i grupp, för de delar som inte är kod: historia, samhälle, lagar och säkerhet. De avslutas med en presentation, en rapport eller en granskning.
+:::
+
+**Instuderingsfrågor** – frågor som kontrollerar att du förstått teorin. Svara med egna ord.
+
+**Nyckelbegrepp** – ord du ska kunna förklara. Alla finns i ordlistan i [Bilaga B](bilagor/b-ordlista.qmd).
+
+## Vad du behöver
+
+- En dator med **VS Code** och minst två olika webbläsare, gärna Chrome och Firefox. Se [Bilaga A](bilagor/a-verktyg.qmd).
+- Ett **GitHub**-konto. Det behövs från kapitel 13, när du publicerar.
+- **Övningsfilerna** i mappen `ovningsfiler/`. Läraren delar ut dem.
+
+## Exempelwebbplatsen
+
+Bokens exempel bygger på en påhittad webbplats för **Kvarnens café**, ett litet kafé i Malmö. Du ser den växa kapitel för kapitel. Din egen webbplats bygger du parallellt med samma tekniker.
+
+Den färdiga exempelwebbplatsen finns i `ovningsfiler/kvarnen-exempel/`, och en tom mall att starta din egen webbplats från finns i `ovningsfiler/startmall/`.
+
+::: {.content-visible when-profile="larare"}
+::: larare
+Det här är **lärarversionen**. Den innehåller lärarblock som det här, med upplägg, vanliga fel och **facit till alla instuderingsfrågor**.
+
+```bash
+quarto render                    # elevversion  → _book/
+quarto render --profile larare   # lärarversion → _book-larare/
+```
+
+Publicera bara `_book/` för eleverna. Mappen `ovningsfiler/` delas ut separat. Där finns även facit-varianter av vissa övningar i undermappar som heter `facit/`. Plocka bort dem innan du delar ut mappen.
+:::
+:::

@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv" xml:lang="sv"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Hur webben fungerar – Webbutveckling 1</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../del2/k03-html.html" rel="next">
+<link href="../del1/k01-webbens-historia.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a1953863e1f72ef3b996ef827f01ca7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-03c9dafadeb5298962e5cbf7f8641a4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f1d7f68b0002ed4784130a8513023e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-03c9dafadeb5298962e5cbf7f8641a4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Inget resultat",
+    "search-matching-documents-text": "matchande dokument",
+    "search-copy-link-title": "Kopiera länk för att söka",
+    "search-hide-matches-text": "Göm ytterligare resultat",
+    "search-more-match-text": "annat resultat i detta dokument",
+    "search-more-matches-text": "fler resultat i detta dokument",
+    "search-clear-button-title": "Rensa",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Verkställ",
+    "search-label": "Sök"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del1/k01-webbens-historia.html">Del 1 – Webben</a></li><li class="breadcrumb-item"><a href="../del1/k02-hur-webben-fungerar.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Sök" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Webbutveckling 1</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Skifta mörkt läge"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Sök"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Välkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../kursoversikt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kursöversikt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 1 – Webben</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k01-webbens-historia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Webben som plattform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k02-hur-webben-fungerar.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 2 – Bygga webbsidor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k03-html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k04-teckenkodning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Teckenkodning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k05-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CSS – grunderna</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k06-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typsnitt, färg och layoutprinciper</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k07-layout.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Layout och responsiv design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k08-bilder-media.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bilder och media</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 3 – Kvalitet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k09-tillganglighet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k10-kvalitet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Kvalitet, interoperabilitet och optimering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k11-javascript-dom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">JavaScript och DOM</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k12-sakerhet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 4 – Publicering, ansvar och process</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k13-publicering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k14-lagar-etik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k15-processen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Webbutvecklingsprocessen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k16-slutprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Slutprojekt</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bilagor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/a-verktyg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Verktyg och kom igång</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/b-ordlista.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Ordlista</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/c-fusklapp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Fusklapp: HTML och CSS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/d-mallar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mallar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/e-bedomning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Bedömning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innehållsförteckning</h2>
+   
+  <ul>
+  <li><a href="#klient-och-server" id="toc-klient-och-server" class="nav-link active" data-scroll-target="#klient-och-server"><span class="header-section-number">2.1</span> Klient och server</a></li>
+  <li><a href="#vad-händer-när-du-skriver-en-adress" id="toc-vad-händer-när-du-skriver-en-adress" class="nav-link" data-scroll-target="#vad-händer-när-du-skriver-en-adress"><span class="header-section-number">2.2</span> Vad händer när du skriver en adress?</a></li>
+  <li><a href="#adresser-url" id="toc-adresser-url" class="nav-link" data-scroll-target="#adresser-url"><span class="header-section-number">2.3</span> Adresser: URL</a>
+  <ul class="collapse">
+  <li><a href="#domännamn" id="toc-domännamn" class="nav-link" data-scroll-target="#domännamn"><span class="header-section-number">2.3.1</span> Domännamn</a></li>
+  <li><a href="#absoluta-och-relativa-adresser" id="toc-absoluta-och-relativa-adresser" class="nav-link" data-scroll-target="#absoluta-och-relativa-adresser"><span class="header-section-number">2.3.2</span> Absoluta och relativa adresser</a></li>
+  </ul></li>
+  <li><a href="#ip-adresser-och-dns" id="toc-ip-adresser-och-dns" class="nav-link" data-scroll-target="#ip-adresser-och-dns"><span class="header-section-number">2.4</span> IP-adresser och DNS</a></li>
+  <li><a href="#http" id="toc-http" class="nav-link" data-scroll-target="#http"><span class="header-section-number">2.5</span> HTTP</a>
+  <ul class="collapse">
+  <li><a href="#metoder" id="toc-metoder" class="nav-link" data-scroll-target="#metoder"><span class="header-section-number">2.5.1</span> Metoder</a></li>
+  <li><a href="#statuskoder" id="toc-statuskoder" class="nav-link" data-scroll-target="#statuskoder"><span class="header-section-number">2.5.2</span> Statuskoder</a></li>
+  <li><a href="#http-är-tillståndslöst" id="toc-http-är-tillståndslöst" class="nav-link" data-scroll-target="#http-är-tillståndslöst"><span class="header-section-number">2.5.3</span> HTTP är tillståndslöst</a></li>
+  <li><a href="#versioner" id="toc-versioner" class="nav-link" data-scroll-target="#versioner"><span class="header-section-number">2.5.4</span> Versioner</a></li>
+  </ul></li>
+  <li><a href="#https-säker-överföring" id="toc-https-säker-överföring" class="nav-link" data-scroll-target="#https-säker-överföring"><span class="header-section-number">2.6</span> HTTPS: säker överföring</a></li>
+  <li><a href="#statiska-och-dynamiska-webbplatser" id="toc-statiska-och-dynamiska-webbplatser" class="nav-link" data-scroll-target="#statiska-och-dynamiska-webbplatser"><span class="header-section-number">2.7</span> Statiska och dynamiska webbplatser</a></li>
+  <li><a href="#labbar" id="toc-labbar" class="nav-link" data-scroll-target="#labbar"><span class="header-section-number">2.8</span> Labbar</a></li>
+  <li><a href="#instuderingsfrågor" id="toc-instuderingsfrågor" class="nav-link" data-scroll-target="#instuderingsfrågor"><span class="header-section-number">2.9</span> Instuderingsfrågor</a></li>
+  <li><a href="#nyckelbegrepp" id="toc-nyckelbegrepp" class="nav-link" data-scroll-target="#nyckelbegrepp"><span class="header-section-number">2.10</span> Nyckelbegrepp</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del1/k01-webbens-historia.html">Del 1 – Webben</a></li><li class="breadcrumb-item"><a href="../del1/k02-hur-webben-fungerar.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-teknik" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ci">
+<p>Teknisk orientering om webbens protokoll, adresser, säkerhet och samspelet mellan klient och server.</p>
+</div>
+<div class="mal">
+<p><strong>Kapitlets mål</strong> – efter kapitlet kan du:</p>
+<ul>
+<li>beskriva vad som händer från att du skriver en adress tills sidan syns,</li>
+<li>förklara begreppen klient, server, förfrågan och svar,</li>
+<li>dela upp en URL i dess delar,</li>
+<li>förklara vad DNS och IP-adresser är,</li>
+<li>läsa HTTP-statuskoder och headers i utvecklarverktygen,</li>
+<li>förklara vad HTTPS skyddar mot – och vad det inte skyddar mot.</li>
+</ul>
+</div>
+<section id="klient-och-server" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="klient-och-server"><span class="header-section-number">2.1</span> Klient och server</h2>
+<p>Webben bygger på ett enkelt samspel mellan två parter:</p>
+<ul>
+<li><strong>Klienten</strong> är programmet som <em>ber</em> om något. Oftast är det din webbläsare. Ett annat ord för det är <strong>användaragent</strong> (<em>user agent</em>).</li>
+<li><strong>Servern</strong> är en dator som <em>svarar</em>. Den står i en datorhall någonstans och väntar på förfrågningar.</li>
+</ul>
+<p>Samtalet går alltid till så här:</p>
+<pre><code> Klient (webbläsare)                         Server
+        │                                      │
+        │  ── förfrågan (request) ──────────►  │
+        │     "GET /meny.html"                 │
+        │                                      │
+        │  ◄───────────── svar (response) ──   │
+        │     "200 OK" + HTML-koden             │
+        │                                      │</code></pre>
+<p>Klienten frågar och servern svarar. Servern kan inte på eget initiativ skicka något till webbläsaren.</p>
+</section>
+<section id="vad-händer-när-du-skriver-en-adress" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="vad-händer-när-du-skriver-en-adress"><span class="header-section-number">2.2</span> Vad händer när du skriver en adress?</h2>
+<p>Säg att du skriver <code>https://www.kvarnenscafe.se/meny.html</code> och trycker Enter.</p>
+<ol type="1">
+<li><strong>DNS-uppslag.</strong> Webbläsaren behöver serverns <strong>IP-adress</strong>, ett nummer som <code>93.184.215.14</code>. Den frågar en <strong>DNS-server</strong>: “Vilken IP-adress har <code>www.kvarnenscafe.se</code>?” DNS fungerar som internets telefonkatalog.</li>
+<li><strong>Anslutning.</strong> Webbläsaren kopplar upp sig mot servern. Med <code>https</code> görs först ett <strong>TLS-handslag</strong>: servern visar upp sitt <strong>certifikat</strong>, och de två kommer överens om en krypteringsnyckel.</li>
+<li><strong>HTTP-förfrågan.</strong> Webbläsaren skickar <code>GET /meny.html</code>.</li>
+<li><strong>Servern svarar</strong> med en statuskod (<code>200 OK</code>) och HTML-koden.</li>
+<li><strong>Fler förfrågningar.</strong> Webbläsaren läser HTML:en och hittar länkar till CSS, bilder, typsnitt och JavaScript. Den begär var och en, ofta tiotals filer.</li>
+<li><strong>Rendering.</strong> Webbläsaren bygger upp sidan av HTML och CSS, kör JavaScript och ritar sidan på skärmen.</li>
+</ol>
+<p>Allt det här tar ofta under en sekund.</p>
+</section>
+<section id="adresser-url" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="adresser-url"><span class="header-section-number">2.3</span> Adresser: URL</h2>
+<p>En <strong>URL</strong> (<em>Uniform Resource Locator</em>) pekar ut exakt en resurs på webben:</p>
+<pre><code>https://www.kvarnenscafe.se:443/meny/dryck.html?sort=pris&amp;max=50#te
+└─┬─┘   └────────┬────────┘└┬┘└──────┬──────┘ └───────┬───────┘ └┬┘
+schema       värdnamn     port    sökväg           query       fragment
+(protokoll)  (host)                (path)    (frågeparametrar)</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Del</th>
+<th>Exempel</th>
+<th>Betydelse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Schema</strong></td>
+<td><code>https</code></td>
+<td>Vilket protokoll som används</td>
+</tr>
+<tr class="even">
+<td><strong>Värdnamn</strong></td>
+<td><code>www.kvarnenscafe.se</code></td>
+<td>Vilken server</td>
+</tr>
+<tr class="odd">
+<td><strong>Port</strong></td>
+<td><code>443</code></td>
+<td>“Dörren” på servern. Skrivs sällan ut: <code>https</code> använder 443 och <code>http</code> 80 som standard</td>
+</tr>
+<tr class="even">
+<td><strong>Sökväg</strong></td>
+<td><code>/meny/dryck.html</code></td>
+<td>Vilken fil eller sida på servern</td>
+</tr>
+<tr class="odd">
+<td><strong>Query</strong></td>
+<td><code>?sort=pris&amp;max=50</code></td>
+<td>Extra information i par av <code>namn=värde</code>, åtskilda med <code>&amp;</code></td>
+</tr>
+<tr class="even">
+<td><strong>Fragment</strong></td>
+<td><code>#te</code></td>
+<td>Ett ställe <em>på</em> sidan. Skickas aldrig till servern – webbläsaren hoppar dit själv</td>
+</tr>
+</tbody>
+</table>
+<section id="domännamn" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="domännamn"><span class="header-section-number">2.3.1</span> Domännamn</h3>
+<p>Värdnamnet läses <strong>bakifrån</strong>:</p>
+<pre><code>www . kvarnenscafe . se
+ │         │          └─ toppdomän (TLD): .se, .com, .org, .nu …
+ │         └──────────── domännamn: det man köper/hyr
+ └────────────────────── underdomän: valfri, bestäms av ägaren</code></pre>
+<p>Toppdomänen <code>.se</code> administreras av <strong>Internetstiftelsen</strong>. Ett domännamn köper man inte för alltid – man hyr det, ofta per år, genom en <em>registrar</em> (domänleverantör).</p>
+</section>
+<section id="absoluta-och-relativa-adresser" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="absoluta-och-relativa-adresser"><span class="header-section-number">2.3.2</span> Absoluta och relativa adresser</h3>
+<p>I din egen kod länkar du oftast med <strong>relativa</strong> adresser, som räknas från filen du står i:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Adress</th>
+<th>Betyder</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>https://www.svt.se/</code></td>
+<td>Absolut: hela vägen</td>
+</tr>
+<tr class="even">
+<td><code>meny.html</code></td>
+<td>Filen <code>meny.html</code> i samma mapp</td>
+</tr>
+<tr class="odd">
+<td><code>bilder/kaffe.jpg</code></td>
+<td>I undermappen <code>bilder</code></td>
+</tr>
+<tr class="even">
+<td><code>../index.html</code></td>
+<td>Upp en mapp</td>
+</tr>
+<tr class="odd">
+<td><code>/kontakt.html</code></td>
+<td>Från roten av webbplatsen</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="ip-adresser-och-dns" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ip-adresser-och-dns"><span class="header-section-number">2.4</span> IP-adresser och DNS</h2>
+<p>Alla datorer på internet har en <strong>IP-adress</strong>. Det finns två versioner:</p>
+<ul>
+<li><strong>IPv4</strong>: fyra tal 0–255, t.ex. <code>192.0.2.17</code>. Det finns ungefär 4 miljarder, vilket inte räcker.</li>
+<li><strong>IPv6</strong>: längre adresser, t.ex. <code>2001:db8::17</code>. Det finns i praktiken obegränsat många.</li>
+</ul>
+<p><strong>DNS</strong> (<em>Domain Name System</em>) översätter namn till IP-adresser. Ett namn kan ha en <strong>A-post</strong> (IPv4) och en <strong>AAAA-post</strong> (IPv6).</p>
+</section>
+<section id="http" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="http"><span class="header-section-number">2.5</span> HTTP</h2>
+<p><strong>HTTP</strong> (<em>Hypertext Transfer Protocol</em>) är språket som klient och server talar. En förfrågan ser i princip ut så här:</p>
+<pre class="http"><code>GET /meny.html HTTP/1.1
+Host: www.kvarnenscafe.se
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) … Firefox/131.0
+Accept-Language: sv-SE,sv;q=0.9,en;q=0.8</code></pre>
+<p>Och svaret:</p>
+<pre class="http"><code>HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 4821
+Cache-Control: max-age=3600
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="sv"&gt;
+…</code></pre>
+<p>Raderna med <code>Namn: värde</code> kallas <strong>headers</strong>. De beskriver förfrågan och svaret: vilken webbläsare det är, vilket språk användaren vill ha, vilken sorts fil som skickas och hur länge den får sparas.</p>
+<section id="metoder" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="metoder"><span class="header-section-number">2.5.1</span> Metoder</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metod</th>
+<th>Används till</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>GET</code></td>
+<td>Hämta något. Den vanligaste. Data skickas i URL:en</td>
+</tr>
+<tr class="even">
+<td><code>POST</code></td>
+<td>Skicka data till servern, t.ex. ett formulär. Data skickas i förfrågans “kropp”, inte i URL:en</td>
+</tr>
+</tbody>
+</table>
+<p>Det finns fler (<code>PUT</code>, <code>DELETE</code> …), men de här två räcker i den här kursen.</p>
+</section>
+<section id="statuskoder" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="statuskoder"><span class="header-section-number">2.5.2</span> Statuskoder</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kod</th>
+<th>Grupp</th>
+<th>Vanliga exempel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>2xx</strong></td>
+<td>Lyckades</td>
+<td><code>200 OK</code></td>
+</tr>
+<tr class="even">
+<td><strong>3xx</strong></td>
+<td>Gå någon annanstans</td>
+<td><code>301 Moved Permanently</code>, <code>304 Not Modified</code> (du har redan senaste versionen)</td>
+</tr>
+<tr class="odd">
+<td><strong>4xx</strong></td>
+<td>Klientens fel</td>
+<td><code>403 Forbidden</code>, <code>404 Not Found</code></td>
+</tr>
+<tr class="even">
+<td><strong>5xx</strong></td>
+<td>Serverns fel</td>
+<td><code>500 Internal Server Error</code>, <code>503 Service Unavailable</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="http-är-tillståndslöst" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="http-är-tillståndslöst"><span class="header-section-number">2.5.3</span> HTTP är tillståndslöst</h3>
+<p>Servern minns ingenting mellan två förfrågningar. Varje förfrågan är helt ny för den. Hur kan man då vara inloggad? Med <strong>kakor</strong> (<em>cookies</em>): servern skickar en liten textbit som webbläsaren sparar och skickar med i varje förfrågan efteråt, ungefär som ett nummer på en garderobsbricka. Kakor tas upp igen i kapitel 12 och 14.</p>
+</section>
+<section id="versioner" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="versioner"><span class="header-section-number">2.5.4</span> Versioner</h3>
+<p>HTTP/1.1 kom 1997 och används fortfarande. HTTP/2 (2015) och HTTP/3 (2022) gör samma sak men snabbare, framför allt genom att hämta många filer samtidigt över samma anslutning. Som webbutvecklare märker du sällan skillnaden.</p>
+</section>
+</section>
+<section id="https-säker-överföring" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="https-säker-överföring"><span class="header-section-number">2.6</span> HTTPS: säker överföring</h2>
+<p><code>https</code> är HTTP över en krypterad anslutning, <strong>TLS</strong>. HTTPS ger tre skydd:</p>
+<ol type="1">
+<li><strong>Kryptering.</strong> Ingen på vägen – på kaféets wifi, hos internetleverantören – kan läsa vad som skickas.</li>
+<li><strong>Integritet.</strong> Ingen kan ändra innehållet på vägen.</li>
+<li><strong>Autentisering.</strong> Ett <strong>certifikat</strong>, utfärdat av en betrodd <strong>certifikatutfärdare</strong> (CA), bevisar att servern verkligen tillhör domänen.</li>
+</ol>
+<p>Hänglåset i adressfältet betyder <strong>bara</strong> att anslutningen är krypterad och att certifikatet gäller för den domänen. Det betyder <strong>inte</strong> att webbplatsen är seriös. En bedragare kan ha HTTPS på <code>kvarnenscafe-betalning.se</code>. Mer om det i kapitel 12.</p>
+<p>I dag ska alla webbplatser använda HTTPS. Det finns gratis certifikat, till exempel från <em>Let’s Encrypt</em>, och webbläsare varnar för sidor utan.</p>
+</section>
+<section id="statiska-och-dynamiska-webbplatser" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="statiska-och-dynamiska-webbplatser"><span class="header-section-number">2.7</span> Statiska och dynamiska webbplatser</h2>
+<ul>
+<li><strong>Statisk</strong> webbplats: servern skickar färdiga filer, likadana till alla. Snabbt, säkert och enkelt. Det är sådana du bygger i den här kursen.</li>
+<li><strong>Dynamisk</strong> webbplats: servern <em>skapar</em> sidan när någon frågar, ofta med data från en databas. Exempel: en webbshop, ett forum, en inloggad vy. Sådant kod som körs på servern kallas <strong>serverkod</strong> (t.ex. PHP, Node.js, Python).</li>
+</ul>
+<p>Kod som körs i webbläsaren (HTML, CSS, JavaScript) kallas <strong>klientkod</strong>.</p>
+</section>
+<section id="labbar" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="labbar"><span class="header-section-number">2.8</span> Labbar</h2>
+<p>Alla labbar använder <strong>utvecklarverktygen</strong> i webbläsaren. Öppna dem med <code>F12</code> (Mac: <code>Cmd+Option+I</code>).</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.1 – Titta in i trafiken
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Öppna utvecklarverktygen och välj fliken <strong>Network</strong> (Nätverk).</li>
+<li>Gå till en nyhetssajt, t.ex. <code>svt.se</code>. Om listan är tom, ladda om sidan.</li>
+<li>Längst ner i fliken står en sammanfattning. Svara:
+<ol type="a">
+<li>Hur många förfrågningar (<em>requests</em>) gjordes?</li>
+<li>Hur mycket data överfördes (<em>transferred</em>)?</li>
+<li>Hur lång tid tog det tills allt var laddat (<em>Load</em>)?</li>
+</ol></li>
+<li>Klicka på den <strong>första</strong> raden, som är själva HTML-dokumentet. Under <em>Headers</em>:
+<ol type="a">
+<li>Vilken statuskod fick du?</li>
+<li>Vad står i <code>content-type</code>?</li>
+<li>Hitta din egen <code>user-agent</code>. Vad avslöjar den om dig?</li>
+</ol></li>
+<li>Filtrera på typ (knapparna <em>Doc, CSS, JS, Img, Font</em>). Vilken typ av fil står för mest data?</li>
+<li>Gör om samma sak på en enkel sida, t.ex. <code>info.cern.ch</code>. Jämför.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.2 – Plocka isär URL:er
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dela upp adresserna i schema, värdnamn, toppdomän, sökväg, query och fragment. Lämna tomt där en del saknas.</p>
+<ol type="1">
+<li><code>https://sv.wikipedia.org/wiki/World_Wide_Web#Historia</code></li>
+<li><code>https://www.google.com/search?q=kaffe+malm%C3%B6&amp;hl=sv</code></li>
+<li><code>http://localhost:5500/index.html</code></li>
+<li><code>https://www.skolverket.se/undervisning/gymnasieskolan</code></li>
+<li><code>https://maps.app.goo.gl/AbC123</code></li>
+<li>Hitta själv en adress med minst två query-parametrar. Vad tror du att de gör? Prova att ändra en.</li>
+</ol>
+<p>Varför är <code>%C3%A5</code> i adress 2 ett “å”? Svaret kommer i kapitel 4.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.3 – Statuskodsjakten
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Hitta, med Network-fliken, en förfrågan som får:</p>
+<ol type="1">
+<li><code>200</code> – lätt.</li>
+<li><code>404</code> – hitta på en adress som inte finns på en webbplats.</li>
+<li><code>301</code> eller <code>308</code> – skriv <code>http://</code> (utan s) framför en känd webbplats. Vart skickas du? Titta på headern <code>location</code>.</li>
+<li><code>304</code> – ladda om en sida du nyss besökt. Hittar du filer som inte hämtades på nytt? Testa också att ladda om med <code>Ctrl+Shift+R</code> (Mac: <code>Cmd+Shift+R</code>). Vad händer då?</li>
+</ol>
+<p>Tips: kryssa i <strong>Preserve log</strong> så att listan inte töms när sidan byter adress.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.4 – DNS och IP i terminalen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Öppna en terminal (Windows: <em>Kommandotolken</em> eller <em>PowerShell</em>; Mac: <em>Terminal</em>).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> svt.se</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="1">
+<li>Vilken eller vilka IP-adresser fick du? Finns både IPv4 och IPv6?</li>
+<li>Gör samma sak för <code>skolverket.se</code> och skolans webbplats.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ping</span> svt.se</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="3" type="1">
+<li>Hur lång tid tar det för ett paket att gå fram och tillbaka (<em>tid</em>/<em>time</em>, i millisekunder)? Avbryt med <code>Ctrl+C</code>.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tracert</span> svt.se        <span class="co"># Windows</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">traceroute</span> svt.se     <span class="co"># Mac/Linux</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="1">
+<li>Hur många “hopp” (routrar) passerar paketen? Känner du igen några namn?</li>
+</ol>
+<p>Skolans nätverk kan blockera vissa av kommandona. Gör i så fall labben hemma eller i mobilen via en app som <em>Network Tools</em>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.5 – Prata HTTP direkt med <code>curl</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>curl</code> är ett program som skickar HTTP-förfrågningar från terminalen. Det finns i Windows 10/11, macOS och Linux.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> https://www.skolverket.se</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>-I</code> hämtar bara headers.</p>
+<ol type="1">
+<li>Vilken statuskod och vilken HTTP-version fick du?</li>
+<li>Vilka headers känner du igen från genomgången?</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-v</span> http://example.com</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>-v</code> (<em>verbose</em>) visar hela samtalet. Raderna som börjar med <code>&gt;</code> är förfrågan, <code>&lt;</code> är svaret.</p>
+<ol start="3" type="1">
+<li>Hitta raden <code>GET / HTTP/1.1</code>. Vilka headers skickar curl?</li>
+<li>Jämför med vad din webbläsare skickade i labb 2.1. Vad skiljer?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.6 – Granska ett certifikat
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Gå till din bank, <code>skolverket.se</code> och en webbplats du väljer själv.</li>
+<li>Klicka på hänglåset (eller ikonen) till vänster om adressen och leta upp certifikatet.</li>
+<li>Fyll i för varje webbplats: <em>Utfärdat till</em>, <em>Utfärdat av</em> (certifikatutfärdare), <em>Giltigt till</em>.</li>
+<li>Varför har certifikat ett slutdatum, tror du?</li>
+<li>Gå till <a href="https://expired.badssl.com" class="uri">https://expired.badssl.com</a>. Vad säger webbläsaren? Gå <em>inte</em> vidare till sidan.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 2.7 – Rita resan
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Rita på papper eller digitalt, som en serie eller ett flödesschema, allt som händer från att du skriver <code>https://www.kvarnenscafe.se/meny.html</code> tills sidan syns. Ta med: webbläsaren, DNS-servern, webbservern, TLS-handslaget, förfrågan, svaret, extra filer och rendering. Märk pilarna.</p>
+<p>Jämför med en klasskamrat. Saknar någon av er ett steg?</p>
+</div>
+</div>
+</section>
+<section id="instuderingsfrågor" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="instuderingsfrågor"><span class="header-section-number">2.9</span> Instuderingsfrågor</h2>
+<ol type="1">
+<li>Vad är en klient och vad är en server? Ge exempel på varje.</li>
+<li>Beskriv med egna ord vad som händer från att du skriver en webbadress tills sidan visas. Ta med minst fem steg.</li>
+<li>Vad gör DNS? Varför behövs det?</li>
+<li>Vad är skillnaden mellan IPv4 och IPv6, och varför finns IPv6?</li>
+<li>Dela upp <code>https://shop.exempel.se/skor?farg=rod#recensioner</code> i dess delar och förklara varje del.</li>
+<li>Varför skickas aldrig fragmentet (<code>#…</code>) till servern?</li>
+<li>Vad är skillnaden mellan HTTP-metoderna GET och POST? När skulle du använda POST?</li>
+<li>Förklara statuskoderna 200, 301, 404 och 500. Vilka av dem är “klientens fel”?</li>
+<li>Vad betyder det att HTTP är <em>tillståndslöst</em>? Hur kan man ändå vara inloggad på en webbplats?</li>
+<li>Vilka tre saker skyddar HTTPS? Vad betyder hänglåset i adressfältet – och vad betyder det <em>inte</em>?</li>
+<li>Vad är ett certifikat, och vem utfärdar det?</li>
+<li>Vad är skillnaden mellan en statisk och en dynamisk webbplats? Ge ett exempel på varje.</li>
+<li>Vad är skillnaden mellan en absolut och en relativ adress? Skriv en relativ länk från <code>sidor/om.html</code> till <code>index.html</code> i mappen ovanför.</li>
+</ol>
+</section>
+<section id="nyckelbegrepp" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="nyckelbegrepp"><span class="header-section-number">2.10</span> Nyckelbegrepp</h2>
+<p>klient · server · användaragent · förfrågan (request) · svar (response) · URL · schema · värdnamn · port · sökväg · query-parameter · fragment · domännamn · toppdomän · IP-adress · IPv4 · IPv6 · DNS · HTTP · metod (GET/POST) · statuskod · header · tillståndslöst · kaka (cookie) · HTTPS · TLS · certifikat · certifikatutfärdare · statisk/dynamisk webbplats · klientkod · serverkod · absolut/relativ adress</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopierat!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopierat!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../del1/k01-webbens-historia.html" class="pagination-link" aria-label="Webben som plattform">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Webben som plattform</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../del2/k03-html.html" class="pagination-link" aria-label="HTML – struktur och semantik">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

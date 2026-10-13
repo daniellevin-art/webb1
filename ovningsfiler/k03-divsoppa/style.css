@@ -1,0 +1,17 @@
+body { margin: 0; font-family: Arial, sans-serif; line-height: 1.5; color: #222; }
+.topp { background: #33415c; color: white; padding: 1rem; }
+.logga { font-size: 1.5rem; font-weight: bold; display: block; }
+.meny { margin-top: 0.5rem; }
+.menylank { margin-right: 1rem; }
+.menylank a { color: white; }
+.innehall { max-width: 40rem; margin: 0 auto; padding: 1rem; }
+.stor-rubrik { font-size: 2rem; font-weight: bold; margin: 1rem 0; }
+.mellan-rubrik { font-size: 1.5rem; font-weight: bold; margin: 1.5rem 0 0.5rem; }
+.liten-rubrik { font-size: 1.15rem; font-weight: bold; }
+.text { margin-bottom: 1rem; }
+.bok { border: 1px solid #ccc; padding: 0.75rem; margin-bottom: 0.75rem; border-radius: 6px; }
+.punkt { margin-left: 1rem; }
+.rad { display: flex; border-bottom: 1px solid #ccc; }
+.rubrikrad { font-weight: bold; }
+.cell { flex: 1; padding: 0.25rem; }
+.botten { background: #eee; padding: 1rem; text-align: center; margin-top: 2rem; }

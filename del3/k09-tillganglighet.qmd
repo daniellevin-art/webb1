@@ -1,0 +1,285 @@
+# Tillgänglighet {#sec-tillganglighet}
+
+::: ci
+Hur tillgänglighet uppnås även för användare med funktionsnedsättning. Riktlinjer för god praxis och tillgänglighet. Anpassning av kod, bilder och media för att uppnå tillgänglighet.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara vad digital tillgänglighet är och vem den gäller,
+- beskriva WCAG, dess fyra principer och nivåer,
+- bygga sidor som fungerar med tangentbord och skärmläsare,
+- testa tillgänglighet både manuellt och med verktyg,
+- hitta och laga vanliga tillgänglighetsfel,
+- förklara vilka krav lagen ställer.
+:::
+
+## Vem gäller det?
+
+**Digital tillgänglighet** betyder att alla ska kunna använda en webbplats, oavsett funktionsförmåga. Det handlar om fler än man tror:
+
+| Funktionsnedsättning | Exempel | Hjälpmedel eller strategi |
+|---|---|---|
+| **Syn** | Blind, synsvag, färgblind | Skärmläsare, förstoring, hög kontrast, punktskriftsdisplay |
+| **Hörsel** | Döv, hörselskadad | Undertexter, transkribering, teckenspråk |
+| **Motorik** | Kan inte använda mus, darrningar | Tangentbord, röststyrning, kontaktstyrning |
+| **Kognition** | Dyslexi, ADHD, minnessvårigheter | Tydligt språk, enkel struktur, inga tidsgränser |
+
+Funktionsnedsättningar kan också vara **tillfälliga** (en bruten arm) eller **situationsbundna** (starkt solljus på skärmen, en bebis på armen, en bullrig buss). Det som är nödvändigt för vissa är bra för alla.
+
+## WCAG
+
+**WCAG** (*Web Content Accessibility Guidelines*) är de internationella riktlinjerna för tillgänglighet, framtagna av W3C. Senaste versionen är **WCAG 2.2** (2023). Riktlinjerna är indelade i fyra principer – **POUR**:
+
+| Princip | Betyder | Exempel |
+|---|---|---|
+| **Möjlig att uppfatta** (*Perceivable*) | Allt innehåll går att uppfatta med något sinne | Alt-texter, undertexter, kontrast |
+| **Möjlig att hantera** (*Operable*) | Allt går att använda | Tangentbord, tillräckligt med tid, inga blinkande effekter |
+| **Begriplig** (*Understandable*) | Innehåll och gränssnitt går att förstå | Tydligt språk, förutsägbar navigering, hjälp vid fel |
+| **Robust** (*Robust*) | Fungerar med olika webbläsare och hjälpmedel | Korrekt, giltig HTML |
+
+Varje princip har **framgångskriterier** på tre nivåer: **A** (grundkrav), **AA** (det som normalt krävs, även i lagen) och **AAA** (högsta nivån). Målet för dina webbplatser är **AA**.
+
+## Det viktigaste i praktiken
+
+De flesta tillgänglighetsfel går att undvika med det du redan lärt dig.
+
+### 1. Semantisk HTML
+
+Rätt element ger rätt beteende gratis. En `<button>` kan fokuseras med `Tab`, aktiveras med Enter och mellanslag, och läses upp som "knapp". En `<div>` med en klickfunktion kan ingenting av det.
+
+```html
+<!-- ❌ Ser ut som en knapp, men är det inte -->
+<div class="knapp" onclick="bestall()">Beställ</div>
+
+<!-- ✅ -->
+<button type="button" onclick="bestall()">Beställ</button>
+```
+
+### 2. Struktur: rubriker och landmärken
+
+Skärmläsaranvändare navigerar ofta med **rubriker** (hoppar mellan dem) och **landmärken** (`header`, `nav`, `main`, `footer`). En `h1` per sida, rubriknivåer i ordning.
+
+### 3. Tangentbord
+
+Allt som går att göra med mus ska gå att göra med tangentbord:
+
+| Tangent | Gör |
+|---|---|
+| `Tab` / `Shift+Tab` | Nästa / föregående länk, knapp eller fält |
+| `Enter` | Följ länk, tryck på knapp |
+| `Mellanslag` | Tryck på knapp, kryssa i ruta, scrolla |
+| Piltangenter | Välj i radioknappar och listor |
+| `Esc` | Stäng dialog eller meny |
+
+- **Fokus ska synas.** Ta aldrig bort `outline` utan att ersätta den.
+
+  ```css
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  ```
+
+- **Ordningen ska vara logisk** – samma som den visuella. Den följer HTML-koden, så ändra inte ordningen bara med CSS.
+- **Hoppa till innehållet.** En *skip link* först på sidan låter tangentbordsanvändare hoppa förbi menyn:
+
+  ```html
+  <body>
+    <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+    <header>…</header>
+    <main id="innehall">…</main>
+  ```
+
+  ```css
+  .hoppa {
+    position: absolute;
+    left: -9999px;
+  }
+  .hoppa:focus {
+    left: 1rem;
+    top: 1rem;
+    background: white;
+    padding: 0.5rem 1rem;
+  }
+  ```
+
+### 4. Text och bild
+
+- Alt-texter (kapitel 8).
+- Kontrast minst 4,5 : 1 (kapitel 6).
+- Information inte bara med färg.
+- Textstorlek i `rem`, sidan fungerar vid 200 % zoom (kapitel 7).
+- `lang` på `<html>`, och på delar med annat språk: `<span lang="en">latte art</span>`.
+
+### 5. Länkar och knappar
+
+- Länktexten ska vara begriplig utan sammanhang: "Se hela menyn" – inte "Klicka här".
+- Länkar *går någonstans*, knappar *gör något*.
+- Klickytor minst 24 × 24 px (WCAG 2.2), helst 44 × 44.
+
+### 6. Formulär
+
+- Varje fält har en synlig `label`.
+- Instruktioner *före* fältet, inte bara som `placeholder` (den försvinner när man skriver och har ofta låg kontrast).
+- Felmeddelanden i text, nära fältet, och som förklarar hur man rättar.
+- `autocomplete` på personuppgiftsfält.
+
+### 7. Media och rörelse
+
+- Undertexter och transkribering.
+- Inget som blinkar mer än tre gånger per sekund (kan utlösa epileptiska anfall).
+- Användaren ska kunna pausa rörelse. Respektera `prefers-reduced-motion`:
+
+  ```css
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  ```
+
+### 8. Begripligt innehåll
+
+- **Klarspråk**: korta meningar, vanliga ord, det viktigaste först.
+- Konsekvent navigering på alla sidor.
+- Inga tidsgränser, eller möjlighet att förlänga dem.
+
+### ARIA – med försiktighet
+
+**ARIA** (*Accessible Rich Internet Applications*) är attribut som ger skärmläsare extra information: `aria-label`, `aria-current`, `aria-expanded`, `aria-hidden` med flera. Första regeln för ARIA är: **använd inte ARIA om det finns ett HTML-element som gör jobbet.** Fel använd ARIA gör sidan *sämre*.
+
+## Testa tillgänglighet
+
+Ingen metod räcker ensam:
+
+| Metod | Hittar | Hittar inte |
+|---|---|---|
+| **Automatiska verktyg** (Lighthouse, WAVE, axe) | Saknade alt, låg kontrast, saknade etiketter | Om alt-texten är *bra*, om ordningen är logisk, om sidan går att förstå. Hittar bara en del av alla fel |
+| **Tangentbordstest** | Fokusfel, fällor, saknade knappar | Problem som bara syns för skärmläsare |
+| **Skärmläsare** | Hur sidan faktiskt låter | – kräver övning |
+| **Användartest** med personer med funktionsnedsättning | Riktiga problem | – det bästa, men mest resurskrävande |
+
+## Lagen
+
+I Sverige finns två lagar som ställer krav på digital tillgänglighet:
+
+- **Lagen om tillgänglighet till digital offentlig service** (DOS-lagen, 2018:1937) gäller **offentlig sektor**: myndigheter, kommuner, regioner, skolor. Webbplatser måste uppfylla en europeisk standard som i praktiken betyder **WCAG 2.1 nivå AA**, och ha en **tillgänglighetsredogörelse** som berättar vad som inte är tillgängligt och hur man kan få hjälp. Myndigheten för digital förvaltning (**DIGG**) har tillsyn.
+- **Lagen om vissa produkters och tjänsters tillgänglighet** (2023:254), som bygger på EU:s tillgänglighetsdirektiv, gäller sedan **28 juni 2025** även många **privata** tjänster, bland annat e-handel, banktjänster och e-böcker. Mycket små företag (mikroföretag) som erbjuder tjänster är undantagna.
+
+Kapitel 14 tar upp fler lagar.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 9.1 – Tangentbordstestet
+Lägg undan musen.
+
+1. Gå till en stor webbplats du använder ofta och försök göra något vanligt – söka, lägga en vara i varukorgen, logga in – med bara tangentbordet.
+2. Notera: Syns fokus hela tiden? Är ordningen logisk? Finns en skip link (tryck `Tab` direkt när sidan laddats)? Fastnade du någonstans?
+3. Gör samma test på Kvarnens sida och din egen webbplats. Laga det du hittar.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 9.2 – Lyssna på webben
+Starta en skärmläsare:
+
+- **Windows:** ladda ner **NVDA** (gratis, <https://www.nvaccess.org>). Starta med `Ctrl+Alt+N`, avsluta med `Insert+Q`. Använd hörlurar.
+- **Mac:** **VoiceOver** är inbyggd. Slå på/av med `Cmd+F5`.
+- **Mobil:** *TalkBack* (Android) eller *VoiceOver* (iPhone) under tillgänglighetsinställningarna. Var försiktig – gesterna ändras när den är på.
+
+| Gör | NVDA | VoiceOver (Mac) |
+|---|---|---|
+| Läs nästa | `↓` | `Ctrl+Option+→` |
+| Nästa rubrik | `H` | `Ctrl+Option+Cmd+H` |
+| Lista rubriker/länkar/landmärken | `Insert+F7` | `Ctrl+Option+U` |
+| Sluta prata | `Ctrl` | `Ctrl` |
+
+1. Lyssna på `ovningsfiler/k03-divsoppa` (originalet) och på din semantiska version från labb 3.2. Vad är skillnaden?
+2. Öppna listan över rubriker och landmärken på Kvarnens startsida. Går det att förstå sidans upplägg bara därifrån?
+3. Lyssna på formuläret. Läses etiketterna upp? Vad händer om du tar bort en `label`?
+4. Lyssna på en bild utan alt, en med `alt=""` och en med bra alt.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 9.3 – Laga den otillgängliga sidan
+Öppna `ovningsfiler/k09-otillganglig/index.html`. Sidan är en bokningssida för ett gym, och den har **minst 15 tillgänglighetsfel**.
+
+1. Leta fel *utan* automatiska verktyg: läs koden, testa med tangentbord, zooma, och lyssna med skärmläsare. Skriv en lista med varje fel, vilken POUR-princip det bryter mot och hur det ska lagas.
+2. Kör sedan WAVE och Lighthouse (labb 9.4). Hittade verktygen något du missat? Missade verktygen något du hittat?
+3. Laga alla fel.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 9.4 – Automatiska verktyg
+1. **Lighthouse:** utvecklarverktygen → fliken *Lighthouse* → kryssa bara i *Accessibility* → *Analyze*. Vilket betyg fick sidan? Läs varje anmärkning.
+2. **WAVE:** installera tillägget *WAVE Evaluation Tool* eller gå till <https://wave.webaim.org>. Röda ikoner är fel, gula är varningar.
+3. Kör båda på din egen webbplats. Laga allt som går.
+4. Fick du 100 i Lighthouse? Betyder det att sidan är helt tillgänglig? Motivera med vad du lärde dig i labb 9.3.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 9.5 – Läs en tillgänglighetsredogörelse
+1. Hitta tillgänglighetsredogörelsen för din kommun, skolan eller en myndighet (sök efter "tillgänglighetsredogörelse" och namnet, eller titta längst ner på sidan).
+2. Vilka brister anger de? Varför har de inte åtgärdats?
+3. Hur kan en användare få innehåll i tillgängligt format eller anmäla brister?
+4. Hur skulle en tillgänglighetsredogörelse för din egen webbplats se ut? Skriv ett utkast.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+- [ ] Skip link som syns vid fokus.
+- [ ] Allt fungerar med tangentbord, fokus syns tydligt.
+- [ ] Rubriker i ordning och landmärken på alla sidor.
+- [ ] Bra alt-texter, rätt kontrast, inget bara med färg.
+- [ ] Formulär med etiketter och begripliga instruktioner.
+- [ ] Lighthouse Accessibility minst 95, inga fel i WAVE.
+- [ ] Testad med skärmläsare.
+:::
+
+## Instuderingsfrågor
+
+1. Vad betyder digital tillgänglighet? Ge exempel på fyra typer av funktionsnedsättningar och ett hjälpmedel för varje.
+2. Vad är en situationsbunden funktionsnedsättning? Ge två exempel.
+3. Vad är WCAG? Vilken nivå är normalt målet?
+4. Förklara de fyra principerna i POUR med ett exempel var.
+5. Varför är `<button>` bättre än en `<div>` med klickfunktion?
+6. Hur navigerar en skärmläsaranvändare effektivt på en webbsida?
+7. Vad är en skip link, och vem har nytta av den?
+8. Varför räcker det inte med `placeholder` istället för `label`?
+9. Vad är ARIA? Vad är den första regeln för ARIA?
+10. Varför räcker det inte att testa med automatiska verktyg?
+11. Vilka krav ställer DOS-lagen, och vem gäller den för?
+12. Vad förändrades 28 juni 2025 för privata företag?
+13. Ge tre exempel på hur tillgänglighetsanpassningar gör en webbplats bättre för *alla* användare.
+
+## Nyckelbegrepp
+
+tillgänglighet · funktionsnedsättning · hjälpmedel · skärmläsare · förstoringsprogram · röststyrning · WCAG · POUR · framgångskriterium · nivå A/AA/AAA · landmärke · fokus · fokusmarkering · tabbordning · skip link · ARIA · klarspråk · `prefers-reduced-motion` · Lighthouse · WAVE · DOS-lagen · tillgänglighetsredogörelse · DIGG · tillgänglighetsdirektivet
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: genomgång + labb 9.1. Lektion 2: skärmläsare, labb 9.2 (hörlurar!). Lektion 3: labb 9.3. Lektion 4: labb 9.4–9.5 + bygg vidare.
+
+**Ett tips:** Bjud in en person som använder skärmläsare eller annat hjälpmedel, eller visa en video där en sådan användare navigerar. Inget ger eleverna lika stor förståelse.
+
+**NVDA på skoldatorer** kräver ofta administratörsrättigheter. Det finns en portabel version. Alternativt: lärardemo på storskärm, eller låt elever med Mac/iPhone använda VoiceOver.
+
+**Facit labb 9.3:** finns i `ovningsfiler/k09-otillganglig/facit/`. Där finns en lista över alla fel och en lagad version.
+
+**Facit till instuderingsfrågorna**
+
+1. Att alla kan använda webbplatsen oavsett funktionsförmåga. Syn – skärmläsare/förstoring; hörsel – undertexter; motorik – tangentbord/röststyrning; kognition – tydligt språk/läshjälp.
+2. En tillfällig begränsning orsakad av omständigheterna: starkt solljus, bara en hand ledig, bullrig miljö, dålig uppkoppling.
+3. Web Content Accessibility Guidelines från W3C, internationella riktlinjer för tillgänglig webb. Nivå AA.
+4. Uppfattbar: alt-text på bilder. Hanterbar: allt går med tangentbord. Begriplig: tydliga felmeddelanden. Robust: giltig HTML som hjälpmedel kan tolka.
+5. Knappen kan fokuseras, aktiveras med Enter/mellanslag och presenteras som "knapp" för skärmläsare – automatiskt.
+6. Hoppar mellan rubriker, landmärken, länkar eller formulärfält, ofta via listor (rotor/elementlista).
+7. En länk först på sidan som hoppar förbi navigeringen till huvudinnehållet. Tangentbords- och skärmläsaranvändare, användare av kontaktstyrning.
+8. Platshållartexten försvinner när man skriver, har ofta låg kontrast och läses inte alltid upp som fältets namn.
+9. Attribut som ger hjälpmedel extra information om roller, tillstånd och egenskaper. Använd inte ARIA om det finns ett inbyggt HTML-element som gör samma sak.
+10. Verktygen hittar bara en del av felen (ofta uppskattat till runt en tredjedel). De kan inte bedöma om alt-texter är bra, om ordningen är logisk eller om innehållet är begripligt.
+11. Offentlig sektor ska uppfylla EN 301 549 (i praktiken WCAG 2.1 AA) och publicera en tillgänglighetsredogörelse. DIGG har tillsyn.
+12. Lagen (2023:254) om vissa produkters och tjänsters tillgänglighet började gälla och omfattar bl.a. e-handel, banktjänster, e-böcker och elektronisk kommunikation – även privata aktörer (mikroföretag som tillhandahåller tjänster undantas).
+13. Undertexter hjälper i bullriga miljöer; god kontrast hjälper i solljus; tydlig struktur gör det lättare för alla att hitta; tangentbordsstöd hjälper snabba användare; bra alt-text hjälper sökmotorer.
+:::
+:::

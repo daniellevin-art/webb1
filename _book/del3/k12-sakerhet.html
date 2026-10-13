@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv" xml:lang="sv"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Säkerhet – Webbutveckling 1</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../del4/k13-publicering.html" rel="next">
+<link href="../del3/k11-javascript-dom.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-5a1953863e1f72ef3b996ef827f01ca7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-bb62276ab45c84d9efd712f51ff97b5a.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-03c9dafadeb5298962e5cbf7f8641a4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f1d7f68b0002ed4784130a8513023e27.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-03c9dafadeb5298962e5cbf7f8641a4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Inget resultat",
+    "search-matching-documents-text": "matchande dokument",
+    "search-copy-link-title": "Kopiera länk för att söka",
+    "search-hide-matches-text": "Göm ytterligare resultat",
+    "search-more-match-text": "annat resultat i detta dokument",
+    "search-more-matches-text": "fler resultat i detta dokument",
+    "search-clear-button-title": "Rensa",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Verkställ",
+    "search-label": "Sök"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del3/k09-tillganglighet.html">Del 3 – Kvalitet</a></li><li class="breadcrumb-item"><a href="../del3/k12-sakerhet.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Sök" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Webbutveckling 1</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Skifta mörkt läge"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Sök"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Välkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../kursoversikt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kursöversikt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 1 – Webben</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k01-webbens-historia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Webben som plattform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k02-hur-webben-fungerar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 2 – Bygga webbsidor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k03-html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k04-teckenkodning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Teckenkodning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k05-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CSS – grunderna</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k06-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typsnitt, färg och layoutprinciper</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k07-layout.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Layout och responsiv design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k08-bilder-media.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bilder och media</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 3 – Kvalitet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k09-tillganglighet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k10-kvalitet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Kvalitet, interoperabilitet och optimering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k11-javascript-dom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">JavaScript och DOM</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k12-sakerhet.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 4 – Publicering, ansvar och process</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k13-publicering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k14-lagar-etik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k15-processen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Webbutvecklingsprocessen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k16-slutprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Slutprojekt</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bilagor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/a-verktyg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Verktyg och kom igång</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/b-ordlista.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Ordlista</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/c-fusklapp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Fusklapp: HTML och CSS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/d-mallar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mallar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/e-bedomning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Bedömning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innehållsförteckning</h2>
+   
+  <ul>
+  <li><a href="#grundbegrepp" id="toc-grundbegrepp" class="nav-link active" data-scroll-target="#grundbegrepp"><span class="header-section-number">12.1</span> Grundbegrepp</a></li>
+  <li><a href="#vanliga-hot-och-åtgärder" id="toc-vanliga-hot-och-åtgärder" class="nav-link" data-scroll-target="#vanliga-hot-och-åtgärder"><span class="header-section-number">12.2</span> Vanliga hot och åtgärder</a>
+  <ul class="collapse">
+  <li><a href="#avlyssning" id="toc-avlyssning" class="nav-link" data-scroll-target="#avlyssning"><span class="header-section-number">12.2.1</span> Avlyssning</a></li>
+  <li><a href="#nätfiske-phishing" id="toc-nätfiske-phishing" class="nav-link" data-scroll-target="#nätfiske-phishing"><span class="header-section-number">12.2.2</span> Nätfiske (<em>phishing</em>)</a></li>
+  <li><a href="#cross-site-scripting-xss" id="toc-cross-site-scripting-xss" class="nav-link" data-scroll-target="#cross-site-scripting-xss"><span class="header-section-number">12.2.3</span> Cross-site scripting (XSS)</a></li>
+  <li><a href="#injektion" id="toc-injektion" class="nav-link" data-scroll-target="#injektion"><span class="header-section-number">12.2.4</span> Injektion</a></li>
+  <li><a href="#validering-i-webbläsaren-är-inte-säkerhet" id="toc-validering-i-webbläsaren-är-inte-säkerhet" class="nav-link" data-scroll-target="#validering-i-webbläsaren-är-inte-säkerhet"><span class="header-section-number">12.2.5</span> Validering i webbläsaren är inte säkerhet</a></li>
+  <li><a href="#lösenord-och-konton" id="toc-lösenord-och-konton" class="nav-link" data-scroll-target="#lösenord-och-konton"><span class="header-section-number">12.2.6</span> Lösenord och konton</a></li>
+  <li><a href="#tredjepartskod" id="toc-tredjepartskod" class="nav-link" data-scroll-target="#tredjepartskod"><span class="header-section-number">12.2.7</span> Tredjepartskod</a></li>
+  <li><a href="#föråldrad-programvara" id="toc-föråldrad-programvara" class="nav-link" data-scroll-target="#föråldrad-programvara"><span class="header-section-number">12.2.8</span> Föråldrad programvara</a></li>
+  <li><a href="#läckta-hemligheter" id="toc-läckta-hemligheter" class="nav-link" data-scroll-target="#läckta-hemligheter"><span class="header-section-number">12.2.9</span> Läckta hemligheter</a></li>
+  <li><a href="#clickjacking" id="toc-clickjacking" class="nav-link" data-scroll-target="#clickjacking"><span class="header-section-number">12.2.10</span> Clickjacking</a></li>
+  <li><a href="#överbelastning-ddos" id="toc-överbelastning-ddos" class="nav-link" data-scroll-target="#överbelastning-ddos"><span class="header-section-number">12.2.11</span> Överbelastning (DDoS)</a></li>
+  <li><a href="#social-manipulation" id="toc-social-manipulation" class="nav-link" data-scroll-target="#social-manipulation"><span class="header-section-number">12.2.12</span> Social manipulation</a></li>
+  </ul></li>
+  <li><a href="#säkerhetsheaders" id="toc-säkerhetsheaders" class="nav-link" data-scroll-target="#säkerhetsheaders"><span class="header-section-number">12.3</span> Säkerhetsheaders</a></li>
+  <li><a href="#owasp-top-10" id="toc-owasp-top-10" class="nav-link" data-scroll-target="#owasp-top-10"><span class="header-section-number">12.4</span> OWASP Top 10</a></li>
+  <li><a href="#labbar" id="toc-labbar" class="nav-link" data-scroll-target="#labbar"><span class="header-section-number">12.5</span> Labbar</a></li>
+  <li><a href="#sec-projekt-b" id="toc-sec-projekt-b" class="nav-link" data-scroll-target="#sec-projekt-b"><span class="header-section-number">12.6</span> Projektarbete B: Hotanalys</a></li>
+  <li><a href="#instuderingsfrågor" id="toc-instuderingsfrågor" class="nav-link" data-scroll-target="#instuderingsfrågor"><span class="header-section-number">12.7</span> Instuderingsfrågor</a></li>
+  <li><a href="#nyckelbegrepp" id="toc-nyckelbegrepp" class="nav-link" data-scroll-target="#nyckelbegrepp"><span class="header-section-number">12.8</span> Nyckelbegrepp</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del3/k09-tillganglighet.html">Del 3 – Kvalitet</a></li><li class="breadcrumb-item"><a href="../del3/k12-sakerhet.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-sakerhet" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ci">
+<p>Säkerhet och sätt att identifiera hot och sårbarheter samt hur attacker kan motverkas genom effektiva åtgärder.</p>
+</div>
+<div class="mal">
+<p><strong>Kapitlets mål</strong> – efter kapitlet kan du:</p>
+<ul>
+<li>förklara begreppen hot, sårbarhet och risk,</li>
+<li>beskriva de vanligaste attackerna mot webbplatser och deras användare,</li>
+<li>förklara och demonstrera hur XSS fungerar och hur det förhindras,</li>
+<li>känna igen falska adresser,</li>
+<li>föreslå effektiva åtgärder mot olika hot,</li>
+<li>göra en enkel hotanalys för en webbplats.</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Viktigt</span>Testa bara det du äger
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Allt i det här kapitlet ska prövas på <strong>dina egna sidor</strong> och övningsfiler. Att försöka ta sig in i eller störa någon annans system utan tillstånd är <strong>dataintrång</strong>, ett brott enligt brottsbalken – även om man “bara testar”. Hittar du en säkerhetsbrist hos någon annan: ändra ingenting, och berätta för ägaren eller din lärare.</p>
+</div>
+</div>
+<section id="grundbegrepp" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="grundbegrepp"><span class="header-section-number">12.1</span> Grundbegrepp</h2>
+<p>Informationssäkerhet brukar delas in i tre mål, <strong>KIT</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mål</th>
+<th>Betyder</th>
+<th>Hotas av</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Konfidentialitet</strong></td>
+<td>Bara behöriga kan läsa informationen</td>
+<td>Avlyssning, dataläckor</td>
+</tr>
+<tr class="even">
+<td><strong>Integritet</strong></td>
+<td>Informationen är korrekt och oförändrad</td>
+<td>Någon ändrar innehåll eller data</td>
+</tr>
+<tr class="odd">
+<td><strong>Tillgänglighet</strong></td>
+<td>Informationen går att nå när den behövs</td>
+<td>Överbelastningsattacker, driftstopp</td>
+</tr>
+</tbody>
+</table>
+<p>Och tre ord som ofta blandas ihop:</p>
+<ul>
+<li><strong>Hot</strong> – något som <em>kan</em> orsaka skada: en bedragare, ett virus, ett strömavbrott.</li>
+<li><strong>Sårbarhet</strong> – en svaghet som ett hot kan utnyttja: ett gammalt tillägg, ett svagt lösenord, ett formulär som inte kontrollerar indata.</li>
+<li><strong>Risk</strong> – hur troligt det är att något händer, gånger hur allvarligt det blir. <strong>Risk = sannolikhet × konsekvens.</strong></li>
+</ul>
+</section>
+<section id="vanliga-hot-och-åtgärder" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="vanliga-hot-och-åtgärder"><span class="header-section-number">12.2</span> Vanliga hot och åtgärder</h2>
+<section id="avlyssning" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="avlyssning"><span class="header-section-number">12.2.1</span> Avlyssning</h3>
+<p>Utan HTTPS skickas allt i klartext. På ett öppet wifi kan andra i samma nät läsa vad du skickar, inklusive lösenord.</p>
+<p><strong>Åtgärd:</strong> HTTPS överallt (kapitel 2). Headern <strong>HSTS</strong> (<code>Strict-Transport-Security</code>) talar om för webbläsaren att alltid använda HTTPS till webbplatsen i fortsättningen.</p>
+</section>
+<section id="nätfiske-phishing" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="nätfiske-phishing"><span class="header-section-number">12.2.2</span> Nätfiske (<em>phishing</em>)</h3>
+<p>Bedragare lurar användare till falska sidor som ser ut som riktiga, ofta via mejl eller sms. De utnyttjar att folk inte läser adressen noga:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Adress</th>
+<th>Vem äger den?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>https://www.kvarnbanken.se/logga-in</code></td>
+<td>Kvarnbanken</td>
+</tr>
+<tr class="even">
+<td><code>https://kvarnbanken.se.inloggning-sakert.com/</code></td>
+<td><strong>inloggning-sakert.com</strong> – läs domänen bakifrån!</td>
+</tr>
+<tr class="odd">
+<td><code>https://kvarnbanken-se.com/</code></td>
+<td><strong>kvarnbanken-se.com</strong> – en helt annan domän</td>
+</tr>
+<tr class="even">
+<td><code>https://kvarnbankem.se/</code></td>
+<td><strong>kvarnbankem.se</strong> – stavfel (<em>typosquatting</em>)</td>
+</tr>
+</tbody>
+</table>
+<p>Kom ihåg: hänglåset betyder bara att anslutningen är krypterad, inte att sidan är äkta.</p>
+<p><strong>Åtgärder:</strong> utbilda användare, använd egen tydlig domän, skicka aldrig länkar till inloggning i mejl och sms, tvåfaktorsautentisering, lösenordshanterare (de fyller bara i på rätt domän).</p>
+</section>
+<section id="cross-site-scripting-xss" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="cross-site-scripting-xss"><span class="header-section-number">12.2.3</span> Cross-site scripting (XSS)</h3>
+<p><strong>XSS</strong> innebär att en angripare får in <strong>sin egen JavaScript</strong> på din sida, som sedan körs i andra besökares webbläsare. Skriptet kan stjäla inloggningar, ändra sidan eller skicka användaren vidare till en falsk sida.</p>
+<p>Det händer när en sida visar text från användare – en kommentar, ett namn, ett sökord – och tolkar den som HTML:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ❌ Sårbart: texten tolkas som HTML</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>lista<span class="op">.</span><span class="at">innerHTML</span> <span class="op">+=</span> <span class="vs">`&lt;li&gt;</span><span class="sc">${</span>kommentar<span class="sc">}</span><span class="vs">&lt;/li&gt;`</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ✅ Säkert: texten är alltid bara text</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> li <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">"li"</span>)<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>li<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> kommentar<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>lista<span class="op">.</span><span class="fu">append</span>(li)<span class="op">;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Åtgärder:</strong></p>
+<ol type="1">
+<li><strong>Behandla all indata som opålitlig.</strong> Visa text som text (<code>textContent</code>, eller servern kodar om <code>&lt;</code> till <code>&amp;lt;</code>).</li>
+<li><strong>Content Security Policy (CSP)</strong> – en header som talar om vilka skript som får köras. Även om någon lyckas få in kod kan webbläsaren vägra köra den.</li>
+</ol>
+</section>
+<section id="injektion" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="injektion"><span class="header-section-number">12.2.4</span> Injektion</h3>
+<p>Om en server bygger en databasfråga direkt av vad användaren skrev kan en angripare skriva <em>kod</em> istället för data – <strong>SQL-injektion</strong>. Det kan ge åtkomst till hela databasen. Det sker på servern och tas upp i senare kurser, men principen är densamma som för XSS: <strong>lita aldrig på indata</strong>.</p>
+</section>
+<section id="validering-i-webbläsaren-är-inte-säkerhet" class="level3" data-number="12.2.5">
+<h3 data-number="12.2.5" class="anchored" data-anchor-id="validering-i-webbläsaren-är-inte-säkerhet"><span class="header-section-number">12.2.5</span> Validering i webbläsaren är inte säkerhet</h3>
+<p><code>required</code>, <code>type="email"</code> och <code>maxlength</code> hjälper <em>användaren</em>. De skyddar inte servern – vem som helst kan ta bort dem i utvecklarverktygen, eller skicka data utan att använda formuläret alls. <strong>Servern måste alltid kontrollera allt igen.</strong></p>
+</section>
+<section id="lösenord-och-konton" class="level3" data-number="12.2.6">
+<h3 data-number="12.2.6" class="anchored" data-anchor-id="lösenord-och-konton"><span class="header-section-number">12.2.6</span> Lösenord och konton</h3>
+<ul>
+<li>Långa lösenord – gärna lösenfraser av flera ord – och ett unikt lösenord per tjänst. En <strong>lösenordshanterare</strong> gör det möjligt.</li>
+<li><strong>Tvåfaktorsautentisering</strong> (2FA/MFA): något du vet (lösenord) + något du har (telefon, säkerhetsnyckel).</li>
+<li>Servern sparar aldrig lösenord i klartext, utan som en <strong>hash</strong> (ett slags fingeravtryck som inte går att räkna baklänges).</li>
+<li>När lösenord läcker från en tjänst provar angripare dem automatiskt på andra tjänster (<em>credential stuffing</em>). Därför unika lösenord.</li>
+</ul>
+</section>
+<section id="tredjepartskod" class="level3" data-number="12.2.7">
+<h3 data-number="12.2.7" class="anchored" data-anchor-id="tredjepartskod"><span class="header-section-number">12.2.7</span> Tredjepartskod</h3>
+<p>Varje skript du hämtar från någon annan – statistik, chatt, reklam, kartor – körs med samma rättigheter som din egen kod. Blir leverantören hackad blir din sida det också.</p>
+<p><strong>Åtgärder:</strong> använd så lite tredjepartskod som möjligt, ladda hellre ner och lägg filen själv, och använd <strong>Subresource Integrity</strong> (attributet <code>integrity</code>) så att webbläsaren vägrar köra en fil som ändrats.</p>
+</section>
+<section id="föråldrad-programvara" class="level3" data-number="12.2.8">
+<h3 data-number="12.2.8" class="anchored" data-anchor-id="föråldrad-programvara"><span class="header-section-number">12.2.8</span> Föråldrad programvara</h3>
+<p>Publiceringssystem som WordPress, och deras tillägg, får ständigt säkerhetsuppdateringar. En webbplats som inte uppdateras blir förr eller senare hackad – oftast automatiskt av robotar som letar efter kända hål.</p>
+<p><strong>Åtgärd:</strong> uppdatera regelbundet, ta bort tillägg du inte använder.</p>
+</section>
+<section id="läckta-hemligheter" class="level3" data-number="12.2.9">
+<h3 data-number="12.2.9" class="anchored" data-anchor-id="läckta-hemligheter"><span class="header-section-number">12.2.9</span> Läckta hemligheter</h3>
+<p>API-nycklar, lösenord och konfigurationsfiler som råkar publiceras – i en JavaScript-fil eller på GitHub – hittas snabbt av robotar.</p>
+<p><strong>Åtgärd:</strong> hemligheter hör aldrig hemma i kod som skickas till webbläsaren eller läggs i Git. Använd <code>.gitignore</code>.</p>
+</section>
+<section id="clickjacking" class="level3" data-number="12.2.10">
+<h3 data-number="12.2.10" class="anchored" data-anchor-id="clickjacking"><span class="header-section-number">12.2.10</span> Clickjacking</h3>
+<p>En angripare bäddar in din sida osynligt i sin egen (<code>iframe</code>) och lurar användaren att klicka på något.</p>
+<p><strong>Åtgärd:</strong> headern <code>Content-Security-Policy: frame-ancestors 'self'</code> hindrar andra från att bädda in sidan.</p>
+</section>
+<section id="överbelastning-ddos" class="level3" data-number="12.2.11">
+<h3 data-number="12.2.11" class="anchored" data-anchor-id="överbelastning-ddos"><span class="header-section-number">12.2.11</span> Överbelastning (DDoS)</h3>
+<p>Många datorer skickar samtidigt så mycket trafik att servern inte orkar. Hotar <em>tillgängligheten</em>.</p>
+<p><strong>Åtgärd:</strong> CDN- och skyddstjänster som filtrerar trafiken. Statiska webbplatser klarar mer än dynamiska.</p>
+</section>
+<section id="social-manipulation" class="level3" data-number="12.2.12">
+<h3 data-number="12.2.12" class="anchored" data-anchor-id="social-manipulation"><span class="header-section-number">12.2.12</span> Social manipulation</h3>
+<p>Den svagaste länken är ofta människan. “Hej, det är IT-supporten, jag behöver ditt lösenord.” Ingen seriös organisation ber om ditt lösenord.</p>
+</section>
+</section>
+<section id="säkerhetsheaders" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="säkerhetsheaders"><span class="header-section-number">12.3</span> Säkerhetsheaders</h2>
+<p>Servern kan skicka headers som slår på skydd i webbläsaren:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Header</th>
+<th>Skyddar mot</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Strict-Transport-Security</code></td>
+<td>Okrypterade anslutningar</td>
+</tr>
+<tr class="even">
+<td><code>Content-Security-Policy</code></td>
+<td>XSS, clickjacking, oväntade skript</td>
+</tr>
+<tr class="odd">
+<td><code>X-Content-Type-Options: nosniff</code></td>
+<td>Att webbläsaren gissar filtyp</td>
+</tr>
+<tr class="even">
+<td><code>Referrer-Policy</code></td>
+<td>Att adresser läcker till andra webbplatser</td>
+</tr>
+<tr class="odd">
+<td><code>Permissions-Policy</code></td>
+<td>Att sidan använder kamera, mikrofon, position i onödan</td>
+</tr>
+</tbody>
+</table>
+<p>Du testar dem med <strong>HTTP Observatory</strong>: <a href="https://developer.mozilla.org/en-US/observatory" class="uri">https://developer.mozilla.org/en-US/observatory</a>.</p>
+</section>
+<section id="owasp-top-10" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="owasp-top-10"><span class="header-section-number">12.4</span> OWASP Top 10</h2>
+<p><strong>OWASP</strong> är en ideell organisation som bland annat sammanställer de tio vanligaste säkerhetsriskerna i webbapplikationer. Listan uppdateras med några års mellanrum och är en bra startpunkt för den som vill lära sig mer. Bristande behörighetskontroll, injektion, felaktiga inställningar och föråldrade komponenter brukar ligga högt upp.</p>
+</section>
+<section id="labbar" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="labbar"><span class="header-section-number">12.5</span> Labbar</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 12.1 – XSS i en gästbok
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Öppna <code>ovningsfiler/k12-xss/index.html</code> med Live Server. Det är en enkel gästbok som bara körs i din egen webbläsare.</p>
+<ol type="1">
+<li><p>Skriv ett vanligt inlägg. Fungerar det?</p></li>
+<li><p>Skriv <code>Hej &lt;b&gt;alla&lt;/b&gt;!</code>. Vad hände med <code>&lt;b&gt;</code>?</p></li>
+<li><p>Skriv: <code>&lt;img src="x" onerror="document.body.style.background='red'"&gt;</code>. Vad hände? Vad kunde en riktig angripare ha gjort istället för att byta färg?</p></li>
+<li><p>Läs koden i <code>gastbok.js</code>. Hitta raden som gör sidan sårbar.</p></li>
+<li><p>Laga sårbarheten med <code>textContent</code>. Testa igen med steg 2 och 3.</p></li>
+<li><p>Lägg till en CSP i <code>&lt;head&gt;</code> och se vad som händer i konsolen om du återställer den sårbara koden:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> http-equiv</span><span class="op">=</span><span class="st">"Content-Security-Policy"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"script-src 'self'"</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 12.2 – Äkta eller falsk?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kvarnbanken är en påhittad bank med domänen <code>kvarnbanken.se</code>. Vilka adresser leder till banken? Förklara varför för varje.</p>
+<ol type="1">
+<li><code>https://www.kvarnbanken.se/privat/logga-in</code></li>
+<li><code>https://kvarnbanken.se.kundservice-login.net/verifiera</code></li>
+<li><code>https://login.kvarnbanken.se/</code></li>
+<li><code>http://www.kvarnbanken.se/</code></li>
+<li><code>https://kvarnbanken-sakerhet.se/</code></li>
+<li><code>https://www.kvarnbanken.se@inloggning.example/</code></li>
+<li><code>https://xn--kvarnbnken-v5a.se/</code></li>
+<li><code>https://kvarnbankken.se/</code></li>
+<li><code>https://bit.ly/3kVarN</code></li>
+<li><code>https://www.kvarnbanken.se.evil.example/</code></li>
+</ol>
+<p>Tips: hitta den riktiga domänen genom att läsa värdnamnet <em>bakifrån</em>. Vad gör <code>@</code> i en adress? Jämför nummer 7 med vad du får om du skriver <code>new URL("https://kvarnbänken.se").hostname</code> i konsolen. Vad betyder det?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 12.3 – Lura formuläret
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Öppna Kvarnens bokningsformulär. Det har <code>required</code> och <code>type="email"</code>.</li>
+<li>Försök skicka det tomt. Vad händer?</li>
+<li>Öppna utvecklarverktygen, hitta fältet i <em>Elements</em> och ta bort <code>required</code> och ändra <code>type</code> till <code>text</code>. Skicka igen.</li>
+<li>Vad drar du för slutsats om validering i webbläsaren? Vem måste kontrollera datan?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 12.4 – Säkerhetsbetyg
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Kör HTTP Observatory på tre webbplatser: en myndighet, en stor e-handel och en liten lokal verksamhet.</li>
+<li>Vilket betyg fick de? Vilka säkerhetsheaders saknades?</li>
+<li>Gör samma sak på din egen webbplats efter att du publicerat den i kapitel 13. Vilka headers kan du påverka på din publiceringstjänst?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 12.5 – Okrypterad trafik
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Gå till <a href="http://neverssl.com" class="uri">http://neverssl.com</a> – en sida som medvetet <em>inte</em> använder HTTPS. Vad visar webbläsaren i adressfältet?</li>
+<li>Vad skulle kunna hända om du loggade in på en sådan sida på ett kafé-wifi?</li>
+<li><strong>Lärardemo:</strong> läraren visar med programmet Wireshark hur okrypterad och krypterad trafik ser ut i ett testnätverk.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="sec-projekt-b" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-projekt-b"><span class="header-section-number">12.6</span> Projektarbete B: Hotanalys</h2>
+<div class="projekt">
+<p><strong>Form:</strong> grupper om 2–3. <strong>Tid:</strong> ca 2 lektioner. <strong>Redovisning:</strong> skriftlig rapport (2–3 sidor) + kort muntlig dragning.</p>
+<p>Kvarnens café vill bygga ut sin webbplats med:</p>
+<ul>
+<li>en <strong>webbshop</strong> där kunder loggar in och köper kaffebönor,</li>
+<li>ett <strong>nyhetsbrev</strong> man kan anmäla sig till med e-post,</li>
+<li>ett <strong>kontaktformulär</strong>,</li>
+<li>ett <strong>kommentarsfält</strong> under bloggen,</li>
+<li>en <strong>adminsida</strong> där personalen ändrar menyn,</li>
+<li>en <strong>chattwidget</strong> och <strong>statistik</strong> från externa företag.</li>
+</ul>
+<p>Gör en hotanalys:</p>
+<ol type="1">
+<li><p><strong>Tillgångar.</strong> Vad är värt att skydda? (Kunddata, betalningar, webbplatsens innehåll, ryktet …)</p></li>
+<li><p><strong>Hot och sårbarheter.</strong> Minst åtta. Koppla varje hot till en eller flera delar av webbplatsen och till KIT.</p></li>
+<li><p><strong>Riskbedömning.</strong> Bedöm sannolikhet (1–3) och konsekvens (1–3) för varje hot. Räkna ut risken och sortera.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Hot</th>
+<th>Sårbarhet</th>
+<th style="text-align: center;">K/I/T</th>
+<th style="text-align: center;">Sannolikhet</th>
+<th style="text-align: center;">Konsekvens</th>
+<th style="text-align: center;">Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>XSS i kommentarer</td>
+<td>Kommentarer visas utan kodning</td>
+<td style="text-align: center;">K, I</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">9</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Åtgärder.</strong> Föreslå minst en effektiv åtgärd per hot. Vilka är viktigast att göra först?</p></li>
+<li><p><strong>Människan.</strong> Vilka risker handlar om personalen och kunderna, inte tekniken? Hur kan de minskas?</p></li>
+<li><p><strong>Lag.</strong> Vilka hot leder också till att kaféet bryter mot lagen om personuppgifter läcker? (Förbered dig för kapitel 14.)</p></li>
+</ol>
+</div>
+</section>
+<section id="instuderingsfrågor" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="instuderingsfrågor"><span class="header-section-number">12.7</span> Instuderingsfrågor</h2>
+<ol type="1">
+<li>Vad står KIT för? Ge ett exempel på ett hot mot varje del.</li>
+<li>Förklara skillnaden mellan hot, sårbarhet och risk.</li>
+<li>Hur kan man räkna ut en risk?</li>
+<li>Vad är nätfiske? Ge tre tecken på att en länk kan vara falsk.</li>
+<li>Hur läser man ut vilken domän en adress egentligen går till?</li>
+<li>Vad är XSS? Hur kan det förhindras?</li>
+<li>Varför är validering i webbläsaren inte ett säkerhetsskydd?</li>
+<li>Vad är SQL-injektion, och vilken gemensam princip skyddar mot både den och XSS?</li>
+<li>Vad är tvåfaktorsautentisering, och varför gör det ett konto säkrare?</li>
+<li>Varför ska man ha ett unikt lösenord för varje tjänst?</li>
+<li>Vilka risker finns med tredjepartsskript?</li>
+<li>Varför är det farligt att inte uppdatera ett publiceringssystem?</li>
+<li>Nämn tre säkerhetsheaders och vad de skyddar mot.</li>
+<li>Vad är OWASP Top 10?</li>
+<li>Varför får du inte testa säkerheten på andras webbplatser? Vad ska du göra om du hittar en brist?</li>
+</ol>
+</section>
+<section id="nyckelbegrepp" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="nyckelbegrepp"><span class="header-section-number">12.8</span> Nyckelbegrepp</h2>
+<p>informationssäkerhet · KIT (konfidentialitet, integritet, tillgänglighet) · hot · sårbarhet · risk · angripare · avlyssning · HSTS · nätfiske (phishing) · typosquatting · XSS · indata · CSP · SQL-injektion · lösenordshanterare · tvåfaktorsautentisering · hash · credential stuffing · tredjepartskod · Subresource Integrity · säkerhetsuppdatering · clickjacking · DDoS · social manipulation · säkerhetsheader · OWASP · dataintrång · ansvarsfullt avslöjande</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopierat!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopierat!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../del3/k11-javascript-dom.html" class="pagination-link" aria-label="JavaScript och DOM">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">JavaScript och DOM</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../del4/k13-publicering.html" class="pagination-link" aria-label="Publicering">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

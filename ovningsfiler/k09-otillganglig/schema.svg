@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140">
+  <rect width="400" height="140" fill="#fafafa"/>
+  <text x="20" y="35" font-family="Arial" font-size="20" font-weight="bold" fill="#333">Veckans pass</text>
+  <text x="20" y="70" font-family="Arial" font-size="16" fill="#333">Mån 18.00 Spinning</text>
+  <text x="20" y="95" font-family="Arial" font-size="16" fill="#333">Ons 17.30 Yoga</text>
+  <text x="20" y="120" font-family="Arial" font-size="16" fill="#333">Fre 07.00 Crossfit</text>
+</svg>

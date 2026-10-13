@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kontakt och bokning – Kvarnens café</title>
+    <meta name="description" content="Boka bord för större sällskap på Kvarnens café.">
+    <link rel="icon" href="bilder/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+
+    <header class="sidhuvud">
+      <a href="index.html" class="logga">
+        <svg viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+          <path d="M22 60 L28 24 L36 24 L42 60 Z" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+            <line x1="32" y1="24" x2="32" y2="4"/><line x1="32" y1="24" x2="52" y2="24"/><line x1="32" y1="24" x2="12" y2="24"/>
+          </g>
+        </svg>
+        Kvarnens café
+      </a>
+      <button class="menyknapp" type="button" aria-expanded="false" aria-controls="huvudmeny">Meny</button>
+      <nav aria-label="Huvudmeny">
+        <ul id="huvudmeny" class="meny">
+          <li><a href="index.html">Hem</a></li>
+          <li><a href="meny.html">Meny</a></li>
+          <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="innehall" class="behallare">
+      <h1>Kontakt och bokning</h1>
+      <p class="ingress">Boka bord för fler än sex personer här. För färre – välkommen in!</p>
+
+      <form class="formular" action="https://formspree.io/f/ditt-id" method="post">
+        <p>Fält märkta med * måste fyllas i.</p>
+
+        <label for="namn">Namn *</label>
+        <input id="namn" name="namn" type="text" autocomplete="name" required>
+
+        <label for="epost">E-post *</label>
+        <input id="epost" name="epost" type="email" autocomplete="email" required>
+
+        <fieldset>
+          <legend>Antal personer *</legend>
+          <label><input type="radio" name="antal" value="7-10" checked> 7–10</label>
+          <label><input type="radio" name="antal" value="11-20"> 11–20</label>
+        </fieldset>
+
+        <label for="datum">Datum *</label>
+        <input id="datum" name="datum" type="date" required>
+
+        <label for="meddelande">Meddelande</label>
+        <textarea id="meddelande" name="meddelande" rows="4"></textarea>
+
+        <p class="liten">Vi använder dina uppgifter bara för att hantera bokningen och raderar dem 30 dagar efter besöket. <a href="integritet.html">Läs mer</a>.</p>
+
+        <button type="submit" class="knapp">Skicka bokning</button>
+      </form>
+
+    </main>
+
+    <footer class="sidfot">
+      <div class="behallare sidfot-kolumner">
+        <section>
+          <h2>Hitta hit</h2>
+          <p>Kvarngatan 1<br>211 00 Malmö</p>
+        </section>
+        <section>
+          <h2>Kontakt</h2>
+          <p><a href="tel:+4640123456">040-12 34 56</a><br><a href="mailto:hej@kvarnenscafe.se">hej@kvarnenscafe.se</a></p>
+        </section>
+        <section>
+          <h2>Inställningar</h2>
+          <p><button id="tema" class="knapp-sekundar" type="button" aria-pressed="false">Mörkt läge</button></p>
+          <p><a href="integritet.html">Så hanterar vi personuppgifter</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fit 24 – gym i Malmö, öppet dygnet runt</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+    <header class="header">
+      <a href="index.html"><img src="logga.svg" class="logga" alt="Fit 24 – till startsidan" width="120" height="40"></a>
+      <nav aria-label="Huvudmeny">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page">Hem</a></li>
+          <li><a href="pass.html">Pass</a></li>
+          <li><a href="priser.html">Priser</a></li>
+        </ul>
+      </nav>
+      <form class="sok" role="search" action="sok.html">
+        <label for="sokord" class="visuellt-dold">Sök</label>
+        <input id="sokord" name="q" type="search">
+        <button type="submit">Sök</button>
+      </form>
+    </header>
+
+    <main id="innehall">
+      <p class="erbjudande">Erbjudande: första månaden gratis!</p>
+
+      <h1>Välkommen till Fit 24</h1>
+      <p class="ingress">Malmös trevligaste gym med öppet dygnet runt. Personlig träning – <span lang="en">get fit fast</span> med våra erfarna tränare!</p>
+
+      <h2>Veckans pass</h2>
+      <ul>
+        <li>Måndag 18.00: Spinning</li>
+        <li>Onsdag 17.30: Yoga</li>
+        <li>Fredag 07.00: Crossfit</li>
+      </ul>
+      <p><a href="pass.html">Läs mer om alla pass</a></p>
+
+      <h2>Priser</h2>
+      <table>
+        <caption>Månadskort</caption>
+        <thead>
+          <tr><th scope="col">Kort</th><th scope="col">Pris per månad</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Bas</th><td>299 kr</td></tr>
+          <tr><th scope="row">Premium</th><td>449 kr</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Boka provträning</h2>
+      <p>Fält märkta med * måste fyllas i.</p>
+      <form action="tack.html" method="post">
+        <label for="namn">Namn *</label>
+        <input id="namn" name="namn" type="text" autocomplete="name" required>
+
+        <label for="epost">E-post *</label>
+        <input id="epost" name="epost" type="email" autocomplete="email" required>
+
+        <label for="telefon">Telefon</label>
+        <input id="telefon" name="telefon" type="tel" autocomplete="tel">
+
+        <label for="pass">Pass</label>
+        <select id="pass" name="pass">
+          <option value="">Välj pass</option>
+          <option>Spinning</option>
+          <option>Yoga</option>
+          <option>Crossfit</option>
+        </select>
+
+        <button type="submit" class="knapp">Boka provträning</button>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <p>© Fit 24 · <a href="villkor.html">Medlemsvillkor</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+# Lärarversion: bygg med  quarto render --profile larare
+book:
+  title: "Webbutveckling 1 (lärarversion)"
+project:
+  output-dir: _book-larare

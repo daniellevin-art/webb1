@@ -1,0 +1,255 @@
+# Webbutvecklingsprocessen {#sec-processen}
+
+::: ci
+Processen för ett webbutvecklingsprojekt med målsättningar, planering, specifikation av struktur och design, kodning, optimering, testning, dokumentation och uppföljning.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- beskriva faserna i ett webbutvecklingsprojekt,
+- formulera mål och beskriva en målgrupp,
+- skriva en kravspecifikation och prioritera krav,
+- planera struktur med sajtkarta och design med wireframes och stilguide,
+- planera arbetet i tid och följa upp det,
+- dokumentera och utvärdera ett projekt.
+:::
+
+Hittills har du lärt dig *hur* man bygger. Det här kapitlet handlar om *hur man arbetar* när man bygger något åt någon annan. Kapitlet är en förberedelse för slutprojektet, och övningarna görs på Kvarnens café som ett litet fall.
+
+## Projektets faser
+
+```
+ 1. Mål och förstudie ─► 2. Planering ─► 3. Specifikation ─► 4. Kodning
+                                          (struktur + design)       │
+ 9. Uppföljning ◄─ 8. Lansering ◄─ 7. Dokumentation ◄─ 6. Testning ◄─ 5. Optimering
+```
+
+I verkligheten går man ofta fram och tillbaka mellan faserna – mer om det sist i kapitlet.
+
+## 1. Mål och förstudie
+
+Allt börjar med frågan **varför**. Varför behöver beställaren en webbplats? Vad ska den åstadkomma?
+
+### Mål
+
+Bra mål är **SMARTA**: Specifika, Mätbara, Accepterade, Realistiska och Tidsatta.
+
+| Dåligt mål | SMART mål |
+|---|---|
+| "Fler kunder" | "Minst 20 bordsbokningar per vecka via webbplatsen senast i mars" |
+| "En snygg sida" | "Besökare ska hitta öppettiderna inom 10 sekunder i ett användartest" |
+
+### Målgrupp och personas
+
+Vem ska använda webbplatsen? En **persona** är en påhittad men realistisk användare som representerar en målgrupp. Den hjälper dig att fatta beslut ur användarens perspektiv.
+
+> **Leila, 34.** Jobbar i närheten, går förbi på lunchen. Använder mobilen, ofta med en hand. Vill snabbt se dagens lunch och om det finns plats.
+>
+> **Bengt, 71.** Pensionär, fikar med vänner varje torsdag. Använder surfplatta med stor text. Vill boka bord för sex personer och veta om lokalen är tillgänglig med rullator.
+
+Tänk på att personas ska representera **hela** bredden av användare, även dem med funktionsnedsättning.
+
+### Konkurrentanalys
+
+Titta på liknande webbplatser. Vad gör de bra? Vad saknas?
+
+## 2. Planering
+
+- **Tidsplan** med **milstolpar** – avstämningspunkter där något ska vara klart.
+- **Resurser** – vem gör vad? Vad behövs (bilder, texter, konton)?
+- **Risker** – vad kan gå fel? Beställaren levererar inte texter i tid, du blir sjuk, en tjänst slutar fungera.
+
+Ett enkelt verktyg är en **Kanbantavla** med tre kolumner: *Att göra*, *Pågår*, *Klart*. Varje uppgift är en lapp som flyttas åt höger. Det kan vara post-it-lappar på en vägg, eller digitalt i t.ex. GitHub Projects eller Trello.
+
+## 3. Specifikation
+
+### Kravspecifikation
+
+En **kravspecifikation** beskriver vad webbplatsen ska göra och uppfylla. Den är ett avtal mellan dig och beställaren – den gör det tydligt när projektet är klart.
+
+- **Funktionella krav** – vad webbplatsen ska *göra*: "Besökaren ska kunna boka bord via ett formulär."
+- **Icke-funktionella krav** – *hur bra* den ska vara: "Webbplatsen ska uppfylla WCAG 2.2 nivå AA." "Startsidan ska ha LCP under 2,5 s på 4G."
+
+Prioritera med **MoSCoW**:
+
+| | Betyder | Exempel för Kvarnen |
+|---|---|---|
+| **M**ust | Måste finnas | Öppettider, adress, meny |
+| **S**hould | Bör finnas | Bordsbokning |
+| **C**ould | Kan finnas om tid finns | Blogg med veckans bakverk |
+| **W**on't | Görs inte nu | Webbshop |
+
+### Struktur
+
+- **Innehållsinventering** – lista allt innehåll som ska finnas: texter, bilder, menyer, kontaktuppgifter. Vem tar fram det?
+- **Sajtkarta** (*sitemap*) – webbplatsens sidor och hur de hänger ihop:
+
+  ```
+  Startsida
+  ├── Meny
+  │   ├── Kaffe och te
+  │   └── Bakverk
+  ├── Om oss
+  └── Kontakt och bokning
+  ```
+
+- **Navigering** – vilka sidor ska finnas i huvudmenyn? Högst ungefär sju punkter.
+
+### Design
+
+- **Skisser och wireframes.** En **wireframe** är en enkel ritning av en sida, utan färger och bilder – bara rutor som visar var innehållet ska ligga. Börja med papper och penna (*lo-fi*). Rita både mobil och dator.
+- **Prototyp.** En mer detaljerad, ibland klickbar version (*hi-fi*), t.ex. i Figma eller Penpot. Bra för att visa beställaren innan man kodar.
+- **Stilguide.** Färger, typsnitt, typskala och komponenter (kapitel 6).
+
+Låt beställaren godkänna specifikationen innan du börjar koda. Det är mycket billigare att ändra en skiss än färdig kod.
+
+## 4. Kodning
+
+- **Versionshantering** med Git från första dagen. Små, ofta commits med beskrivande meddelanden.
+- **Tydlig mappstruktur:**
+
+  ```
+  projekt/
+  ├── index.html
+  ├── meny.html
+  ├── css/style.css
+  ├── js/main.js
+  ├── bilder/
+  ├── fonts/
+  └── README.md
+  ```
+
+- **Namngivning:** små bokstäver, inga mellanslag eller åäö i filnamn, bindestreck mellan ord: `om-oss.html`, `kanelbulle-800.webp`.
+- **Kommentarer** där något är oväntat eller svårt att förstå.
+- **Bygg struktur först** (HTML), sedan utseende (CSS), sist beteende (JS) – progressiv förbättring.
+
+## 5. Optimering
+
+Bilder, prestanda och sökmotoroptimering (kapitel 8 och 10). Gör det löpande, men avsätt tid i slutet för en genomgång.
+
+## 6. Testning
+
+Validering, kompatibilitet, responsivitet, tillgänglighet, prestanda och användartest – dokumenterat i ett testprotokoll (kapitel 9 och 10). Testa mot **kravspecifikationen**: är varje krav uppfyllt?
+
+## 7. Dokumentation
+
+Dokumentation gör att någon annan – eller du själv om ett år – kan förstå och underhålla webbplatsen.
+
+| Dokument | För vem | Innehåll |
+|---|---|---|
+| **README** | Utvecklare | Vad projektet är, hur det är uppbyggt, hur man publicerar, kända brister |
+| **Användarinstruktion** | Beställaren | Hur man byter öppettider, lägger upp en bild … |
+| **Loggbok** | Dig själv och läraren | Vad du gjorde varje dag, problem och lösningar, beslut |
+| **Integritetspolicy, tillgänglighetsredogörelse** | Besökarna | Kapitel 9 och 14 |
+
+En README skrivs i **Markdown** (kapitel 3) och visas automatiskt på GitHub.
+
+## 8. Lansering
+
+Publicera (kapitel 13), kontrollera den publicerade versionen, och överlämna till beställaren: inloggningar, dokumentation, eventuell domän.
+
+## 9. Uppföljning
+
+Projektet är inte slut när webbplatsen publicerats.
+
+- **Utvärdera mot målen.** Nåddes de SMARTA målen? Hur vet du det?
+- **Besöksstatistik** kan visa hur webbplatsen används – men kräver samtycke om den sätter kakor (kapitel 14). Det finns statistikverktyg som inte använder kakor.
+- **Feedback** från beställaren och användarna.
+- **Underhåll.** Vem uppdaterar innehållet? Vem håller koll på att länkar fungerar och att programvara uppdateras?
+- **Utvärdera din egen process.** Vad gick bra? Vad gjorde du för att lösa problem? Vad gör du annorlunda nästa gång?
+
+## Vattenfall eller agilt?
+
+| | Vattenfall | Agilt (iterativt) |
+|---|---|---|
+| Arbetssätt | En fas i taget, i ordning | Korta perioder (*sprintar*) där man planerar, bygger, testar och visar |
+| Kravspecifikation | Låses i början | Ändras under projektet |
+| Beställaren ser resultatet | I slutet | Ofta, efter varje sprint |
+| Passar när | Kraven är tydliga och stabila | Kraven är osäkra eller ändras |
+
+De flesta webbprojekt i dag arbetar agilt eller blandat: man gör en grundlig förstudie och specifikation, men bygger och visar i små steg och tar emot synpunkter längs vägen.
+
+## Labbar
+
+Övningarna görs på Kvarnens café. Läraren eller en klasskamrat spelar kaféägaren.
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 15.1 – Intervjua beställaren
+Kaféägaren Maria vill göra om webbplatsen. Förbered tio frågor till henne som täcker: syfte och mål, målgrupper, innehåll, funktioner, vem som ska uppdatera, budget, tidsplan, varumärke och färger, och vad hon gillar och ogillar på andra webbplatser. Genomför intervjun (2 och 2) och anteckna.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 15.2 – Mål och personas
+1. Formulera tre SMARTA mål för Kvarnens webbplats.
+2. Skapa tre personas, varav minst en med en funktionsnedsättning. För varje: namn, ålder, situation, enhet, vad hen vill göra på webbplatsen, och vad som kan göra det svårt.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 15.3 – Kravspecifikation
+1. Skriv minst tio funktionella och fem icke-funktionella krav.
+2. Prioritera alla med MoSCoW.
+3. Skriv för varje krav hur det ska **testas**. Ett krav som inte går att testa är inte tillräckligt tydligt.
+
+Använd mallen i [Bilaga D](../bilagor/d-mallar.qmd).
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 15.4 – Sajtkarta och wireframes
+1. Gör en innehållsinventering och en sajtkarta.
+2. Rita wireframes på papper för startsidan och en undersida – både mobil och dator. Använd rutor med kryss för bilder och vågiga linjer för text.
+3. Visa för en klasskamrat. Kan hen hitta öppettiderna och bokningen på skissen?
+4. *Frivilligt:* gör en klickbar prototyp i Figma eller Penpot.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 15.5 – Tidsplan och Kanbantavla
+1. Gör en tidsplan för ett fyra veckor långt projekt med milstolpar.
+2. Bryt ner arbetet i minst 15 uppgifter och lägg dem på en Kanbantavla, t.ex. i GitHub Projects (kopplat till ditt repo).
+3. Lista tre risker och vad du gör om de inträffar.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 15.6 – README
+Skriv en `README.md` för din egen webbplats från kapitel 3–10. Den ska innehålla: titel och beskrivning, länk till den publicerade sidan, mappstruktur, vilka tekniker som används, hur man publicerar en ändring, källor och licenser för bilder och typsnitt, och kända brister. Titta på hur den ser ut på GitHub.
+:::
+
+## Instuderingsfrågor
+
+1. Nämn faserna i ett webbutvecklingsprojekt och beskriv kort vad som görs i var och en.
+2. Vad betyder SMART? Skriv om målet "bättre webbplats" till ett SMART mål.
+3. Vad är en persona, och varför används den?
+4. Vad är skillnaden mellan funktionella och icke-funktionella krav? Ge två exempel på var.
+5. Förklara MoSCoW.
+6. Vad är en sajtkarta? Vad är en wireframe?
+7. Varför ska beställaren godkänna specifikationen innan man börjar koda?
+8. Ge tre exempel på god praxis när man kodar.
+9. Vilka sorters dokumentation finns i ett webbprojekt, och vem är de till för?
+10. Vad ingår i uppföljningen av ett projekt?
+11. Vad är skillnaden mellan vattenfallsmodellen och agilt arbete? När passar vilken?
+
+## Nyckelbegrepp
+
+projekt · beställare · förstudie · mål · SMART · målgrupp · persona · konkurrentanalys · tidsplan · milstolpe · risk · Kanban · kravspecifikation · funktionellt krav · icke-funktionellt krav · MoSCoW · innehållsinventering · sajtkarta · navigering · wireframe · prototyp · stilguide · versionshantering · dokumentation · README · loggbok · lansering · uppföljning · utvärdering · underhåll · vattenfall · agilt · sprint
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Kapitlet ligger vecka 15 och överlappar starten av slutprojektet. Lektion 1: faserna + labb 15.1–15.2. Lektion 2: labb 15.3–15.4. Lektion 3: labb 15.5–15.6, sedan direkt över till slutprojektets förstudie.
+
+**Rollspel:** Spela Maria själv i labb 15.1 inför hela klassen, eller ge elevparen ett rollkort. Ge Maria några orealistiska önskemål ("en app som är som Instagram") så att eleverna får öva på att prioritera och säga nej.
+
+**Facit till instuderingsfrågorna**
+
+1. Mål/förstudie (varför, målgrupp), planering (tid, resurser, risker), specifikation (krav, struktur, design), kodning, optimering, testning, dokumentation, lansering, uppföljning.
+2. Specifikt, Mätbart, Accepterat, Realistiskt, Tidsatt. T.ex. "Minst 80 % av testpersonerna ska hitta kontaktuppgifterna inom 15 sekunder före 1 juni."
+3. En påhittad, realistisk representant för en användargrupp. Hjälper att fatta beslut utifrån användarens behov och att inte glömma grupper.
+4. Funktionella: vad systemet gör ("boka bord", "visa meny"). Icke-funktionella: kvaliteter ("WCAG 2.2 AA", "laddas under 2,5 s", "fungerar i Safari på iOS").
+5. Prioritering: Must have, Should have, Could have, Won't have (this time).
+6. Sajtkarta: översikt över sidorna och hur de hänger ihop. Wireframe: enkel skiss av en sidas layout utan grafisk design.
+7. Ändringar är mycket billigare i skiss än i kod; båda vet vad som ska levereras; undvik missförstånd.
+8. Versionshantering med små commits; tydlig mappstruktur och namngivning; kommentarer; semantisk HTML; separera HTML/CSS/JS; validera löpande.
+9. README (utvecklare), användarinstruktion (beställaren), loggbok (utvecklaren/läraren), integritetspolicy och tillgänglighetsredogörelse (besökarna).
+10. Utvärdering mot målen, insamling av statistik och feedback, plan för underhåll, utvärdering av den egna processen.
+11. Vattenfall: faser i ordning, kraven låses tidigt – passar när kraven är tydliga. Agilt: korta iterationer med leveranser och återkoppling – passar när kraven är osäkra eller ändras.
+:::
+:::

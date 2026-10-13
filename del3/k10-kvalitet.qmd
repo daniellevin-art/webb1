@@ -1,0 +1,266 @@
+# Kvalitet, interoperabilitet och optimering {#sec-kvalitet}
+
+::: ci
+Kvalitetssäkring av applikationens funktion och validering av kodens kvalitet. Interoperabilitet genom att följa standarder och testa på olika användaragenter. Optimering. Riktlinjer för god praxis.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- validera HTML och CSS och förstå felmeddelandena,
+- förklara vad interoperabilitet är och hur standarder bidrar till det,
+- kontrollera webbläsarstöd för en teknik,
+- planera och genomföra tester och dokumentera dem i ett testprotokoll,
+- mäta och förbättra en webbplats prestanda,
+- göra grundläggande sökmotoroptimering.
+:::
+
+## Kvalitetssäkring
+
+**Kvalitetssäkring** handlar om två saker:
+
+1. **Kodens kvalitet** – är koden korrekt, följer den standarderna, är den lätt att läsa? Det kontrolleras med **validering**.
+2. **Funktionens kvalitet** – fungerar webbplatsen för användarna, i deras webbläsare och på deras enheter? Det kontrolleras med **testning**.
+
+## Validering
+
+En **validator** kontrollerar att koden följer standarden. Webbläsare är förlåtande och visar sidan ändå – men olika webbläsare kan gissa olika, och hjälpmedel som skärmläsare kan få fel bild av sidan.
+
+| Validator | Adress |
+|---|---|
+| HTML (W3C Nu) | <https://validator.w3.org/nu/> |
+| CSS (W3C) | <https://jigsaw.w3.org/css-validator/> |
+
+Typiska fel:
+
+| Felmeddelande (förenklat) | Betyder |
+|---|---|
+| *End tag `p` seen, but there were open elements* | Ett element stängdes inte, eller stängdes i fel ordning |
+| *Duplicate ID* | Samma `id` används två gånger |
+| *An `img` element must have an `alt` attribute* | Alt saknas |
+| *The `for` attribute of the `label` element must refer to …* | `label for` pekar på ett id som inte finns |
+| *Element `div` not allowed as child of element `ul`* | Fel nästling – i `ul` får bara `li` stå direkt |
+
+Laga **det första felet först** – ett fel kan orsaka flera följdfel längre ner.
+
+## Interoperabilitet
+
+**Interoperabilitet** betyder att olika system fungerar tillsammans: din sida ska fungera i alla webbläsare, på alla operativsystem och med alla hjälpmedel. Nyckeln är **standarder**: om både du och webbläsaren följer standarden behöver ingen gissa.
+
+### Webbläsarmotorer
+
+Under huven finns bara tre stora **renderingsmotorer**:
+
+| Motor | Webbläsare |
+|---|---|
+| **Blink** | Chrome, Edge, Opera, Brave, Samsung Internet |
+| **Gecko** | Firefox |
+| **WebKit** | Safari, och i praktiken de flesta webbläsare på iPhone och iPad |
+
+Att testa i Chrome och Edge är alltså nästan samma sak. Testa minst **en webbläsare per motor** – och glöm inte mobilen.
+
+### Kontrollera webbläsarstöd
+
+Nya CSS- och HTML-funktioner stöds inte alltid överallt direkt.
+
+- **Can I use** (<https://caniuse.com>) visar exakt vilka webbläsarversioner som stöder en funktion.
+- **Baseline** är en märkning på MDN: *Widely available* betyder att funktionen fungerat i alla stora webbläsare i minst två och ett halvt år.
+
+Vill du använda något nytt: bygg så att sidan fungerar utan det (**progressiv förbättring**) eller ge en reserv (*fallback*), som `picture` med JPEG.
+
+## Testning
+
+### Typer av test
+
+| Test | Frågan det svarar på | Hur |
+|---|---|---|
+| **Funktionstest** | Fungerar länkar, formulär, menyer? | Klicka igenom allt, länkkontroll |
+| **Kompatibilitetstest** | Fungerar det i olika webbläsare och system? | Testa i minst en webbläsare per motor |
+| **Responsivitetstest** | Fungerar det på olika skärmar? | Enhetsläget och riktiga enheter |
+| **Tillgänglighetstest** | Fungerar det för alla? | Kapitel 9 |
+| **Prestandatest** | Är det snabbt? | Lighthouse, Network-fliken med strypt hastighet |
+| **Användartest** | Förstår användarna? | Låt någon göra uppgifter och tänka högt |
+
+### Testprotokoll
+
+Testning ska vara **systematisk och dokumenterad**. Skriv först **testfall** – vad som ska testas och vad som ska hända – och för sedan protokoll:
+
+| Nr | Testfall | Förväntat resultat | Chrome (Win) | Firefox (Win) | Safari (iPhone) | Kommentar |
+|:-:|---|---|:-:|:-:|:-:|---|
+| 1 | Klicka på varje menylänk | Rätt sida öppnas | ✅ | ✅ | ✅ | |
+| 2 | Skicka formulär utan e-post | Felmeddelande visas | ✅ | ✅ | ❌ | Inget meddelande i Safari → åtgärdat |
+| 3 | Sidan vid 320 px | Ingen horisontell scroll | ✅ | ✅ | ✅ | |
+| 4 | Hela sidan med tangentbord | Allt nås, fokus syns | ✅ | ✅ | – | |
+
+En mall finns i [Bilaga D](../bilagor/d-mallar.qmd).
+
+### Användartest
+
+Ett användartest behöver inte vara krångligt. Fem testpersoner hittar de flesta stora problemen.
+
+1. Förbered 3–5 **uppgifter**: "Ta reda på när kaféet öppnar på lördag."
+2. Be testpersonen **tänka högt** medan hen löser uppgiften.
+3. **Hjälp inte till.** Säg inte var saker finns. Det är just det du vill se.
+4. Anteckna var personen tvekar, letar eller gör fel.
+5. Åtgärda och testa igen.
+
+## Optimering
+
+### Prestanda
+
+En långsam sida förlorar besökare. Mät med **Lighthouse** (fliken *Lighthouse* i Chrome). Google mäter tre värden som kallas **Core Web Vitals**:
+
+| Mått | Mäter | Bra värde |
+|---|---|---|
+| **LCP** (*Largest Contentful Paint*) | Hur snabbt det största innehållet syns | under 2,5 s |
+| **CLS** (*Cumulative Layout Shift*) | Hur mycket sidan "hoppar" medan den laddas | under 0,1 |
+| **INP** (*Interaction to Next Paint*) | Hur snabbt sidan reagerar på klick | under 200 ms |
+
+Det som oftast hjälper:
+
+1. **Optimera bilder** – rätt storlek och format (kapitel 8). Den största vinsten.
+2. **`width` och `height` på bilder** – minskar CLS.
+3. **Färre och mindre filer** – en CSS-fil istället för fem, bara de typsnittsvikter du använder.
+4. **Minifiera** – ta bort mellanslag och kommentarer ur CSS och JS inför publicering. Görs ofta automatiskt.
+5. **Cachning** – servern talar om hur länge webbläsaren får spara filer (`Cache-Control`, kapitel 2).
+6. **Undvik tunga tredjepartsskript** – chattwidgets, spårning och reklam slöar ner mest.
+
+### Sökmotoroptimering (SEO)
+
+Att bli hittad börjar med det du redan gör:
+
+- En unik, beskrivande `<title>` och `<meta name="description">` på varje sida.
+- Semantisk HTML med en tydlig `h1` och rubrikstruktur.
+- Bra alt-texter och länktexter.
+- Snabb och mobilanpassad sida.
+- Begripliga adresser: `/meny/kaffe.html`, inte `/sida?id=17`.
+- Innehåll som faktiskt svarar på det folk söker efter.
+
+Det mesta som är bra för tillgänglighet är också bra för SEO.
+
+## God praxis – en sammanfattning
+
+- Följ standarderna och validera koden.
+- Semantisk HTML, utseende i CSS, beteende i JavaScript.
+- Mobilt först och progressiv förbättring.
+- Tillgänglighet från början – inte som en efterhandskontroll.
+- Optimera bilder och håll sidan lätt.
+- Tydliga namn på filer, klasser och mappar. Små bokstäver och bindestreck: `om-oss.html`.
+- Konsekvent indrag och kommentarer där något är oväntat.
+- Versionshantering och dokumentation (kapitel 13 och 15).
+- Testa i flera webbläsare och på riktiga enheter.
+- Respektera användarens integritet (kapitel 14).
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 10.1 – Validera
+1. Validera `ovningsfiler/k03-divsoppa/index.html` (originalet) med W3C:s HTML-validator. Välj *Validate by file upload* eller klistra in koden under *Validate by direct input*.
+2. Hur många fel och varningar? Laga dem ett i taget, uppifrån.
+3. Validera stilmallen med CSS-validatorn.
+4. Validera alla sidor på din egen webbplats. Målet är **noll fel**.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 10.2 – Webbläsarstöd
+Slå upp följande på Can I use och MDN. Ange för var och en: stöds den i Safari på iPhone? Är den *Baseline widely available*?
+
+1. CSS Grid
+2. Bildformatet AVIF
+3. CSS-selektorn `:has()`
+4. HTML-elementet `<dialog>`
+5. `input type="date"`
+6. En CSS- eller HTML-funktion du använt på din egen webbplats som du är osäker på.
+
+Behöver någon av dem en reserv på din webbplats?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 10.3 – Testprotokoll
+1. Skriv minst tio testfall för din egen webbplats: menyn, alla länkar, formuläret, bilder, mobil, tangentbord, zoom.
+2. Kör testfallen i **tre** användaragenter: en Blink-webbläsare, Firefox, och en mobil (gärna Safari på iPhone).
+3. Kontrollera alla länkar med W3C Link Checker: <https://validator.w3.org/checklink> (fungerar först när sidan är publicerad – gör det igen efter kapitel 13).
+4. Fyll i protokollet (mall i Bilaga D). Åtgärda felen och skriv vad du gjorde.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 10.4 – Prestanda
+1. Kör Lighthouse (*Performance*, *Mobile*) på `ovningsfiler/k08-media/tung-sida.html` innan du optimerade den, och sedan på din optimerade version. Jämför LCP och CLS.
+2. Öppna *Network*, välj *Slow 4G* under strypningen (*throttling*) och ladda om din egen sida. Hur lång tid tar det? Vad laddas sist?
+3. Kör Lighthouse på din egen webbplats. Åtgärda de tre viktigaste förslagen.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 10.5 – Användartest
+1. Skriv tre uppgifter för din egen webbplats.
+2. Byt dator med en klasskamrat som inte sett din sida. Hen löser uppgifterna och tänker högt. Du antecknar – och håller tyst.
+3. Byt roller.
+4. Skriv ner de tre viktigaste insikterna och vad du ändrar.
+:::
+
+## Delprojekt: din webbplats, testad
+
+Nu ska webbplatsen du byggt sedan kapitel 3 vara klar att visas upp. Lämna in:
+
+- webbplatsens filer (zip eller GitHub-länk),
+- ifyllt **testprotokoll** med minst tio testfall i tre användaragenter,
+- skärmdumpar från **validatorn** (HTML och CSS) utan fel,
+- **Lighthouse**-resultat för Accessibility och Performance, med en kort kommentar,
+- resultatet av **användartestet** och vad du ändrade,
+- en kort **reflektion** (5–10 meningar): vad fungerar bra, vad skulle du göra annorlunda?
+
+Kravlista för webbplatsen:
+
+- [ ] 3–5 sidor med gemensam header, navigering och footer
+- [ ] semantisk HTML, giltig utan fel
+- [ ] gemensam extern stilmall med CSS-variabler, typskala och färgschema
+- [ ] responsiv, mobilt först, testad på riktig mobil
+- [ ] optimerade bilder med alt-texter och tillåten licens
+- [ ] minst ett formulär, en tabell och en lista
+- [ ] tillgänglig: tangentbord, skärmläsare, kontrast, skip link
+- [ ] UTF-8 överallt
+- [ ] stilguide
+
+## Instuderingsfrågor
+
+1. Vilka två delar består kvalitetssäkring av?
+2. Varför ska man validera koden, när sidan ändå syns i webbläsaren?
+3. Vad betyder interoperabilitet? Hur hjälper standarder till?
+4. Vilka tre renderingsmotorer finns, och vilka webbläsare använder dem? Vad betyder det för hur du testar?
+5. Hur tar du reda på om en ny CSS-funktion kan användas?
+6. Nämn fem typer av test och vad var och en kontrollerar.
+7. Vad är ett testfall? Vad ska ett testprotokoll innehålla?
+8. Hur genomför man ett enkelt användartest? Varför ska man inte hjälpa testpersonen?
+9. Vad mäter LCP, CLS och INP?
+10. Ge fyra sätt att göra en webbplats snabbare.
+11. Ge fyra saker som förbättrar en webbplats placering i sökmotorer.
+12. Varför sammanfaller god tillgänglighet och god sökmotoroptimering ofta?
+
+## Nyckelbegrepp
+
+kvalitetssäkring · validering · validator · interoperabilitet · standard · renderingsmotor · Blink · Gecko · WebKit · Can I use · Baseline · fallback · progressiv förbättring · testfall · testprotokoll · funktionstest · kompatibilitetstest · användartest · tänka högt · prestanda · Lighthouse · Core Web Vitals · LCP · CLS · INP · minifiering · cachning · tredjepartsskript · sökmotoroptimering (SEO)
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: validering + interoperabilitet, labb 10.1–10.2. Lektion 2: testning, labb 10.3. Lektion 3: prestanda och SEO, labb 10.4. Lektion 4: användartest (labb 10.5) och delprojektet.
+
+**Delprojektet** är ett bra bedömningstillfälle för "skapar webblösningar med anpassning till syfte, användare och tillgänglighet" och för kvalitetssäkring. Reflektionen ger underlag för "utvärderar process och resultat".
+
+**Facit labb 10.2** (läget hösten 2026 – kontrollera mot Can I use): Grid, AVIF, `:has()`, `<dialog>` och `input type="date"` stöds i alla aktuella stora webbläsare inklusive Safari på iOS. Grid och `dialog` är *widely available*. AVIF och `:has()` blev *newly available* 2023–2024 och bör nu ha hunnit bli *widely available* – låt eleverna läsa av själva. Datumväljarens *utseende* skiljer sig mycket mellan webbläsare.
+
+**Facit till instuderingsfrågorna**
+
+1. Kodens kvalitet (validering, läsbarhet) och funktionens kvalitet (testning).
+2. Webbläsare gissar vid fel och kan gissa olika; hjälpmedel kan tolka fel; felaktig kod är svårare att underhålla och kan ge oväntade problem senare.
+3. Att olika system, webbläsare och hjälpmedel fungerar tillsammans. Om alla följer samma standard tolkas koden lika överallt.
+4. Blink (Chrome, Edge, Opera, Samsung Internet), Gecko (Firefox), WebKit (Safari, i praktiken alla iOS-webbläsare). Testa minst en webbläsare per motor, inklusive iPhone.
+5. Can I use och MDN (Baseline-märkningen).
+6. Funktionstest (fungerar det?), kompatibilitet (olika webbläsare/system), responsivitet (olika skärmar), tillgänglighet (alla användare), prestanda (snabbhet), användartest (förstår användarna?).
+7. Ett testfall beskriver vad som ska göras och förväntat resultat. Protokollet: testfall, förväntat resultat, faktiskt resultat per miljö (webbläsare/enhet), kommentar/åtgärd, datum och testare.
+8. Ge uppgifter, låt testpersonen tänka högt, observera och anteckna. Hjälper man ser man inte var designen brister.
+9. LCP: hur snabbt största synliga innehållet visas. CLS: hur mycket layouten hoppar. INP: hur snabbt sidan svarar på interaktion.
+10. Optimera bilder, `width`/`height`, färre/mindre filer, minifiering, cachning, färre tredjepartsskript, lazy loading.
+11. Unik `title` och `description`, semantisk struktur med rubriker, bra alt- och länktexter, snabb och mobilanpassad, begripliga URL:er, relevant innehåll.
+12. Båda bygger på att maskiner (skärmläsare respektive sökmotorers robotar) ska förstå innehållet: semantik, rubriker, textalternativ och tydliga länkar.
+:::
+:::

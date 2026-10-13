@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv" xml:lang="sv"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; Lagar, regler och etik – Webbutveckling 1 (lärarversion)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../del4/k15-processen.html" rel="next">
+<link href="../del4/k13-publicering.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-969ddfa49e00a70eb3423444dbc81f6c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5994e4a247c6531813b20d3cce7a044d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-bf9a886b062c6921f432e6eb6dea0e3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-5994e4a247c6531813b20d3cce7a044d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Inget resultat",
+    "search-matching-documents-text": "matchande dokument",
+    "search-copy-link-title": "Kopiera länk för att söka",
+    "search-hide-matches-text": "Göm ytterligare resultat",
+    "search-more-match-text": "annat resultat i detta dokument",
+    "search-more-matches-text": "fler resultat i detta dokument",
+    "search-clear-button-title": "Rensa",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Verkställ",
+    "search-label": "Sök"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del4/k13-publicering.html">Del 4 – Publicering, ansvar och process</a></li><li class="breadcrumb-item"><a href="../del4/k14-lagar-etik.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Sök" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Webbutveckling 1 (lärarversion)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Skifta mörkt läge"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Sök"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Välkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../kursoversikt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kursöversikt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 1 – Webben</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k01-webbens-historia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Webben som plattform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k02-hur-webben-fungerar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 2 – Bygga webbsidor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k03-html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k04-teckenkodning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Teckenkodning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k05-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CSS – grunderna</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k06-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typsnitt, färg och layoutprinciper</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k07-layout.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Layout och responsiv design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k08-bilder-media.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bilder och media</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 3 – Kvalitet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k09-tillganglighet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k10-kvalitet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Kvalitet, interoperabilitet och optimering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k11-javascript-dom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">JavaScript och DOM</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k12-sakerhet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 4 – Publicering, ansvar och process</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k13-publicering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k14-lagar-etik.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k15-processen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Webbutvecklingsprocessen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k16-slutprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Slutprojekt</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bilagor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/a-verktyg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Verktyg och kom igång</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/b-ordlista.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Ordlista</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/c-fusklapp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Fusklapp: HTML och CSS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/d-mallar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mallar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/e-bedomning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Bedömning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innehållsförteckning</h2>
+   
+  <ul>
+  <li><a href="#personuppgifter-och-gdpr" id="toc-personuppgifter-och-gdpr" class="nav-link active" data-scroll-target="#personuppgifter-och-gdpr"><span class="header-section-number">14.1</span> Personuppgifter och GDPR</a>
+  <ul class="collapse">
+  <li><a href="#vad-är-en-personuppgift" id="toc-vad-är-en-personuppgift" class="nav-link" data-scroll-target="#vad-är-en-personuppgift"><span class="header-section-number">14.1.1</span> Vad är en personuppgift?</a></li>
+  <li><a href="#roller" id="toc-roller" class="nav-link" data-scroll-target="#roller"><span class="header-section-number">14.1.2</span> Roller</a></li>
+  <li><a href="#principerna" id="toc-principerna" class="nav-link" data-scroll-target="#principerna"><span class="header-section-number">14.1.3</span> Principerna</a></li>
+  <li><a href="#rättslig-grund" id="toc-rättslig-grund" class="nav-link" data-scroll-target="#rättslig-grund"><span class="header-section-number">14.1.4</span> Rättslig grund</a></li>
+  <li><a href="#de-registrerades-rättigheter" id="toc-de-registrerades-rättigheter" class="nav-link" data-scroll-target="#de-registrerades-rättigheter"><span class="header-section-number">14.1.5</span> De registrerades rättigheter</a></li>
+  <li><a href="#integritetspolicy" id="toc-integritetspolicy" class="nav-link" data-scroll-target="#integritetspolicy"><span class="header-section-number">14.1.6</span> Integritetspolicy</a></li>
+  <li><a href="#inbyggt-dataskydd" id="toc-inbyggt-dataskydd" class="nav-link" data-scroll-target="#inbyggt-dataskydd"><span class="header-section-number">14.1.7</span> Inbyggt dataskydd</a></li>
+  <li><a href="#när-något-går-fel" id="toc-när-något-går-fel" class="nav-link" data-scroll-target="#när-något-går-fel"><span class="header-section-number">14.1.8</span> När något går fel</a></li>
+  </ul></li>
+  <li><a href="#kakor-och-lagen-om-elektronisk-kommunikation" id="toc-kakor-och-lagen-om-elektronisk-kommunikation" class="nav-link" data-scroll-target="#kakor-och-lagen-om-elektronisk-kommunikation"><span class="header-section-number">14.2</span> Kakor och lagen om elektronisk kommunikation</a></li>
+  <li><a href="#upphovsrätt" id="toc-upphovsrätt" class="nav-link" data-scroll-target="#upphovsrätt"><span class="header-section-number">14.3</span> Upphovsrätt</a>
+  <ul class="collapse">
+  <li><a href="#bilder-på-personer" id="toc-bilder-på-personer" class="nav-link" data-scroll-target="#bilder-på-personer"><span class="header-section-number">14.3.1</span> Bilder på personer</a></li>
+  </ul></li>
+  <li><a href="#andra-lagar-som-rör-webbplatser" id="toc-andra-lagar-som-rör-webbplatser" class="nav-link" data-scroll-target="#andra-lagar-som-rör-webbplatser"><span class="header-section-number">14.4</span> Andra lagar som rör webbplatser</a></li>
+  <li><a href="#etik" id="toc-etik" class="nav-link" data-scroll-target="#etik"><span class="header-section-number">14.5</span> Etik</a>
+  <ul class="collapse">
+  <li><a href="#frågor-att-ställa" id="toc-frågor-att-ställa" class="nav-link" data-scroll-target="#frågor-att-ställa"><span class="header-section-number">14.5.1</span> Frågor att ställa</a></li>
+  <li><a href="#en-etisk-checklista" id="toc-en-etisk-checklista" class="nav-link" data-scroll-target="#en-etisk-checklista"><span class="header-section-number">14.5.2</span> En etisk checklista</a></li>
+  </ul></li>
+  <li><a href="#labbar" id="toc-labbar" class="nav-link" data-scroll-target="#labbar"><span class="header-section-number">14.6</span> Labbar</a></li>
+  <li><a href="#sec-projekt-c" id="toc-sec-projekt-c" class="nav-link" data-scroll-target="#sec-projekt-c"><span class="header-section-number">14.7</span> Projektarbete C: Granska en webbplats</a></li>
+  <li><a href="#instuderingsfrågor" id="toc-instuderingsfrågor" class="nav-link" data-scroll-target="#instuderingsfrågor"><span class="header-section-number">14.8</span> Instuderingsfrågor</a></li>
+  <li><a href="#nyckelbegrepp" id="toc-nyckelbegrepp" class="nav-link" data-scroll-target="#nyckelbegrepp"><span class="header-section-number">14.9</span> Nyckelbegrepp</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del4/k13-publicering.html">Del 4 – Publicering, ansvar och process</a></li><li class="breadcrumb-item"><a href="../del4/k14-lagar-etik.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-lagar" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ci">
+<p>Lagar och andra bestämmelser som styr digital information, till exempel bestämmelser om personuppgifter, lagen om elektronisk kommunikation och upphovsrätt. Etiska överväganden i samband med webbutveckling.</p>
+</div>
+<div class="mal">
+<p><strong>Kapitlets mål</strong> – efter kapitlet kan du:</p>
+<ul>
+<li>förklara vad en personuppgift är och de viktigaste reglerna i GDPR,</li>
+<li>förklara reglerna för kakor och se till att din webbplats följer dem,</li>
+<li>skriva en integritetspolicy,</li>
+<li>avgöra när du får använda andras texter, bilder och kod,</li>
+<li>känna till andra lagar som påverkar webbplatser,</li>
+<li>göra etiska överväganden när du bygger webbplatser.</li>
+</ul>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Notera</span>Det här är ingen juridisk rådgivning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kapitlet ger en översikt så att du vet vilka regler som finns och när du behöver fråga någon som kan mer. Lagar ändras och tolkas av myndigheter och domstolar. Kontrollera alltid aktuella regler hos ansvarig myndighet.</p>
+</div>
+</div>
+<section id="personuppgifter-och-gdpr" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="personuppgifter-och-gdpr"><span class="header-section-number">14.1</span> Personuppgifter och GDPR</h2>
+<p>Fram till 2018 gällde <em>personuppgiftslagen</em> (PUL) i Sverige. Den har ersatts av EU:s <strong>dataskyddsförordning</strong>, <strong>GDPR</strong>, som gäller i hela EU. Den kompletteras av den svenska <strong>dataskyddslagen</strong> (2018:218). Tillsynsmyndighet är <strong>Integritetsskyddsmyndigheten (IMY)</strong>.</p>
+<section id="vad-är-en-personuppgift" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="vad-är-en-personuppgift"><span class="header-section-number">14.1.1</span> Vad är en personuppgift?</h3>
+<p><strong>All</strong> information som direkt eller indirekt kan kopplas till en levande person:</p>
+<ul>
+<li>namn, personnummer, adress, telefonnummer, e-postadress,</li>
+<li>bilder och filmer där personen syns,</li>
+<li><strong>IP-adresser</strong> och <strong>kak-id:n</strong> som kan kopplas till en person,</li>
+<li>vad någon skrivit i ett formulär.</li>
+</ul>
+<p>Allt man gör med personuppgifter – samla in, spara, visa, skicka vidare, radera – kallas <strong>behandling</strong>.</p>
+</section>
+<section id="roller" class="level3" data-number="14.1.2">
+<h3 data-number="14.1.2" class="anchored" data-anchor-id="roller"><span class="header-section-number">14.1.2</span> Roller</h3>
+<ul>
+<li><strong>Personuppgiftsansvarig</strong> – den som bestämmer <em>varför</em> och <em>hur</em> uppgifterna behandlas. För Kvarnens webbplats är det kaféet.</li>
+<li><strong>Personuppgiftsbiträde</strong> – den som behandlar uppgifterna <em>åt</em> den ansvarige, t.ex. webbhotellet eller tjänsten som tar emot kontaktformuläret. Det ska finnas ett avtal mellan dem.</li>
+</ul>
+</section>
+<section id="principerna" class="level3" data-number="14.1.3">
+<h3 data-number="14.1.3" class="anchored" data-anchor-id="principerna"><span class="header-section-number">14.1.3</span> Principerna</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Princip</th>
+<th>Betyder för en webbplats</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Laglighet, korrekthet och öppenhet</strong></td>
+<td>Du behöver en rättslig grund, och användaren ska få veta vad som händer med uppgifterna</td>
+</tr>
+<tr class="even">
+<td><strong>Ändamålsbegränsning</strong></td>
+<td>Uppgifter från bokningsformuläret får inte plötsligt användas till reklamutskick</td>
+</tr>
+<tr class="odd">
+<td><strong>Uppgiftsminimering</strong></td>
+<td>Fråga bara efter det du behöver. Behövs personnummer för att boka bord? Nej</td>
+</tr>
+<tr class="even">
+<td><strong>Korrekthet</strong></td>
+<td>Felaktiga uppgifter ska rättas</td>
+</tr>
+<tr class="odd">
+<td><strong>Lagringsminimering</strong></td>
+<td>Radera när uppgifterna inte behövs längre</td>
+</tr>
+<tr class="even">
+<td><strong>Integritet och konfidentialitet</strong></td>
+<td>Skydda uppgifterna – HTTPS, behörigheter, säkra lösenord (kapitel 12)</td>
+</tr>
+<tr class="odd">
+<td><strong>Ansvarsskyldighet</strong></td>
+<td>Den ansvarige ska kunna <em>visa</em> att reglerna följs</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rättslig-grund" class="level3" data-number="14.1.4">
+<h3 data-number="14.1.4" class="anchored" data-anchor-id="rättslig-grund"><span class="header-section-number">14.1.4</span> Rättslig grund</h3>
+<p>Varje behandling måste ha en <strong>rättslig grund</strong>. Några vanliga:</p>
+<ul>
+<li><strong>Avtal</strong> – uppgifterna behövs för att leverera det kunden beställt (adress för leverans).</li>
+<li><strong>Rättslig förpliktelse</strong> – lagen kräver det (bokföring av köp).</li>
+<li><strong>Intresseavvägning</strong> – den ansvariges intresse väger tyngre än integritetsintrånget (svara på ett mejl som någon skickat via kontaktformuläret).</li>
+<li><strong>Samtycke</strong> – användaren har frivilligt sagt ja (nyhetsbrev).</li>
+</ul>
+<p>Ett giltigt <strong>samtycke</strong> ska vara frivilligt, specifikt, informerat och otvetydigt. Förkryssade rutor räknas inte. Det ska vara lika lätt att återkalla samtycket som att ge det.</p>
+</section>
+<section id="de-registrerades-rättigheter" class="level3" data-number="14.1.5">
+<h3 data-number="14.1.5" class="anchored" data-anchor-id="de-registrerades-rättigheter"><span class="header-section-number">14.1.5</span> De registrerades rättigheter</h3>
+<p>Den vars uppgifter behandlas – <strong>den registrerade</strong> – har bland annat rätt att:</p>
+<ul>
+<li>få <strong>information</strong> om behandlingen,</li>
+<li>få ett <strong>registerutdrag</strong> – en kopia av sina uppgifter,</li>
+<li>få felaktiga uppgifter <strong>rättade</strong>,</li>
+<li>få uppgifterna <strong>raderade</strong> (“rätten att bli bortglömd”) i många fall,</li>
+<li><strong>invända</strong> mot behandling, t.ex. direktreklam,</li>
+<li>få ut sina uppgifter i ett format som kan flyttas till en annan tjänst (<strong>dataportabilitet</strong>).</li>
+</ul>
+</section>
+<section id="integritetspolicy" class="level3" data-number="14.1.6">
+<h3 data-number="14.1.6" class="anchored" data-anchor-id="integritetspolicy"><span class="header-section-number">14.1.6</span> Integritetspolicy</h3>
+<p>Informationen till användaren samlas ofta i en <strong>integritetspolicy</strong>. Den ska vara lätt att hitta och skriven så att alla förstår den: vem som är ansvarig, vilka uppgifter som samlas in, varför, med vilken rättslig grund, hur länge de sparas, vem som får ta del av dem, vilka rättigheter användaren har och vart man kan klaga (IMY).</p>
+</section>
+<section id="inbyggt-dataskydd" class="level3" data-number="14.1.7">
+<h3 data-number="14.1.7" class="anchored" data-anchor-id="inbyggt-dataskydd"><span class="header-section-number">14.1.7</span> Inbyggt dataskydd</h3>
+<p>GDPR kräver <strong>inbyggt dataskydd och dataskydd som standard</strong> (<em>privacy by design and by default</em>): integriteten ska vara med från början i designen, och standardinställningen ska vara den mest integritetsvänliga. Som webbutvecklare betyder det:</p>
+<ul>
+<li>ta bara med de fält i formuläret som behövs,</li>
+<li>lägg typsnitt och skript på egen server istället för hos tredje part (kapitel 6),</li>
+<li>slå av spårning som inte behövs,</li>
+<li>tänk på var data lagras – överföring till länder utanför EU kräver särskilda skydd.</li>
+</ul>
+</section>
+<section id="när-något-går-fel" class="level3" data-number="14.1.8">
+<h3 data-number="14.1.8" class="anchored" data-anchor-id="när-något-går-fel"><span class="header-section-number">14.1.8</span> När något går fel</h3>
+<p>En <strong>personuppgiftsincident</strong> – t.ex. att en databas med kunders e-postadresser läckt – ska anmälas till IMY inom <strong>72 timmar</strong>. Brott mot GDPR kan ge sanktionsavgifter på upp till 20 miljoner euro eller 4 % av ett företags globala omsättning.</p>
+</section>
+</section>
+<section id="kakor-och-lagen-om-elektronisk-kommunikation" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="kakor-och-lagen-om-elektronisk-kommunikation"><span class="header-section-number">14.2</span> Kakor och lagen om elektronisk kommunikation</h2>
+<p><strong>Kakor</strong> (<em>cookies</em>) är små textfiler som en webbplats sparar i webbläsaren (kapitel 2). Regeln om dem står i <strong>lagen (2022:482) om elektronisk kommunikation (LEK)</strong>, 9 kap. 28 §. Den gäller även liknande tekniker, som <code>localStorage</code> och spårningspixlar.</p>
+<p>Regeln i korthet: <strong>du får bara spara eller läsa information i användarens enhet om användaren fått information om syftet och samtyckt.</strong></p>
+<p>Undantaget: samtycke behövs inte om lagringen är <strong>nödvändig</strong> för att leverera en tjänst som användaren <strong>uttryckligen begärt</strong> – till exempel en varukorg eller inloggning.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kaka för</th>
+<th>Kräver samtycke?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Varukorg i webbshop</td>
+<td>Nej – nödvändig</td>
+</tr>
+<tr class="even">
+<td>Inloggning</td>
+<td>Nej – nödvändig</td>
+</tr>
+<tr class="odd">
+<td>Användarens val av mörkt läge</td>
+<td>Troligen nej – en funktion användaren själv begärt</td>
+</tr>
+<tr class="even">
+<td>Besöksstatistik (Google Analytics, Matomo …)</td>
+<td><strong>Ja</strong></td>
+</tr>
+<tr class="odd">
+<td>Annonser, spårning mellan webbplatser</td>
+<td><strong>Ja</strong></td>
+</tr>
+<tr class="even">
+<td>Inbäddade videor och sociala medier som sätter kakor</td>
+<td><strong>Ja</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Post- och telestyrelsen (PTS)</strong> har tillsyn över kakreglerna. Samtycket ska uppfylla GDPR:s krav. PTS har bland annat krävt att det ska vara lika lätt att <strong>neka</strong> som att godkänna, i samma vy, och att inga icke-nödvändiga kakor sätts <strong>innan</strong> användaren svarat.</p>
+<p>Det enklaste sättet att följa reglerna är att <strong>inte använda onödiga kakor alls</strong>. Då behövs ingen samtyckesruta.</p>
+</section>
+<section id="upphovsrätt" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="upphovsrätt"><span class="header-section-number">14.3</span> Upphovsrätt</h2>
+<p><strong>Upphovsrättslagen</strong> (1960:729) skyddar <strong>verk</strong>: texter, bilder, musik, film, design – och programkod. Skyddet uppstår <strong>automatiskt</strong> när verket skapas; man behöver inte skriva © eller registrera något.</p>
+<ul>
+<li>Upphovspersonen har <strong>ekonomisk rätt</strong> (bestämma över kopiering och spridning) och <strong>ideell rätt</strong> (att namnges, och att verket inte ändras på ett kränkande sätt).</li>
+<li>Skyddet gäller i <strong>70 år efter upphovspersonens död</strong>. Därefter blir verket fritt (<em>public domain</em>).</li>
+<li>Även enkla foton utan konstnärlig ambition skyddas, som <strong>fotografiska bilder</strong>, i 50 år.</li>
+</ul>
+<p>Vad får du göra?</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Handling</th>
+<th>Får du?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Använda en bild du hittat på nätet</td>
+<td><strong>Nej</strong>, inte utan licens eller tillstånd</td>
+</tr>
+<tr class="even">
+<td>Använda en CC-licensierad bild enligt licensens villkor</td>
+<td><strong>Ja</strong> (kapitel 8)</td>
+</tr>
+<tr class="odd">
+<td><strong>Citera</strong> en kort del av en text, med källa, i ett sammanhang som motiverar det</td>
+<td><strong>Ja</strong> – citaträtten</td>
+</tr>
+<tr class="even">
+<td><strong>Länka</strong> till en sida som redan är fritt tillgänglig</td>
+<td><strong>Ja</strong>. EU-domstolen kom fram till det 2014 i ett mål som började i Sverige</td>
+</tr>
+<tr class="odd">
+<td>Kopiera hela texten från en annan webbplats</td>
+<td><strong>Nej</strong></td>
+</tr>
+<tr class="even">
+<td>Kopiera kod från ett exempel på nätet</td>
+<td>Beror på licensen. Öppen källkod har licenser som <strong>MIT</strong> och <strong>GPL</strong> med olika villkor</td>
+</tr>
+<tr class="odd">
+<td>Använda ett känt företags logotyp som om det var ditt</td>
+<td><strong>Nej</strong> – det är dessutom ett <strong>varumärke</strong>, som skyddas av varumärkeslagen</td>
+</tr>
+<tr class="even">
+<td>Använda AI-genererade bilder</td>
+<td>Läs tjänstens villkor. Om och när de skyddas av upphovsrätt är juridiskt oklart</td>
+</tr>
+</tbody>
+</table>
+<section id="bilder-på-personer" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="bilder-på-personer"><span class="header-section-number">14.3.1</span> Bilder på personer</h3>
+<p>En bild där en person går att känna igen är en <strong>personuppgift</strong>. Publicera bara bilder på personer som samtyckt, och var extra försiktig med barn. Att använda någons bild i <strong>reklam</strong> utan tillstånd är dessutom förbjudet enligt lagen om namn och bild i reklam.</p>
+</section>
+</section>
+<section id="andra-lagar-som-rör-webbplatser" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="andra-lagar-som-rör-webbplatser"><span class="header-section-number">14.4</span> Andra lagar som rör webbplatser</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lag</th>
+<th>Vad den säger</th>
+<th>Gäller t.ex.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Lagen om ansvar för elektroniska anslutningstavlor</strong> (1998:112, “BBS-lagen”)</td>
+<td>Den som har ett kommentarsfält eller forum ska ha uppsikt och ta bort uppenbart olagligt innehåll, t.ex. hets mot folkgrupp eller upphovsrättsintrång</td>
+<td>Kommentarsfält, gästböcker, forum</td>
+</tr>
+<tr class="even">
+<td><strong>E-handelslagen</strong> (2002:562)</td>
+<td>Företag som säljer tjänster på nätet ska visa namn, adress, organisationsnummer och kontaktuppgifter</td>
+<td>Webbshoppar, företagssajter</td>
+</tr>
+<tr class="odd">
+<td><strong>Distansavtalslagen</strong></td>
+<td>Ångerrätt, tydliga priser och villkor vid köp på nätet</td>
+<td>Webbshoppar</td>
+</tr>
+<tr class="even">
+<td><strong>Marknadsföringslagen</strong></td>
+<td>Reklam ska vara tydligt markerad och inte vilseleda</td>
+<td>All marknadsföring, även influencers</td>
+</tr>
+<tr class="odd">
+<td><strong>DOS-lagen</strong> (2018:1937)</td>
+<td>Krav på tillgänglighet för offentlig sektor</td>
+<td>Myndigheter, kommuner, skolor (kapitel 9)</td>
+</tr>
+<tr class="even">
+<td><strong>Lagen om vissa produkters och tjänsters tillgänglighet</strong> (2023:254)</td>
+<td>Krav på tillgänglighet för vissa privata tjänster sedan 2025</td>
+<td>E-handel, bank (kapitel 9)</td>
+</tr>
+<tr class="odd">
+<td><strong>Brottsbalken</strong></td>
+<td>Dataintrång, förtal, olaga hot gäller även på nätet</td>
+<td>Alla</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="etik" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="etik"><span class="header-section-number">14.5</span> Etik</h2>
+<p>Lagar sätter de yttre gränserna. <strong>Etik</strong> handlar om vad som är <em>rätt</em> att göra – även när det är lagligt. Som webbutvecklare fattar du många små beslut som påverkar användarna.</p>
+<section id="frågor-att-ställa" class="level3" data-number="14.5.1">
+<h3 data-number="14.5.1" class="anchored" data-anchor-id="frågor-att-ställa"><span class="header-section-number">14.5.1</span> Frågor att ställa</h3>
+<ul>
+<li><strong>Ärlighet.</strong> Lurar designen användaren? <em>Dark patterns</em> – dold “Neka”-knapp, förkryssade rutor, falsk brådska, svår uppsägning – kan vara lagliga men är oärliga, och ibland olagliga.</li>
+<li><strong>Integritet.</strong> Samlar vi in mer än vi behöver? Skulle användaren bli förvånad om hen visste vad vi gör med uppgifterna?</li>
+<li><strong>Inkludering.</strong> Vem kan <em>inte</em> använda det vi bygger? Personer med funktionsnedsättning, äldre telefoner, långsamma nät, de som inte läser svenska?</li>
+<li><strong>Påverkan.</strong> Bygger vi något som gör människor beroende, eller som sprider desinformation?</li>
+<li><strong>Miljö.</strong> Varje kilobyte överförs och lagras med el. En lättare webbplats har lägre klimatpåverkan.</li>
+<li><strong>AI.</strong> Är det tydligt för användaren när text eller bilder är AI-genererade? Har vi rätt att använda materialet?</li>
+<li><strong>Ansvar.</strong> Kan jag stå för det jag byggt om det hamnar i nyheterna?</li>
+</ul>
+</section>
+<section id="en-etisk-checklista" class="level3" data-number="14.5.2">
+<h3 data-number="14.5.2" class="anchored" data-anchor-id="en-etisk-checklista"><span class="header-section-number">14.5.2</span> En etisk checklista</h3>
+<p>Innan du publicerar, fråga dig:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Skulle jag själv vilja bli behandlad så här som användare?</label></li>
+<li><label><input type="checkbox">Har användaren fått veta det hen behöver för att fatta egna beslut?</label></li>
+<li><label><input type="checkbox">Är det lika lätt att säga nej som ja?</label></li>
+<li><label><input type="checkbox">Kan alla använda tjänsten?</label></li>
+<li><label><input type="checkbox">Samlar vi bara in det som behövs?</label></li>
+</ul>
+</section>
+</section>
+<section id="labbar" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="labbar"><span class="header-section-number">14.6</span> Labbar</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 14.1 – Kakgranskning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Öppna ett <strong>privat/inkognitofönster</strong> och utvecklarverktygen <em>innan</em> du går till webbplatsen.</li>
+<li>Välj en svensk webbplats för en tidning, butik eller tjänst. Gå dit men <strong>klicka inte</strong> i samtyckesrutan.</li>
+<li><em>Application → Cookies</em> (Firefox: <em>Storage → Cookies</em>). Hur många kakor har satts redan? Från vilka domäner?</li>
+<li><em>Network</em>: filtrera på <em>Third-party requests</em> (Chrome: kryssa i <em>3rd-party requests</em> eller sortera på <em>Domain</em>). Hur många andra domäner kontaktas innan du svarat?</li>
+<li>Titta på samtyckesrutan: Är “Neka” lika lätt som “Godkänn alla”? Finns förkryssade val? Står syftena tydligt?</li>
+<li>Klicka “Godkänn alla” och räkna kakor och domäner igen.</li>
+<li>Följer webbplatsen reglerna, enligt det du läst? Motivera.</li>
+<li>Gör samma kontroll på din egen webbplats. Sätter den några kakor? Kontaktar den några andra domäner (typsnitt, videor, kartor)?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 14.2 – Integritetspolicy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Kvarnens café har ett bokningsformulär (namn, e-post, telefon, datum, antal, meddelande) som skickas via tjänsten Formspree, och ett nyhetsbrev.</p>
+<ol type="1">
+<li>Skriv en integritetspolicy för kaféet. Använd mallen i <a href="../bilagor/d-mallar.html">Bilaga D</a>. Skriv så att en 12-åring förstår.</li>
+<li>Granska formuläret enligt <em>uppgiftsminimering</em>. Behövs alla fält? Vilka kan tas bort eller göras frivilliga?</li>
+<li>Skriv en kort, tydlig text under formuläret som berättar vad som händer med uppgifterna och länkar till policyn.</li>
+<li>Gör samma sak för din egen webbplats, om den har ett formulär.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 14.3 – Får man göra så?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avgör för varje fall om det är tillåtet, och vilken lag eller regel som gäller.</p>
+<ol type="1">
+<li>Ali tar en bild på en Kvarnen-kanelbulle från kaféets Instagram och lägger den på sin egen fiksajt.</li>
+<li>Kvarnen länkar till en recension av kaféet i Sydsvenskan.</li>
+<li>Kvarnen kopierar hela recensionen till sin egen webbplats.</li>
+<li>Kvarnen citerar två meningar ur recensionen, med källa.</li>
+<li>Kvarnen lägger in Google Analytics och visar en ruta där det bara står “Vi använder kakor. [OK]”.</li>
+<li>Kvarnen publicerar en bild från personalfesten där alla anställda syns, utan att ha frågat.</li>
+<li>Kvarnen har ett kommentarsfält. Någon skriver ett rasistiskt inlägg. Kvarnen låter det ligga kvar i en månad.</li>
+<li>Kvarnen använder kod från ett exempel på GitHub med MIT-licens och behåller licenstexten.</li>
+<li>Kvarnens bokningsformulär kräver personnummer.</li>
+<li>Kvarnen använder <code>localStorage</code> för att komma ihåg att besökaren valt mörkt läge, utan samtyckesruta.</li>
+<li>En kund ber att få veta vilka uppgifter kaféet har om henne. Kaféet svarar inte.</li>
+<li>En kommunal skola publicerar en ny webbplats som inte går att använda med tangentbord.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 14.4 – Dark patterns
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Gå igenom katalogen på <a href="https://www.deceptive.design/types" class="uri">https://www.deceptive.design/types</a>.</li>
+<li>Hitta tre exempel på manipulativ design på riktiga webbplatser eller i appar. Ta skärmdumpar.</li>
+<li>Beskriv för varje: vilken typ det är, vem den gynnar, vem den skadar, och hur en ärlig design skulle se ut.</li>
+<li>Är något av exemplen olagligt, tror du? Vilken lag skulle det i så fall vara?</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 14.5 – Rätten till dina uppgifter <em>(frivillig)</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Begär ut dina data från en tjänst du använder, t.ex. Google (<em>Google Takeout</em>), Instagram eller Spotify. Det kan ta några dagar.</li>
+<li>Vad fick du? Förvånade något dig?</li>
+<li>Vilken rättighet i GDPR använde du?</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="sec-projekt-c" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="sec-projekt-c"><span class="header-section-number">14.7</span> Projektarbete C: Granska en webbplats</h2>
+<div class="projekt">
+<p><strong>Form:</strong> enskilt eller i par. <strong>Tid:</strong> ca 3 lektioner. <strong>Redovisning:</strong> skriftlig granskningsrapport (3–4 sidor).</p>
+<p>Välj en riktig svensk webbplats för en verksamhet med ett formulär och/eller webbshop: en lokal butik, en förening, ett gym, en restaurang, en kommun. Granska den <strong>utan</strong> att göra något som kan störa eller skada den – du får bara titta och använda den som en vanlig besökare.</p>
+<p>Granska:</p>
+<ol type="1">
+<li><strong>Personuppgifter.</strong> Finns en integritetspolicy? Är den lätt att hitta och förstå? Innehåller den det GDPR kräver? Samlar formulären in mer än nödvändigt?</li>
+<li><strong>Kakor.</strong> Sätts kakor eller kontaktas tredje part innan samtycke? Är det lika lätt att neka? (Labb 14.1.)</li>
+<li><strong>Tillgänglighet.</strong> Tangentbordstest, Lighthouse, WAVE. För offentlig verksamhet: finns en tillgänglighetsredogörelse?</li>
+<li><strong>Säkerhet.</strong> HTTPS, betyg i HTTP Observatory, märks föråldrade system?</li>
+<li><strong>Övrig lagstiftning.</strong> Företagsuppgifter enligt e-handelslagen? Kommentarsfält som sköts? Källor till bilder?</li>
+<li><strong>Etik.</strong> Finns dark patterns? Hur behandlas användaren?</li>
+</ol>
+<p>Rapporten ska innehålla:</p>
+<ul>
+<li>en sammanfattning med de tre allvarligaste bristerna,</li>
+<li>en tabell med varje granskningspunkt: resultat, bevis (skärmdump), bedömning (OK/brist), hänvisning till lag eller riktlinje,</li>
+<li>konkreta <strong>rekommendationer</strong> till ägaren,</li>
+<li>en reflektion: vad skulle du göra annorlunda om du byggde webbplatsen?</li>
+</ul>
+</div>
+</section>
+<section id="instuderingsfrågor" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="instuderingsfrågor"><span class="header-section-number">14.8</span> Instuderingsfrågor</h2>
+<ol type="1">
+<li>Vad hette lagen som tidigare reglerade personuppgifter i Sverige, och vad ersattes den av?</li>
+<li>Vad är en personuppgift? Ge fem exempel som kan förekomma på en webbplats.</li>
+<li>Vad är skillnaden mellan personuppgiftsansvarig och personuppgiftsbiträde?</li>
+<li>Förklara principerna uppgiftsminimering och ändamålsbegränsning med exempel.</li>
+<li>Nämn fyra rättsliga grunder. Vilken passar för ett nyhetsbrev, och vilken för att leverera en beställd vara?</li>
+<li>Vad krävs för att ett samtycke ska vara giltigt?</li>
+<li>Vilka rättigheter har den registrerade? Nämn minst fyra.</li>
+<li>Vad ska en integritetspolicy innehålla?</li>
+<li>Vad är inbyggt dataskydd? Ge två exempel på hur det påverkar hur du bygger en webbplats.</li>
+<li>Vad säger lagen om elektronisk kommunikation om kakor? När behövs inte samtycke?</li>
+<li>Vilka myndigheter har tillsyn över GDPR och över kakreglerna?</li>
+<li>Vad skyddar upphovsrätten, och hur länge? Behöver man registrera sitt verk?</li>
+<li>Vad är citaträtt? Får man länka till andras sidor?</li>
+<li>Varför är en bild på en person en personuppgift? Vad måste man tänka på innan man publicerar den?</li>
+<li>Vad säger BBS-lagen, och när gäller den för en webbplats?</li>
+<li>Vad är skillnaden mellan lag och etik? Ge ett exempel på något som kan vara lagligt men oetiskt i webbutveckling.</li>
+</ol>
+</section>
+<section id="nyckelbegrepp" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="nyckelbegrepp"><span class="header-section-number">14.9</span> Nyckelbegrepp</h2>
+<p>GDPR · dataskyddsförordningen · dataskyddslagen · personuppgiftslagen (PUL) · personuppgift · behandling · personuppgiftsansvarig · personuppgiftsbiträde · den registrerade · uppgiftsminimering · ändamålsbegränsning · rättslig grund · samtycke · registerutdrag · rätten att bli bortglömd · dataportabilitet · integritetspolicy · inbyggt dataskydd · personuppgiftsincident · IMY · lagen om elektronisk kommunikation (LEK) · kaka · nödvändig kaka · PTS · upphovsrätt · verk · ekonomisk rätt · ideell rätt · public domain · citaträtt · licens · öppen källkod · varumärke · BBS-lagen · e-handelslagen · etik · dark patterns</p>
+<div class="larare">
+<p><strong>Upplägg:</strong> Lektion 1: GDPR + labb 14.2. Lektion 2: kakor + labb 14.1. Lektion 3: upphovsrätt och andra lagar + labb 14.3. Lektion 4: etik + labb 14.4. Lektion 5–6: projektarbete C.</p>
+<p><strong>Juridiken:</strong> Kapitlet beskriver läget hösten 2026. Kontrollera gärna IMY:s och PTS:s webbplatser inför kursstart. Kakreglerna har tidigare stått i 6 kap. 18 § i den äldre LEK (2003:389) – äldre material och webbplatser hänvisar ibland dit. EU-domstolens mål om länkning är C-466/12 Svensson m.fl. (2014).</p>
+<p><strong>Projektarbete C:</strong> Påminn om etiken från kapitel 12 – inga försök att ta sig förbi inloggningar, inga automatiska skanningar utöver de nämnda passiva verktygen. Låt gärna eleverna skicka sina rekommendationer till verksamheten, efter att du granskat dem.</p>
+<p><strong>Facit labb 14.3</strong></p>
+<ol type="1">
+<li>Inte tillåtet – upphovsrätt (bilden ägs av kaféet/fotografen).</li>
+<li>Tillåtet – länkning till fritt tillgängligt material är inget intrång.</li>
+<li>Inte tillåtet – upphovsrätt.</li>
+<li>Tillåtet – citaträtt, om citatet är kort, motiverat och har källa.</li>
+<li>Inte tillåtet – statistikkakor kräver informerat samtycke (LEK 9:28 + GDPR:s samtyckeskrav); “OK” utan valmöjlighet och utan att kakorna väntar på svar är inte giltigt samtycke.</li>
+<li>Problematiskt – bilden är personuppgifter; kräver rättslig grund, i praktiken samtycke. Dessutom en fråga om respekt.</li>
+<li>Inte tillåtet om innehållet är uppenbart olagligt (hets mot folkgrupp) – BBS-lagen kräver uppsikt och borttagning.</li>
+<li>Tillåtet – MIT-licensen tillåter användning om licenstexten behålls.</li>
+<li>Bryter mot uppgiftsminimering (GDPR) – personnummer behövs inte för att boka bord.</li>
+<li>Troligen tillåtet – lagringen är nödvändig för en funktion användaren själv begärt (undantaget i 9:28 andra stycket). Bra diskussionsfall; informera gärna ändå.</li>
+<li>Inte tillåtet – rätten till registerutdrag (GDPR art. 15); svar ska normalt ges inom en månad.</li>
+<li>Bryter mot DOS-lagen (krav på WCAG 2.1 AA).</li>
+</ol>
+<p><strong>Facit till instuderingsfrågorna</strong></p>
+<ol type="1">
+<li>Personuppgiftslagen (PUL), ersatt 2018 av GDPR och dataskyddslagen.</li>
+<li>Information som kan kopplas till en levande person: namn, e-post, telefon, IP-adress, kak-id, bild, det någon skrivit i ett formulär.</li>
+<li>Ansvarig bestämmer ändamål och medel; biträdet behandlar uppgifterna åt den ansvarige (t.ex. webbhotell, formulärtjänst).</li>
+<li>Minimering: samla bara in det som behövs (inte personnummer för bordsbokning). Ändamålsbegränsning: använd bara för det syfte de samlades in för (inte bokningsuppgifter till nyhetsbrev).</li>
+<li>Samtycke, avtal, rättslig förpliktelse, intresseavvägning (även myndighetsutövning, allmänt intresse, grundläggande intressen). Nyhetsbrev: samtycke. Leverans: avtal.</li>
+<li>Frivilligt, specifikt, informerat, otvetydigt (aktiv handling); lika lätt att återkalla.</li>
+<li>Information, tillgång (registerutdrag), rättelse, radering, begränsning, invändning, dataportabilitet.</li>
+<li>Vem som är ansvarig och kontaktuppgifter, vilka uppgifter, ändamål, rättslig grund, lagringstid, mottagare/biträden, eventuell överföring utanför EU, rättigheter, rätt att klaga hos IMY.</li>
+<li>Integritetsskydd ska byggas in från början och vara standardinställning. Exempel: bara nödvändiga formulärfält; typsnitt på egen server; ingen spårning som standard; HTTPS.</li>
+<li>Lagring/läsning i användarens enhet kräver information och samtycke, utom när det är nödvändigt för en tjänst användaren uttryckligen begärt (eller för att överföra ett meddelande).</li>
+<li>IMY (GDPR), PTS (kakreglerna i LEK).</li>
+<li>Verk – texter, bilder, musik, film, kod med mera. 70 år efter upphovspersonens död (fotografiska bilder 50 år). Nej, skyddet uppstår automatiskt.</li>
+<li>Rätt att citera en kort del av ett offentliggjort verk i den omfattning som motiveras av ändamålet, med källa. Ja, att länka till fritt tillgängligt innehåll är tillåtet.</li>
+<li>Personen kan identifieras. Rättslig grund (oftast samtycke), information, särskild försiktighet med barn; i reklam krävs tillstånd.</li>
+<li>Den som tillhandahåller en elektronisk anslutningstavla (kommentarsfält, forum) ska ha uppsikt och ta bort uppenbart olagligt innehåll. Gäller när användare kan publicera inlägg på webbplatsen.</li>
+<li>Lag är bindande regler med sanktioner; etik handlar om vad som är rätt. Exempel: dark patterns som pressar användaren att köpa mer, spårning som är tekniskt laglig men oväntad, otillgänglig design hos privat aktör som inte omfattas av lagkrav.</li>
+</ol>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopierat!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopierat!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../del4/k13-publicering.html" class="pagination-link" aria-label="Publicering">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../del4/k15-processen.html" class="pagination-link" aria-label="Webbutvecklingsprocessen">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Webbutvecklingsprocessen</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

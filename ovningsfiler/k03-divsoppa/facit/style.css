@@ -1,0 +1,16 @@
+/* Anpassad till den semantiska versionen */
+body { margin: 0; font-family: Arial, sans-serif; line-height: 1.5; color: #222; }
+.topp { background: #33415c; color: white; padding: 1rem; }
+.logga { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; }
+.meny { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; gap: 1rem; }
+.meny a { color: white; }
+.innehall { max-width: 40rem; margin: 0 auto; padding: 1rem; }
+h1 { font-size: 2rem; margin: 1rem 0; }
+h2 { font-size: 1.5rem; margin: 1.5rem 0 0.5rem; }
+h3 { font-size: 1.15rem; margin: 0; }
+.bok { border: 1px solid #ccc; padding: 0.75rem; margin-bottom: 0.75rem; border-radius: 6px; }
+.bok p { margin: 0.25rem 0 0; }
+table { width: 100%; border-collapse: collapse; }
+caption { text-align: left; font-style: italic; }
+th, td { text-align: left; padding: 0.25rem; border-bottom: 1px solid #ccc; }
+.botten { background: #eee; padding: 1rem; text-align: center; margin-top: 2rem; }

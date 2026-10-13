@@ -1,0 +1,52 @@
+/* ===== Grund ===== */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bakgrund: #ffffff;
+  --yta: #f3f4f6;
+  --text: #1f2937;
+  --accent: #1d4ed8;
+  --radie: 0.5rem;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bakgrund);
+}
+
+img { max-width: 100%; height: auto; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.behallare { max-width: 60rem; margin-inline: auto; padding-inline: 1rem; }
+
+/* ===== Skip link ===== */
+.hoppa { position: absolute; left: -9999px; }
+.hoppa:focus { left: 1rem; top: 1rem; background: var(--bakgrund); padding: 0.5rem 1rem; z-index: 10; }
+
+/* ===== Sidhuvud ===== */
+.sidhuvud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--yta);
+}
+.logga { font-weight: 700; font-size: 1.25rem; text-decoration: none; color: var(--text); }
+.meny { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+
+/* ===== Sidfot ===== */
+.sidfot { margin-top: 3rem; padding-block: 1rem; background: var(--yta); }
+
+/* ===== Större skärmar ===== */
+@media (min-width: 48rem) {
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

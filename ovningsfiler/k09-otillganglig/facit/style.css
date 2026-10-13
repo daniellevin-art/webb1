@@ -1,0 +1,20 @@
+body { font-family: Arial, sans-serif; font-size: 1rem; line-height: 1.5; margin: 0; color: #222; }
+:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 2px; }
+.hoppa { position: absolute; left: -9999px; }
+.hoppa:focus { left: 1rem; top: 1rem; background: #fff; padding: 0.5rem 1rem; z-index: 10; }
+.visuellt-dold { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.header { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; background: #222; padding: 0.75rem 1.25rem; }
+.logga { display: block; }
+.nav { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+.nav a { color: #fff; }
+.sok { display: flex; gap: 0.25rem; margin-left: auto; }
+.erbjudande { background: #fde047; padding: 0.75rem 1.25rem; margin: 0; font-weight: bold; }
+main > *:not(.erbjudande) { margin-left: 1.25rem; margin-right: 1.25rem; }
+.ingress { color: #444; font-size: 1.125rem; }
+table { border-collapse: collapse; }
+th, td { text-align: left; padding: 0.25rem 1rem 0.25rem 0; border-bottom: 1px solid #ccc; }
+caption { text-align: left; font-weight: bold; }
+label { display: block; margin-top: 0.75rem; }
+input, select { display: block; padding: 0.5rem; border: 1px solid #767676; min-width: 16rem; }
+.knapp { margin-top: 1rem; background: #b91c1c; color: #fff; border: 0; padding: 0.75rem 1.25rem; font: inherit; cursor: pointer; }
+.footer { margin-top: 2.5rem; padding: 1rem 1.25rem; background: #eee; color: #444; }

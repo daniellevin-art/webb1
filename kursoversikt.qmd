@@ -1,0 +1,104 @@
+# Kursöversikt {.unnumbered}
+
+## Veckoplan
+
+Planen utgår från 20 veckor, vilket motsvarar ungefär 100 poäng. Varje kapitel tar i regel en vecka. Läraren kan flytta och slå ihop kapitel.
+
+| Vecka | Kapitel | Praktiskt | Projekt / instudering |
+|:-:|---|---|---|
+| 1 | [1. Webben som plattform](del1/k01-webbens-historia.qmd) | Första webbplatsen, Wayback Machine | **Projektarbete A:** Webben och samhället |
+| 2 | [2. Hur webben fungerar](del1/k02-hur-webben-fungerar.qmd) | Nätverkstrafik, URL:er, DNS, certifikat | Instuderingsfrågor |
+| 3 | [3. HTML](del2/k03-html.qmd) | Första sidan, semantik, formulär | Starta egen webbplats |
+| 4 | [4. Teckenkodning](del2/k04-teckenkodning.qmd) | Laga trasiga tecken, bytes och emoji | Instuderingsfrågor |
+| 5 | [5. CSS](del2/k05-css.qmd) | Selektorer, boxmodellen, kaskaden | |
+| 6 | [6. Typsnitt, färg och layoutprinciper](del2/k06-design.qmd) | Färgpalett, typskala, stilguide | |
+| 7 | [7. Layout och responsiv design](del2/k07-layout.qmd) | Flexbox, Grid, mobilt först | |
+| 8 | [8. Bilder och media](del2/k08-bilder-media.qmd) | Formatjämförelse, `picture`, video med undertexter | |
+| 9 | [9. Tillgänglighet](del3/k09-tillganglighet.qmd) | Tangentbord, skärmläsare, laga en otillgänglig sida | Instuderingsfrågor |
+| 10 | [10. Kvalitet, interoperabilitet och optimering](del3/k10-kvalitet.qmd) | Validering, webbläsartest, Lighthouse | **Delprojekt:** egen webbplats testad |
+| 11 | [11. JavaScript och DOM](del3/k11-javascript-dom.qmd) | Mobilmeny, temaväxlare | |
+| 12 | [12. Säkerhet](del3/k12-sakerhet.qmd) | XSS-demo, phishing-URL:er, säkerhetsheaders | **Projektarbete B:** Hotanalys + instuderingsfrågor |
+| 13 | [13. Publicering](del4/k13-publicering.qmd) | GitHub Pages, WordPress Playground | Jämförelse av publiceringssätt |
+| 14 | [14. Lagar, regler och etik](del4/k14-lagar-etik.qmd) | Kak-granskning, integritetspolicy | **Projektarbete C:** Granska en webbplats + instuderingsfrågor |
+| 15 | [15. Webbutvecklingsprocessen](del4/k15-processen.qmd) | Projektplan, wireframes, stilguide | Starta slutprojektet |
+| 16–19 | [16. Slutprojekt](del4/k16-slutprojekt.qmd) | Bygga, testa, publicera | Dokumentation |
+| 20 | 16. Slutprojekt | Redovisning | Utvärdering och uppföljning |
+
+## Centralt innehåll och var det behandlas
+
+Kursen täcker **både** det centrala innehållet i *Webbutveckling 1* (Gy11) och i *Webbutveckling nivå 1* (WEBB1000X, Gy25). Formuleringarna skiljer sig, men innehållet överlappar till största delen. Tabellerna visar var varje punkt behandlas och i vilken form.
+
+**P** = praktiskt (labbar, bygga), **Pr** = projektarbete, **I** = instuderingsfrågor.
+
+### Webbutveckling 1 (Gy11)
+
+| Centralt innehåll | Kapitel | Form |
+|---|---|:-:|
+| Webben som plattform, dess historia och samhällspåverkan | 1 | P, Pr, I |
+| Protokoll, adresser, säkerhet, samspelet klient–server | 2, 12 | P, I |
+| Publikation med och utan webbpubliceringssystem | 13 | P, I |
+| Processen för ett webbutvecklingsprojekt | 15, 16 | P |
+| Märkspråk, roller, syntax och semantik – HTML och CSS | 3, 5, 6, 7 | P |
+| Orientering om Ecmaskript och DOM | 11 | P, I |
+| Teckenkodning | 4 | P, I |
+| Bilder och media: format, optimering, tillgänglighet | 8 | P |
+| Riktlinjer för god praxis | 9, 10, 15 | P |
+| Interoperabilitet: standarder och testning i användaragenter | 10 | P |
+| Oberoende av användaragent och plattform, tillgänglighet vid funktionsnedsättning | 7, 9, 10 | P, I |
+| Kvalitetssäkring och validering | 10 | P |
+| Säkerhet: hot, sårbarheter, motåtgärder | 12 | P, Pr, I |
+| Lagar och bestämmelser (personuppgifter, elektronisk kommunikation) | 14 | P, Pr, I |
+| Terminologi | Alla, [Bilaga B](bilagor/b-ordlista.qmd) | I |
+
+::: {.callout-note}
+## Om personuppgiftslagen
+Gy11-kursplanen nämner *personuppgiftslagen* (PUL). Den upphävdes 2018 och ersattes av EU:s **dataskyddsförordning (GDPR)** och den svenska **dataskyddslagen**. Kursen behandlar de regler som gäller i dag.
+:::
+
+### Webbutveckling nivå 1 (Gy25)
+
+| Centralt innehåll | Kapitel | Form |
+|---|---|:-:|
+| Webben som plattform och dess samhällspåverkan | 1 | P, Pr, I |
+| Protokoll, adresser och samspelet klient–server | 2 | P, I |
+| Grundläggande terminologi | Alla, Bilaga B | I |
+| Märkspråk, roller, syntax och semantik – HTML och CSS | 3, 5 | P |
+| Skapande av webbsidor med HTML och CSS | 3–8 | P |
+| Introduktion till responsiv design | 7 | P |
+| Alternativa metoder för att skapa och redigera webbsidor | 13 | P, I |
+| Bilder och media i lämpliga format | 8 | P |
+| Kvalitetssäkring och validering | 10 | P |
+| Teckenkodning | 4 | P, I |
+| Typsnitt, färgscheman och layoutprinciper | 6 | P |
+| Orientering om JavaScript och DOM | 11 | P, I |
+| God praxis och tillgänglighet | 9, 10 | P |
+| Anpassning av kod, bilder och media för tillgänglighet | 8, 9 | P |
+| Interoperabilitet: standarder och testning | 10 | P |
+| Utvecklingsprocessen för ett mindre webbprojekt | 15, 16 | P |
+| Upphovsrätt och personuppgifter | 8, 14 | P, Pr, I |
+| Etiska överväganden | 1, 14 | Pr, I |
+
+## Bedömning
+
+Kursen bedöms utifrån:
+
+1. **Labbar och Bygg vidare.** Läraren följer arbetet löpande.
+2. **Delprojektet** i vecka 10: din egen webbplats, validerad och testad.
+3. **Projektarbetena A, B och C.**
+4. **Instuderingsfrågorna**, som kan följas upp i skriftliga förhör.
+5. **Slutprojektet** med dokumentation, redovisning och utvärdering.
+
+Hur uppgifterna kopplar till betygskriterierna står i [Bilaga E](bilagor/e-bedomning.qmd).
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Gy11 eller Gy25?** Elever som började gymnasiet hösten 2025 eller senare läser Gy25-nivån WEBB1000X. Äldre elever läser Gy11-kursen WEUWEB01. Materialet täcker båda. Skillnaderna i korthet:
+
+- **Bara i Gy11:** säkerhet (kap. 12) och publicering (kap. 13) som eget innehåll, samt *lagen om elektronisk kommunikation*. Kapitel 12 och 13 är ändå värdefulla i Gy25: säkerhet hör till god praxis, och kapitel 13 täcker "alternativa metoder att skapa och redigera webbsidor".
+- **Bara i Gy25:** typsnitt, färgscheman och layoutprinciper (kap. 6), etiska överväganden (kap. 1 och 14) och upphovsrätt (kap. 8 och 14). Även här fungerar innehållet bra för Gy11-grupper.
+
+**Tidsbrist?** Kapitel 11 (JS/DOM) och 12 (säkerhet) kan kortas till en lektion vardera plus instuderingsfrågor. Kapitel 6 kan slås ihop med kapitel 7.
+
+**Instuderingsfrågor som förhör.** Frågorna är skrivna så att de kan användas direkt i korta skriftliga förhör. Facit finns i lärarblocket sist i varje kapitel.
+:::
+:::

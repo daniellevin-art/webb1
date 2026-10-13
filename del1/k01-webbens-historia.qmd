@@ -1,0 +1,220 @@
+# Webben som plattform {#sec-historia}
+
+::: ci
+Webben som plattform, dess historia och samhällspåverkan. Etiska överväganden.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara skillnaden mellan *internet* och *webben*,
+- beskriva de viktigaste stegen i webbens historia och varför de var viktiga,
+- förklara vad det betyder att webben är en *plattform*,
+- ge exempel på hur webben har förändrat samhället, både positivt och negativt,
+- resonera om etiska frågor kring webben.
+:::
+
+## Internet och webben är inte samma sak
+
+Orden används ofta som om de betydde samma sak, men de gör inte det.
+
+- **Internet** är det fysiska och tekniska *nätet*: kablar, routrar, satelliter och de regler (protokoll) som låter datorer över hela världen skicka data till varandra.
+- **Webben** (*World Wide Web*) är *en tjänst* som körs på internet: sidor som länkar till varandra och som du läser i en webbläsare.
+
+Andra tjänster på internet är e-post, onlinespel, videosamtal och filöverföring. Liknelse: internet är vägnätet, webben är en av alla transporttjänster som använder vägarna, som bussarna.
+
+## En kort historia
+
+| År | Händelse | Varför det var viktigt |
+|---|---|---|
+| 1969 | **ARPANET** kopplar ihop de första datorerna i USA | Internets föregångare |
+| 1983 | ARPANET går över till **TCP/IP** | Gemensamt "språk" som fortfarande används |
+| 1989 | **Tim Berners-Lee** på CERN skriver ett förslag om ett länkat informationssystem | Webbens födelse |
+| 1990–91 | Första webbläsaren, webbservern och webbplatsen (`info.cern.ch`) | HTML, HTTP och URL uppfinns |
+| 1993 | CERN släpper webben fritt, utan avgifter. Webbläsaren **Mosaic** visar bilder i texten | Vem som helst får bygga webben. Den blir populär |
+| 1994 | **W3C** grundas. Netscape Navigator släpps | Organisation för gemensamma standarder |
+| 1995 | **JavaScript** skapas. Amazon och eBay startar | Interaktiva sidor och e-handel |
+| 1996 | **CSS** blir standard | Utseende skilt från innehåll |
+| 1998 | **Google** grundas | Sökmotorer blir vägen in på webben |
+| 2000 | **IT-bubblan** spricker | Många webbföretag går i konkurs |
+| 2001 | **Wikipedia** | Användarna skapar innehållet |
+| 2004–05 | Facebook, YouTube. Begreppet **webb 2.0** | Sociala medier, användargenererat innehåll |
+| 2007 | **iPhone** | Webben flyttar in i fickan |
+| 2010 | **Responsiv design** beskrivs | En sida som fungerar på alla skärmar |
+| 2014 | **HTML5** blir standard | Video, ljud och appar direkt i webbläsaren |
+| 2016 | Mobiltrafiken går om datortrafiken globalt | Mobilen blir den viktigaste skärmen |
+| 2018 | **GDPR** börjar gälla i EU | Skärpta krav på hantering av personuppgifter |
+| 2019 | HTML blir en "levande standard" som uppdateras löpande | Inga fler versionsnummer |
+| 2022– | **Generativ AI** (t.ex. chattbotar) | Nya sätt att söka och skapa innehåll |
+
+### Tre idéer som gjorde webben
+
+Berners-Lee kombinerade tre enkla uppfinningar. Alla tre används fortfarande:
+
+1. **HTML** – ett språk för att skriva dokument med **länkar** (*hypertext*).
+2. **HTTP** – ett protokoll för att hämta dokument från en server.
+3. **URL** – en adress som pekar ut exakt ett dokument, var som helst i världen.
+
+Det kanske viktigaste beslutet var ändå inte tekniskt: CERN gjorde webben **fri och öppen**. Vem som helst fick bygga webbläsare, servrar och webbplatser utan att betala eller fråga om lov.
+
+## Webben som plattform
+
+En **plattform** är något andra bygger vidare på. Webben började som ett sätt att läsa dokument. I dag körs hela program i webbläsaren: e-post, kontorsprogram, spel, banker, skolplattformar och streamingtjänster.
+
+Det som gör webben till en så stark plattform:
+
+- **Öppna standarder.** HTML, CSS och JavaScript ägs inte av något företag. Standarderna skrivs av W3C och WHATWG och är gratis att använda.
+- **Oberoende av enhet.** Samma sida fungerar på dator, mobil, surfplatta och tv, och i Windows, macOS, Linux, Android och iOS.
+- **Ingen installation.** Användaren skriver en adress och kommer direkt in.
+- **Länkar.** Allt kan länka till allt.
+
+En webbapp konkurrerar alltså med vanliga appar, men utan app-butikernas regler och avgifter.
+
+## Webbens samhällspåverkan
+
+Webben har förändrat nästan allt. Några exempel:
+
+| Område | Före webben | Med webben |
+|---|---|---|
+| Information | Bibliotek, uppslagsverk, tidningar | Allt finns ett sökord bort, men vem som helst kan publicera, även falska uppgifter |
+| Handel | Butiker med öppettider | E-handel dygnet runt. Lokala butiker konkurreras ut |
+| Kommunikation | Brev, telefon | Meddelanden och video i realtid över hela världen |
+| Demokrati | Tidningar, radio och tv valde vad som sades | Alla kan göra sin röst hörd, men algoritmer styr vad vi ser |
+| Arbete | Plats- och tidsbundet | Distansarbete, nya yrken och nya sätt att bli övervakad |
+| Myndigheter | Blanketter och kö | E-tjänster och BankID, men svårt för den som inte är digital |
+
+Mycket har blivit lättare, men nya problem har uppstått: desinformation, att några få företag har mycket stor makt, integritet och övervakning, digitalt utanförskap och webbens energianvändning.
+
+### Etiska frågor
+
+Som webbutvecklare fattar du beslut som påverkar användarna. Några frågor att fundera på:
+
+- Är det okej att designa en sida så att användaren *råkar* godkänna spårning eller köpa något extra? (Det kallas **dark patterns**, eller *manipulativ design*.)
+- Vem utesluts om sidan bara fungerar med mus eller bara på nya telefoner?
+- Ska en sida samla in mer data om användarna än den behöver?
+- Vem ansvarar för det användare skriver i ett kommentarsfält?
+
+Vi återkommer till etiken i [kapitel 14](../del4/k14-lagar-etik.qmd).
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 1.1 – Världens första webbplats
+1. Gå till <https://info.cern.ch>. Klicka vidare till *Browse the first website*.
+2. Det här är en återskapad version av den första webbplatsen från 1991. Utforska den i fem minuter.
+3. Besvara:
+   a. Vad finns det på sidan? Vad finns *inte*, jämfört med en sida i dag?
+   b. Hur navigerar man?
+   c. Vad tror du var syftet med sidan?
+4. Högerklicka och välj **Visa sidkälla**. Känner du igen något? Vilka taggar (ord inom `< >`) hittar du?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 1.2 – Tidsresa med Wayback Machine
+*Internet Archive* har sparat kopior av miljarder webbsidor sedan 1996.
+
+1. Gå till <https://web.archive.org>.
+2. Välj en välkänd svensk webbplats, till exempel `svt.se`, `aftonbladet.se`, `ikea.se` eller skolans webbplats.
+3. Titta på hur den såg ut ungefär **2000**, **2010** och **i dag**. Ta skärmdumpar.
+4. Fyll i tabellen:
+
+| | ~2000 | ~2010 | I dag |
+|---|---|---|---|
+| Hur mycket text, bild och video? | | | |
+| Fungerar den i mobilen? (Testa med `Ctrl+Shift+M` i utvecklarverktygen) | | | |
+| Reklam? Vilken sort? | | | |
+| Kakbanner/samtyckesruta? | | | |
+| Navigering: hur hittar man? | | | |
+
+5. Skriv tre meningar om vad som har förändrats mest, och *varför* du tror att det har det. Tips: titta i tidslinjen ovan.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 1.3 – Min webbvardag
+1. Skriv ner alla webbtjänster du använder under en dag, inklusive appar som egentligen visar webbinnehåll (sociala medier, skolplattform, bank, spel, nyheter, streaming).
+2. Dela in dem i kategorier: *kommunikation, skola/arbete, nöje, handel, samhälle/myndigheter*.
+3. Välj en tjänst. Hur skulle du ha gjort samma sak 1990?
+4. Jämför med en klasskamrat. Vem har flest? Vilken kategori är störst?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 1.4 – Din första ändring i HTML
+Öppna `ovningsfiler/k01-tidslinje/index.html` i VS Code och i webbläsaren. Det är en färdig sida med en tidslinje över webbens historia. Några händelser är redan inlagda.
+
+1. Ändra rubriken till ditt namn: "Webbens historia – av …".
+2. Lägg till fem händelser till från tabellen i det här kapitlet. Kopiera ett befintligt `<li>`-block och ändra text och årtal.
+3. Lägg till en egen händelse som inte finns i boken. Sök själv, och ange källan.
+4. Spara och ladda om sidan i webbläsaren.
+
+Du behöver inte förstå all kod än. Det är meningen att du ska se hur text och taggar hänger ihop.
+:::
+
+## Projektarbete A: Webben och samhället {#sec-projekt-a}
+
+::: projekt
+**Form:** grupper om 2–3. **Tid:** ca 3 lektioner + presentation. **Redovisning:** muntlig presentation (5–7 min) + en sammanfattning på en sida med källförteckning.
+
+Välj ett tema:
+
+1. Webben, demokratin och yttrandefriheten
+2. Desinformation, källkritik och algoritmer
+3. E-handelns påverkan på städer, butiker och jobb
+4. Sociala medier och uppmärksamhetsekonomin
+5. Integritet: vem samlar data om oss, och varför?
+6. Digitalt utanförskap: vem hänger inte med?
+7. Plattformarnas makt: när några få företag äger webben
+8. AI och webben: vad händer med sökning, upphovsrätt och jobb?
+9. Webbens klimatpåverkan
+10. Eget tema, som läraren godkänner
+
+Presentationen ska innehålla:
+
+- **Bakgrund och historia.** Hur var det före webben? Hur har det utvecklats?
+- **Nuläge.** Minst två konkreta exempel, gärna svenska.
+- **Konsekvenser.** Minst en positiv och en negativ.
+- **En etisk fråga** som ni låter klassen diskutera i två minuter.
+- **Källor.** Minst fyra, varav minst en vetenskaplig eller från en myndighet (t.ex. Internetstiftelsen, SCB, Skolverket, IMY). Granska källorna kritiskt.
+- **Din roll som webbutvecklare.** Vad kan den som bygger webbplatser göra för att påverka i rätt riktning?
+
+Tips: Rapporten *Svenskarna och internet* från Internetstiftelsen har aktuell svensk statistik.
+:::
+
+## Instuderingsfrågor
+
+1. Förklara skillnaden mellan internet och webben. Ge två exempel på internettjänster som inte är webben.
+2. Vilka tre tekniker uppfann Tim Berners-Lee, och vad gör var och en av dem?
+3. Varför var det viktigt att CERN gjorde webben fri att använda 1993?
+4. Vad är W3C, och varför behövs en sådan organisation?
+5. Vad menas med att webben är en *plattform*? Ge två skäl till att webben blivit en så stark plattform.
+6. Vad menas med *webb 2.0*?
+7. Hur förändrade smarttelefonen webben, och hur påverkade det sättet man bygger webbplatser?
+8. Ge två exempel på hur webben har gjort samhället mer demokratiskt, och två exempel på hur den kan hota demokratin.
+9. Vad är *dark patterns*? Ge ett exempel du själv sett.
+10. Vad är digitalt utanförskap? Vilka grupper drabbas, och vad kan en webbutvecklare göra åt det?
+
+## Nyckelbegrepp
+
+internet · webben (WWW) · hypertext · HTML · HTTP · URL · webbläsare · webbserver · W3C · WHATWG · öppen standard · plattform · webb 2.0 · responsiv design · dark patterns · digitalt utanförskap
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: genomgång + labb 1.1 och 1.2. Lektion 2: labb 1.3 och 1.4, starta projektarbetet. Lektion 3–4: projektarbete. Presentationerna kan hållas vecka 3–4 så att de inte tar tid från HTML-starten.
+
+**Labb 1.4** är elevernas första kontakt med HTML. Poängen är att de ska se att en webbsida är text och att de kan ändra den. Förklara inga detaljer – det kommer i kapitel 3.
+
+**Facit till instuderingsfrågorna**
+
+1. Internet är det globala nätverket av sammankopplade nät och dess protokoll (TCP/IP). Webben är en tjänst på internet: länkade dokument som hämtas med HTTP och visas i en webbläsare. Andra tjänster: e-post, onlinespel, videosamtal, filöverföring (FTP), SSH.
+2. HTML (märkspråk för dokument med länkar), HTTP (protokoll för att begära och skicka dokument mellan klient och server) och URL (unik adress till ett dokument).
+3. Alla kunde bygga webbläsare, servrar och webbplatser utan licensavgifter. Det gav snabb spridning och gjorde att ingen enskild aktör ägde webben. Konkurrerande slutna system (t.ex. Gopher, som började ta ut licensavgifter) tappade mark.
+4. World Wide Web Consortium, grundat 1994 av Berners-Lee. Tar fram standarder (t.ex. CSS, tillgänglighetsriktlinjerna WCAG). Behövs för att alla webbläsare ska tolka koden likadant – annars fungerar sidor bara i vissa webbläsare.
+5. Andra bygger tjänster och program ovanpå webben. Skäl: öppna standarder, fungerar på alla enheter och operativsystem, ingen installation, länkbarhet.
+6. Webb där användarna själva skapar och delar innehåll (sociala medier, wikis, bloggar, kommentarer), till skillnad från tidigare webb där få publicerade och många läste.
+7. Webben används mest i mobilen; skärmarna är små och används med fingrar. Det ledde till responsiv design och "mobilt först", och större fokus på prestanda (mobilnät).
+8. Positivt t.ex.: alla kan publicera, lättare att granska makthavare, organisera sig, tillgång till offentliga handlingar. Hot t.ex.: desinformation, filterbubblor/algoritmer, påverkanskampanjer, hat och hot som tystar, få plattformar kontrollerar debatten.
+9. Design som lurar eller pressar användaren att göra något hen inte vill, t.ex. "Godkänn alla" stor och färgad medan "Neka" är gömd, förkryssade rutor, falsk brådska ("bara 1 kvar!"), svårt att säga upp prenumeration.
+10. Att inte kunna eller ha möjlighet att använda digitala tjänster. Drabbar t.ex. äldre, personer med funktionsnedsättning, personer med begränsad svenska, personer med låg inkomst eller utan bra uppkoppling. Webbutvecklare kan bygga tillgängligt, med enkelt språk, som fungerar på äldre enheter och långsamma nät.
+
+**Bedömning projektarbete A:** se Bilaga E. Lägg särskild vikt vid om konsekvenser och etik *resoneras* om, inte bara räknas upp. Det skiljer E från C och A.
+:::
+:::

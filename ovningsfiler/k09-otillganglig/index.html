@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Sida</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="logga.svg" class="logga">
+      <div class="nav">
+        <a href="index.html" tabindex="3">Hem</a>
+        <a href="pass.html" tabindex="1">Pass</a>
+        <a href="priser.html" tabindex="2">Priser</a>
+      </div>
+      <button class="sok">🔍</button>
+    </div>
+
+    <div class="erbjudande">ERBJUDANDE! Första månaden gratis!</div>
+
+    <h2>Välkommen till Fit 24</h2>
+    <p class="ingress">Malmös trevligaste gym med öppet dygnet runt. Personal training – get fit fast with our expert coaches!</p>
+
+    <h4>Veckans pass</h4>
+    <img src="schema.svg" alt="bild">
+    <p>Vill du veta mer om passen? <a href="pass.html">Klicka här</a>.</p>
+
+    <h4>Priser</h4>
+    <table>
+      <tr><td>Kort</td><td>Pris per månad</td></tr>
+      <tr><td>Bas</td><td>299 kr</td></tr>
+      <tr><td>Premium</td><td>449 kr</td></tr>
+    </table>
+
+    <h4>Boka provträning</h4>
+    <p>Fält markerade med röd ram måste fyllas i.</p>
+    <form>
+      <input type="text" placeholder="Namn" class="obligatorisk">
+      <input type="text" placeholder="E-post" class="obligatorisk">
+      <input type="text" placeholder="Telefon">
+      <select>
+        <option>Välj pass</option>
+        <option>Spinning</option>
+        <option>Yoga</option>
+      </select>
+      <div class="knapp" onclick="alert('Tack!')">Boka</div>
+    </form>
+
+    <div class="footer">© Fit 24 · <a href="villkor.html">Läs mer</a></div>
+  </body>
+</html>

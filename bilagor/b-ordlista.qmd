@@ -1,0 +1,479 @@
+# Ordlista {#sec-ordlista}
+
+Terminologin inom webbutveckling är till stor del engelsk. Här står de svenska begreppen med engelsk motsvarighet där den är vanlig. Siffran inom parentes anger kapitlet där begreppet förklaras.
+
+## A–D
+
+60–30–10 (6)
+:   Färgfördelning: 60 % huvudfärg, 30 % sekundärfärg, 10 % accentfärg.
+
+Absolut adress (2)
+:   En adress med schema och värdnamn, t.ex. `https://exempel.se/om.html`. Jfr *relativ adress*.
+
+Agilt arbetssätt (15)
+:   Arbete i korta perioder (sprintar) med leverans och återkoppling efter varje period.
+
+Alt-text (3, 8)
+:   Textalternativ till en bild i attributet `alt`. Läses av skärmläsare.
+
+ARIA (3, 9)
+:   *Accessible Rich Internet Applications*. Attribut som ger hjälpmedel extra information, t.ex. `aria-label`, `aria-expanded`.
+
+ASCII (4)
+:   Teckenuppsättning från 1963 med 128 tecken. Saknar å, ä, ö.
+
+Attribut (3)
+:   Extra information i en HTML-starttagg, `namn="värde"`.
+
+AVIF (8)
+:   Modernt bildformat med mycket effektiv komprimering.
+
+Användaragent (2, 10)
+:   *User agent*. Programmet som hämtar och visar webbsidor åt användaren, oftast en webbläsare.
+
+Användartest (10)
+:   Test där riktiga användare löser uppgifter medan man observerar.
+
+Baseline (10)
+:   Märkning på MDN som visar om en webbfunktion stöds i alla stora webbläsare.
+
+BBS-lagen (14)
+:   Lagen om ansvar för elektroniska anslutningstavlor. Krav på uppsikt över kommentarsfält och forum.
+
+Blink, Gecko, WebKit (10)
+:   De tre stora renderingsmotorerna: Chrome/Edge, Firefox, Safari.
+
+Blockelement (5)
+:   Element som börjar på ny rad och tar hela bredden, t.ex. `p`, `div`.
+
+Boxmodellen (5)
+:   Varje element är en låda med content, padding, border och margin.
+
+Brytpunkt (7)
+:   *Breakpoint*. Skärmbredd där layouten ändras med en media query.
+
+Byte (4)
+:   Åtta bitar. Kan lagra värden 0–255.
+
+Cachning (2, 10)
+:   Att spara en kopia av en fil så att den inte behöver hämtas igen.
+
+Certifikat (2)
+:   Digitalt intyg som bevisar att en server tillhör en viss domän. Används av HTTPS.
+
+Certifikatutfärdare (2)
+:   *Certificate Authority, CA*. Organisation som utfärdar certifikat, t.ex. Let's Encrypt.
+
+Citaträtt (14)
+:   Rätten att citera korta delar av ett verk, med källa, när det är motiverat.
+
+Clickjacking (12)
+:   Angrepp där en sida bäddas in osynligt så att användaren klickar på fel sak.
+
+CMS (13)
+:   *Content Management System*, publiceringssystem. T.ex. WordPress.
+
+Commit (13)
+:   En sparpunkt i Git, med en beskrivning av ändringen.
+
+Core Web Vitals (10)
+:   Googles mått på upplevd prestanda: LCP, CLS och INP.
+
+Creative Commons (8)
+:   Licenser som låter upphovspersoner ge andra tillstånd att använda verk på vissa villkor.
+
+CSP (12)
+:   *Content Security Policy*. Header som begränsar vilka skript och resurser en sida får använda.
+
+CSS (5)
+:   *Cascading Style Sheets*. Språket för webbsidors utseende och layout.
+
+CSS-variabel (5)
+:   Egendefinierat värde, t.ex. `--accent`, som används med `var(--accent)`.
+
+Dark patterns (1, 14)
+:   Manipulativ design som lurar användaren att göra något hen inte vill.
+
+Dataintrång (12)
+:   Brott enligt brottsbalken: att olovligen ta sig in i eller ändra data i ett datorsystem.
+
+Dataportabilitet (14)
+:   Rätten enligt GDPR att få ut sina uppgifter i ett format som kan flyttas till en annan tjänst.
+
+DDoS (12)
+:   *Distributed Denial of Service*. Överbelastningsattack från många datorer samtidigt.
+
+Den registrerade (14)
+:   Personen vars personuppgifter behandlas.
+
+DNS (2)
+:   *Domain Name System*. Översätter domännamn till IP-adresser.
+
+DOM (11)
+:   *Document Object Model*. Webbläsarens trädmodell av sidan, som JavaScript kan läsa och ändra.
+
+Domännamn (2)
+:   Läsbart namn på en webbplats, t.ex. `kvarnenscafe.se`.
+
+DOS-lagen (9, 14)
+:   Lagen om tillgänglighet till digital offentlig service. Gäller offentlig sektor.
+
+## E–K
+
+ECMAScript (11)
+:   Standarden för språket JavaScript.
+
+Element (3)
+:   Starttagg, innehåll och sluttagg tillsammans.
+
+Flexbox (7)
+:   CSS-layout som placerar element längs en axel.
+
+Fokus (9)
+:   Det element som tar emot tangentbordsinmatning. Ska alltid synas.
+
+Formulär (3)
+:   Del av en sida där användaren matar in och skickar data, `<form>`.
+
+Fragment (2)
+:   Delen av en URL efter `#`. Pekar på ett ställe på sidan.
+
+Funktionellt krav (15)
+:   Krav på vad ett system ska *göra*. Jfr *icke-funktionellt krav*.
+
+GDPR (14)
+:   EU:s dataskyddsförordning. Reglerar behandling av personuppgifter.
+
+Git (13)
+:   Program för versionshantering.
+
+GitHub, GitHub Pages (13)
+:   Tjänst för Git-repon, och dess funktion för att publicera webbplatser.
+
+Grid (7)
+:   CSS-layout i rader och kolumner.
+
+Hash (12)
+:   Ett "fingeravtryck" av data som inte går att räkna tillbaka. Används för att lagra lösenord.
+
+Header (2)
+:   Rad med metadata i en HTTP-förfrågan eller ett svar, `Namn: värde`.
+
+Hot (12)
+:   Något som kan orsaka skada. Jfr *sårbarhet*, *risk*.
+
+HSTS (12)
+:   Header som tvingar webbläsaren att alltid använda HTTPS till webbplatsen.
+
+HTML (3)
+:   *HyperText Markup Language*. Märkspråket för webbsidors innehåll och struktur.
+
+HTML-entitet (4)
+:   Kod för ett tecken, t.ex. `&lt;` för `<`.
+
+HTTP (2)
+:   *Hypertext Transfer Protocol*. Protokollet för kommunikation mellan webbläsare och webbserver.
+
+HTTPS (2)
+:   HTTP över en krypterad anslutning (TLS).
+
+Hypertext (1)
+:   Text med länkar till annan text.
+
+Icke-funktionellt krav (15)
+:   Krav på hur bra något ska vara, t.ex. prestanda eller tillgänglighet.
+
+IMY (14)
+:   Integritetsskyddsmyndigheten. Tillsyn över GDPR i Sverige.
+
+Inbyggt dataskydd (14)
+:   *Privacy by design*. Integritet ska byggas in från början.
+
+Indata (12)
+:   Data som kommer in i ett system, t.ex. från ett formulär. Ska aldrig litas på.
+
+Inline-element (5)
+:   Element som ligger i textflödet, t.ex. `a`, `span`.
+
+Integritetspolicy (14)
+:   Information till användarna om hur personuppgifter behandlas.
+
+Interoperabilitet (10)
+:   Att olika system, webbläsare och hjälpmedel fungerar tillsammans.
+
+Internet (1)
+:   Det globala nätverket av sammankopplade datornät.
+
+IP-adress (2)
+:   Numerisk adress till en dator på internet. IPv4 och IPv6.
+
+JavaScript (11)
+:   Programspråket för interaktivitet på webbsidor.
+
+JPEG (8)
+:   Bildformat med förstörande komprimering, för foton.
+
+Kakor (2, 14)
+:   *Cookies*. Små textfiler som webbplatser sparar i webbläsaren.
+
+Kaskaden (5)
+:   Reglerna som avgör vilken CSS-regel som gäller: ursprung, specificitet, ordning.
+
+KIT (12)
+:   Konfidentialitet, integritet, tillgänglighet – informationssäkerhetens tre mål.
+
+Klient (2)
+:   Program som skickar förfrågningar till en server, oftast webbläsaren.
+
+Klientkod (2)
+:   Kod som körs i webbläsaren: HTML, CSS, JavaScript.
+
+Kodpunkt (4)
+:   Ett teckens nummer i Unicode, t.ex. U+00E5 för å.
+
+Kontrastkvot (6, 9)
+:   Mått på skillnaden i ljushet mellan text och bakgrund. Minst 4,5 : 1 för vanlig text.
+
+Kravspecifikation (15)
+:   Dokument som beskriver vad en webbplats ska göra och uppfylla.
+
+## L–R
+
+Landmärke (9)
+:   Sidregion som hjälpmedel kan hoppa till, t.ex. `header`, `nav`, `main`.
+
+Lazy loading (8)
+:   Att bilder laddas först när de närmar sig skärmen.
+
+LEK (14)
+:   Lagen om elektronisk kommunikation. Innehåller bland annat reglerna om kakor.
+
+Licens (8, 14)
+:   Tillstånd att använda ett verk på vissa villkor.
+
+Lighthouse (9, 10)
+:   Granskningsverktyg i Chrome för prestanda, tillgänglighet och SEO.
+
+Media query (7)
+:   CSS som bara gäller under vissa förutsättningar, t.ex. `@media (min-width: 48rem)`.
+
+Minifiering (10)
+:   Att ta bort onödiga tecken ur kod för att göra filen mindre.
+
+Mobilt först (7)
+:   *Mobile first*. Att skriva CSS för minsta skärmen först.
+
+Mojibake (4)
+:   Trasiga tecken som uppstår när text läses med fel teckenkodning.
+
+MoSCoW (15)
+:   Prioritering av krav: Must, Should, Could, Won't.
+
+Märkspråk (3)
+:   Språk som märker upp text för att beskriva dess struktur, t.ex. HTML, XML.
+
+Nätfiske (12)
+:   *Phishing*. Bedrägeri där användaren lockas till en falsk sida.
+
+Nod (11)
+:   En del i DOM-trädet: ett element, en text eller ett attribut.
+
+Persona (15)
+:   Påhittad men realistisk användare som representerar en målgrupp.
+
+Personuppgift (14)
+:   Information som kan kopplas till en levande person.
+
+Personuppgiftsansvarig (14)
+:   Den som bestämmer varför och hur personuppgifter behandlas.
+
+Personuppgiftsbiträde (14)
+:   Den som behandlar personuppgifter åt den ansvarige.
+
+PNG (8)
+:   Bildformat med förlustfri komprimering och genomskinlighet.
+
+Port (2)
+:   Nummer som anger vilken tjänst på en server man ansluter till. HTTP 80, HTTPS 443.
+
+POUR (9)
+:   WCAG:s fyra principer: uppfattbar, hanterbar, begriplig, robust.
+
+Procentkodning (4)
+:   Sätt att skriva tecken i URL:er, t.ex. `%C3%A5` för å.
+
+Progressiv förbättring (8, 11)
+:   Bygg en grund som fungerar för alla, och lägg till förbättringar för dem som har stöd.
+
+Protokoll (2)
+:   Regler för hur datorer kommunicerar, t.ex. HTTP, TCP/IP.
+
+PTS (14)
+:   Post- och telestyrelsen. Tillsyn över bland annat kakreglerna.
+
+Punycode (4)
+:   Sätt att skriva domännamn med åäö och andra tecken med bara ASCII.
+
+Query-parameter (2)
+:   Par av `namn=värde` efter `?` i en URL.
+
+Relativ adress (2)
+:   Adress som räknas från den aktuella filen, t.ex. `../index.html`.
+
+Renderingsmotor (10)
+:   Den del av webbläsaren som tolkar HTML och CSS och ritar sidan.
+
+Responsiv design (7)
+:   Webbplats som anpassar sig efter skärmen.
+
+Risk (12)
+:   Sannolikhet × konsekvens.
+
+Rättslig grund (14)
+:   Det stöd i GDPR som krävs för att behandla personuppgifter, t.ex. samtycke eller avtal.
+
+## S–Ö
+
+Sajtkarta (15)
+:   *Sitemap*. Översikt över en webbplats sidor och hur de hänger ihop.
+
+Samtycke (14)
+:   Frivilligt, specifikt, informerat och otvetydigt ja till en behandling.
+
+Selektor (5)
+:   Den del av en CSS-regel som anger vilka element som ska stylas.
+
+Semantisk HTML (3)
+:   HTML där elementen beskriver vad innehållet är.
+
+SEO (10)
+:   *Search Engine Optimization*, sökmotoroptimering.
+
+Server (2)
+:   Dator som tar emot förfrågningar och skickar svar.
+
+Serverkod (2)
+:   Kod som körs på servern, t.ex. PHP eller Node.js.
+
+SFTP (13)
+:   Krypterad filöverföring till en server.
+
+Skip link (9)
+:   Länk först på sidan som hoppar förbi navigeringen.
+
+Skärmläsare (9)
+:   Hjälpmedel som läser upp skärmens innehåll, t.ex. NVDA, VoiceOver.
+
+Specificitet (5)
+:   Hur exakt en CSS-selektor är. Avgör vilken regel som vinner.
+
+SQL-injektion (12)
+:   Angrepp där databaskod smugglas in via indata.
+
+Statisk/dynamisk webbplats (2)
+:   Statisk: färdiga filer till alla. Dynamisk: sidan skapas vid varje förfrågan.
+
+Statisk sajtgenerator (13)
+:   Program som bygger färdiga HTML-sidor från mallar och innehåll.
+
+Statuskod (2)
+:   Tresiffrig kod i ett HTTP-svar, t.ex. 200, 404.
+
+Stilguide (6)
+:   Samling av en webbplats färger, typsnitt och komponenter.
+
+Stilmall (5)
+:   *Stylesheet*. Fil med CSS-regler.
+
+SVG (8)
+:   Vektorgrafikformat baserat på XML.
+
+Sårbarhet (12)
+:   Svaghet som ett hot kan utnyttja.
+
+Tagg (3)
+:   Märkning inom `< >`, t.ex. `<p>`.
+
+Teckenkodning (4)
+:   Sätt att lagra teckens nummer som bytes, t.ex. UTF-8.
+
+Teckenuppsättning (4)
+:   Lista som ger varje tecken ett nummer.
+
+Testprotokoll (10)
+:   Dokumentation av testfall, förväntat och faktiskt resultat.
+
+Tillgänglighet (9)
+:   Att alla kan använda en webbplats, oavsett funktionsförmåga.
+
+Tillgänglighetsredogörelse (9)
+:   Redovisning av en webbplats tillgänglighet och brister. Krävs i offentlig sektor.
+
+Tillståndslöst (2)
+:   HTTP minns inget mellan förfrågningar.
+
+TLS (2)
+:   Krypteringen som används i HTTPS.
+
+Toppdomän (2)
+:   Sista delen av ett domännamn, t.ex. `.se`.
+
+Tvåfaktorsautentisering (12)
+:   Inloggning med två olika slags bevis, t.ex. lösenord och kod i mobilen.
+
+Typskala (6)
+:   Uppsättning textstorlekar som hör ihop.
+
+Unicode (4)
+:   Gemensam teckenuppsättning för alla skriftsystem.
+
+Upphovsrätt (8, 14)
+:   Skydd för upphovspersoners verk. Uppstår automatiskt.
+
+URL (2)
+:   *Uniform Resource Locator*. En webbadress.
+
+UTF-8 (4)
+:   Teckenkodning för Unicode som använder 1–4 bytes per tecken. Standard på webben.
+
+Validering (10)
+:   Kontroll av att kod följer standarden.
+
+Versionshantering (13)
+:   Att spara och hålla ordning på alla versioner av ett projekt.
+
+Viewport (7)
+:   Den synliga ytan i webbläsaren. `<meta name="viewport">` styr den i mobiler.
+
+W3C (1)
+:   *World Wide Web Consortium*. Tar fram webbstandarder, t.ex. CSS och WCAG.
+
+WCAG (9)
+:   *Web Content Accessibility Guidelines*. Riktlinjer för tillgänglighet.
+
+Webben (1)
+:   *World Wide Web*. Tjänst på internet med länkade dokument.
+
+Webbhotell (13)
+:   Tjänst som hyr ut plats på webbservrar.
+
+WebP (8)
+:   Modernt bildformat, mindre filer än JPEG och PNG.
+
+WebVTT (8)
+:   Textformat för undertexter till video.
+
+WHATWG (3)
+:   Organisationen som underhåller HTML-standarden.
+
+Wireframe (15)
+:   Enkel skiss av en sidas layout.
+
+WYSIWYG (13)
+:   *What You See Is What You Get*. Redigering där man ser resultatet direkt.
+
+XML (3)
+:   Allmänt märkspråk för data.
+
+XSS (12)
+:   *Cross-site scripting*. Angrepp där skript smugglas in på en sida och körs hos andra besökare.

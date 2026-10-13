@@ -1,0 +1,370 @@
+# JavaScript och DOM {#sec-js}
+
+::: ci
+Orientering om Ecmaskript (JavaScript) och dokumentobjektsmodellen (DOM).
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara vad JavaScript och ECMAScript är, och vilken roll de har på en webbsida,
+- förklara vad DOM är och hur den skiljer sig från HTML-koden,
+- läsa och ändra element på en sida med JavaScript,
+- reagera på klick och andra händelser,
+- bygga enkla, tillgängliga funktioner som en mobilmeny och en temaväxlare,
+- förklara principen om progressiv förbättring.
+:::
+
+Det här kapitlet är en **orientering**. Du ska förstå vad JavaScript gör och kunna använda det i enkla fall. Programmering på djupet kommer i senare kurser.
+
+## JavaScript och ECMAScript
+
+**JavaScript** skapades 1995 på tio dagar för webbläsaren Netscape. I dag är det världens mest använda programspråk och körs i alla webbläsare – och även på servrar.
+
+**ECMAScript** är namnet på *standarden* för JavaScript. Den skrivs av en kommitté (TC39) inom organisationen Ecma International och kommer i en ny version varje år: ES2015, ES2016 … Versionen från 2015 var den stora förändringen som gav det moderna JavaScript du ser i dag.
+
+| | |
+|---|---|
+| **JavaScript** | Språket |
+| **ECMAScript** | Standarden som beskriver språket |
+| **DOM** | Standarden för hur JavaScript kommer åt sidan |
+
+JavaScript och Java har inget med varandra att göra, förutom namnet.
+
+## DOM – sidan som ett träd
+
+När webbläsaren läser HTML bygger den ett träd av objekt i minnet: **DOM** (*Document Object Model*).
+
+```html
+<body>
+  <h1>Kvarnens café</h1>
+  <ul>
+    <li>Kaffe</li>
+    <li>Te</li>
+  </ul>
+</body>
+```
+
+```
+document
+└── html
+    └── body
+        ├── h1
+        │   └── "Kvarnens café"
+        └── ul
+            ├── li
+            │   └── "Kaffe"
+            └── li
+                └── "Te"
+```
+
+Varje del av trädet är en **nod**. JavaScript kan läsa och ändra trädet, och webbläsaren ritar om sidan direkt.
+
+::: {.callout-note}
+## Visa sidkälla och Elements visar olika saker
+*Visa sidkälla* (`Ctrl+U`) visar HTML-koden som servern skickade. Fliken *Elements* i utvecklarverktygen visar **DOM:en just nu** – efter att webbläsaren lagat fel och JavaScript ändrat i den. På många moderna webbplatser skiljer de sig mycket.
+:::
+
+## Koppla in JavaScript
+
+```html
+  <script src="js/main.js" defer></script>
+</head>
+```
+
+`defer` betyder: ladda filen nu, men kör den först när hela HTML:en är inläst. Då finns alla element när skriptet letar efter dem.
+
+## Grunderna
+
+```js
+// Variabler
+const namn = "Kvarnens café";     // kan inte ändras
+let antal = 0;                    // kan ändras
+antal = antal + 1;
+
+// Text med variabler (backticks)
+console.log(`Välkommen till ${namn}!`);
+
+// Villkor
+const timme = new Date().getHours();
+if (timme < 10) {
+  console.log("God morgon!");
+} else {
+  console.log("Hej!");
+}
+
+// Funktion
+function dubbla(tal) {
+  return tal * 2;
+}
+```
+
+`console.log` skriver ut i konsolen i utvecklarverktygen. Det är ditt viktigaste felsökningsverktyg.
+
+## Hitta och ändra element
+
+```js
+const rubrik = document.querySelector("h1");           // första som matchar (CSS-selektor)
+const knappar = document.querySelectorAll(".knapp");   // alla som matchar
+
+rubrik.textContent = "Välkommen!";      // byt text
+rubrik.classList.add("markerad");       // lägg till en klass
+rubrik.classList.toggle("dold");        // av/på
+rubrik.setAttribute("lang", "en");      // ändra ett attribut
+```
+
+Ändra hellre **klasser** än stilar direkt. Då ligger utseendet kvar i CSS:en, där det hör hemma.
+
+## Händelser
+
+En **händelse** (*event*) är något som händer: ett klick, en tangent, att ett formulär skickas. Du reagerar med `addEventListener`:
+
+```js
+const knapp = document.querySelector("#visa-mer");
+
+knapp.addEventListener("click", () => {
+  console.log("Någon klickade!");
+});
+```
+
+Vanliga händelser: `click`, `input` (text ändras i ett fält), `change`, `submit`, `keydown`.
+
+## Exempel 1: Mobilmeny
+
+I mobilen vill vi dölja menyn bakom en knapp.
+
+```html
+<header class="sidhuvud">
+  <a href="index.html" class="logga">Kvarnens café</a>
+  <button class="menyknapp" aria-expanded="false" aria-controls="huvudmeny">
+    Meny
+  </button>
+  <nav>
+    <ul id="huvudmeny" class="meny">
+      <li><a href="index.html">Hem</a></li>
+      <li><a href="meny.html">Meny</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
+```
+
+```css
+.menyknapp { display: none; }
+
+/* Bara i mobil, och bara när JavaScript fungerar */
+@media (max-width: 47.99rem) {
+  .js .menyknapp { display: block; }
+  .js .meny { display: none; }
+  .js .meny.oppen { display: block; }
+}
+```
+
+```{.js filename="js/main.js"}
+// Säg till CSS:en att JavaScript fungerar
+document.documentElement.classList.add("js");
+
+const menyknapp = document.querySelector(".menyknapp");
+const meny = document.querySelector("#huvudmeny");
+
+menyknapp.addEventListener("click", () => {
+  const oppen = meny.classList.toggle("oppen");
+  menyknapp.setAttribute("aria-expanded", oppen);
+});
+```
+
+Lägg märke till:
+
+- Det är en riktig `<button>`, så den fungerar med tangentbord och skärmläsare.
+- `aria-expanded` talar om för skärmläsare om menyn är öppen eller stängd.
+- Klassen `js` på `<html>` gör att menyn bara döljs **om JavaScript fungerar**. Utan JavaScript syns menyn som vanligt.
+
+## Progressiv förbättring
+
+Det sista är en viktig princip: **progressiv förbättring** (*progressive enhancement*). Bygg först något som fungerar med bara HTML. Lägg till CSS för utseendet. Lägg till JavaScript för att göra det *bättre* – inte för att det ska fungera alls.
+
+JavaScript kan saknas eller misslyckas oftare än man tror: en dålig uppkoppling som avbryter nedladdningen, ett fel i ett skript, en blockerare, ett gammalt system. Innehållet ska ändå gå att läsa och länkarna gå att följa.
+
+## Exempel 2: Är kaféet öppet nu?
+
+```html
+<p id="oppet-nu" hidden></p>
+```
+
+```{.js filename="js/main.js"}
+const oppetNu = document.querySelector("#oppet-nu");
+
+if (oppetNu) {
+  const nu = new Date();
+  const dag = nu.getDay();        // 0 = söndag, 6 = lördag
+  const timme = nu.getHours();
+
+  const helg = dag === 0 || dag === 6;
+  const oppnar = helg ? 9 : 7;
+  const stanger = helg ? 16 : 18;
+
+  if (timme >= oppnar && timme < stanger) {
+    oppetNu.textContent = `Öppet nu – välkommen in! Vi stänger kl. ${stanger}.`;
+  } else {
+    oppetNu.textContent = `Stängt just nu. Vi öppnar kl. ${oppnar}.`;
+  }
+  oppetNu.hidden = false;
+}
+```
+
+Elementet är dolt (`hidden`) i HTML:en och visas först när JavaScript har skrivit en text. Utan JavaScript syns ingen tom ruta – öppettiderna står ju ändå i tabellen.
+
+## `textContent` eller `innerHTML`?
+
+```js
+element.textContent = "Text";                // sätter text – säkert
+element.innerHTML = "<strong>Text</strong>"; // tolkar som HTML – var försiktig
+```
+
+Om texten kommer från en användare kan `innerHTML` låta någon smyga in kod på sidan. Det kallas XSS och tas upp i kapitel 12. **Använd `textContent` när du sätter text.**
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 11.1 – Konsolen
+Öppna konsolen (`F12` → *Console*) och prova:
+
+```js
+2 + 2
+"Kvarn" + "en"
+const pris = 25;
+pris * 3
+new Date().getHours()
+document.title
+document.querySelectorAll("a").length
+```
+
+1. Vad blir svaren?
+2. Hur många länkar finns det på Kvarnens startsida? På `svt.se`?
+3. Skriv `document.title = "Hej!"`. Vad hände med fliken?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 11.2 – Ändra en riktig webbplats
+1. Gå till en nyhetssajt. Öppna konsolen och skriv:
+
+   ```js
+   document.querySelector("h1").textContent = "Elever i Malmö får längre sommarlov";
+   ```
+
+2. Ta en skärmdump. Ser den äkta ut?
+3. Ladda om sidan. Vad hände med ändringen? Vem mer såg den?
+4. Vad lär det dig om skärmdumpar av "nyheter" som sprids i sociala medier?
+5. Jämför *Visa sidkälla* och *Elements* på samma sida. Hittar du något i Elements som inte finns i källan?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 11.3 – Mobilmenyn
+1. Bygg mobilmenyn på Kvarnens sida enligt exemplet.
+2. Testa i enhetsläget: med mus, med tangentbord (`Tab` till knappen, Enter) och med skärmläsare. Läses "kollapsad"/"expanderad" (eller *collapsed*/*expanded*) upp?
+3. Stäng av JavaScript: i Chrome, utvecklarverktygen → `Ctrl+Shift+P` → skriv *Disable JavaScript*. Ladda om. Går menyn fortfarande att använda?
+4. Bonus: stäng menyn när användaren trycker `Esc`.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 11.4 – Öppet nu
+1. Lägg in "Öppet nu"-skylten på Kvarnens startsida.
+2. Testa båda fallen. Tips: ändra tillfälligt `timme` till ett fast tal, eller ändra datorns klocka.
+3. Lägg till en färgmarkering med en klass (`.oppet`, `.stangt`) – men glöm inte att informationen inte får ligga bara i färgen.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 11.5 – Temaväxlare
+1. Lägg en knapp "Mörkt läge" i sidfoten.
+2. Vid klick: växla klassen `morkt` på `<html>`. Skriv CSS som byter dina färgvariabler när klassen finns.
+3. Spara valet i webbläsaren så att det finns kvar på nästa sida:
+
+   ```js
+   localStorage.setItem("tema", "morkt");     // spara
+   localStorage.getItem("tema");              // läsa
+   ```
+
+4. Uppdatera knappens text och `aria-pressed`.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+Lägg till **minst en** JavaScript-funktion på din egen webbplats som gör den bättre – till exempel mobilmeny, temaväxlare, en bildvisare, "tillbaka till toppen", eller räknare för tecken i ett formulärfält. Krav:
+
+- [ ] Fungerar med tangentbord.
+- [ ] Sidan fungerar fortfarande med JavaScript avstängt.
+- [ ] Inga fel i konsolen.
+- [ ] `textContent`, inte `innerHTML`, för text.
+:::
+
+## Instuderingsfrågor
+
+1. Vad är skillnaden mellan JavaScript och ECMAScript?
+2. Vilken roll har JavaScript jämfört med HTML och CSS?
+3. Vad är DOM? Rita DOM-trädet för en enkel lista med tre punkter.
+4. Varför kan fliken *Elements* visa något annat än *Visa sidkälla*?
+5. Vad gör `defer` på en `<script>`-tagg?
+6. Vad gör `querySelector` och `addEventListener`?
+7. Varför är det bättre att ändra en klass än att ändra stilen direkt med JavaScript?
+8. Vad är progressiv förbättring? Ge ett exempel.
+9. Varför ska en mobilmeny öppnas med ett `<button>`-element, och vad gör `aria-expanded`?
+10. Varför ska man använda `textContent` istället för `innerHTML` för text?
+
+## Nyckelbegrepp
+
+JavaScript · ECMAScript · TC39 · DOM · nod · dokumentträd · konsol · `console.log` · variabel · `const` · `let` · funktion · `querySelector` · `textContent` · `innerHTML` · `classList` · händelse (event) · `addEventListener` · `defer` · progressiv förbättring · `aria-expanded` · `localStorage`
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: vad är JS/ECMAScript/DOM, labb 11.1–11.2. Lektion 2: händelser, labb 11.3. Lektion 3: labb 11.4–11.5 + bygg vidare.
+
+**Nivå:** Orientering räcker enligt kursplanen. Elever utan programmeringsvana kan nöja sig med att *förstå* och anpassa färdig kod. Elever med erfarenhet kan göra bonusuppgifterna och egna funktioner.
+
+**Labb 11.2** brukar väcka diskussion och kopplar fint till källkritik och projektarbete A.
+
+**Facit labb 11.3.4**
+
+```js
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && meny.classList.contains("oppen")) {
+    meny.classList.remove("oppen");
+    menyknapp.setAttribute("aria-expanded", "false");
+    menyknapp.focus();
+  }
+});
+```
+
+**Facit labb 11.5 (en lösning)**
+
+```js
+const temaknapp = document.querySelector("#tema");
+if (localStorage.getItem("tema") === "morkt") {
+  document.documentElement.classList.add("morkt");
+}
+function uppdateraKnapp() {
+  const morkt = document.documentElement.classList.contains("morkt");
+  temaknapp.textContent = morkt ? "Ljust läge" : "Mörkt läge";
+  temaknapp.setAttribute("aria-pressed", morkt);
+}
+temaknapp.addEventListener("click", () => {
+  const morkt = document.documentElement.classList.toggle("morkt");
+  localStorage.setItem("tema", morkt ? "morkt" : "ljust");
+  uppdateraKnapp();
+});
+uppdateraKnapp();
+```
+
+**Facit till instuderingsfrågorna**
+
+1. JavaScript är språket; ECMAScript är standarden (från Ecma International/TC39) som beskriver det.
+2. HTML: innehåll/struktur, CSS: utseende, JS: beteende/interaktivitet.
+3. En trädstruktur av objekt (noder) som webbläsaren bygger av HTML:en och som JS kan läsa/ändra. Träd: `ul` → tre `li` → textnoder.
+4. Elements visar aktuell DOM: webbläsaren har rättat fel i HTML:en och JavaScript kan ha lagt till/ändrat innehåll efter inläsning.
+5. Skriptet laddas parallellt men körs först när HTML:en tolkats färdigt, så alla element finns.
+6. `querySelector` hittar första elementet som matchar en CSS-selektor. `addEventListener` kör en funktion när en händelse inträffar på elementet.
+7. Utseendet stannar i CSS (separation of concerns), lättare att underhålla och ändra.
+8. Grundfunktionen byggs med HTML så att den fungerar för alla; CSS och JS lägger till förbättringar. Ex: menyn syns utan JS och blir en utfällbar meny med JS.
+9. `button` är fokuserbar och fungerar med Enter/mellanslag och skärmläsare. `aria-expanded` berättar om menyn är öppen eller stängd.
+10. `innerHTML` tolkar texten som HTML, så kod från användare kan köras (XSS). `textContent` sätter alltid bara text.
+:::
+:::

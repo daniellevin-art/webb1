@@ -1,0 +1,425 @@
+# HTML – struktur och semantik {#sec-html}
+
+::: ci
+Märkspråk och deras inbördes roller, syntax och semantik med fokus på HTML. Skapande av webbsidor.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara vad ett märkspråk är och vilka roller HTML, CSS och JavaScript har,
+- skriva ett korrekt HTML-dokument med rätt grundstruktur,
+- använda element för rubriker, text, länkar, bilder, listor och tabeller,
+- välja *semantiskt* rätt element,
+- bygga ett formulär med etiketter,
+- starta din egen webbplats med flera sidor som länkar till varandra.
+:::
+
+## Märkspråk
+
+Ett **märkspråk** (*markup language*) är ett sätt att *märka upp* text, alltså tala om vad olika delar av texten är. Märkningen skrivs med taggar inom `< >`:
+
+```html
+<h1>Kvarnens café</h1>
+<p>Nybakat varje morgon sedan 1987.</p>
+```
+
+`<h1>` säger: "det här är huvudrubriken". `<p>` säger: "det här är ett stycke" (*paragraph*). Märkspråket säger *vad* något är, inte hur det ska se ut.
+
+### Tre språk, tre roller
+
+| Språk | Typ | Ansvar | Fråga det svarar på |
+|---|---|---|---|
+| **HTML** | Märkspråk | Innehåll och struktur | *Vad* är det här? |
+| **CSS** | Stilmallsspråk | Utseende och layout | Hur ska det *se ut*? |
+| **JavaScript** | Programspråk | Beteende och interaktivitet | Vad ska *hända*? |
+
+Att hålla isär rollerna kallas **separation of concerns**. Det gör koden lättare att underhålla och sidan mer tillgänglig: en skärmläsare bryr sig om HTML:en, inte om färgerna.
+
+### Andra märkspråk
+
+HTML är inte ensamt. Du kommer att stöta på:
+
+- **XML** – ett allmänt märkspråk för data, där man hittar på egna taggar. Används t.ex. i RSS-flöden och Office-filer.
+- **SVG** – XML för vektorbilder. Används för ikoner och logotyper (kapitel 8).
+- **Markdown** – ett enkelt märkspråk där `# Rubrik` blir en rubrik och `**fet**` blir fet text. Används i README-filer, chattar och – den här boken.
+
+### Standarden
+
+HTML-standarden heter **HTML Living Standard** och underhålls av **WHATWG**. Den uppdateras löpande. Den bästa referensen för dig är **MDN Web Docs**: <https://developer.mozilla.org/sv-SE/docs/Web/HTML> (byt till engelska om något saknas på svenska).
+
+## Syntax
+
+```html
+<a href="meny.html" title="Vår meny">Se menyn</a>
+└┬┘└──────┬───────┘ └──────┬──────┘ └───┬───┘└┬─┘
+ │     attribut         attribut     innehåll  sluttagg
+starttagg (med elementnamn a)
+```
+
+- En **tagg** är det inom `< >`. Ett **element** är starttagg + innehåll + sluttagg.
+- **Attribut** ger extra information. De skrivs i starttaggen: `namn="värde"`.
+- Element kan **nästlas** i varandra. Det inre måste stängas först:
+
+```html
+<p>Prova vår <strong>kanelbulle</strong>!</p>   <!-- rätt -->
+<p>Prova vår <strong>kanelbulle</p></strong>!   <!-- fel -->
+```
+
+- Vissa element har inget innehåll och ingen sluttagg, s.k. **tomma element** (*void elements*): `<img>`, `<br>`, `<hr>`, `<input>`, `<meta>`, `<link>`.
+- `<!-- kommentarer -->` syns inte på sidan.
+- HTML bryr sig inte om radbrytningar och extra mellanslag. Använd indrag för att göra koden läsbar.
+- Skriv taggar och attribut med små bokstäver.
+
+## Grundstrukturen
+
+Varje HTML-sida börjar likadant. I VS Code skriver du `!` och trycker `Tab`:
+
+```{.html filename="index.html"}
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kvarnens café – Malmö</title>
+    <meta name="description" content="Litet kafé i Malmö med nybakat och gott kaffe.">
+  </head>
+  <body>
+    <h1>Kvarnens café</h1>
+  </body>
+</html>
+```
+
+| Rad | Gör |
+|---|---|
+| `<!DOCTYPE html>` | Talar om att det är modern HTML |
+| `<html lang="sv">` | Roten. `lang` talar om språket för skärmläsare, översättning och sökmotorer |
+| `<head>` | Information *om* sidan – syns inte |
+| `<meta charset="UTF-8">` | Teckenkodningen, så att å, ä och ö fungerar (kapitel 4) |
+| `<meta name="viewport" …>` | Gör att sidan inte krymps ihop i mobilen (kapitel 7) |
+| `<title>` | Texten i fliken, i bokmärken och i sökresultat |
+| `<meta name="description">` | Beskrivning som sökmotorer kan visa |
+| `<body>` | Allt som syns |
+
+## Text
+
+```html
+<h1>Kvarnens café</h1>              <!-- en per sida -->
+<h2>Om oss</h2>
+<p>Ett litet kafé i en gammal kvarn.</p>
+<h2>Meny</h2>
+<h3>Kaffe</h3>
+<h3>Bakverk</h3>
+
+<p>
+  Vi använder <strong>ekologiskt</strong> mjöl.        <!-- viktigt -->
+  Det är <em>verkligen</em> gott.                       <!-- betoning -->
+  <small>Priser inklusive moms.</small>                 <!-- finstilt -->
+</p>
+
+<blockquote>
+  <p>Malmös bästa kanelbullar.</p>
+  <footer>— Sydsvenskan</footer>
+</blockquote>
+```
+
+Rubrikerna `h1`–`h6` bildar sidans **innehållsförteckning**. Skärmläsaranvändare hoppar ofta mellan rubriker för att hitta. Välj nivå efter *struktur*, aldrig efter storlek – storleken styr du med CSS. Hoppa inte över nivåer.
+
+## Länkar
+
+```html
+<a href="meny.html">Meny</a>                              <!-- annan sida, samma mapp -->
+<a href="https://www.malmo.se">Malmö stad</a>              <!-- extern -->
+<a href="#oppettider">Öppettider</a>                       <!-- ställe på samma sida -->
+<h2 id="oppettider">Öppettider</h2>
+<a href="mailto:hej@kvarnenscafe.se">Mejla oss</a>         <!-- e-post -->
+<a href="tel:+4640123456">040-12 34 56</a>                 <!-- ring (i mobilen) -->
+```
+
+Länktexten ska säga vart länken går. "Klicka här" och "Läs mer" säger ingenting när de läses upp utan sammanhang.
+
+## Bilder
+
+```html
+<img src="bilder/kanelbulle.jpg" alt="Nybakad kanelbulle med pärlsocker" width="800" height="600">
+```
+
+- `alt` beskriver bilden för den som inte ser den. Rent dekorativa bilder får `alt=""`.
+- `width` och `height` reserverar plats så att sidan inte hoppar när bilden laddas.
+
+Bilder får ett helt eget kapitel (8).
+
+## Listor
+
+```html
+<ul>                         <!-- oordnad: ordningen spelar ingen roll -->
+  <li>Kaffe</li>
+  <li>Te</li>
+</ul>
+
+<ol>                         <!-- ordnad: ordningen spelar roll -->
+  <li>Beställ i kassan</li>
+  <li>Hitta ett bord</li>
+  <li>Vi kommer med fikat</li>
+</ol>
+
+<dl>                         <!-- beskrivningslista: begrepp och förklaring -->
+  <dt>Cortado</dt>
+  <dd>Espresso med lika mycket varm mjölk.</dd>
+</dl>
+```
+
+Menyer på webbplatser är listor med länkar.
+
+## Tabeller
+
+Tabeller är till för **data i rader och kolumner** – aldrig för layout.
+
+```html
+<table>
+  <caption>Öppettider</caption>
+  <thead>
+    <tr>
+      <th scope="col">Dag</th>
+      <th scope="col">Tid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Måndag–fredag</th>
+      <td>07–18</td>
+    </tr>
+    <tr>
+      <th scope="row">Lördag–söndag</th>
+      <td>09–16</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+`caption` ger tabellen en rubrik. `th` är rubrikceller, och `scope` talar om ifall de gäller en kolumn eller en rad – viktigt för skärmläsare.
+
+## Semantisk struktur
+
+**Semantik** betyder *betydelse*. Semantisk HTML använder element som beskriver vad innehållet *är*:
+
+```html
+<body>
+  <header>
+    <a href="index.html">Kvarnens café</a>
+    <nav aria-label="Huvudmeny">
+      <ul>
+        <li><a href="index.html" aria-current="page">Hem</a></li>
+        <li><a href="meny.html">Meny</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Välkommen till Kvarnens café</h1>
+
+    <section>
+      <h2>Veckans bakverk</h2>
+      <article>
+        <h3>Kardemummaknut</h3>
+        <p>…</p>
+      </article>
+    </section>
+
+    <aside>
+      <h2>Följ oss</h2>
+      <p>…</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Kvarngatan 1, Malmö · 040-12 34 56</p>
+  </footer>
+</body>
+```
+
+| Element | Betydelse |
+|---|---|
+| `header` | Sidhuvud |
+| `nav` | Navigering (en grupp viktiga länkar) |
+| `main` | Huvudinnehållet. Ett per sida |
+| `section` | En tematisk del med egen rubrik |
+| `article` | Innehåll som kan stå för sig självt: ett inlägg, en produkt, en recension |
+| `aside` | Sidoinnehåll |
+| `footer` | Sidfot |
+| `div`, `span` | Ingen betydelse – används bara när inget annat passar |
+
+Varför spelar det roll, när sidan ser likadan ut?
+
+- **Tillgänglighet** – skärmläsare kan hoppa direkt till `main` eller `nav`.
+- **Sökmotorer** förstår vad som är viktigt.
+- **Underhåll** – koden blir lättare att läsa.
+
+`aria-current="page"` och `aria-label` är **ARIA**-attribut som ger skärmläsare extra information. Mer om det i kapitel 9.
+
+## Formulär
+
+```html
+<form action="https://formspree.io/f/ditt-id" method="post">
+  <p>
+    <label for="namn">Namn</label>
+    <input id="namn" name="namn" type="text" autocomplete="name" required>
+  </p>
+
+  <p>
+    <label for="epost">E-post</label>
+    <input id="epost" name="epost" type="email" autocomplete="email" required>
+  </p>
+
+  <fieldset>
+    <legend>Antal personer</legend>
+    <label><input type="radio" name="antal" value="1-2" checked> 1–2</label>
+    <label><input type="radio" name="antal" value="3-6"> 3–6</label>
+    <label><input type="radio" name="antal" value="7+"> 7 eller fler</label>
+  </fieldset>
+
+  <p>
+    <label for="datum">Datum</label>
+    <input id="datum" name="datum" type="date">
+  </p>
+
+  <p>
+    <label for="meddelande">Meddelande</label>
+    <textarea id="meddelande" name="meddelande" rows="4"></textarea>
+  </p>
+
+  <button type="submit">Skicka bokning</button>
+</form>
+```
+
+- **`label for`** måste matcha fältets **`id`**. Då kan man klicka på texten, och skärmläsaren vet vad fältet heter.
+- **`name`** är namnet datan skickas under. Fält utan `name` skickas inte.
+- **`type`** ger rätt tangentbord i mobilen (`email`, `tel`, `number`) och inbyggd kontroll.
+- **`required`** gör fältet obligatoriskt.
+- **`autocomplete`** låter webbläsaren fylla i sparade uppgifter.
+- **`fieldset`** + **`legend`** grupperar radioknappar under en gemensam fråga.
+- **`action`** är vart datan skickas och **`method`** hur (`get` eller `post`, kapitel 2).
+
+En statisk webbplats har ingen server som kan ta emot formulär. Tjänster som *Formspree* eller *Netlify Forms* kan göra det åt dig. I kursen räcker det att formuläret är korrekt byggt.
+
+### Vad formuläret faktiskt skickar
+
+Med `method="get"` lägger webbläsaren fälten i adressen: varje fält med `name` blir ett par `name=värde`. Med `name="q"` och texten *kaffe* blir det `?q=kaffe`. Det är **mottagaren** som bestämmer vilka namn som gäller. Google letar till exempel efter `q`. Testa i labb 3.4.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 3.1 – Kvarnens startsida
+Skapa mappen `kvarnen` och filen `index.html`. Bygg startsidan med:
+
+- korrekt grundstruktur med `lang`, `charset`, `viewport`, `title` och `description`,
+- `header` med kaféets namn och en `nav` med länkar till *Hem*, *Meny* och *Kontakt*,
+- `main` med en `h1`, en introduktion, en sektion "Veckans bakverk" med två `article` och en tabell med öppettider,
+- `footer` med adress, en `tel:`-länk och en `mailto:`-länk.
+
+Öppna sidan med **Live Server** (högerklicka → *Open with Live Server*).
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 3.2 – Från div-soppa till semantik
+Öppna `ovningsfiler/k03-divsoppa/index.html`. Sidan ser okej ut men består nästan bara av `div` och `span`, och rubriker är vanlig text i stor stil.
+
+1. Byt ut elementen mot semantiskt rätt element: `header`, `nav`, `main`, `section`, `article`, `footer`, rubriker, listor och tabell.
+2. Gör ingen ändring i CSS-filen. Hur ser sidan ut efteråt? Vad måste ändras i CSS:en för att det ska se ut som innan?
+3. Installera tillägget **HeadingsMap** (Chrome/Firefox) eller använd W3C-validatorns *outline*. Jämför sidans rubrikstruktur före och efter.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 3.3 – Flera sidor
+Lägg till `meny.html` och `kontakt.html` i Kvarnen-mappen.
+
+1. Samma `header` och `footer` på alla sidor. Länkarna i menyn ska fungera åt alla håll.
+2. `meny.html`: en `h2` per kategori (Kaffe, Te, Bakverk) med en tabell eller `dl` per kategori.
+3. `kontakt.html`: bokningsformuläret från genomgången.
+4. Sätt `aria-current="page"` på menylänken till den sida man står på.
+5. Lägg bilderna i en mapp `bilder/` och länka dem med relativa sökvägar.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 3.4 – Vad skickar ett formulär?
+1. Skapa en ny fil med formuläret nedan och öppna den med Live Server.
+
+```html
+<form action="" method="get">
+  <label for="sok">Sök</label>
+  <input id="sok" name="q" type="search">
+  <label for="typ">Typ</label>
+  <select id="typ" name="typ">
+    <option value="">Alla</option>
+    <option value="kaffe">Kaffe</option>
+    <option value="te">Te</option>
+  </select>
+  <button>Skicka</button>
+</form>
+```
+
+2. Skriv `latte` och skicka. Titta i adressfältet. Vad har hänt?
+3. Byt `name="q"` mot `name="fraga"` och skicka igen. Ta sedan bort `name` helt.
+4. Skriv `te & kaka` och skicka. Hur ser `&` ut i adressen? Varför?
+5. Ändra `action` till `https://www.google.com/search` och skicka. Byt sedan tillbaka till `name="fraga"`. Varför slutar Google att söka?
+:::
+
+## Bygg vidare: din egen webbplats
+
+Nu börjar du bygga **din egen webbplats**, som du arbetar med fram till kapitel 10 och publicerar i kapitel 13.
+
+1. **Välj ämne.** Något du kan och tycker om: en hobby, en idrott, ett spel, en artist, din hemstad, ett skolämne. Stäm av med läraren.
+2. **Planera tre till fem sidor** på papper. Vad ska stå på varje sida?
+3. **Skapa mappen** med `index.html` och minst två undersidor, och en `bilder/`-mapp.
+4. **Bygg strukturen:** samma `header`, `nav` och `footer` på alla sidor, semantiska element, rubriker i rätt ordning.
+5. Webbplatsen ska innehålla minst: en lista, en tabell, en bild med `alt`, en extern länk och ett formulär.
+
+Ingen CSS än – den kommer i kapitel 5.
+
+## Instuderingsfrågor
+
+1. Vad är ett märkspråk? Ge tre exempel på märkspråk.
+2. Beskriv rollerna för HTML, CSS och JavaScript. Varför håller man isär dem?
+3. Vad är skillnaden mellan en tagg, ett element och ett attribut?
+4. Vad är ett tomt element? Ge två exempel.
+5. Vad står i `<head>` och vad står i `<body>`? Ge två exempel på element i `head` och vad de gör.
+6. Varför ska man ange `lang` på `<html>`?
+7. Vad betyder *semantisk HTML*? Ge tre skäl till att använda semantiska element.
+8. När ska man använda `div`?
+9. Varför ska man inte välja rubriknivå efter hur stor texten ska bli?
+10. Vad gör `label for` och `id` i ett formulär? Vad händer med ett fält som saknar `name`?
+11. Varför ska tabeller inte användas för layout?
+12. Vem underhåller HTML-standarden, och var hittar du en pålitlig referens?
+
+## Nyckelbegrepp
+
+märkspråk · HTML · tagg · element · attribut · nästling · tomt element · `head` · `body` · doctype · `lang` · semantik · semantiska element · rubrikstruktur · länk · relativ sökväg · `alt`-text · formulär · `label` · `name` · separation of concerns · XML · SVG · Markdown · WHATWG · MDN
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Kapitlet räcker gott till 1,5 vecka (vecka 3 + början av 4). Lektion 1: märkspråk, syntax, grundstruktur, labb 3.1. Lektion 2: semantik, labb 3.2. Lektion 3: formulär, labb 3.3–3.4. Lektion 4: bygg vidare.
+
+**Vanliga fel**
+
+- Filen heter `index.html.txt` (dolda filändelser i Windows).
+- Bilder syns inte: fel sökväg eller versaler i filnamnet.
+- `label for` matchar inte `id`.
+- `<a>` runt block-element är tillåtet i HTML5 – elever som lärt sig annat kan bli förvirrade.
+
+**Facit till instuderingsfrågorna**
+
+1. Ett språk som märker upp text med taggar för att beskriva dess struktur/betydelse. HTML, XML, SVG, Markdown, MathML.
+2. HTML: innehåll och struktur. CSS: utseende och layout. JS: beteende. Separation ger lättare underhåll, återanvändning av CSS, bättre tillgänglighet (innehållet fungerar utan CSS/JS) och tydligare ansvar.
+3. Tagg: `<p>` eller `</p>`. Element: start + innehåll + slut. Attribut: extra information i starttaggen, `href="…"`.
+4. Element utan innehåll och utan sluttagg: `img`, `br`, `input`, `meta`, `link`, `hr`.
+5. `head`: metadata – `title` (flikens titel), `meta charset` (teckenkodning), `meta viewport`, `link` (CSS), `meta description`. `body`: allt synligt innehåll.
+6. Skärmläsare väljer rätt uttal, webbläsare kan erbjuda översättning, sökmotorer förstår språket, avstavning/typografi i CSS.
+7. Element som beskriver innehållets betydelse. Skäl: tillgänglighet, sökmotoroptimering, läsbar och underhållbar kod.
+8. När inget semantiskt element passar, t.ex. som behållare för layout/styling.
+9. Rubrikerna bildar dokumentets struktur som används av skärmläsare och sökmotorer. Storlek styrs med CSS.
+10. Kopplar etiketten till fältet: klickbar etikett, skärmläsaren läser upp etiketten. Fält utan `name` skickas inte med.
+11. Tabeller betyder tabelldata; skärmläsare läser upp rader och kolumner, vilket blir obegripligt för layout. Svårt att göra responsivt. CSS (Grid/Flexbox) är rätt verktyg.
+12. WHATWG (HTML Living Standard). MDN Web Docs.
+:::
+:::

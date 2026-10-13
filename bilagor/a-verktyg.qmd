@@ -1,0 +1,92 @@
+# Verktyg och kom igång {#sec-verktyg}
+
+Allt i kursen är gratis.
+
+## Installera
+
+| Verktyg | Används till | Var |
+|---|---|---|
+| **VS Code** | Skriva kod | <https://code.visualstudio.com> |
+| **Chrome** eller **Edge** | Webbläsare (Blink) med bra utvecklarverktyg | Förinstallerad / google.com/chrome |
+| **Firefox** | Webbläsare (Gecko) för test | <https://www.mozilla.org/firefox> |
+| **GitHub Desktop** *(valfritt)* | Git utan terminal | <https://desktop.github.com> |
+| **NVDA** (Windows) | Skärmläsare | <https://www.nvaccess.org> – Mac har VoiceOver inbyggt |
+
+### Tillägg i VS Code
+
+Öppna *Extensions* (`Ctrl+Shift+X`) och installera:
+
+- **Live Server** – öppnar sidan i webbläsaren och laddar om när du sparar. Högerklicka i en HTML-fil → *Open with Live Server*.
+- **Prettier** *(valfritt)* – formaterar koden snyggt. Slå på *Format On Save* i inställningarna.
+
+Praktiska inställningar: *Auto Save: afterDelay*, och kontrollera att *Files: Encoding* är `utf8`.
+
+### Tillägg i webbläsaren
+
+- **WAVE Evaluation Tool** – tillgänglighetskontroll.
+- **HeadingsMap** – visar sidans rubrikstruktur.
+
+## Konton
+
+- **GitHub** – <https://github.com>. Behövs från kapitel 13.
+
+## Webbtjänster som används i kursen
+
+| Tjänst | Kapitel | Adress |
+|---|:-:|---|
+| Wayback Machine | 1 | <https://web.archive.org> |
+| W3C HTML-validator | 10 | <https://validator.w3.org/nu/> |
+| W3C CSS-validator | 10 | <https://jigsaw.w3.org/css-validator/> |
+| W3C Link Checker | 10, 13 | <https://validator.w3.org/checklink> |
+| MDN Web Docs | alla | <https://developer.mozilla.org> |
+| Can I use | 10 | <https://caniuse.com> |
+| CSS Diner | 5 | <https://flukeout.github.io> |
+| Flexbox Froggy / Grid Garden | 7 | <https://flexboxfroggy.com> / <https://cssgridgarden.com> |
+| Google Fonts / google-webfonts-helper | 6 | <https://fonts.google.com> / <https://gwfh.mranftl.com> |
+| Typescale | 6 | <https://typescale.com> |
+| Coolors / Adobe Color | 6 | <https://coolors.co> / <https://color.adobe.com> |
+| WebAIM Contrast Checker | 6, 9 | <https://webaim.org/resources/contrastchecker/> |
+| Squoosh | 8 | <https://squoosh.app> |
+| Openverse / Wikimedia Commons | 8 | <https://openverse.org> / <https://commons.wikimedia.org> |
+| WAVE | 9 | <https://wave.webaim.org> |
+| HTTP Observatory | 12 | <https://developer.mozilla.org/en-US/observatory> |
+| WordPress Playground | 13 | <https://playground.wordpress.net> |
+| Deceptive Design | 14 | <https://www.deceptive.design> |
+
+## Utvecklarverktygen
+
+Öppna med `F12` eller högerklick → **Inspektera** (Mac: `Cmd+Option+I`).
+
+| Flik | Används till |
+|---|---|
+| **Elements** | Se och ändra HTML (DOM) och CSS. Boxmodellen under *Computed* |
+| **Console** | Felmeddelanden, köra JavaScript |
+| **Network** | Alla förfrågningar: statuskoder, headers, storlek, tid. Strypa hastigheten |
+| **Application** (Firefox: *Storage*) | Kakor och `localStorage` |
+| **Lighthouse** | Granska prestanda, tillgänglighet, SEO (bara Chrome/Edge) |
+
+| Genväg | Gör |
+|---|---|
+| `Ctrl+Shift+M` | Enhetsläge (mobilvy) |
+| `Ctrl+Shift+C` | Välj ett element på sidan |
+| `Ctrl+Shift+P` | Kommandomeny – t.ex. *Rendering*, *Disable JavaScript* |
+| `Ctrl+Shift+R` | Ladda om utan cache |
+| `Ctrl+U` | Visa sidkälla |
+
+## Arbetsrutiner
+
+**Mappstruktur** för varje webbplats:
+
+```
+min-webbplats/
+├── index.html
+├── om.html
+├── css/style.css
+├── js/main.js
+├── bilder/
+└── fonts/
+```
+
+**Filnamn:** små bokstäver, inga mellanslag, inga åäö, bindestreck mellan ord. `om-oss.html`, `kaffe-kopp.webp`.
+
+**Spara arbetet:** Commit och push till GitHub efter varje lektion. Då har du både säkerhetskopia och historik.

@@ -1,0 +1,371 @@
+# Bilder och media {#sec-media}
+
+::: ci
+Bilder och media med alternativa format, optimering och tillgänglighet. Upphovsrätt.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- välja rätt bildformat för olika slags bilder,
+- optimera bilder så att sidan laddar snabbt,
+- leverera olika format och storlekar med `picture` och `srcset`,
+- skriva bra alternativtexter,
+- lägga in video och ljud med undertexter,
+- använda bilder lagligt, med rätt licens och källhänvisning.
+:::
+
+## Raster och vektor
+
+| | Rastergrafik | Vektorgrafik |
+|---|---|---|
+| Består av | Pixlar i ett rutnät | Matematiska former: linjer, kurvor, fyllningar |
+| Förstoras | Blir suddig eller pixlig | Alltid skarp |
+| Passar för | Foton, komplexa bilder | Logotyper, ikoner, diagram, illustrationer |
+| Format | JPEG, PNG, GIF, WebP, AVIF | SVG |
+
+## Bildformaten
+
+| Format | Komprimering | Genomskinlighet | Animation | Använd till |
+|---|---|:-:|:-:|---|
+| **JPEG** | Förstörande (*lossy*) | Nej | Nej | Foton, när bästa kompatibilitet behövs |
+| **PNG** | Förlustfri (*lossless*) | Ja | Nej | Skärmdumpar, grafik med skarpa kanter och text |
+| **GIF** | Förlustfri, max 256 färger | Ja (av/på) | Ja | Gamla animationer. Använd video eller WebP istället |
+| **WebP** | Båda | Ja | Ja | Ersätter JPEG och PNG, ofta 25–35 % mindre |
+| **AVIF** | Båda | Ja | Ja | Ofta ännu mindre än WebP. Stöds av alla moderna webbläsare |
+| **SVG** | Vektor (text) | Ja | Ja | Logotyper och ikoner |
+
+- **Förstörande** komprimering kastar bort detaljer man knappt ser. Ju högre komprimering, desto mindre fil och sämre kvalitet.
+- **Förlustfri** komprimering behåller varje pixel exakt.
+
+Tumregel i dag: **foton som WebP eller AVIF** (med JPEG som reserv om det behövs), **logotyper och ikoner som SVG**, **skärmdumpar som PNG eller WebP**.
+
+## Optimering
+
+Bilder står ofta för den största delen av en webbsidas vikt. En okomprimerad bild direkt från mobilkameran kan vara 4 000 × 3 000 pixlar och 5 MB – fast den visas 800 px bred.
+
+1. **Rätt dimensioner.** Skala ner bilden till ungefär den största storlek den visas i, gärna dubbelt för skarpa skärmar (*retina*). En bild som visas 600 px bred behöver sällan vara större än 1 200 px.
+2. **Rätt format och komprimering.** Exportera med t.ex. <https://squoosh.app>. Kvalitet 70–80 räcker oftast för foton.
+3. **`width` och `height`** i HTML:en, så att webbläsaren reserverar plats och sidan inte hoppar (*layout shift*).
+4. **`loading="lazy"`** på bilder längre ner på sidan – de laddas först när användaren scrollar dit. Använd det *inte* på den första stora bilden.
+
+```html
+<img src="bilder/kafe-interior-1200.webp"
+     alt="Kafélokalen med långbord i trä och stora fönster mot kanalen"
+     width="1200" height="800"
+     loading="lazy">
+```
+
+```css
+img {
+  max-width: 100%;   /* bilder blir aldrig bredare än sin behållare */
+  height: auto;      /* behåll proportionerna */
+}
+```
+
+## Olika format och storlekar
+
+### `picture` – nya format med reserv
+
+```html
+<picture>
+  <source srcset="bilder/kanelbulle.avif" type="image/avif">
+  <source srcset="bilder/kanelbulle.webp" type="image/webp">
+  <img src="bilder/kanelbulle.jpg" alt="Kanelbulle med pärlsocker" width="800" height="600">
+</picture>
+```
+
+Webbläsaren tar det första formatet den förstår. Gamla webbläsare som inte känner till `picture` visar bara `img`. Det är ett exempel på **progressiv förbättring**: alla får något som fungerar, nyare webbläsare får något bättre.
+
+### `srcset` och `sizes` – olika upplösning
+
+```html
+<img src="bilder/kafe-800.webp"
+     srcset="bilder/kafe-400.webp 400w,
+             bilder/kafe-800.webp 800w,
+             bilder/kafe-1600.webp 1600w"
+     sizes="(min-width: 64rem) 50vw, 100vw"
+     alt="Kafélokalen med långbord i trä"
+     width="1600" height="1067">
+```
+
+- `srcset` listar bildfilerna och deras bredd (`w`).
+- `sizes` talar om hur bred bilden *visas*: halva fönstret på stora skärmar, hela fönstret annars.
+- Webbläsaren väljer själv den minsta fil som räcker. En mobil laddar då 400-versionen istället för 1600.
+
+### `figure` och bildtext
+
+```html
+<figure>
+  <img src="bilder/kvarnen-1910.jpg" alt="Svartvitt foto av kvarnen med vingar, omgiven av åkrar" width="800" height="560">
+  <figcaption>Kvarnen 1910. Foto: Malmö Museer, CC BY 4.0.</figcaption>
+</figure>
+```
+
+## Alternativtexter
+
+`alt`-texten är det en skärmläsare läser upp. Den visas också om bilden inte laddas och används av sökmotorer.
+
+| Bildtyp | Vad alt-texten ska vara | Exempel |
+|---|---|---|
+| **Informativ** | Det bilden förmedlar i sammanhanget | `alt="Kanelbulle med pärlsocker"` |
+| **Dekorativ** (bara utsmyckning) | Tom | `alt=""` |
+| **Funktionell** (bild i en länk eller knapp) | Vad länken/knappen *gör* | `alt="Till startsidan"` på loggan |
+| **Komplex** (diagram, karta) | Kort alt + längre beskrivning i texten | `alt="Diagram över besökare per månad, se tabell nedan"` |
+| **Text i bild** | Samma text | Undvik text i bilder om det går |
+
+- Skriv inte "Bild på …" – skärmläsaren säger redan att det är en bild.
+- Tänk på **sammanhanget**: samma foto av en kopp kan behöva "Cappuccino, 38 kr" på menysidan men "Personal som serverar kaffe" på jobbsidan.
+- Saknas `alt` helt läser många skärmläsare upp filnamnet: "IMG underscore 4 7 1 1 punkt jpg".
+
+## SVG
+
+SVG är text, och kan skrivas direkt i HTML:en:
+
+```html
+<svg viewBox="0 0 24 24" width="48" height="48" role="img" aria-labelledby="kopp-titel">
+  <title id="kopp-titel">Kaffekopp</title>
+  <path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z" fill="currentColor"/>
+  <path d="M16 10h2a2 2 0 0 1 0 4h-2" fill="none" stroke="currentColor" stroke-width="2"/>
+</svg>
+```
+
+- `viewBox` är ritytans koordinatsystem. Bilden skalas till `width` och `height` utan att bli suddig.
+- `fill="currentColor"` gör att ikonen får samma färg som texten runt den – och följer med vid hover och mörkt läge.
+- `title` + `role="img"` gör ikonen tillgänglig. En rent dekorativ ikon får istället `aria-hidden="true"`.
+
+SVG-filer kan också användas som vanliga bilder: `<img src="logga.svg" alt="Kvarnens café">`.
+
+### Favicon
+
+Ikonen i webbläsarfliken:
+
+```html
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+```
+
+## Video och ljud
+
+```html
+<video controls width="1280" height="720" poster="bilder/bakning-poster.jpg" preload="metadata">
+  <source src="media/bakning.webm" type="video/webm">
+  <source src="media/bakning.mp4" type="video/mp4">
+  <track kind="captions" src="media/bakning.sv.vtt" srclang="sv" label="Svenska" default>
+  <p>Din webbläsare kan inte visa videon. <a href="media/bakning.mp4">Ladda ner den</a>.</p>
+</video>
+
+<audio controls>
+  <source src="media/intervju.mp3" type="audio/mpeg">
+</audio>
+<p><a href="intervju-transkribering.html">Läs intervjun som text</a></p>
+```
+
+- `controls` – visa spela/paus. Utan den kan användaren inte styra.
+- `poster` – bilden som visas innan videon startar.
+- `preload="metadata"` – ladda bara längd och storlek, inte hela filmen.
+- **Undertexter** (`<track>`) är ett krav för tillgänglighet, och bra för alla som tittar utan ljud.
+- **Transkribering** – ljud ska ha en textversion.
+- **Autoplay** irriterar och kan vara svårt för personer med koncentrationssvårigheter. Webbläsare tillåter bara autoplay utan ljud (`muted`).
+
+### Undertexter med WebVTT
+
+Undertexter skrivs i ett enkelt textformat, **WebVTT**:
+
+```{.text filename="media/bakning.sv.vtt"}
+WEBVTT
+
+00:00:00.000 --> 00:00:03.500
+Välkommen till Kvarnens bageri!
+
+00:00:03.500 --> 00:00:07.000
+I dag bakar vi kardemummaknutar.
+```
+
+Filen måste sparas som UTF-8 – annars blir åäö fel (kapitel 4).
+
+### Inbäddad video från YouTube
+
+```html
+<iframe src="https://www.youtube-nocookie.com/embed/VIDEO-ID"
+        title="Så bakar du kardemummaknutar"
+        width="560" height="315"
+        loading="lazy" allowfullscreen></iframe>
+```
+
+`youtube-nocookie.com` sätter färre spårningskakor. Alla inbäddningar från andra företag skickar ändå data om besökaren till dem – det tar vi upp i kapitel 14. `title` på `iframe` behövs för skärmläsare.
+
+## Upphovsrätt för bilder
+
+Att en bild finns på internet betyder **inte** att du får använda den. Den som skapat en bild har **upphovsrätt** automatiskt, utan att skriva något. Du behöver tillstånd – en **licens**.
+
+### Creative Commons
+
+Många bilder är licensierade med **Creative Commons** (CC). Licensen byggs av delar:
+
+| Del | Betyder |
+|---|---|
+| **BY** | Du måste ange vem som skapat bilden |
+| **SA** (*Share Alike*) | Om du ändrar bilden ska din version ha samma licens |
+| **NC** (*Non Commercial*) | Inte i kommersiellt syfte |
+| **ND** (*No Derivatives*) | Du får inte ändra bilden |
+| **CC0** | Inga villkor – fri att använda |
+
+Exempel: *CC BY-SA 4.0* betyder att du får använda och ändra bilden om du anger skaparen och delar din version med samma licens.
+
+### Källhänvisning
+
+Använd minnesregeln **TALL**: **T**itel, **A**vsändare (skapare), **L**änk till källan, **L**icens.
+
+> *Kanelbulle* av Anna Bagare, från Wikimedia Commons, CC BY 4.0.
+
+### Var hittar man bilder?
+
+- **Wikimedia Commons** – fria bilder med tydliga licenser.
+- **Openverse** (<https://openverse.org>) – söker bland CC-licensierade bilder.
+- **Unsplash**, **Pexels** – gratis bilder med egna licenser. Läs villkoren.
+- **Egna foton och illustrationer** – bäst av allt. Om det finns personer på bilden måste du ha deras tillstånd, eftersom en bild på en person är en personuppgift (kapitel 14).
+- **AI-genererade bilder** – kontrollera tjänstens villkor och var öppen med att bilden är AI-genererad.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.1 – Formatduellen
+1. Ta ett foto med mobilen eller använd ett foto ur `ovningsfiler/k08-media/`.
+2. Öppna det i <https://squoosh.app>. Ändra bredden till 1 200 px.
+3. Exportera som JPEG, PNG, WebP och AVIF med kvalitet ~75. Fyll i tabellen:
+
+| Format | Filstorlek | Ser du skillnad mot originalet? |
+|---|---|---|
+| Original | | – |
+| JPEG | | |
+| PNG | | |
+| WebP | | |
+| AVIF | | |
+
+4. Gör om samma sak med en logotyp med tre färger och skarpa kanter. Vilket format vinner nu?
+5. Öppna `ovningsfiler/k08-media/logga.svg` i VS Code. Hur stor är filen? Vad händer när du zoomar in på den i webbläsaren?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.2 – Hitta överviktiga bilder
+1. Öppna `ovningsfiler/k08-media/tung-sida.html`. Kontrollera i *Network → Img* hur mycket bilderna väger totalt.
+2. Hovra över en bild i *Elements*. Utvecklarverktygen visar *Rendered size* (visad storlek) och *Intrinsic size* (bildens verkliga storlek). Hur mycket större än nödvändigt är bilderna?
+3. Optimera bilderna med Squoosh och lägg in `width`, `height` och `loading="lazy"` där det passar.
+4. Hur mycket mindre blev sidan? Ange i procent.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.3 – Skriv alt-texter
+Skriv alt-texter för bilderna i de här sammanhangen. Ibland är rätt svar `alt=""`.
+
+1. Kvarnens logga, som är en länk till startsidan.
+2. Ett foto av en kanelbulle på menysidan, bredvid texten "Kanelbulle 25 kr".
+3. Ett suddigt foto av kaffebönor som bakgrund bakom rubriken "Om oss".
+4. Ett stapeldiagram över antal sålda bullar per månad i en årsrapport.
+5. En bild av en affisch med texten "Jazzkväll fredag 18/10 kl. 19".
+6. En förstoringsglasikon i en sökknapp, utan synlig text.
+7. Ett foto av personalen på sidan "Om oss".
+8. En ikon av en telefon framför telefonnumret 040-12 34 56.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.4 – `picture` och `srcset`
+1. Exportera ett foto i tre bredder (400, 800 och 1 600 px) som WebP, och 800 px som JPEG.
+2. Lägg in det med `picture` (WebP + JPEG-reserv) och `srcset` med de tre bredderna.
+3. Öppna enhetsläget, välj en smal telefon och kryssa i *Disable cache* i *Network*. Ladda om. Vilken fil hämtades?
+4. Byt till en bred skärm och ladda om. Vilken fil hämtas nu?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.5 – Rita en SVG-ikon för hand
+1. Kopiera kaffekoppen från genomgången till Kvarnens sida, framför ordet "Meny" i navigeringen.
+2. Ändra textfärgen på länken. Följer ikonen med? Varför?
+3. Rita en egen enkel ikon (t.ex. en klocka till öppettiderna) med `circle`, `line` och `rect`. Slå upp elementen på MDN.
+4. Ikonen står bredvid text som redan säger samma sak. Ska den då ha `title` eller `aria-hidden="true"`?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.6 – Video med undertexter
+1. Filma en kort video (10–20 sekunder) med mobilen där du säger något, eller hämta en fri video från Wikimedia Commons.
+2. Komprimera den med t.ex. HandBrake till högst några MB.
+3. Lägg in den med `<video>`, `controls` och `poster`.
+4. Skriv en WebVTT-fil med undertexter och koppla den med `<track>`.
+5. Testa i två webbläsare. Syns undertexterna? Fungerar åäö?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 8.7 – Licensjakten
+1. Hitta tre bilder till din egen webbplats på Wikimedia Commons, Openverse eller Unsplash.
+2. För varje bild: vilken licens har den? Får du använda den på din webbplats? Får du beskära den?
+3. Skriv en korrekt källhänvisning (TALL) under varje bild med `figcaption`.
+4. Hitta en bild som du *inte* får använda, och förklara varför.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+- [ ] Alla bilder har rätt format och är optimerade (ingen bild över ~300 kB utan skäl).
+- [ ] Alla bilder har `width`, `height` och genomtänkt `alt`.
+- [ ] Minst en bild med `picture` eller `srcset`.
+- [ ] Minst en SVG (logga, ikon eller favicon).
+- [ ] Alla bilder har tillåten licens och källhänvisning där det krävs.
+- [ ] Har du video eller ljud: kontroller, undertexter eller transkribering.
+:::
+
+## Instuderingsfrågor
+
+1. Vad är skillnaden mellan raster- och vektorgrafik? Ge ett exempel på när du använder vardera.
+2. Vad är skillnaden mellan förstörande och förlustfri komprimering?
+3. Vilket format väljer du för: ett foto, en logotyp, en skärmdump med text? Motivera.
+4. Varför ska man ange `width` och `height` på bilder?
+5. Vad gör `loading="lazy"`, och när ska man *inte* använda det?
+6. Förklara vad `picture` och `srcset` gör. Vad är skillnaden?
+7. Vad är progressiv förbättring? Ge ett exempel från kapitlet.
+8. Hur skriver man alt-text för en dekorativ bild? För en bild som är en länk?
+9. Varför ska video ha undertexter? Ge två grupper som har nytta av dem.
+10. Vad är WebVTT?
+11. Får du använda en bild du hittat med Google bildsök på din webbplats? Förklara.
+12. Vad betyder licensen CC BY-NC? Får ett kafé använda en sådan bild på sin webbplats?
+13. Vad ska en källhänvisning till en bild innehålla?
+
+## Nyckelbegrepp
+
+rastergrafik · vektorgrafik · pixel · upplösning · JPEG · PNG · GIF · WebP · AVIF · SVG · förstörande komprimering · förlustfri komprimering · optimering · layout shift · lazy loading · `picture` · `srcset` · `sizes` · progressiv förbättring · `figure` · `figcaption` · alt-text · dekorativ bild · `viewBox` · `currentColor` · favicon · `video` · `audio` · `track` · undertexter · WebVTT · transkribering · autoplay · upphovsrätt · licens · Creative Commons · CC0 · källhänvisning
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: format, optimering, labb 8.1–8.2. Lektion 2: `picture`/`srcset`, alt-texter, labb 8.3–8.4. Lektion 3: SVG och video, labb 8.5–8.6. Lektion 4: upphovsrätt, labb 8.7 + bygg vidare.
+
+**Verktyg:** Squoosh fungerar i webbläsaren. HandBrake kräver installation – alternativt kan videon komprimeras med mobilens inbyggda export, eller hoppa över komprimeringen och använd en kort fil.
+
+**Upphovsrätt** återkommer i kapitel 14 som juridik. Här ligger fokus på det praktiska: hitta, kontrollera, ange.
+
+**Facit labb 8.3**
+
+1. `alt="Kvarnens café – till startsidan"` (eller bara "Till startsidan").
+2. `alt=""` eller kort beskrivning – priset och namnet står redan i texten. En beskrivning som "Kanelbulle med pärlsocker" är okej om bilden tillför något; upprepa inte "Kanelbulle 25 kr".
+3. `alt=""` (dekorativ). Ännu bättre: lägg den som CSS-bakgrund.
+4. Kort alt ("Stapeldiagram över sålda bullar per månad 2025, mest i december") + samma data i en tabell eller text.
+5. `alt="Jazzkväll fredag 18/10 kl. 19"` – all text i bilden. Bättre: skriv informationen som riktig text.
+6. `alt="Sök"` – knappens funktion.
+7. Beskriv vad som är relevant: `alt="Kvarnens fem anställda står leende framför disken"`. Namn kan stå i bildtexten.
+8. `alt=""` eller `aria-hidden="true"` på ikonen – texten säger redan vad det är.
+
+**Labb 8.5.4:** `aria-hidden="true"` – texten bredvid förmedlar redan informationen.
+
+**Facit till instuderingsfrågorna**
+
+1. Raster: pixlar, blir suddigt vid förstoring – foton. Vektor: matematiska former, alltid skarpt – logotyper, ikoner.
+2. Förstörande tar bort information för att få mindre fil (JPEG, lossy WebP/AVIF); förlustfri behåller alla pixlar exakt (PNG).
+3. Foto: WebP/AVIF (JPEG som reserv) – små filer för fotografiskt innehåll. Logotyp: SVG – skarp i alla storlekar, liten fil. Skärmdump med text: PNG eller förlustfri WebP – skarpa kanter, ingen artefakt runt text.
+4. Webbläsaren kan reservera rätt yta innan bilden laddats; sidan hoppar inte (layout shift).
+5. Bilden laddas först när den är på väg in i bild. Inte på bilder som syns direkt när sidan öppnas (t.ex. stor bild högst upp) – då blir de långsammare.
+6. `picture` + `source` låter webbläsaren välja format (t.ex. AVIF/WebP med JPEG-reserv) eller olika bilder för olika förutsättningar. `srcset` erbjuder samma bild i olika storlekar så att webbläsaren väljer lämplig upplösning.
+7. Grundfunktion som fungerar för alla, med förbättringar för webbläsare som stödjer mer. Exempel: `picture` med JPEG-reserv; `video` med textlänk inuti.
+8. Dekorativ: `alt=""`. Länk: beskriv vart länken går/vad den gör.
+9. Döva/hörselskadade, personer som tittar utan ljud (allmänna platser), personer med annat modersmål, sökmotorer.
+10. Ett textformat för undertexter med tidskoder, som används med `<track>`.
+11. Nej, inte utan vidare. Bilden är skyddad av upphovsrätt; du behöver tillstånd/licens som tillåter användningen.
+12. Erkännande (ange skaparen), icke-kommersiell användning. Ett kafé är en kommersiell verksamhet, så nej.
+13. Titel, skapare, källa (länk) och licens (TALL).
+:::
+:::

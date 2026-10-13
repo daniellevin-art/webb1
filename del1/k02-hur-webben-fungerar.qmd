@@ -1,0 +1,334 @@
+# Hur webben fungerar {#sec-teknik}
+
+::: ci
+Teknisk orientering om webbens protokoll, adresser, säkerhet och samspelet mellan klient och server.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- beskriva vad som händer från att du skriver en adress tills sidan syns,
+- förklara begreppen klient, server, förfrågan och svar,
+- dela upp en URL i dess delar,
+- förklara vad DNS och IP-adresser är,
+- läsa HTTP-statuskoder och headers i utvecklarverktygen,
+- förklara vad HTTPS skyddar mot – och vad det inte skyddar mot.
+:::
+
+## Klient och server
+
+Webben bygger på ett enkelt samspel mellan två parter:
+
+- **Klienten** är programmet som *ber* om något. Oftast är det din webbläsare. Ett annat ord för det är **användaragent** (*user agent*).
+- **Servern** är en dator som *svarar*. Den står i en datorhall någonstans och väntar på förfrågningar.
+
+Samtalet går alltid till så här:
+
+```
+ Klient (webbläsare)                         Server
+        │                                      │
+        │  ── förfrågan (request) ──────────►  │
+        │     "GET /meny.html"                 │
+        │                                      │
+        │  ◄───────────── svar (response) ──   │
+        │     "200 OK" + HTML-koden             │
+        │                                      │
+```
+
+Klienten frågar och servern svarar. Servern kan inte på eget initiativ skicka något till webbläsaren.
+
+## Vad händer när du skriver en adress?
+
+Säg att du skriver `https://www.kvarnenscafe.se/meny.html` och trycker Enter.
+
+1. **DNS-uppslag.** Webbläsaren behöver serverns **IP-adress**, ett nummer som `93.184.215.14`. Den frågar en **DNS-server**: "Vilken IP-adress har `www.kvarnenscafe.se`?" DNS fungerar som internets telefonkatalog.
+2. **Anslutning.** Webbläsaren kopplar upp sig mot servern. Med `https` görs först ett **TLS-handslag**: servern visar upp sitt **certifikat**, och de två kommer överens om en krypteringsnyckel.
+3. **HTTP-förfrågan.** Webbläsaren skickar `GET /meny.html`.
+4. **Servern svarar** med en statuskod (`200 OK`) och HTML-koden.
+5. **Fler förfrågningar.** Webbläsaren läser HTML:en och hittar länkar till CSS, bilder, typsnitt och JavaScript. Den begär var och en, ofta tiotals filer.
+6. **Rendering.** Webbläsaren bygger upp sidan av HTML och CSS, kör JavaScript och ritar sidan på skärmen.
+
+Allt det här tar ofta under en sekund.
+
+## Adresser: URL
+
+En **URL** (*Uniform Resource Locator*) pekar ut exakt en resurs på webben:
+
+```
+https://www.kvarnenscafe.se:443/meny/dryck.html?sort=pris&max=50#te
+└─┬─┘   └────────┬────────┘└┬┘└──────┬──────┘ └───────┬───────┘ └┬┘
+schema       värdnamn     port    sökväg           query       fragment
+(protokoll)  (host)                (path)    (frågeparametrar)
+```
+
+| Del | Exempel | Betydelse |
+|---|---|---|
+| **Schema** | `https` | Vilket protokoll som används |
+| **Värdnamn** | `www.kvarnenscafe.se` | Vilken server |
+| **Port** | `443` | "Dörren" på servern. Skrivs sällan ut: `https` använder 443 och `http` 80 som standard |
+| **Sökväg** | `/meny/dryck.html` | Vilken fil eller sida på servern |
+| **Query** | `?sort=pris&max=50` | Extra information i par av `namn=värde`, åtskilda med `&` |
+| **Fragment** | `#te` | Ett ställe *på* sidan. Skickas aldrig till servern – webbläsaren hoppar dit själv |
+
+### Domännamn
+
+Värdnamnet läses **bakifrån**:
+
+```
+www . kvarnenscafe . se
+ │         │          └─ toppdomän (TLD): .se, .com, .org, .nu …
+ │         └──────────── domännamn: det man köper/hyr
+ └────────────────────── underdomän: valfri, bestäms av ägaren
+```
+
+Toppdomänen `.se` administreras av **Internetstiftelsen**. Ett domännamn köper man inte för alltid – man hyr det, ofta per år, genom en *registrar* (domänleverantör).
+
+### Absoluta och relativa adresser
+
+I din egen kod länkar du oftast med **relativa** adresser, som räknas från filen du står i:
+
+| Adress | Betyder |
+|---|---|
+| `https://www.svt.se/` | Absolut: hela vägen |
+| `meny.html` | Filen `meny.html` i samma mapp |
+| `bilder/kaffe.jpg` | I undermappen `bilder` |
+| `../index.html` | Upp en mapp |
+| `/kontakt.html` | Från roten av webbplatsen |
+
+## IP-adresser och DNS
+
+Alla datorer på internet har en **IP-adress**. Det finns två versioner:
+
+- **IPv4**: fyra tal 0–255, t.ex. `192.0.2.17`. Det finns ungefär 4 miljarder, vilket inte räcker.
+- **IPv6**: längre adresser, t.ex. `2001:db8::17`. Det finns i praktiken obegränsat många.
+
+**DNS** (*Domain Name System*) översätter namn till IP-adresser. Ett namn kan ha en **A-post** (IPv4) och en **AAAA-post** (IPv6).
+
+## HTTP
+
+**HTTP** (*Hypertext Transfer Protocol*) är språket som klient och server talar. En förfrågan ser i princip ut så här:
+
+```http
+GET /meny.html HTTP/1.1
+Host: www.kvarnenscafe.se
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) … Firefox/131.0
+Accept-Language: sv-SE,sv;q=0.9,en;q=0.8
+```
+
+Och svaret:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 4821
+Cache-Control: max-age=3600
+
+<!DOCTYPE html>
+<html lang="sv">
+…
+```
+
+Raderna med `Namn: värde` kallas **headers**. De beskriver förfrågan och svaret: vilken webbläsare det är, vilket språk användaren vill ha, vilken sorts fil som skickas och hur länge den får sparas.
+
+### Metoder
+
+| Metod | Används till |
+|---|---|
+| `GET` | Hämta något. Den vanligaste. Data skickas i URL:en |
+| `POST` | Skicka data till servern, t.ex. ett formulär. Data skickas i förfrågans "kropp", inte i URL:en |
+
+Det finns fler (`PUT`, `DELETE` …), men de här två räcker i den här kursen.
+
+### Statuskoder
+
+| Kod | Grupp | Vanliga exempel |
+|---|---|---|
+| **2xx** | Lyckades | `200 OK` |
+| **3xx** | Gå någon annanstans | `301 Moved Permanently`, `304 Not Modified` (du har redan senaste versionen) |
+| **4xx** | Klientens fel | `403 Forbidden`, `404 Not Found` |
+| **5xx** | Serverns fel | `500 Internal Server Error`, `503 Service Unavailable` |
+
+### HTTP är tillståndslöst
+
+Servern minns ingenting mellan två förfrågningar. Varje förfrågan är helt ny för den. Hur kan man då vara inloggad? Med **kakor** (*cookies*): servern skickar en liten textbit som webbläsaren sparar och skickar med i varje förfrågan efteråt, ungefär som ett nummer på en garderobsbricka. Kakor tas upp igen i kapitel 12 och 14.
+
+### Versioner
+
+HTTP/1.1 kom 1997 och används fortfarande. HTTP/2 (2015) och HTTP/3 (2022) gör samma sak men snabbare, framför allt genom att hämta många filer samtidigt över samma anslutning. Som webbutvecklare märker du sällan skillnaden.
+
+## HTTPS: säker överföring
+
+`https` är HTTP över en krypterad anslutning, **TLS**. HTTPS ger tre skydd:
+
+1. **Kryptering.** Ingen på vägen – på kaféets wifi, hos internetleverantören – kan läsa vad som skickas.
+2. **Integritet.** Ingen kan ändra innehållet på vägen.
+3. **Autentisering.** Ett **certifikat**, utfärdat av en betrodd **certifikatutfärdare** (CA), bevisar att servern verkligen tillhör domänen.
+
+Hänglåset i adressfältet betyder **bara** att anslutningen är krypterad och att certifikatet gäller för den domänen. Det betyder **inte** att webbplatsen är seriös. En bedragare kan ha HTTPS på `kvarnenscafe-betalning.se`. Mer om det i kapitel 12.
+
+I dag ska alla webbplatser använda HTTPS. Det finns gratis certifikat, till exempel från *Let's Encrypt*, och webbläsare varnar för sidor utan.
+
+## Statiska och dynamiska webbplatser
+
+- **Statisk** webbplats: servern skickar färdiga filer, likadana till alla. Snabbt, säkert och enkelt. Det är sådana du bygger i den här kursen.
+- **Dynamisk** webbplats: servern *skapar* sidan när någon frågar, ofta med data från en databas. Exempel: en webbshop, ett forum, en inloggad vy. Sådant kod som körs på servern kallas **serverkod** (t.ex. PHP, Node.js, Python).
+
+Kod som körs i webbläsaren (HTML, CSS, JavaScript) kallas **klientkod**.
+
+## Labbar
+
+Alla labbar använder **utvecklarverktygen** i webbläsaren. Öppna dem med `F12` (Mac: `Cmd+Option+I`).
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.1 – Titta in i trafiken
+1. Öppna utvecklarverktygen och välj fliken **Network** (Nätverk).
+2. Gå till en nyhetssajt, t.ex. `svt.se`. Om listan är tom, ladda om sidan.
+3. Längst ner i fliken står en sammanfattning. Svara:
+   a. Hur många förfrågningar (*requests*) gjordes?
+   b. Hur mycket data överfördes (*transferred*)?
+   c. Hur lång tid tog det tills allt var laddat (*Load*)?
+4. Klicka på den **första** raden, som är själva HTML-dokumentet. Under *Headers*:
+   a. Vilken statuskod fick du?
+   b. Vad står i `content-type`?
+   c. Hitta din egen `user-agent`. Vad avslöjar den om dig?
+5. Filtrera på typ (knapparna *Doc, CSS, JS, Img, Font*). Vilken typ av fil står för mest data?
+6. Gör om samma sak på en enkel sida, t.ex. `info.cern.ch`. Jämför.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.2 – Plocka isär URL:er
+Dela upp adresserna i schema, värdnamn, toppdomän, sökväg, query och fragment. Lämna tomt där en del saknas.
+
+1. `https://sv.wikipedia.org/wiki/World_Wide_Web#Historia`
+2. `https://www.google.com/search?q=kaffe+malm%C3%B6&hl=sv`
+3. `http://localhost:5500/index.html`
+4. `https://www.skolverket.se/undervisning/gymnasieskolan`
+5. `https://maps.app.goo.gl/AbC123`
+6. Hitta själv en adress med minst två query-parametrar. Vad tror du att de gör? Prova att ändra en.
+
+Varför är `%C3%A5` i adress 2 ett "å"? Svaret kommer i kapitel 4.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.3 – Statuskodsjakten
+Hitta, med Network-fliken, en förfrågan som får:
+
+1. `200` – lätt.
+2. `404` – hitta på en adress som inte finns på en webbplats.
+3. `301` eller `308` – skriv `http://` (utan s) framför en känd webbplats. Vart skickas du? Titta på headern `location`.
+4. `304` – ladda om en sida du nyss besökt. Hittar du filer som inte hämtades på nytt? Testa också att ladda om med `Ctrl+Shift+R` (Mac: `Cmd+Shift+R`). Vad händer då?
+
+Tips: kryssa i **Preserve log** så att listan inte töms när sidan byter adress.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.4 – DNS och IP i terminalen
+Öppna en terminal (Windows: *Kommandotolken* eller *PowerShell*; Mac: *Terminal*).
+
+```bash
+nslookup svt.se
+```
+
+1. Vilken eller vilka IP-adresser fick du? Finns både IPv4 och IPv6?
+2. Gör samma sak för `skolverket.se` och skolans webbplats.
+
+```bash
+ping svt.se
+```
+
+3. Hur lång tid tar det för ett paket att gå fram och tillbaka (*tid*/*time*, i millisekunder)? Avbryt med `Ctrl+C`.
+
+```bash
+tracert svt.se        # Windows
+traceroute svt.se     # Mac/Linux
+```
+
+4. Hur många "hopp" (routrar) passerar paketen? Känner du igen några namn?
+
+Skolans nätverk kan blockera vissa av kommandona. Gör i så fall labben hemma eller i mobilen via en app som *Network Tools*.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.5 – Prata HTTP direkt med `curl`
+`curl` är ett program som skickar HTTP-förfrågningar från terminalen. Det finns i Windows 10/11, macOS och Linux.
+
+```bash
+curl -I https://www.skolverket.se
+```
+
+`-I` hämtar bara headers.
+
+1. Vilken statuskod och vilken HTTP-version fick du?
+2. Vilka headers känner du igen från genomgången?
+
+```bash
+curl -v http://example.com
+```
+
+`-v` (*verbose*) visar hela samtalet. Raderna som börjar med `>` är förfrågan, `<` är svaret.
+
+3. Hitta raden `GET / HTTP/1.1`. Vilka headers skickar curl?
+4. Jämför med vad din webbläsare skickade i labb 2.1. Vad skiljer?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.6 – Granska ett certifikat
+1. Gå till din bank, `skolverket.se` och en webbplats du väljer själv.
+2. Klicka på hänglåset (eller ikonen) till vänster om adressen och leta upp certifikatet.
+3. Fyll i för varje webbplats: *Utfärdat till*, *Utfärdat av* (certifikatutfärdare), *Giltigt till*.
+4. Varför har certifikat ett slutdatum, tror du?
+5. Gå till <https://expired.badssl.com>. Vad säger webbläsaren? Gå *inte* vidare till sidan.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 2.7 – Rita resan
+Rita på papper eller digitalt, som en serie eller ett flödesschema, allt som händer från att du skriver `https://www.kvarnenscafe.se/meny.html` tills sidan syns. Ta med: webbläsaren, DNS-servern, webbservern, TLS-handslaget, förfrågan, svaret, extra filer och rendering. Märk pilarna.
+
+Jämför med en klasskamrat. Saknar någon av er ett steg?
+:::
+
+## Instuderingsfrågor
+
+1. Vad är en klient och vad är en server? Ge exempel på varje.
+2. Beskriv med egna ord vad som händer från att du skriver en webbadress tills sidan visas. Ta med minst fem steg.
+3. Vad gör DNS? Varför behövs det?
+4. Vad är skillnaden mellan IPv4 och IPv6, och varför finns IPv6?
+5. Dela upp `https://shop.exempel.se/skor?farg=rod#recensioner` i dess delar och förklara varje del.
+6. Varför skickas aldrig fragmentet (`#…`) till servern?
+7. Vad är skillnaden mellan HTTP-metoderna GET och POST? När skulle du använda POST?
+8. Förklara statuskoderna 200, 301, 404 och 500. Vilka av dem är "klientens fel"?
+9. Vad betyder det att HTTP är *tillståndslöst*? Hur kan man ändå vara inloggad på en webbplats?
+10. Vilka tre saker skyddar HTTPS? Vad betyder hänglåset i adressfältet – och vad betyder det *inte*?
+11. Vad är ett certifikat, och vem utfärdar det?
+12. Vad är skillnaden mellan en statisk och en dynamisk webbplats? Ge ett exempel på varje.
+13. Vad är skillnaden mellan en absolut och en relativ adress? Skriv en relativ länk från `sidor/om.html` till `index.html` i mappen ovanför.
+
+## Nyckelbegrepp
+
+klient · server · användaragent · förfrågan (request) · svar (response) · URL · schema · värdnamn · port · sökväg · query-parameter · fragment · domännamn · toppdomän · IP-adress · IPv4 · IPv6 · DNS · HTTP · metod (GET/POST) · statuskod · header · tillståndslöst · kaka (cookie) · HTTPS · TLS · certifikat · certifikatutfärdare · statisk/dynamisk webbplats · klientkod · serverkod · absolut/relativ adress
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: genomgång klient/server, URL, DNS + labb 2.2 och 2.7. Lektion 2: HTTP och statuskoder + labb 2.1 och 2.3. Lektion 3: HTTPS + labb 2.4–2.6.
+
+**Förbered:** Kontrollera att `nslookup`, `ping`, `tracert` och `curl` fungerar på skolans nät och datorer. ICMP (ping/tracert) blockeras ofta. Labb 2.5 kan göras som lärardemo om terminalen är låst.
+
+**Labb 2.6:** `badssl.com` har flera testsidor för olika certifikatfel. Bra demo på storskärm.
+
+**Facit till instuderingsfrågorna**
+
+1. Klienten begär resurser (webbläsare, app, curl). Servern tar emot förfrågningar och svarar (webbserver hos ett webbhotell, en molntjänst).
+2. DNS-uppslag av värdnamnet → IP-adress; anslutning (TCP/QUIC) och TLS-handslag med certifikat; HTTP-förfrågan (GET); servern svarar med statuskod och HTML; webbläsaren tolkar HTML och begär CSS, bilder, JS osv.; rendering och körning av JS.
+3. Översätter domännamn till IP-adresser. Människor minns namn, datorer behöver nummer. Dessutom kan IP-adressen bakom ett namn bytas utan att adressen ändras.
+4. IPv4 är 32 bitar (~4,3 miljarder adresser), skrivs som fyra tal 0–255. IPv6 är 128 bitar, skrivs hexadecimalt med kolon. IPv6 finns för att IPv4-adresserna tagit slut.
+5. `https` schema/protokoll, `shop.exempel.se` värdnamn (`shop` underdomän, `exempel` domän, `se` toppdomän), `/skor` sökväg, `?farg=rod` query med parametern `farg` = `rod`, `#recensioner` fragment – stället på sidan.
+6. Fragmentet hanteras bara av webbläsaren och pekar på en plats i dokumentet som redan hämtats; servern behöver det inte.
+7. GET hämtar och lägger data i URL:en (syns, kan bokmärkas, sparas i historik). POST skickar data i förfrågans kropp. POST används när data ska skickas/ändras: inloggning, beställning, lösenord, stora mängder data.
+8. 200 OK; 301 permanent flyttad, ny adress i `location`; 404 hittades inte (klientens fel – fel adress); 500 serverfel. 4xx = klientens fel.
+9. Servern kommer inte ihåg tidigare förfrågningar. Med kakor: servern skickar ett sessions-id i en kaka som webbläsaren skickar med i varje förfrågan.
+10. Kryptering, integritet (oförändrat innehåll), autentisering (rätt server via certifikat). Hänglåset betyder att anslutningen är krypterad till den domän som står i adressfältet. Det betyder inte att webbplatsen är pålitlig eller ärlig.
+11. En digital "id-handling" för en domän som innehåller domännamnet och en publik nyckel, signerad av en certifikatutfärdare (CA), t.ex. Let's Encrypt, DigiCert. Webbläsaren litar på en lista med CA:er.
+12. Statisk: samma färdiga filer till alla (portfoliosida, kafébroschyr). Dynamisk: sidan skapas vid förfrågan, ofta från en databas (webbshop, nyhetssajt med inloggning, forum).
+13. Absolut innehåller hela adressen inklusive schema och värd; relativ räknas från aktuell fil. `../index.html`.
+:::
+:::

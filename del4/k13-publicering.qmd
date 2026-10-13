@@ -1,0 +1,227 @@
+# Publicering {#sec-publicering}
+
+::: ci
+Publikation av webbplatser med och utan webbpubliceringssystem. Översikt av alternativa metoder för att skapa och redigera webbsidor.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara vad som krävs för att en webbplats ska synas på internet,
+- publicera en handkodad webbplats,
+- versionshantera med Git och GitHub,
+- förklara hur ett publiceringssystem (CMS) fungerar och bygga en enkel webbplats i ett,
+- jämföra olika sätt att skapa webbplatser och välja rätt för ett visst behov.
+:::
+
+## Vad krävs för att publicera?
+
+1. **En webbserver** som alltid är igång och svarar på förfrågningar. De flesta hyr plats hos ett **webbhotell** eller en molntjänst.
+2. **Ett domännamn**, t.ex. `kvarnenscafe.se`, som hyrs hos en domänleverantör (kapitel 2).
+3. **DNS-poster** som pekar domänen till serverns IP-adress.
+4. **Ett certifikat** för HTTPS. Många tjänster fixar det automatiskt och gratis.
+
+Det finns gratistjänster som sköter 1, 3 och 4 åt dig och ger en adress av typen `dittnamn.github.io`. Det räcker gott för skolprojekt.
+
+## Sätt att skapa en webbplats
+
+| Metod | Exempel | Passar när |
+|---|---|---|
+| **Handkodad** | HTML, CSS och JS i VS Code | Du vill ha full kontroll, lära dig, eller bygga något litet och snabbt |
+| **Statisk sajtgenerator** | Astro, Hugo, Eleventy, Quarto | Många sidor med samma mall, innehåll skrivet i Markdown |
+| **Publiceringssystem (CMS)** | WordPress, Drupal, Joomla | Någon utan kodkunskap ska uppdatera innehållet ofta |
+| **Webbplatsbyggare** | Wix, Squarespace, Google Sites | Snabbt, utan kod, för den som accepterar tjänstens begränsningar |
+| **AI-verktyg** | Genererar kod eller hela sidor från en beskrivning | Snabba utkast – men koden måste granskas: tillgänglighet, säkerhet, upphovsrätt |
+
+Den här boken är för övrigt byggd med en statisk sajtgenerator: Quarto.
+
+## Publicera utan publiceringssystem
+
+En handkodad webbplats är en mapp med filer. Att publicera den betyder att kopiera mappen till en webbserver.
+
+### Git och GitHub
+
+**Git** är ett **versionshanteringssystem**. Det sparar historiken för ditt projekt i **commits** – sparpunkter med en beskrivning. Du kan alltid gå tillbaka, se vad som ändrats och samarbeta med andra. **GitHub** är en tjänst där Git-projekt (*repositories*, repon) lagras på nätet.
+
+Grundflödet:
+
+```bash
+git init                            # gör mappen till ett repo (en gång)
+git add .                           # välj ändringarna
+git commit -m "Lägg till menysida"  # spara en commit
+git push                            # skicka upp till GitHub
+```
+
+Det går också att göra allt i VS Code (ikonen *Source Control*) eller i programmet *GitHub Desktop*.
+
+### GitHub Pages
+
+GitHub Pages publicerar ett repo som webbplats, gratis:
+
+1. Lägg webbplatsen i ett repo på GitHub. `index.html` ska ligga i roten.
+2. *Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main`, mapp `/ (root)` → Save*.
+3. Efter någon minut finns webbplatsen på `https://ANVÄNDARNAMN.github.io/REPONAMN/`.
+
+Varje gång du gör `git push` publiceras den nya versionen automatiskt.
+
+::: {.callout-warning}
+## Allt i ett publikt repo är publikt
+Lägg aldrig lösenord, API-nycklar eller personuppgifter du inte får publicera i repot. Även om du tar bort dem senare finns de kvar i historiken.
+:::
+
+### Andra sätt
+
+- **Netlify** (<https://app.netlify.com/drop>) – dra och släpp mappen i webbläsaren, så får du en adress direkt.
+- **Traditionellt webbhotell** – du får ett konto och laddar upp filerna med **SFTP** (säker filöverföring) i ett program som *FileZilla*. Undvik okrypterad **FTP**: lösenordet skickas i klartext.
+
+### Statiska sajtgeneratorer
+
+När en webbplats växer blir det jobbigt att kopiera samma header till 30 sidor. En **statisk sajtgenerator** bygger alla HTML-filer automatiskt från mallar och innehåll skrivet i Markdown. Resultatet är fortfarande statiska filer: snabbt och säkert.
+
+## Publicera med publiceringssystem (CMS)
+
+Ett **publiceringssystem** (*Content Management System*, **CMS**) låter användare skapa och ändra innehåll i ett webbgränssnitt utan att röra koden. Det vanligaste är **WordPress**, som driver ungefär 40 % av alla webbplatser.
+
+### Hur ett CMS fungerar
+
+```
+Besökare ──► Webbserver ──► CMS-programmet (PHP)
+                                │      │
+                    Tema (mallar)      Databas (texter, bilder, användare)
+                                │
+                     Tillägg (plugins)
+```
+
+- **Innehållet** – texter, bilder, menyer – ligger i en **databas**.
+- **Temat** bestämmer utseendet. Byter du tema ser hela webbplatsen annorlunda ut, men innehållet är detsamma. *Separation of concerns* igen.
+- **Tillägg** (*plugins*) ger nya funktioner: kontaktformulär, webbshop, SEO.
+- **Sidan skapas när någon besöker den**: CMS:et hämtar innehållet ur databasen och fyller i mallen. Det är en **dynamisk** webbplats (kapitel 2).
+- **Användare och roller** – administratören kan allt, en redaktör kan bara skriva och publicera.
+- Innehållet redigeras i en **WYSIWYG**-redigerare (*What You See Is What You Get*). I WordPress heter den *blockredigeraren*.
+
+### Fördelar och nackdelar
+
+| Fördelar | Nackdelar |
+|---|---|
+| Den som inte kan koda kan uppdatera innehållet | Långsammare än statiska filer |
+| Tusentals färdiga teman och tillägg | Måste uppdateras ofta – annars blir det hackat |
+| Många användare med olika roller | Tillägg av låg kvalitet kan ge säkerhetshål och dålig tillgänglighet |
+| Stort stöd och många utvecklare | Mindre kontroll över den genererade koden |
+| | Kräver server med databas – dyrare hosting |
+
+### Headless CMS
+
+Ett nyare sätt: CMS:et används bara för att *redigera* innehållet, och en statisk sajtgenerator eller app hämtar innehållet och bygger sidorna. Kallas **headless CMS** – "CMS utan huvud", alltså utan eget utseende. Du stöter troligen på det i senare kurser.
+
+## Välja metod
+
+Fråga beställaren:
+
+- **Vem ska uppdatera** innehållet, och hur ofta?
+- **Vad ska webbplatsen göra?** Bara visa information, eller ta emot beställningar och inloggningar?
+- **Budget** – för bygge *och* för drift och underhåll.
+- **Krav på tillgänglighet, prestanda och integritet.**
+- **Inlåsning** – kan man flytta webbplatsen till en annan tjänst om man vill?
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 13.1 – Publicera med GitHub Pages
+1. Skapa ett GitHub-konto om du inte har ett.
+2. Skapa ett nytt repo, t.ex. `min-webbplats`. Välj *Public*.
+3. Ladda upp din webbplats. Antingen via webben (*Add file → Upload files* och dra in filerna), eller med VS Code: *Source Control → Initialize Repository → Commit → Publish Branch*.
+4. Slå på GitHub Pages enligt genomgången.
+5. Öppna adressen i datorn och i mobilen. Fungerar allt? Vanliga problem: bilder som inte syns för att filnamnet har versaler (`Bild.JPG` ≠ `bild.jpg` på servern), eller absoluta sökvägar som `C:/Users/...`.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 13.2 – Uppdatera
+1. Ändra något på webbplatsen: rätta ett stavfel, byt en färg.
+2. Gör en commit med ett beskrivande meddelande och pusha.
+3. Hur lång tid tar det innan ändringen syns? (Tips: `Ctrl+Shift+R` för att hoppa förbi cachen.)
+4. Titta på historiken på GitHub (*Commits*). Hitta din ändring. Vad skulle hända om du behövde ångra den?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 13.3 – Kontrollera den publicerade webbplatsen
+1. Kör **W3C Link Checker** (<https://validator.w3.org/checklink>) på den publicerade adressen.
+2. Kör **HTTP Observatory** (labb 12.4). Vilket betyg fick sidan? Vilka headers kan du inte styra över på GitHub Pages?
+3. Kör **Lighthouse** på den publicerade versionen. Blev resultatet annorlunda än lokalt? Varför kan det bli så?
+4. Fyll i testprotokollet från kapitel 10 med kolumnen "publicerad".
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 13.4 – WordPress utan installation
+**WordPress Playground** kör en hel WordPress i din webbläsare, utan server och utan konto: <https://playground.wordpress.net>.
+
+1. Öppna Playground. Logga in i adminpanelen (*/wp-admin*) – du är redan inloggad som administratör.
+2. Bygg en enkel version av Kvarnens café: sidorna *Hem*, *Meny* och *Kontakt*, och en meny som länkar till dem.
+3. Skriv ett blogginlägg "Veckans bakverk" med en bild och korrekt alt-text.
+4. Byt tema två gånger (*Utseende → Teman*). Vad händer med innehållet? Vad händer med utseendet?
+5. Skapa en användare med rollen *Redaktör*. Vad kan den inte göra?
+6. Gå till *Tillägg*. Hur många tillägg finns installerade? Finns det uppdateringar?
+7. Inspektera den genererade HTML:en med utvecklarverktygen och kör Lighthouse. Jämför med din handkodade webbplats: kodens storlek, antal förfrågningar, tillgänglighetspoäng.
+
+Allt försvinner när du stänger fliken – det är bara en lekplats.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 13.5 – Jämförelse
+Välj en verksamhet: en fotbollsförening, en frisör, en klassresa eller en lokal musikfestival. Vilken metod skulle du rekommendera för deras webbplats? Fyll i tabellen och motivera ditt val.
+
+| | Handkodad | Statisk generator | WordPress | Webbplatsbyggare |
+|---|---|---|---|---|
+| Vem kan uppdatera? | | | | |
+| Kostnad (bygge + drift) | | | | |
+| Kunskap som krävs | | | | |
+| Säkerhet och underhåll | | | | |
+| Prestanda | | | | |
+| Kontroll över tillgänglighet | | | | |
+| Lätt att flytta? | | | | |
+:::
+
+## Instuderingsfrågor
+
+1. Vilka fyra saker behövs för att en webbplats ska synas på internet med egen domän?
+2. Vad är ett webbhotell?
+3. Vad är Git, och varför använder man versionshantering?
+4. Beskriv hur du publicerar en webbplats med GitHub Pages.
+5. Varför ska man använda SFTP och inte FTP?
+6. Vad är en statisk sajtgenerator? Vilket problem löser den?
+7. Vad är ett CMS? Beskriv hur det fungerar med databas, tema och tillägg.
+8. Vad betyder WYSIWYG?
+9. Ge tre fördelar och tre nackdelar med WordPress jämfört med en handkodad webbplats.
+10. Varför måste ett CMS uppdateras regelbundet?
+11. Vad är en webbplatsbyggare? Vad är risken med inlåsning?
+12. Vad måste du tänka på om du använder AI för att generera en webbsida?
+13. Vilka frågor bör du ställa till en beställare innan du väljer publiceringsmetod?
+
+## Nyckelbegrepp
+
+publicering · webbserver · webbhotell · domänleverantör · DNS-post · versionshantering · Git · commit · repo · push · GitHub · GitHub Pages · Netlify · FTP · SFTP · statisk sajtgenerator · publiceringssystem (CMS) · WordPress · tema · tillägg (plugin) · databas · roller · WYSIWYG · blockredigerare · headless CMS · webbplatsbyggare · inlåsning
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: genomgång + labb 13.1–13.2. Lektion 2: labb 13.3. Lektion 3: CMS + labb 13.4. Lektion 4: labb 13.5 + instuderingsfrågor.
+
+**Åldersgränser och konton:** GitHub kräver att användaren är minst 13 år. Kontrollera skolans riktlinjer för elevkonton i externa tjänster. Alternativ: läraren skapar en GitHub-organisation för klassen, eller publicering via skolans egen server.
+
+**WordPress Playground** kräver en modern webbläsare och fungerar oftast på skoldatorer. Testa i förväg. Den kan exportera hela webbplatsen som zip om eleverna vill spara.
+
+**Facit till instuderingsfrågorna**
+
+1. Webbserver (hosting), domännamn, DNS som pekar domänen till servern, certifikat för HTTPS.
+2. En tjänst som hyr ut plats på webbservrar (och ofta databaser, e-post, domäner).
+3. Ett versionshanteringssystem som sparar historiken i commits. Man kan gå tillbaka, se vem som ändrat vad, samarbeta och har en säkerhetskopia.
+4. Lägg filerna i ett repo på GitHub med `index.html` i roten, slå på Pages under Settings → Pages och välj gren och mapp. Adressen blir `användarnamn.github.io/repo`. Varje push publicerar om.
+5. FTP skickar lösenord och filer okrypterat; SFTP krypterar.
+6. Ett program som bygger färdiga HTML-sidor från mallar och innehåll (ofta Markdown). Löser problemet med upprepad kod på många sidor, men resultatet är fortfarande snabba, säkra statiska filer.
+7. Ett system där innehåll redigeras i ett webbgränssnitt och lagras i en databas; temat (mallar) bestämmer utseendet; tillägg ger funktioner; sidor genereras dynamiskt vid besök.
+8. What You See Is What You Get – man redigerar och ser ungefär resultatet direkt.
+9. Fördelar: lätt för icke-tekniker att uppdatera, färdiga teman och tillägg, roller/användare. Nackdelar: kräver uppdateringar/säkerhetsarbete, långsammare, mindre kontroll över kod/tillgänglighet, dyrare drift.
+10. Nya säkerhetshål upptäcks hela tiden och utnyttjas automatiskt av robotar.
+11. En tjänst där man bygger webbplatser med dra-och-släpp utan kod (Wix, Squarespace). Inlåsning: webbplatsen kan inte enkelt flyttas till en annan tjänst; man är beroende av tjänstens priser och villkor.
+12. Granska koden: tillgänglighet, semantik, säkerhet (t.ex. `innerHTML`), att den validerar, upphovsrätt för text och bilder, att innehållet stämmer.
+13. Vem ska uppdatera och hur ofta, vilka funktioner som behövs, budget för bygge och drift, krav på tillgänglighet/prestanda/integritet, risk för inlåsning.
+:::
+:::

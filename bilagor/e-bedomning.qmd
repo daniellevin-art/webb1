@@ -1,0 +1,50 @@
+# Bedömning {#sec-bedomning}
+
+Betyget sätts efter en **sammanvägd bedömning** av allt du gjort i kursen. Tabellerna nedan visar vilka uppgifter som visar vad, och hur kvaliteten skiljer sig mellan betygsstegen.
+
+Betygskriterierna för *Webbutveckling nivå 1* (Gy25) har fyra delar. Kursen *Webbutveckling 1* (Gy11) har motsvarande kunskapskrav, och samma underlag används där.
+
+## Vilka uppgifter visar vad?
+
+| Betygskriterium | Underlag i kursen |
+|---|---|
+| **1. Kunskaper om webbens betydelse och funktion** | Projektarbete A, instuderingsfrågor kap. 1–4, 11–13, labbarna i kap. 2, redovisningar |
+| **2. Skapar webblösningar anpassade till syfte, användare och tillgänglighet** | Bygg vidare (kap. 3–11), delprojektet, slutprojektet |
+| **3. Planerar och genomför webbutvecklingsprojekt, utvärderar process och resultat** | Kap. 15, slutprojektet: projektplan, specifikation, loggbok, testprotokoll, utvärdering |
+| **4. Etiska överväganden och arbete enligt lagar och bestämmelser** | Projektarbete B och C, instuderingsfrågor kap. 12 och 14, bildlicenser, integritetspolicy och kakor i slutprojektet |
+
+## Bedömningsmatris
+
+Orden i fetstil är de som skiljer betygsstegen åt i kursplanen. D och B sätts när kunskaperna sammantaget ligger mellan stegen.
+
+### 1. Webbens betydelse och funktion
+
+| E – godtagbara kunskaper | C – goda kunskaper | A – mycket goda kunskaper |
+|---|---|---|
+| Beskriver hur webben fungerar (klient–server, URL, HTTP, DNS) och ger exempel på webbens samhällspåverkan. | Förklarar sambanden – t.ex. vad som händer i varje steg när en sida laddas – och resonerar om orsaker och konsekvenser av webbens samhällspåverkan. | Förklarar sambanden utförligt och nyanserat, använder terminologin korrekt och för välgrundade resonemang med flera perspektiv och egna exempel. |
+
+### 2. Webblösningar anpassade till syfte, användare och tillgänglighet
+
+| E – **viss** anpassning | C – **god** anpassning | A – **mycket god** anpassning |
+|---|---|---|
+| Webbplatsen fungerar och har en struktur som passar syftet. Grundläggande tillgänglighet: alt-texter, etiketter, rubriker. Den är responsiv i stort. Koden har få valideringsfel. | Genomtänkt struktur, semantik och design utifrån målgruppen. Fungerar med tangentbord och skärmläsare, god kontrast, testad i flera användaragenter. Validerar utan fel. Optimerade bilder. | Design och funktion är tydligt anpassade till personas och testade med användare. Tillgängligheten är grundligt testad (manuellt och med verktyg) och bristerna åtgärdade. Prestanda och interoperabilitet är optimerade och dokumenterade. Valen motiveras. |
+
+### 3. Planering, genomförande och utvärdering
+
+| E – **viss** säkerhet, **enkla** omdömen | C – säkerhet, **utvecklade** omdömen | A – **god** säkerhet, **välutvecklade** omdömen |
+|---|---|---|
+| Följer processen med stöd: projektplan, krav, wireframes, kod, test. Utvärderingen beskriver vad som gick bra och dåligt. | Planerar och genomför självständigt i stort. Kravspecifikationen är testbar och följs upp. Utvärderingen förklarar *varför* det gick som det gick, med exempel. | Planerar och genomför självständigt och anpassar planen när förutsättningarna ändras. Utvärderingen är nyanserad: värderar resultat mot mål och krav, analyserar processen och ger konkreta, välgrundade förslag till förbättring. |
+
+### 4. Etik, lagar och bestämmelser
+
+| E – **viss** säkerhet | C – säkerhet | A – **god** säkerhet |
+|---|---|---|
+| Använder bilder med tillåten licens och källa, och känner till GDPR och kakreglerna. Ger exempel på etiska frågor. | Tillämpar reglerna i eget arbete: integritetspolicy, uppgiftsminimering, inga kakor utan samtycke, korrekta licenser. Resonerar om etiska val i sitt projekt. | Tillämpar reglerna konsekvent och kan motivera dem med hänvisning till lag. Gör väl avvägda etiska överväganden och identifierar själv risker i egna och andras lösningar. |
+
+## Projektarbetena
+
+| | E | C | A |
+|---|---|---|---|
+| **A. Webben och samhället** | Beskriver utvecklingen och ger exempel på konsekvenser, med källor. | Förklarar orsaker och konsekvenser, positiva och negativa, med granskade källor. | Nyanserat resonemang med flera perspektiv, välgrundad etisk diskussion, kritiskt granskade källor. |
+| **B. Hotanalys** | Rimliga hot och åtgärder. | Motiverad riskbedömning, åtgärder kopplade till hoten. | Välmotiverad prioritering; människa, juridik och tredjepart vägs in. |
+| **C. Granska en webbplats** | Hittar brister och ger några rekommendationer. | Bristerna är belagda med bevis och kopplade till lag eller riktlinje. | Grundlig granskning, väl underbyggda och prioriterade rekommendationer, egen reflektion. |

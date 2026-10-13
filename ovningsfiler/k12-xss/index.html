@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kvarnens gästbok (övning i XSS)</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body { font-family: system-ui, sans-serif; max-width: 36rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+      label { display: block; margin-top: 0.75rem; }
+      input, textarea { width: 100%; padding: 0.5rem; font: inherit; }
+      button { margin-top: 0.75rem; padding: 0.5rem 1rem; font: inherit; }
+      #inlagg { list-style: none; padding: 0; }
+      #inlagg li { border: 1px solid #ccc; border-radius: 6px; padding: 0.75rem; margin-top: 0.75rem; }
+      .fran { font-size: 0.875rem; color: #555; }
+    </style>
+  </head>
+  <body>
+    <main>
+    <h1>Kvarnens gästbok</h1>
+    <p>Övningsfil för labb 12.1. Allt sker bara i din egen webbläsare – inget skickas någonstans.</p>
+
+    <form id="gastbok">
+      <label for="namn">Namn</label>
+      <input id="namn" name="namn" required>
+      <label for="text">Meddelande</label>
+      <textarea id="text" name="text" rows="3" required></textarea>
+      <button type="submit">Skriv i gästboken</button>
+    </form>
+
+    <h2>Inlägg</h2>
+    <ul id="inlagg"></ul>
+
+    </main>
+    <script src="gastbok.js"></script>
+  </body>
+</html>

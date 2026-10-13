@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Personuppgifter – Kvarnens café</title>
+    <meta name="description" content="Så hanterar Kvarnens café personuppgifter.">
+    <link rel="icon" href="bilder/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+
+    <header class="sidhuvud">
+      <a href="index.html" class="logga">
+        <svg viewBox="0 0 64 64" width="40" height="40" aria-hidden="true">
+          <path d="M22 60 L28 24 L36 24 L42 60 Z" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+            <line x1="32" y1="24" x2="32" y2="4"/><line x1="32" y1="24" x2="52" y2="24"/><line x1="32" y1="24" x2="12" y2="24"/>
+          </g>
+        </svg>
+        Kvarnens café
+      </a>
+      <button class="menyknapp" type="button" aria-expanded="false" aria-controls="huvudmeny">Meny</button>
+      <nav aria-label="Huvudmeny">
+        <ul id="huvudmeny" class="meny">
+          <li><a href="index.html">Hem</a></li>
+          <li><a href="meny.html">Meny</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="innehall" class="behallare">
+      <h1>Så hanterar vi dina personuppgifter</h1>
+      <p>Kvarnens café, Kvarngatan 1, 211 00 Malmö, är personuppgiftsansvarig.</p>
+
+      <h2>Vilka uppgifter, och varför?</h2>
+      <p>När du bokar bord sparar vi namn, e-post, datum, antal personer och ditt meddelande. Vi använder dem bara för att hantera bokningen (rättslig grund: avtal) och raderar dem 30 dagar efter besöket.</p>
+
+      <h2>Vem får ta del av dem?</h2>
+      <p>Formuläret skickas via tjänsten Formspree, som är vårt personuppgiftsbiträde.</p>
+
+      <h2>Kakor</h2>
+      <p>Vi använder inga kakor. Om du väljer mörkt läge sparas valet i din webbläsare så att det gäller på alla sidor.</p>
+
+      <h2>Dina rättigheter</h2>
+      <p>Du har rätt att få veta vilka uppgifter vi har om dig, få dem rättade eller raderade. Kontakta oss på <a href="mailto:hej@kvarnenscafe.se">hej@kvarnenscafe.se</a>. Är du missnöjd kan du vända dig till Integritetsskyddsmyndigheten (IMY).</p>
+
+    </main>
+
+    <footer class="sidfot">
+      <div class="behallare sidfot-kolumner">
+        <section>
+          <h2>Hitta hit</h2>
+          <p>Kvarngatan 1<br>211 00 Malmö</p>
+        </section>
+        <section>
+          <h2>Kontakt</h2>
+          <p><a href="tel:+4640123456">040-12 34 56</a><br><a href="mailto:hej@kvarnenscafe.se">hej@kvarnenscafe.se</a></p>
+        </section>
+        <section>
+          <h2>Inställningar</h2>
+          <p><button id="tema" class="knapp-sekundar" type="button" aria-pressed="false">Mörkt läge</button></p>
+          <p><a href="integritet.html">Så hanterar vi personuppgifter</a></p>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,279 @@
+# Typsnitt, färg och layoutprinciper {#sec-design}
+
+::: ci
+Introduktion till typsnitt, färgscheman och principer för layout av gränssnitt.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- välja och kombinera typsnitt, och lägga in webbtypsnitt på ett bra sätt,
+- bygga en typskala med tydlig hierarki,
+- skapa ett färgschema och kontrollera kontrasten,
+- använda fyra grundprinciper för layout: kontrast, upprepning, linjering och närhet,
+- samla dina designbeslut i en stilguide.
+:::
+
+Det här kapitlet handlar om design, men du behöver inte vara konstnärlig. Bra gränssnitt följer ett fåtal principer, och de går att lära sig.
+
+## Typsnitt
+
+### Typsnittsfamiljer
+
+| Grupp | Kännetecken | Passar till | Exempel |
+|---|---|---|---|
+| **Serif** | Små "fötter" på bokstäverna | Rubriker, längre läsning, klassisk känsla | Georgia, Merriweather, Lora |
+| **Sans-serif** | Utan fötter | Gränssnitt, brödtext på skärm, modern känsla | Arial, Inter, Source Sans |
+| **Monospace** | Alla tecken lika breda | Kod, siffror i tabeller | Consolas, JetBrains Mono |
+| **Display** | Dekorativa | Bara stora rubriker | Bebas Neue, Lobster |
+
+**Tumregel:** högst två typsnitt per webbplats – ett för rubriker och ett för brödtext. Eller ett enda typsnitt i olika vikter.
+
+### Systemtypsnitt och webbtypsnitt
+
+**Systemtypsnitt** finns redan på användarens dator. De laddas inte ner, så de är snabbast, men de ser olika ut på olika system:
+
+```css
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+```
+
+**Webbtypsnitt** laddas ner med sidan. Det bästa formatet är **WOFF2**. Lägg filen på din egen webbplats och beskriv den med `@font-face`:
+
+```{.css filename="css/style.css"}
+@font-face {
+  font-family: "Lora";
+  src: url("../fonts/lora-v35-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;   /* visa reservtypsnittet medan Lora laddas */
+}
+
+h1, h2, h3 {
+  font-family: "Lora", Georgia, serif;
+}
+```
+
+::: {.callout-note}
+## Google Fonts och integritet
+Det är enkelt att länka in typsnitt direkt från Google Fonts servrar, men då skickas besökarens IP-adress till Google. En tysk domstol ansåg 2022 att det bröt mot GDPR. Ladda därför hellre ner typsnittsfilen och lägg den på din egen server – det är dessutom ofta snabbare. Mer om GDPR i kapitel 14.
+:::
+
+### Typskala och hierarki
+
+En **typskala** är en uppsättning textstorlekar som hör ihop. Ett enkelt sätt är att multiplicera med samma tal varje steg, till exempel 1,25:
+
+```css
+:root {
+  --text-sm:   0.8rem;
+  --text-base: 1rem;      /* brödtext, 16 px */
+  --text-lg:   1.25rem;   /* × 1,25 */
+  --text-xl:   1.563rem;
+  --text-2xl:  1.953rem;
+  --text-3xl:  2.441rem;  /* h1 */
+}
+```
+
+Läsbarhet:
+
+- **Brödtext minst 16 px** (1 rem).
+- **Radhöjd** 1,5–1,7 för brödtext, tätare (1,1–1,3) för stora rubriker.
+- **Radlängd** 45–75 tecken: `max-width: 65ch`.
+- **Vänsterställd** text. Marginaljusterad text ger ojämna mellanrum.
+
+**Hierarki** betyder att viktigast syns först. Skapa den med storlek, vikt (fetstil), färg och luft – inte med versaler och understrykning överallt.
+
+## Färg
+
+### Färgscheman
+
+Utgå från färghjulet:
+
+| Schema | Beskrivning | Känsla |
+|---|---|---|
+| **Monokromt** | En nyans i olika ljusheter | Lugnt, enhetligt |
+| **Analogt** | Färger bredvid varandra på hjulet | Harmoniskt |
+| **Komplementärt** | Färger mitt emot varandra | Kontrastrikt, energiskt |
+| **Triad** | Tre färger jämnt fördelade | Livligt – svårt att få balans |
+
+En praktisk fördelning är **60–30–10**: 60 % huvudfärg (ofta en neutral bakgrund), 30 % sekundärfärg, 10 % accentfärg för det som ska synas, som knappar och länkar.
+
+Kvarnens café använder ett analogt, varmt schema:
+
+```css
+:root {
+  --bakgrund: hsl(35 50% 95%);   /* 60 %: ljus kräm */
+  --yta:      hsl(35 40% 88%);   /* 30 %: kort och fält */
+  --text:     hsl(25 30% 15%);   /* nästan svart brun */
+  --accent:   hsl(22 60% 32%);   /* 10 %: kanelbrun, för knappar och länkar */
+}
+```
+
+Med `hsl` är det enkelt att göra varianter: behåll nyansen (första talet) och ändra ljusheten.
+
+### Kontrast
+
+Text måste synas mot bakgrunden. Tillgänglighetsriktlinjerna WCAG (kapitel 9) kräver en **kontrastkvot** på minst:
+
+| Vad | Minst |
+|---|:-:|
+| Vanlig text | **4,5 : 1** |
+| Stor text (från ca 24 px, eller 19 px fet) | **3 : 1** |
+| Ikoner, ramar runt fält, fokusmarkering | **3 : 1** |
+
+Svart på vitt är 21 : 1. Ljusgrå text på vit bakgrund – populärt men ofta för svagt – hamnar lätt under 3 : 1.
+
+### Färg får inte vara enda informationen
+
+Ungefär **8 % av alla män** och en liten andel kvinnor har någon form av färgseende som gör det svårt att skilja rött från grönt. Visa därför aldrig information *bara* med färg. Ett felmeddelande ska ha text och gärna en ikon, inte bara en röd ram.
+
+### Mörkt läge
+
+Användare kan välja mörkt läge i sitt operativsystem. Med CSS-variabler är det enkelt att följa det:
+
+```css
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bakgrund: hsl(25 20% 10%);
+    --yta:      hsl(25 18% 16%);
+    --text:     hsl(35 40% 90%);
+    --accent:   hsl(30 70% 65%);
+  }
+}
+```
+
+## Fyra principer för layout
+
+Designern Robin Williams sammanfattade grunderna i fyra principer. På engelska bildar de förkortningen **CRAP**:
+
+### 1. Kontrast (*Contrast*)
+
+Det som är *olika* ska vara *tydligt olika*. En rubrik som bara är lite större än texten ser ut som ett misstag. En primärknapp ska skilja sig från en sekundär.
+
+### 2. Upprepning (*Repetition*)
+
+Samma sak ska se likadan ut överallt: alla knappar, alla rubriker på samma nivå, alla kort. Upprepning gör sidan sammanhängande och lätt att lära sig. Det är därför CSS-klasser och variabler är så användbara.
+
+### 3. Linjering (*Alignment*)
+
+Inget ska placeras på måfå. Varje element ska linjera med något annat. En osynlig rak linje längs vänsterkanten gör sidan lugn och ordnad.
+
+### 4. Närhet (*Proximity*)
+
+Det som hör ihop ska stå nära varandra. En etikett ska stå närmare sitt fält än nästa fält. Rubriken ska ha mer luft *ovanför* än under, så att den hör ihop med texten under.
+
+### Mer att tänka på
+
+- **Luft** (*white space*) är inte slöseri. Det är det som gör att innehållet går att läsa.
+- **Läsmönster.** I västvärlden läser vi uppifrån vänster. Viktigast högt upp och till vänster.
+- **Konventioner.** Användare förväntar sig att loggan leder till startsidan, att menyn finns högst upp och att länkar ser ut som länkar. Följ konventionerna om du inte har ett mycket bra skäl att låta bli.
+- **Knappar ska se klickbara ut** – tydlig form, kontrast och en hover-effekt.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 6.1 – Analysera en webbplats
+1. Välj två webbplatser: en du tycker är snygg och lättanvänd, och en du tycker är rörig.
+2. Ta en skärmdump av startsidan på varje.
+3. Rita på skärmdumparna (t.ex. i Paint, Canva eller på en utskrift):
+   - linjeringslinjer,
+   - grupper som hör ihop (närhet),
+   - saker som upprepas,
+   - var kontrasten styr blicken.
+4. Hur många typsnitt används? Vilka färger? Är det 60–30–10?
+5. Skriv tre förslag på hur den röriga sidan kan bli bättre.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 6.2 – Typsnitt
+1. Gå till <https://fonts.google.com>. Välj ett rubriktypsnitt och ett brödtextypsnitt till Kvarnens café. Motivera valet med en mening.
+2. Ladda ner typsnitten som WOFF2. Verktyget *google-webfonts-helper* (<https://gwfh.mranftl.com>) ger färdiga filer och `@font-face`-kod.
+3. Lägg filerna i `fonts/` och skriv `@font-face`-reglerna.
+4. Kontrollera i utvecklarverktygen (*Network → Font*) att typsnitten laddas från din egen webbplats och inte från Google.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 6.3 – Typskala
+1. Gå till <https://typescale.com>. Prova några skalor och välj en.
+2. Lägg storlekarna i CSS-variabler och använd dem för `h1`–`h3`, brödtext och liten text.
+3. Sätt radhöjd och radlängd enligt genomgången.
+4. Jämför sidan före och efter. Är hierarkin tydligare?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 6.4 – Färgschema och kontrast
+1. Skapa ett schema med verktyg som <https://coolors.co> eller <https://color.adobe.com>. Välj schematyp medvetet.
+2. Fördela färgerna enligt 60–30–10 och lägg dem i CSS-variabler.
+3. Kontrollera kontrasten för text/bakgrund, länkfärg/bakgrund och knapptext/knappfärg med <https://webaim.org/resources/contrastchecker/>. Allt ska klara 4,5 : 1. Justera ljusheten tills det gör det.
+4. Simulera färgblindhet: i Chrome, öppna utvecklarverktygen → `Ctrl+Shift+P` → skriv *Rendering* → *Emulate vision deficiencies*. Testa *Protanopia*, *Deuteranopia* och *Achromatopsia*. Syns allt fortfarande?
+5. Lägg till ett mörkt läge med `prefers-color-scheme`. Testa i *Rendering → Emulate CSS media feature prefers-color-scheme*.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 6.5 – Stilguide
+En **stilguide** samlar alla designbeslut på ett ställe, så att alla som jobbar med webbplatsen gör likadant.
+
+Skapa `stilguide.html` för din egen webbplats. Den ska visa:
+
+- färgerna som rutor med namn, hexkod och användning ("accent – knappar och länkar"),
+- typsnitten och hela typskalan med exempeltext,
+- rubriker `h1`–`h3`, ett stycke, en lista och en länk,
+- knappar i alla lägen: vanlig, hover, fokus,
+- formulärfält,
+- ett kort.
+
+Stilguiden ska använda samma CSS-fil som resten av webbplatsen.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+- [ ] Högst två typsnitt, lagrade på din egen webbplats.
+- [ ] En typskala i CSS-variabler.
+- [ ] Ett färgschema med godkänd kontrast överallt.
+- [ ] Information förmedlas aldrig bara med färg.
+- [ ] Stilguiden finns och stämmer med webbplatsen.
+:::
+
+## Instuderingsfrågor
+
+1. Vad är skillnaden mellan serif och sans-serif? Ge ett exempel på när du skulle välja vardera.
+2. Varför bör man inte använda fler än två typsnitt?
+3. Vad är fördelen med systemtypsnitt, och vad är nackdelen?
+4. Varför är det bättre att lägga webbtypsnitt på sin egen server än att länka till Google Fonts?
+5. Vad är en typskala?
+6. Ange rimliga värden för brödtextens storlek, radhöjd och radlängd.
+7. Beskriv två färgscheman från färghjulet.
+8. Vad innebär 60–30–10-regeln?
+9. Vilken kontrastkvot krävs för vanlig text enligt WCAG? För stor text?
+10. Varför får färg inte vara det enda sättet att visa information?
+11. Förklara de fyra layoutprinciperna kontrast, upprepning, linjering och närhet med ett exempel var.
+12. Vad är en stilguide, och varför är den användbar?
+
+## Nyckelbegrepp
+
+typsnitt · serif · sans-serif · monospace · systemtypsnitt · webbtypsnitt · WOFF2 · `@font-face` · `font-display` · typskala · hierarki · radhöjd · radlängd · färghjul · monokromt · analogt · komplementärt · 60–30–10 · kontrastkvot · färgblindhet · mörkt läge · `prefers-color-scheme` · kontrast · upprepning · linjering · närhet · luft (white space) · konvention · stilguide
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: typografi + labb 6.1 och 6.2. Lektion 2: färg + labb 6.3 och 6.4. Lektion 3: layoutprinciper + labb 6.5.
+
+**Skolnät:** Om `gwfh.mranftl.com` eller Google Fonts är blockerat, ladda ner några typsnitt i förväg och dela ut dem.
+
+**Bedömningstips:** Stilguiden är ett bra underlag för att bedöma "anpassning till syfte och användare". Be eleverna motivera minst tre val i stilguiden.
+
+**Facit till instuderingsfrågorna**
+
+1. Serif har små utsprång (serifer) på bokstavsändarna; sans-serif saknar dem. Serif: rubriker, klassisk/tidningskänsla, längre text i tryck. Sans-serif: gränssnitt, brödtext på skärm, modern känsla.
+2. Fler typsnitt ger rörigt intryck och svagare enhetlighet, och varje typsnitt ökar laddningstiden.
+3. Fördel: laddas inte ner, snabbt, känns hemma i operativsystemet. Nackdel: ser olika ut på olika system, mindre kontroll över formen.
+4. Besökarens IP-adress skickas inte till tredje part (GDPR); färre externa anrop och ofta snabbare.
+5. En uppsättning textstorlekar som följer ett gemensamt förhållande (t.ex. ×1,25) och ger konsekvent hierarki.
+6. Minst 16 px (1 rem), radhöjd 1,5–1,7, radlängd 45–75 tecken.
+7. T.ex. monokromt: en nyans i olika ljusheter. Analogt: grannfärger. Komplementärt: motstående färger. Triad: tre jämnt fördelade.
+8. 60 % huvudfärg, 30 % sekundärfärg, 10 % accentfärg.
+9. 4,5 : 1 för vanlig text, 3 : 1 för stor text.
+10. Personer med nedsatt färgseende, skärmar med dålig återgivning, utskrift i gråskala eller starkt solljus gör att färgskillnaden kan försvinna.
+11. Kontrast: primärknapp tydligt annorlunda än sekundär. Upprepning: alla kort har samma stil. Linjering: rubrik, text och bild linjerar mot samma vänsterkant. Närhet: etikett nära sitt fält, rubrik nära sitt stycke.
+12. Ett dokument eller en sida med webbplatsens färger, typsnitt och komponenter. Ger konsekvent design och gör det lättare för flera att arbeta med samma webbplats.
+:::
+:::

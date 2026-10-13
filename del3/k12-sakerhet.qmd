@@ -1,0 +1,291 @@
+# Säkerhet {#sec-sakerhet}
+
+::: ci
+Säkerhet och sätt att identifiera hot och sårbarheter samt hur attacker kan motverkas genom effektiva åtgärder.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara begreppen hot, sårbarhet och risk,
+- beskriva de vanligaste attackerna mot webbplatser och deras användare,
+- förklara och demonstrera hur XSS fungerar och hur det förhindras,
+- känna igen falska adresser,
+- föreslå effektiva åtgärder mot olika hot,
+- göra en enkel hotanalys för en webbplats.
+:::
+
+::: {.callout-important}
+## Testa bara det du äger
+Allt i det här kapitlet ska prövas på **dina egna sidor** och övningsfiler. Att försöka ta sig in i eller störa någon annans system utan tillstånd är **dataintrång**, ett brott enligt brottsbalken – även om man "bara testar". Hittar du en säkerhetsbrist hos någon annan: ändra ingenting, och berätta för ägaren eller din lärare.
+:::
+
+## Grundbegrepp
+
+Informationssäkerhet brukar delas in i tre mål, **KIT**:
+
+| Mål | Betyder | Hotas av |
+|---|---|---|
+| **Konfidentialitet** | Bara behöriga kan läsa informationen | Avlyssning, dataläckor |
+| **Integritet** | Informationen är korrekt och oförändrad | Någon ändrar innehåll eller data |
+| **Tillgänglighet** | Informationen går att nå när den behövs | Överbelastningsattacker, driftstopp |
+
+Och tre ord som ofta blandas ihop:
+
+- **Hot** – något som *kan* orsaka skada: en bedragare, ett virus, ett strömavbrott.
+- **Sårbarhet** – en svaghet som ett hot kan utnyttja: ett gammalt tillägg, ett svagt lösenord, ett formulär som inte kontrollerar indata.
+- **Risk** – hur troligt det är att något händer, gånger hur allvarligt det blir. **Risk = sannolikhet × konsekvens.**
+
+## Vanliga hot och åtgärder
+
+### Avlyssning
+
+Utan HTTPS skickas allt i klartext. På ett öppet wifi kan andra i samma nät läsa vad du skickar, inklusive lösenord.
+
+**Åtgärd:** HTTPS överallt (kapitel 2). Headern **HSTS** (`Strict-Transport-Security`) talar om för webbläsaren att alltid använda HTTPS till webbplatsen i fortsättningen.
+
+### Nätfiske (*phishing*)
+
+Bedragare lurar användare till falska sidor som ser ut som riktiga, ofta via mejl eller sms. De utnyttjar att folk inte läser adressen noga:
+
+| Adress | Vem äger den? |
+|---|---|
+| `https://www.kvarnbanken.se/logga-in` | Kvarnbanken |
+| `https://kvarnbanken.se.inloggning-sakert.com/` | **inloggning-sakert.com** – läs domänen bakifrån! |
+| `https://kvarnbanken-se.com/` | **kvarnbanken-se.com** – en helt annan domän |
+| `https://kvarnbankem.se/` | **kvarnbankem.se** – stavfel (*typosquatting*) |
+
+Kom ihåg: hänglåset betyder bara att anslutningen är krypterad, inte att sidan är äkta.
+
+**Åtgärder:** utbilda användare, använd egen tydlig domän, skicka aldrig länkar till inloggning i mejl och sms, tvåfaktorsautentisering, lösenordshanterare (de fyller bara i på rätt domän).
+
+### Cross-site scripting (XSS)
+
+**XSS** innebär att en angripare får in **sin egen JavaScript** på din sida, som sedan körs i andra besökares webbläsare. Skriptet kan stjäla inloggningar, ändra sidan eller skicka användaren vidare till en falsk sida.
+
+Det händer när en sida visar text från användare – en kommentar, ett namn, ett sökord – och tolkar den som HTML:
+
+```js
+// ❌ Sårbart: texten tolkas som HTML
+lista.innerHTML += `<li>${kommentar}</li>`;
+
+// ✅ Säkert: texten är alltid bara text
+const li = document.createElement("li");
+li.textContent = kommentar;
+lista.append(li);
+```
+
+**Åtgärder:**
+
+1. **Behandla all indata som opålitlig.** Visa text som text (`textContent`, eller servern kodar om `<` till `&lt;`).
+2. **Content Security Policy (CSP)** – en header som talar om vilka skript som får köras. Även om någon lyckas få in kod kan webbläsaren vägra köra den.
+
+### Injektion
+
+Om en server bygger en databasfråga direkt av vad användaren skrev kan en angripare skriva *kod* istället för data – **SQL-injektion**. Det kan ge åtkomst till hela databasen. Det sker på servern och tas upp i senare kurser, men principen är densamma som för XSS: **lita aldrig på indata**.
+
+### Validering i webbläsaren är inte säkerhet
+
+`required`, `type="email"` och `maxlength` hjälper *användaren*. De skyddar inte servern – vem som helst kan ta bort dem i utvecklarverktygen, eller skicka data utan att använda formuläret alls. **Servern måste alltid kontrollera allt igen.**
+
+### Lösenord och konton
+
+- Långa lösenord – gärna lösenfraser av flera ord – och ett unikt lösenord per tjänst. En **lösenordshanterare** gör det möjligt.
+- **Tvåfaktorsautentisering** (2FA/MFA): något du vet (lösenord) + något du har (telefon, säkerhetsnyckel).
+- Servern sparar aldrig lösenord i klartext, utan som en **hash** (ett slags fingeravtryck som inte går att räkna baklänges).
+- När lösenord läcker från en tjänst provar angripare dem automatiskt på andra tjänster (*credential stuffing*). Därför unika lösenord.
+
+### Tredjepartskod
+
+Varje skript du hämtar från någon annan – statistik, chatt, reklam, kartor – körs med samma rättigheter som din egen kod. Blir leverantören hackad blir din sida det också.
+
+**Åtgärder:** använd så lite tredjepartskod som möjligt, ladda hellre ner och lägg filen själv, och använd **Subresource Integrity** (attributet `integrity`) så att webbläsaren vägrar köra en fil som ändrats.
+
+### Föråldrad programvara
+
+Publiceringssystem som WordPress, och deras tillägg, får ständigt säkerhetsuppdateringar. En webbplats som inte uppdateras blir förr eller senare hackad – oftast automatiskt av robotar som letar efter kända hål.
+
+**Åtgärd:** uppdatera regelbundet, ta bort tillägg du inte använder.
+
+### Läckta hemligheter
+
+API-nycklar, lösenord och konfigurationsfiler som råkar publiceras – i en JavaScript-fil eller på GitHub – hittas snabbt av robotar.
+
+**Åtgärd:** hemligheter hör aldrig hemma i kod som skickas till webbläsaren eller läggs i Git. Använd `.gitignore`.
+
+### Clickjacking
+
+En angripare bäddar in din sida osynligt i sin egen (`iframe`) och lurar användaren att klicka på något.
+
+**Åtgärd:** headern `Content-Security-Policy: frame-ancestors 'self'` hindrar andra från att bädda in sidan.
+
+### Överbelastning (DDoS)
+
+Många datorer skickar samtidigt så mycket trafik att servern inte orkar. Hotar *tillgängligheten*.
+
+**Åtgärd:** CDN- och skyddstjänster som filtrerar trafiken. Statiska webbplatser klarar mer än dynamiska.
+
+### Social manipulation
+
+Den svagaste länken är ofta människan. "Hej, det är IT-supporten, jag behöver ditt lösenord." Ingen seriös organisation ber om ditt lösenord.
+
+## Säkerhetsheaders
+
+Servern kan skicka headers som slår på skydd i webbläsaren:
+
+| Header | Skyddar mot |
+|---|---|
+| `Strict-Transport-Security` | Okrypterade anslutningar |
+| `Content-Security-Policy` | XSS, clickjacking, oväntade skript |
+| `X-Content-Type-Options: nosniff` | Att webbläsaren gissar filtyp |
+| `Referrer-Policy` | Att adresser läcker till andra webbplatser |
+| `Permissions-Policy` | Att sidan använder kamera, mikrofon, position i onödan |
+
+Du testar dem med **HTTP Observatory**: <https://developer.mozilla.org/en-US/observatory>.
+
+## OWASP Top 10
+
+**OWASP** är en ideell organisation som bland annat sammanställer de tio vanligaste säkerhetsriskerna i webbapplikationer. Listan uppdateras med några års mellanrum och är en bra startpunkt för den som vill lära sig mer. Bristande behörighetskontroll, injektion, felaktiga inställningar och föråldrade komponenter brukar ligga högt upp.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 12.1 – XSS i en gästbok
+Öppna `ovningsfiler/k12-xss/index.html` med Live Server. Det är en enkel gästbok som bara körs i din egen webbläsare.
+
+1. Skriv ett vanligt inlägg. Fungerar det?
+2. Skriv `Hej <b>alla</b>!`. Vad hände med `<b>`?
+3. Skriv: `<img src="x" onerror="document.body.style.background='red'">`. Vad hände? Vad kunde en riktig angripare ha gjort istället för att byta färg?
+4. Läs koden i `gastbok.js`. Hitta raden som gör sidan sårbar.
+5. Laga sårbarheten med `textContent`. Testa igen med steg 2 och 3.
+6. Lägg till en CSP i `<head>` och se vad som händer i konsolen om du återställer den sårbara koden:
+
+   ```html
+   <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+   ```
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 12.2 – Äkta eller falsk?
+Kvarnbanken är en påhittad bank med domänen `kvarnbanken.se`. Vilka adresser leder till banken? Förklara varför för varje.
+
+1. `https://www.kvarnbanken.se/privat/logga-in`
+2. `https://kvarnbanken.se.kundservice-login.net/verifiera`
+3. `https://login.kvarnbanken.se/`
+4. `http://www.kvarnbanken.se/`
+5. `https://kvarnbanken-sakerhet.se/`
+6. `https://www.kvarnbanken.se@inloggning.example/`
+7. `https://xn--kvarnbnken-v5a.se/`
+8. `https://kvarnbankken.se/`
+9. `https://bit.ly/3kVarN`
+10. `https://www.kvarnbanken.se.evil.example/`
+
+Tips: hitta den riktiga domänen genom att läsa värdnamnet *bakifrån*. Vad gör `@` i en adress? Jämför nummer 7 med vad du får om du skriver `new URL("https://kvarnbänken.se").hostname` i konsolen. Vad betyder det?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 12.3 – Lura formuläret
+1. Öppna Kvarnens bokningsformulär. Det har `required` och `type="email"`.
+2. Försök skicka det tomt. Vad händer?
+3. Öppna utvecklarverktygen, hitta fältet i *Elements* och ta bort `required` och ändra `type` till `text`. Skicka igen.
+4. Vad drar du för slutsats om validering i webbläsaren? Vem måste kontrollera datan?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 12.4 – Säkerhetsbetyg
+1. Kör HTTP Observatory på tre webbplatser: en myndighet, en stor e-handel och en liten lokal verksamhet.
+2. Vilket betyg fick de? Vilka säkerhetsheaders saknades?
+3. Gör samma sak på din egen webbplats efter att du publicerat den i kapitel 13. Vilka headers kan du påverka på din publiceringstjänst?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 12.5 – Okrypterad trafik
+1. Gå till <http://neverssl.com> – en sida som medvetet *inte* använder HTTPS. Vad visar webbläsaren i adressfältet?
+2. Vad skulle kunna hända om du loggade in på en sådan sida på ett kafé-wifi?
+3. **Lärardemo:** läraren visar med programmet Wireshark hur okrypterad och krypterad trafik ser ut i ett testnätverk.
+:::
+
+## Projektarbete B: Hotanalys {#sec-projekt-b}
+
+::: projekt
+**Form:** grupper om 2–3. **Tid:** ca 2 lektioner. **Redovisning:** skriftlig rapport (2–3 sidor) + kort muntlig dragning.
+
+Kvarnens café vill bygga ut sin webbplats med:
+
+- en **webbshop** där kunder loggar in och köper kaffebönor,
+- ett **nyhetsbrev** man kan anmäla sig till med e-post,
+- ett **kontaktformulär**,
+- ett **kommentarsfält** under bloggen,
+- en **adminsida** där personalen ändrar menyn,
+- en **chattwidget** och **statistik** från externa företag.
+
+Gör en hotanalys:
+
+1. **Tillgångar.** Vad är värt att skydda? (Kunddata, betalningar, webbplatsens innehåll, ryktet …)
+2. **Hot och sårbarheter.** Minst åtta. Koppla varje hot till en eller flera delar av webbplatsen och till KIT.
+3. **Riskbedömning.** Bedöm sannolikhet (1–3) och konsekvens (1–3) för varje hot. Räkna ut risken och sortera.
+
+   | Hot | Sårbarhet | K/I/T | Sannolikhet | Konsekvens | Risk |
+   |---|---|:-:|:-:|:-:|:-:|
+   | XSS i kommentarer | Kommentarer visas utan kodning | K, I | 3 | 3 | 9 |
+
+4. **Åtgärder.** Föreslå minst en effektiv åtgärd per hot. Vilka är viktigast att göra först?
+5. **Människan.** Vilka risker handlar om personalen och kunderna, inte tekniken? Hur kan de minskas?
+6. **Lag.** Vilka hot leder också till att kaféet bryter mot lagen om personuppgifter läcker? (Förbered dig för kapitel 14.)
+:::
+
+## Instuderingsfrågor
+
+1. Vad står KIT för? Ge ett exempel på ett hot mot varje del.
+2. Förklara skillnaden mellan hot, sårbarhet och risk.
+3. Hur kan man räkna ut en risk?
+4. Vad är nätfiske? Ge tre tecken på att en länk kan vara falsk.
+5. Hur läser man ut vilken domän en adress egentligen går till?
+6. Vad är XSS? Hur kan det förhindras?
+7. Varför är validering i webbläsaren inte ett säkerhetsskydd?
+8. Vad är SQL-injektion, och vilken gemensam princip skyddar mot både den och XSS?
+9. Vad är tvåfaktorsautentisering, och varför gör det ett konto säkrare?
+10. Varför ska man ha ett unikt lösenord för varje tjänst?
+11. Vilka risker finns med tredjepartsskript?
+12. Varför är det farligt att inte uppdatera ett publiceringssystem?
+13. Nämn tre säkerhetsheaders och vad de skyddar mot.
+14. Vad är OWASP Top 10?
+15. Varför får du inte testa säkerheten på andras webbplatser? Vad ska du göra om du hittar en brist?
+
+## Nyckelbegrepp
+
+informationssäkerhet · KIT (konfidentialitet, integritet, tillgänglighet) · hot · sårbarhet · risk · angripare · avlyssning · HSTS · nätfiske (phishing) · typosquatting · XSS · indata · CSP · SQL-injektion · lösenordshanterare · tvåfaktorsautentisering · hash · credential stuffing · tredjepartskod · Subresource Integrity · säkerhetsuppdatering · clickjacking · DDoS · social manipulation · säkerhetsheader · OWASP · dataintrång · ansvarsfullt avslöjande
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: grundbegrepp + hot/åtgärder, labb 12.2. Lektion 2: XSS och formulär, labb 12.1 och 12.3. Lektion 3: headers, labb 12.4–12.5. Lektion 4–5: projektarbete B.
+
+**Etik och juridik:** Ta upp rutan om dataintrång ordentligt. Övningarna är byggda så att allt sker lokalt. Brottsbalken 4 kap. 9 c § (dataintrång). Om elever är nyfikna på att gå vidare: hänvisa till lagliga övningsmiljöer (t.ex. CTF-tävlingar, OWASP Juice Shop lokalt).
+
+**Wireshark-demo (labb 12.5.3):** Kör på en egen dator i ett eget nät (mobil hotspot). Fånga trafiken mot `http://neverssl.com` – sidans text syns i klartext. Jämför med en HTTPS-sida – bara krypterade data och domännamnet (SNI) syns.
+
+**Facit labb 12.1:** Felet är `innerHTML` med användarens text. Steg 2: texten blir fet. Steg 3: bakgrunden blir röd – skriptet körs. En angripare kunde stjäla kakor/sessioner, visa en falsk inloggning, skicka vidare till en nätfiskesida. Lösning i `ovningsfiler/k12-xss/facit/`. Med CSP `script-src 'self'` blockeras inline-händelsehanteraren `onerror` och konsolen visar ett CSP-fel.
+
+**Facit labb 12.2:** Äkta: 1, 3 (underdomän till kvarnbanken.se), 4 (rätt domän men okrypterad – ska omdirigeras till HTTPS; logga aldrig in utan https). Falska: 2 (kundservice-login.net), 5 (annan domän), 6 (allt före `@` är användarnamn – domänen är inloggning.example), 7 (Punycode för kvarnbänken.se – annan domän med ä), 8 (typosquatting), 10 (evil.example). 9: går inte att avgöra – en förkortad länk döljer målet; öppna inte, eller kontrollera med en förhandsgranskningstjänst.
+
+**Bedömning projektarbete B:** E: rimliga hot och åtgärder. C: riskbedömningen är motiverad och åtgärderna är kopplade till hoten. A: prioriteringen är välmotiverad, och människor, juridik och tredjepart vägs in.
+
+**Facit till instuderingsfrågorna**
+
+1. Konfidentialitet (avlyssning, dataläcka), integritet (någon ändrar innehåll, XSS), tillgänglighet (DDoS, driftstopp).
+2. Hot: något som kan orsaka skada. Sårbarhet: svaghet som kan utnyttjas. Risk: sannolikheten att hotet utnyttjar sårbarheten gånger konsekvensen.
+3. Sannolikhet × konsekvens.
+4. Bedragare lurar användare att lämna uppgifter på falska sidor. Tecken: fel domän, stavfel, brådska/hot i meddelandet, okänd avsändare, förkortade länkar, ber om lösenord/BankID.
+5. Läs värdnamnet (mellan `://` och första `/`, efter ett eventuellt `@`) bakifrån: toppdomän och domännamnet framför avgör ägaren.
+6. Angriparen får in eget skript som körs hos andra besökare. Förhindras genom att alltid koda om/visa indata som text (`textContent`, serverkodning) och genom CSP.
+7. Kontrollerna kan tas bort eller kringgås; data kan skickas direkt till servern. Servern måste validera.
+8. Angriparen skickar kod i ett fält som servern lägger in i en databasfråga. Princip: lita aldrig på indata – behandla den som data, aldrig som kod.
+9. Inloggning med två olika faktorer, t.ex. lösenord + kod i telefonen. Ett stulet lösenord räcker inte.
+10. Läcker lösenordet från en tjänst kan angripare inte använda det på andra (skydd mot credential stuffing).
+11. De körs med samma rättigheter som egen kod; om leverantören hackas eller ändrar koden påverkas din sida; de kan samla data om besökarna och göra sidan långsam.
+12. Kända säkerhetshål utnyttjas automatiskt av robotar; gamla versioner har publicerade sårbarheter.
+13. HSTS (tvingar HTTPS), CSP (XSS, oväntade skript, clickjacking via frame-ancestors), X-Content-Type-Options (filtypsgissning), Referrer-Policy (läckta adresser), Permissions-Policy (onödig åtkomst till kamera/mikrofon).
+14. En lista från OWASP över de tio vanligaste/allvarligaste säkerhetsriskerna i webbapplikationer.
+15. Det är dataintrång (brott) och kan orsaka skada. Ändra inget, dokumentera kort, kontakta ägaren (ansvarsfullt avslöjande) eller en lärare.
+:::
+:::

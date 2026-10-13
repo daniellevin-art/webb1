@@ -1,0 +1,367 @@
+# CSS – grunderna {#sec-css}
+
+::: ci
+Märkspråk och deras inbördes roller, syntax och semantik med fokus på CSS. Skapande av webbsidor med HTML och CSS.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- koppla en stilmall till flera HTML-sidor,
+- skriva CSS-regler med de vanligaste selektorerna,
+- använda färger, enheter, typsnitt och avstånd,
+- förklara och använda boxmodellen,
+- förklara varför en regel vinner över en annan (kaskaden, specificitet och arv),
+- felsöka CSS i utvecklarverktygen.
+:::
+
+## Stilmallar
+
+**CSS** (*Cascading Style Sheets*) bestämmer hur HTML-elementen ska se ut. CSS är en W3C-standard. Den har inget enskilt versionsnummer längre utan består av moduler (färg, layout, typsnitt …) som utvecklas var för sig.
+
+Det finns tre sätt att lägga till CSS. Använd det första:
+
+```html
+<!-- 1. Extern stilmall – en fil som alla sidor delar (bäst) -->
+<link rel="stylesheet" href="css/style.css">
+
+<!-- 2. Intern – i head, gäller bara den här sidan -->
+<style>
+  h1 { color: brown; }
+</style>
+
+<!-- 3. Inline – direkt på elementet (undvik) -->
+<h1 style="color: brown;">Kvarnens café</h1>
+```
+
+Med en extern fil ändrar du utseendet på hela webbplatsen på ett ställe.
+
+## Syntax
+
+```css
+/* Kommentar */
+h1 {                         /* selektor: vilka element */
+  color: #5a3825;            /* deklaration: egenskap: värde; */
+  font-size: 2.5rem;
+}
+```
+
+Selektorn och dess deklarationer kallas tillsammans en **regel**. Glömmer du ett semikolon slutar *nästa* rad att fungera – ett vanligt fel.
+
+## Selektorer
+
+```css
+p { }                   /* elementselektor: alla <p> */
+.pris { }               /* klass: alla med class="pris" */
+#karta { }              /* id: elementet med id="karta" */
+nav a { }               /* ättling: alla <a> någonstans inuti <nav> */
+nav > ul { }            /* barn: <ul> direkt inuti <nav> */
+h1, h2, h3 { }          /* gruppering */
+a[href^="https"] { }    /* attribut: länkar som börjar med https */
+
+a:hover { }             /* pseudoklass: muspekaren är över */
+a:focus-visible { }     /*   har fokus via tangentbordet */
+li:first-child { }      /*   första barnet */
+tr:nth-child(even) { }  /*   varannan rad */
+input:invalid { }       /*   formulärfält med ogiltigt värde */
+
+.pris::after {          /* pseudoelement: skapar innehåll */
+  content: " kr";
+}
+```
+
+I HTML sätter du klasser med `class`. Ett element kan ha flera klasser: `class="kort erbjudande"`.
+
+**Tumregel:** styla med **klasser**. Elementselektorer passar för grundutseendet (`body`, `h1`, `a`). Id används till länkar och JavaScript, sällan i CSS.
+
+## Färger
+
+```css
+color: brown;                    /* namngiven färg */
+color: #5a3825;                  /* hex: röd, grön, blå (00–ff) */
+color: rgb(90 56 37);            /* rgb: 0–255 */
+color: rgb(90 56 37 / 50%);      /* med genomskinlighet */
+color: hsl(22 42% 25%);          /* nyans (0–360), mättnad, ljushet */
+background-color: #f7efe5;
+```
+
+`hsl` är lättast att justera för hand: behåll nyansen och ändra ljusheten för att få en ljusare eller mörkare variant. Om färgval och kontrast handlar kapitel 6.
+
+## Enheter
+
+| Enhet | Betyder | Använd till |
+|---|---|---|
+| `px` | pixel | Ramar, små detaljer |
+| `rem` | gånger rotens textstorlek (oftast 16 px) | Textstorlek, avstånd |
+| `em` | gånger elementets egen textstorlek | Avstånd som ska växa med texten |
+| `%` | procent av förälderns storlek | Bredder |
+| `vw`, `vh` | procent av fönstrets bredd/höjd | Helsidesytor |
+| `ch` | bredden av tecknet "0" | Radlängd: `max-width: 65ch` |
+
+**Använd `rem` för text.** Om användaren har ställt in större text i sin webbläsare växer då hela sidan med. Med `px` gör den inte alltid det, och det är en tillgänglighetsfråga.
+
+## Text
+
+```css
+body {
+  font-family: Georgia, "Times New Roman", serif;  /* reservlista */
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #2b2118;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ingress {
+  font-size: 1.25rem;
+  max-width: 60ch;
+}
+
+a {
+  color: #8a4b1f;
+  text-decoration-thickness: 2px;
+}
+```
+
+## Boxmodellen
+
+**Alla element är lådor.** Varje låda har fyra lager:
+
+```
+┌────────────── margin ──────────────┐
+│  ┌─────────── border ───────────┐  │
+│  │  ┌──────── padding ───────┐  │  │
+│  │  │        content         │  │  │
+│  │  └────────────────────────┘  │  │
+│  └──────────────────────────────┘  │
+└────────────────────────────────────┘
+```
+
+| Lager | Vad | Bakgrundsfärg? |
+|---|---|---|
+| **content** | Innehållet | Ja |
+| **padding** | Luft *innanför* ramen | Ja |
+| **border** | Ramen | – |
+| **margin** | Luft *utanför*, mot andra element | Nej, alltid genomskinlig |
+
+```css
+.kort {
+  padding: 1rem;                  /* alla sidor */
+  padding: 1rem 2rem;             /* upp/ner  vänster/höger */
+  padding: 1rem 2rem 1rem 2rem;   /* upp höger ner vänster (medurs) */
+  border: 2px solid #d9c3a5;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+```
+
+### `box-sizing`
+
+Som standard räknas `width` bara på *content*. `width: 300px` + `padding: 20px` + `border: 2px` blir 344 px. Lägg därför alltid det här först i stilmallen:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;   /* width räknar med padding och border */
+}
+```
+
+### Block och inline
+
+- **Blockelement** (`p`, `h1`, `div`, `section`, `ul` …) börjar på ny rad och tar hela bredden.
+- **Inline-element** (`a`, `span`, `strong`, `img` …) ligger i textflödet. `width`, `height` och vertikal `margin` fungerar inte som man tror.
+
+`display` ändrar beteendet: `block`, `inline`, `inline-block`, `none` (göm). I kapitel 7 kommer `flex` och `grid`.
+
+### Centrera innehållet
+
+```css
+.behallare {
+  max-width: 60rem;
+  margin-inline: auto;  /* auto till vänster och höger = centrerat */
+  padding-inline: 1rem; /* luft mot kanterna i mobilen */
+}
+```
+
+## Kaskaden: vilken regel gäller?
+
+Ofta säger flera regler olika saker om samma element. Då avgörs det i tre steg:
+
+1. **Ursprung och vikt.** Webbläsaren har en egen stilmall (*user agent stylesheet*) som gör `h1` stor och länkar blå. Din CSS går före den. `!important` går före allt – men använd det inte.
+2. **Specificitet** – hur exakt selektorn är.
+3. **Ordning** – vid lika specificitet vinner den regel som står *sist*.
+
+Specificitet räknas med tre siffror:
+
+| Selektor | Specificitet |
+|---|:-:|
+| `p` | 0-0-1 |
+| `nav a` | 0-0-2 |
+| `.pris` | 0-1-0 |
+| `p.pris` | 0-1-1 |
+| `a:hover` | 0-1-1 |
+| `#karta` | 1-0-0 |
+| `style="…"` | går före alla selektorer |
+
+Jämför från vänster: den som har flest id vinner, sedan flest klasser, sedan flest element.
+
+### Arv
+
+Vissa egenskaper **ärvs** av elementen inuti: `color`, `font-family`, `font-size`, `line-height`. Därför räcker det att sätta typsnittet på `body`. Egenskaper som `padding`, `margin`, `border` och `background` ärvs inte.
+
+## CSS-variabler
+
+```css
+:root {
+  --farg-text: #2b2118;
+  --farg-bakgrund: #f7efe5;
+  --farg-accent: #8a4b1f;
+  --radie: 0.75rem;
+}
+
+body {
+  color: var(--farg-text);
+  background: var(--farg-bakgrund);
+}
+
+.knapp {
+  background: var(--farg-accent);
+  border-radius: var(--radie);
+}
+```
+
+Byt en färg på ett ställe och hela webbplatsen uppdateras. Variablerna blir grunden i din stilguide i kapitel 6.
+
+## Utvecklarverktygen för CSS
+
+Högerklicka på ett element och välj **Inspektera**:
+
+- Panelen *Styles* visar **alla regler** som påverkar elementet. Överstrukna regler har förlorat i kaskaden.
+- Klicka på ett värde och ändra det – du ser resultatet direkt. (Ändringen försvinner när du laddar om.)
+- Panelen *Computed* visar boxmodellen med exakta mått.
+- Rader märkta *user agent stylesheet* kommer från webbläsarens egen CSS.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 5.1 – Webbplatser utan CSS
+1. Öppna en nyhetssajt i **Firefox**. Välj *Visa → Sidstil → Ingen stil* (tryck `Alt` om menyraden inte syns).
+2. Hur ser sidan ut nu? Går den att använda? Syns det att HTML:en är semantisk – rubriker, listor, navigering?
+3. Gör samma sak med din egen webbplats och med `ovningsfiler/k03-divsoppa` före och efter labb 3.2. Vilken är lättast att förstå utan CSS?
+
+Så här ser sidan ungefär ut för en sökmotor och för en skärmläsare.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 5.2 – Selektordetektiven
+1. Spela **CSS Diner** på <https://flukeout.github.io> och ta dig så långt du hinner på 20 minuter.
+2. Öppna `ovningsfiler/k05-selektorer/index.html`. Där finns tio CSS-regler och en sida. Gissa för varje regel *vilka* element den träffar, skriv ner svaret, och avkommentera sedan regeln för att kontrollera.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 5.3 – Boxmodellen
+1. Gör ett kort för veckans bakverk på Kvarnens startsida: `padding`, ram, rundade hörn, `margin` under.
+2. Inspektera kortet. Hitta boxmodellen i *Computed*. Hur brett är kortet totalt?
+3. Ta bort `box-sizing: border-box`. Hur brett är det nu? Varför?
+4. Lägg två kort efter varandra med `margin-bottom: 2rem` på det första och `margin-top: 2rem` på det andra. Hur stort blir avståndet? Sök upp begreppet *margin collapse*.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 5.4 – Kaskadtävlingen
+Lägg den här HTML:en och CSS:en i en ny fil:
+
+```html
+<p id="erbjudande" class="pris viktig">Kanelbulle 25 kr</p>
+```
+
+```css
+p { color: black; }
+.pris { color: green; }
+p.viktig { color: red; }
+#erbjudande { color: blue; }
+.pris.viktig { color: orange; }
+```
+
+1. Förutsäg vilken färg texten får. Kontrollera.
+2. Rangordna alla fem regler efter specificitet.
+3. Flytta regeln `p { … }` sist. Spelar det någon roll? Varför?
+4. Vad händer om du lägger `!important` på `p`-regeln? Varför är det en dålig idé i ett stort projekt?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 5.5 – Styla Kvarnen
+Skapa `css/style.css` och koppla den till alla sidor.
+
+1. Börja med `box-sizing`-regeln.
+2. Lägg färger i CSS-variabler.
+3. Ge `body` typsnitt, radhöjd och färger.
+4. Centrera innehållet med en `.behallare`.
+5. Gör menyn till en vågrät rad med `display: inline-block` på `li` (vi gör det snyggare med Flexbox i kapitel 7).
+6. Styla tabellen med öppettider: ram mellan raderna, varannan rad tonad.
+7. Ge länkar `:hover` och `:focus-visible`.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+Ge din egen webbplats en gemensam stilmall:
+
+- [ ] En extern CSS-fil som alla sidor länkar till.
+- [ ] `box-sizing: border-box` och CSS-variabler för färger.
+- [ ] Textstorlekar i `rem`, rimlig radhöjd och radlängd.
+- [ ] Minst tre egna klasser.
+- [ ] Hover och synligt fokus på länkar och knappar.
+- [ ] Ingen inline-CSS.
+:::
+
+## Instuderingsfrågor
+
+1. Vilka tre sätt finns det att lägga till CSS? Vilket är bäst och varför?
+2. Vad är en CSS-regel, en selektor och en deklaration?
+3. Vad är skillnaden mellan en klass- och en id-selektor? Vilken bör du använda mest?
+4. Vad är en pseudoklass? Ge tre exempel.
+5. Varför är `rem` ofta bättre än `px` för textstorlek?
+6. Beskriv boxmodellens fyra delar. Vilka av dem får elementets bakgrundsfärg?
+7. Vad gör `box-sizing: border-box`?
+8. Vad är skillnaden mellan block- och inline-element?
+9. Förklara kaskaden. I vilken ordning avgörs vilken regel som gäller?
+10. Räkna ut specificiteten för `nav ul li.aktiv a`.
+11. Vad är arv i CSS? Ge ett exempel på en egenskap som ärvs och en som inte gör det.
+12. Vad är fördelen med CSS-variabler?
+13. Vad är webbläsarens *user agent stylesheet*?
+
+## Nyckelbegrepp
+
+CSS · stilmall · regel · selektor · deklaration · egenskap · värde · klass · id · pseudoklass · pseudoelement · hex · rgb · hsl · `px` · `rem` · `em` · boxmodellen · content · padding · border · margin · `box-sizing` · block · inline · kaskad · specificitet · arv · `!important` · CSS-variabel · user agent stylesheet
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: koppla in CSS, selektorer, färger, labb 5.1 och 5.2. Lektion 2: boxmodellen och enheter, labb 5.3. Lektion 3: kaskaden, labb 5.4. Lektion 4: labb 5.5 + bygg vidare.
+
+**Facit labb 5.2:** finns i `ovningsfiler/k05-selektorer/facit/`.
+
+**Facit labb 5.4:** Blå (id vinner). Specificitet: `#erbjudande` 1-0-0 > `.pris.viktig` 0-2-0 > `p.viktig` 0-1-1 > `.pris` 0-1-0 > `p` 0-0-1. Ordningen spelar ingen roll eftersom specificiteten skiljer sig. Med `!important` blir texten svart; i stora projekt leder det till att man måste använda `!important` igen för att skriva över, och koden blir omöjlig att överblicka.
+
+**Labb 5.3.4:** Vertikala marginaler mellan block slås ihop – avståndet blir 2rem, inte 4rem.
+
+**Facit till instuderingsfrågorna**
+
+1. Extern fil, `<style>` i head, `style`-attribut. Extern: en fil för hela webbplatsen, lätt att underhålla, cachas av webbläsaren.
+2. Regel = selektor + deklarationsblock. Selektor = vilka element. Deklaration = `egenskap: värde;`.
+3. Klass (`.namn`) kan användas på många element; id (`#namn`) är unikt per sida och har mycket hög specificitet. Klasser bör användas mest.
+4. Väljer element i ett visst tillstånd/position: `:hover`, `:focus-visible`, `:first-child`, `:nth-child()`, `:invalid`, `:disabled`.
+5. `rem` följer användarens inställda textstorlek; ger skalbar och tillgänglig design.
+6. Content, padding, border, margin. Content och padding (bakgrunden sträcker sig under ramen också, men den syns sällan).
+7. `width`/`height` inkluderar padding och border, så elementets totala storlek blir den angivna.
+8. Block: ny rad, full bredd, kan få bredd/höjd. Inline: i textflödet, bredd/höjd/vertikal marginal fungerar inte på vanligt sätt.
+9. Ursprung och vikt (webbläsarens CSS, författarens CSS, `!important`), sedan specificitet, sedan ordning (sist vinner).
+10. `nav ul li.aktiv a`: 0 id, 1 klass, 4 element → 0-1-4.
+11. Barn får förälderns värde om inget annat anges. Ärvs: `color`, `font-family`. Ärvs inte: `margin`, `border`, `background`.
+12. Värden definieras på ett ställe och återanvänds; lätt att ändra tema; tydligare kod.
+13. Webbläsarens inbyggda grundstilar (t.ex. att `h1` är stor och fet, länkar blå och understrukna, listor har punkter).
+:::
+:::

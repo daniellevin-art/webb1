@@ -1,0 +1,322 @@
+# Lagar, regler och etik {#sec-lagar}
+
+::: ci
+Lagar och andra bestämmelser som styr digital information, till exempel bestämmelser om personuppgifter, lagen om elektronisk kommunikation och upphovsrätt. Etiska överväganden i samband med webbutveckling.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara vad en personuppgift är och de viktigaste reglerna i GDPR,
+- förklara reglerna för kakor och se till att din webbplats följer dem,
+- skriva en integritetspolicy,
+- avgöra när du får använda andras texter, bilder och kod,
+- känna till andra lagar som påverkar webbplatser,
+- göra etiska överväganden när du bygger webbplatser.
+:::
+
+::: {.callout-note}
+## Det här är ingen juridisk rådgivning
+Kapitlet ger en översikt så att du vet vilka regler som finns och när du behöver fråga någon som kan mer. Lagar ändras och tolkas av myndigheter och domstolar. Kontrollera alltid aktuella regler hos ansvarig myndighet.
+:::
+
+## Personuppgifter och GDPR
+
+Fram till 2018 gällde *personuppgiftslagen* (PUL) i Sverige. Den har ersatts av EU:s **dataskyddsförordning**, **GDPR**, som gäller i hela EU. Den kompletteras av den svenska **dataskyddslagen** (2018:218). Tillsynsmyndighet är **Integritetsskyddsmyndigheten (IMY)**.
+
+### Vad är en personuppgift?
+
+**All** information som direkt eller indirekt kan kopplas till en levande person:
+
+- namn, personnummer, adress, telefonnummer, e-postadress,
+- bilder och filmer där personen syns,
+- **IP-adresser** och **kak-id:n** som kan kopplas till en person,
+- vad någon skrivit i ett formulär.
+
+Allt man gör med personuppgifter – samla in, spara, visa, skicka vidare, radera – kallas **behandling**.
+
+### Roller
+
+- **Personuppgiftsansvarig** – den som bestämmer *varför* och *hur* uppgifterna behandlas. För Kvarnens webbplats är det kaféet.
+- **Personuppgiftsbiträde** – den som behandlar uppgifterna *åt* den ansvarige, t.ex. webbhotellet eller tjänsten som tar emot kontaktformuläret. Det ska finnas ett avtal mellan dem.
+
+### Principerna
+
+| Princip | Betyder för en webbplats |
+|---|---|
+| **Laglighet, korrekthet och öppenhet** | Du behöver en rättslig grund, och användaren ska få veta vad som händer med uppgifterna |
+| **Ändamålsbegränsning** | Uppgifter från bokningsformuläret får inte plötsligt användas till reklamutskick |
+| **Uppgiftsminimering** | Fråga bara efter det du behöver. Behövs personnummer för att boka bord? Nej |
+| **Korrekthet** | Felaktiga uppgifter ska rättas |
+| **Lagringsminimering** | Radera när uppgifterna inte behövs längre |
+| **Integritet och konfidentialitet** | Skydda uppgifterna – HTTPS, behörigheter, säkra lösenord (kapitel 12) |
+| **Ansvarsskyldighet** | Den ansvarige ska kunna *visa* att reglerna följs |
+
+### Rättslig grund
+
+Varje behandling måste ha en **rättslig grund**. Några vanliga:
+
+- **Avtal** – uppgifterna behövs för att leverera det kunden beställt (adress för leverans).
+- **Rättslig förpliktelse** – lagen kräver det (bokföring av köp).
+- **Intresseavvägning** – den ansvariges intresse väger tyngre än integritetsintrånget (svara på ett mejl som någon skickat via kontaktformuläret).
+- **Samtycke** – användaren har frivilligt sagt ja (nyhetsbrev).
+
+Ett giltigt **samtycke** ska vara frivilligt, specifikt, informerat och otvetydigt. Förkryssade rutor räknas inte. Det ska vara lika lätt att återkalla samtycket som att ge det.
+
+### De registrerades rättigheter
+
+Den vars uppgifter behandlas – **den registrerade** – har bland annat rätt att:
+
+- få **information** om behandlingen,
+- få ett **registerutdrag** – en kopia av sina uppgifter,
+- få felaktiga uppgifter **rättade**,
+- få uppgifterna **raderade** ("rätten att bli bortglömd") i många fall,
+- **invända** mot behandling, t.ex. direktreklam,
+- få ut sina uppgifter i ett format som kan flyttas till en annan tjänst (**dataportabilitet**).
+
+### Integritetspolicy
+
+Informationen till användaren samlas ofta i en **integritetspolicy**. Den ska vara lätt att hitta och skriven så att alla förstår den: vem som är ansvarig, vilka uppgifter som samlas in, varför, med vilken rättslig grund, hur länge de sparas, vem som får ta del av dem, vilka rättigheter användaren har och vart man kan klaga (IMY).
+
+### Inbyggt dataskydd
+
+GDPR kräver **inbyggt dataskydd och dataskydd som standard** (*privacy by design and by default*): integriteten ska vara med från början i designen, och standardinställningen ska vara den mest integritetsvänliga. Som webbutvecklare betyder det:
+
+- ta bara med de fält i formuläret som behövs,
+- lägg typsnitt och skript på egen server istället för hos tredje part (kapitel 6),
+- slå av spårning som inte behövs,
+- tänk på var data lagras – överföring till länder utanför EU kräver särskilda skydd.
+
+### När något går fel
+
+En **personuppgiftsincident** – t.ex. att en databas med kunders e-postadresser läckt – ska anmälas till IMY inom **72 timmar**. Brott mot GDPR kan ge sanktionsavgifter på upp till 20 miljoner euro eller 4 % av ett företags globala omsättning.
+
+## Kakor och lagen om elektronisk kommunikation
+
+**Kakor** (*cookies*) är små textfiler som en webbplats sparar i webbläsaren (kapitel 2). Regeln om dem står i **lagen (2022:482) om elektronisk kommunikation (LEK)**, 9 kap. 28 §. Den gäller även liknande tekniker, som `localStorage` och spårningspixlar.
+
+Regeln i korthet: **du får bara spara eller läsa information i användarens enhet om användaren fått information om syftet och samtyckt.**
+
+Undantaget: samtycke behövs inte om lagringen är **nödvändig** för att leverera en tjänst som användaren **uttryckligen begärt** – till exempel en varukorg eller inloggning.
+
+| Kaka för | Kräver samtycke? |
+|---|---|
+| Varukorg i webbshop | Nej – nödvändig |
+| Inloggning | Nej – nödvändig |
+| Användarens val av mörkt läge | Troligen nej – en funktion användaren själv begärt |
+| Besöksstatistik (Google Analytics, Matomo …) | **Ja** |
+| Annonser, spårning mellan webbplatser | **Ja** |
+| Inbäddade videor och sociala medier som sätter kakor | **Ja** |
+
+**Post- och telestyrelsen (PTS)** har tillsyn över kakreglerna. Samtycket ska uppfylla GDPR:s krav. PTS har bland annat krävt att det ska vara lika lätt att **neka** som att godkänna, i samma vy, och att inga icke-nödvändiga kakor sätts **innan** användaren svarat.
+
+Det enklaste sättet att följa reglerna är att **inte använda onödiga kakor alls**. Då behövs ingen samtyckesruta.
+
+## Upphovsrätt
+
+**Upphovsrättslagen** (1960:729) skyddar **verk**: texter, bilder, musik, film, design – och programkod. Skyddet uppstår **automatiskt** när verket skapas; man behöver inte skriva © eller registrera något.
+
+- Upphovspersonen har **ekonomisk rätt** (bestämma över kopiering och spridning) och **ideell rätt** (att namnges, och att verket inte ändras på ett kränkande sätt).
+- Skyddet gäller i **70 år efter upphovspersonens död**. Därefter blir verket fritt (*public domain*).
+- Även enkla foton utan konstnärlig ambition skyddas, som **fotografiska bilder**, i 50 år.
+
+Vad får du göra?
+
+| Handling | Får du? |
+|---|---|
+| Använda en bild du hittat på nätet | **Nej**, inte utan licens eller tillstånd |
+| Använda en CC-licensierad bild enligt licensens villkor | **Ja** (kapitel 8) |
+| **Citera** en kort del av en text, med källa, i ett sammanhang som motiverar det | **Ja** – citaträtten |
+| **Länka** till en sida som redan är fritt tillgänglig | **Ja**. EU-domstolen kom fram till det 2014 i ett mål som började i Sverige |
+| Kopiera hela texten från en annan webbplats | **Nej** |
+| Kopiera kod från ett exempel på nätet | Beror på licensen. Öppen källkod har licenser som **MIT** och **GPL** med olika villkor |
+| Använda ett känt företags logotyp som om det var ditt | **Nej** – det är dessutom ett **varumärke**, som skyddas av varumärkeslagen |
+| Använda AI-genererade bilder | Läs tjänstens villkor. Om och när de skyddas av upphovsrätt är juridiskt oklart |
+
+### Bilder på personer
+
+En bild där en person går att känna igen är en **personuppgift**. Publicera bara bilder på personer som samtyckt, och var extra försiktig med barn. Att använda någons bild i **reklam** utan tillstånd är dessutom förbjudet enligt lagen om namn och bild i reklam.
+
+## Andra lagar som rör webbplatser
+
+| Lag | Vad den säger | Gäller t.ex. |
+|---|---|---|
+| **Lagen om ansvar för elektroniska anslutningstavlor** (1998:112, "BBS-lagen") | Den som har ett kommentarsfält eller forum ska ha uppsikt och ta bort uppenbart olagligt innehåll, t.ex. hets mot folkgrupp eller upphovsrättsintrång | Kommentarsfält, gästböcker, forum |
+| **E-handelslagen** (2002:562) | Företag som säljer tjänster på nätet ska visa namn, adress, organisationsnummer och kontaktuppgifter | Webbshoppar, företagssajter |
+| **Distansavtalslagen** | Ångerrätt, tydliga priser och villkor vid köp på nätet | Webbshoppar |
+| **Marknadsföringslagen** | Reklam ska vara tydligt markerad och inte vilseleda | All marknadsföring, även influencers |
+| **DOS-lagen** (2018:1937) | Krav på tillgänglighet för offentlig sektor | Myndigheter, kommuner, skolor (kapitel 9) |
+| **Lagen om vissa produkters och tjänsters tillgänglighet** (2023:254) | Krav på tillgänglighet för vissa privata tjänster sedan 2025 | E-handel, bank (kapitel 9) |
+| **Brottsbalken** | Dataintrång, förtal, olaga hot gäller även på nätet | Alla |
+
+## Etik
+
+Lagar sätter de yttre gränserna. **Etik** handlar om vad som är *rätt* att göra – även när det är lagligt. Som webbutvecklare fattar du många små beslut som påverkar användarna.
+
+### Frågor att ställa
+
+- **Ärlighet.** Lurar designen användaren? *Dark patterns* – dold "Neka"-knapp, förkryssade rutor, falsk brådska, svår uppsägning – kan vara lagliga men är oärliga, och ibland olagliga.
+- **Integritet.** Samlar vi in mer än vi behöver? Skulle användaren bli förvånad om hen visste vad vi gör med uppgifterna?
+- **Inkludering.** Vem kan *inte* använda det vi bygger? Personer med funktionsnedsättning, äldre telefoner, långsamma nät, de som inte läser svenska?
+- **Påverkan.** Bygger vi något som gör människor beroende, eller som sprider desinformation?
+- **Miljö.** Varje kilobyte överförs och lagras med el. En lättare webbplats har lägre klimatpåverkan.
+- **AI.** Är det tydligt för användaren när text eller bilder är AI-genererade? Har vi rätt att använda materialet?
+- **Ansvar.** Kan jag stå för det jag byggt om det hamnar i nyheterna?
+
+### En etisk checklista
+
+Innan du publicerar, fråga dig:
+
+- [ ] Skulle jag själv vilja bli behandlad så här som användare?
+- [ ] Har användaren fått veta det hen behöver för att fatta egna beslut?
+- [ ] Är det lika lätt att säga nej som ja?
+- [ ] Kan alla använda tjänsten?
+- [ ] Samlar vi bara in det som behövs?
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 14.1 – Kakgranskning
+1. Öppna ett **privat/inkognitofönster** och utvecklarverktygen *innan* du går till webbplatsen.
+2. Välj en svensk webbplats för en tidning, butik eller tjänst. Gå dit men **klicka inte** i samtyckesrutan.
+3. *Application → Cookies* (Firefox: *Storage → Cookies*). Hur många kakor har satts redan? Från vilka domäner?
+4. *Network*: filtrera på *Third-party requests* (Chrome: kryssa i *3rd-party requests* eller sortera på *Domain*). Hur många andra domäner kontaktas innan du svarat?
+5. Titta på samtyckesrutan: Är "Neka" lika lätt som "Godkänn alla"? Finns förkryssade val? Står syftena tydligt?
+6. Klicka "Godkänn alla" och räkna kakor och domäner igen.
+7. Följer webbplatsen reglerna, enligt det du läst? Motivera.
+8. Gör samma kontroll på din egen webbplats. Sätter den några kakor? Kontaktar den några andra domäner (typsnitt, videor, kartor)?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 14.2 – Integritetspolicy
+Kvarnens café har ett bokningsformulär (namn, e-post, telefon, datum, antal, meddelande) som skickas via tjänsten Formspree, och ett nyhetsbrev.
+
+1. Skriv en integritetspolicy för kaféet. Använd mallen i [Bilaga D](../bilagor/d-mallar.qmd). Skriv så att en 12-åring förstår.
+2. Granska formuläret enligt *uppgiftsminimering*. Behövs alla fält? Vilka kan tas bort eller göras frivilliga?
+3. Skriv en kort, tydlig text under formuläret som berättar vad som händer med uppgifterna och länkar till policyn.
+4. Gör samma sak för din egen webbplats, om den har ett formulär.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 14.3 – Får man göra så?
+Avgör för varje fall om det är tillåtet, och vilken lag eller regel som gäller.
+
+1. Ali tar en bild på en Kvarnen-kanelbulle från kaféets Instagram och lägger den på sin egen fiksajt.
+2. Kvarnen länkar till en recension av kaféet i Sydsvenskan.
+3. Kvarnen kopierar hela recensionen till sin egen webbplats.
+4. Kvarnen citerar två meningar ur recensionen, med källa.
+5. Kvarnen lägger in Google Analytics och visar en ruta där det bara står "Vi använder kakor. [OK]".
+6. Kvarnen publicerar en bild från personalfesten där alla anställda syns, utan att ha frågat.
+7. Kvarnen har ett kommentarsfält. Någon skriver ett rasistiskt inlägg. Kvarnen låter det ligga kvar i en månad.
+8. Kvarnen använder kod från ett exempel på GitHub med MIT-licens och behåller licenstexten.
+9. Kvarnens bokningsformulär kräver personnummer.
+10. Kvarnen använder `localStorage` för att komma ihåg att besökaren valt mörkt läge, utan samtyckesruta.
+11. En kund ber att få veta vilka uppgifter kaféet har om henne. Kaféet svarar inte.
+12. En kommunal skola publicerar en ny webbplats som inte går att använda med tangentbord.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 14.4 – Dark patterns
+1. Gå igenom katalogen på <https://www.deceptive.design/types>.
+2. Hitta tre exempel på manipulativ design på riktiga webbplatser eller i appar. Ta skärmdumpar.
+3. Beskriv för varje: vilken typ det är, vem den gynnar, vem den skadar, och hur en ärlig design skulle se ut.
+4. Är något av exemplen olagligt, tror du? Vilken lag skulle det i så fall vara?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 14.5 – Rätten till dina uppgifter *(frivillig)*
+1. Begär ut dina data från en tjänst du använder, t.ex. Google (*Google Takeout*), Instagram eller Spotify. Det kan ta några dagar.
+2. Vad fick du? Förvånade något dig?
+3. Vilken rättighet i GDPR använde du?
+:::
+
+## Projektarbete C: Granska en webbplats {#sec-projekt-c}
+
+::: projekt
+**Form:** enskilt eller i par. **Tid:** ca 3 lektioner. **Redovisning:** skriftlig granskningsrapport (3–4 sidor).
+
+Välj en riktig svensk webbplats för en verksamhet med ett formulär och/eller webbshop: en lokal butik, en förening, ett gym, en restaurang, en kommun. Granska den **utan** att göra något som kan störa eller skada den – du får bara titta och använda den som en vanlig besökare.
+
+Granska:
+
+1. **Personuppgifter.** Finns en integritetspolicy? Är den lätt att hitta och förstå? Innehåller den det GDPR kräver? Samlar formulären in mer än nödvändigt?
+2. **Kakor.** Sätts kakor eller kontaktas tredje part innan samtycke? Är det lika lätt att neka? (Labb 14.1.)
+3. **Tillgänglighet.** Tangentbordstest, Lighthouse, WAVE. För offentlig verksamhet: finns en tillgänglighetsredogörelse?
+4. **Säkerhet.** HTTPS, betyg i HTTP Observatory, märks föråldrade system?
+5. **Övrig lagstiftning.** Företagsuppgifter enligt e-handelslagen? Kommentarsfält som sköts? Källor till bilder?
+6. **Etik.** Finns dark patterns? Hur behandlas användaren?
+
+Rapporten ska innehålla:
+
+- en sammanfattning med de tre allvarligaste bristerna,
+- en tabell med varje granskningspunkt: resultat, bevis (skärmdump), bedömning (OK/brist), hänvisning till lag eller riktlinje,
+- konkreta **rekommendationer** till ägaren,
+- en reflektion: vad skulle du göra annorlunda om du byggde webbplatsen?
+:::
+
+## Instuderingsfrågor
+
+1. Vad hette lagen som tidigare reglerade personuppgifter i Sverige, och vad ersattes den av?
+2. Vad är en personuppgift? Ge fem exempel som kan förekomma på en webbplats.
+3. Vad är skillnaden mellan personuppgiftsansvarig och personuppgiftsbiträde?
+4. Förklara principerna uppgiftsminimering och ändamålsbegränsning med exempel.
+5. Nämn fyra rättsliga grunder. Vilken passar för ett nyhetsbrev, och vilken för att leverera en beställd vara?
+6. Vad krävs för att ett samtycke ska vara giltigt?
+7. Vilka rättigheter har den registrerade? Nämn minst fyra.
+8. Vad ska en integritetspolicy innehålla?
+9. Vad är inbyggt dataskydd? Ge två exempel på hur det påverkar hur du bygger en webbplats.
+10. Vad säger lagen om elektronisk kommunikation om kakor? När behövs inte samtycke?
+11. Vilka myndigheter har tillsyn över GDPR och över kakreglerna?
+12. Vad skyddar upphovsrätten, och hur länge? Behöver man registrera sitt verk?
+13. Vad är citaträtt? Får man länka till andras sidor?
+14. Varför är en bild på en person en personuppgift? Vad måste man tänka på innan man publicerar den?
+15. Vad säger BBS-lagen, och när gäller den för en webbplats?
+16. Vad är skillnaden mellan lag och etik? Ge ett exempel på något som kan vara lagligt men oetiskt i webbutveckling.
+
+## Nyckelbegrepp
+
+GDPR · dataskyddsförordningen · dataskyddslagen · personuppgiftslagen (PUL) · personuppgift · behandling · personuppgiftsansvarig · personuppgiftsbiträde · den registrerade · uppgiftsminimering · ändamålsbegränsning · rättslig grund · samtycke · registerutdrag · rätten att bli bortglömd · dataportabilitet · integritetspolicy · inbyggt dataskydd · personuppgiftsincident · IMY · lagen om elektronisk kommunikation (LEK) · kaka · nödvändig kaka · PTS · upphovsrätt · verk · ekonomisk rätt · ideell rätt · public domain · citaträtt · licens · öppen källkod · varumärke · BBS-lagen · e-handelslagen · etik · dark patterns
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Lektion 1: GDPR + labb 14.2. Lektion 2: kakor + labb 14.1. Lektion 3: upphovsrätt och andra lagar + labb 14.3. Lektion 4: etik + labb 14.4. Lektion 5–6: projektarbete C.
+
+**Juridiken:** Kapitlet beskriver läget hösten 2026. Kontrollera gärna IMY:s och PTS:s webbplatser inför kursstart. Kakreglerna har tidigare stått i 6 kap. 18 § i den äldre LEK (2003:389) – äldre material och webbplatser hänvisar ibland dit. EU-domstolens mål om länkning är C-466/12 Svensson m.fl. (2014).
+
+**Projektarbete C:** Påminn om etiken från kapitel 12 – inga försök att ta sig förbi inloggningar, inga automatiska skanningar utöver de nämnda passiva verktygen. Låt gärna eleverna skicka sina rekommendationer till verksamheten, efter att du granskat dem.
+
+**Facit labb 14.3**
+
+1. Inte tillåtet – upphovsrätt (bilden ägs av kaféet/fotografen).
+2. Tillåtet – länkning till fritt tillgängligt material är inget intrång.
+3. Inte tillåtet – upphovsrätt.
+4. Tillåtet – citaträtt, om citatet är kort, motiverat och har källa.
+5. Inte tillåtet – statistikkakor kräver informerat samtycke (LEK 9:28 + GDPR:s samtyckeskrav); "OK" utan valmöjlighet och utan att kakorna väntar på svar är inte giltigt samtycke.
+6. Problematiskt – bilden är personuppgifter; kräver rättslig grund, i praktiken samtycke. Dessutom en fråga om respekt.
+7. Inte tillåtet om innehållet är uppenbart olagligt (hets mot folkgrupp) – BBS-lagen kräver uppsikt och borttagning.
+8. Tillåtet – MIT-licensen tillåter användning om licenstexten behålls.
+9. Bryter mot uppgiftsminimering (GDPR) – personnummer behövs inte för att boka bord.
+10. Troligen tillåtet – lagringen är nödvändig för en funktion användaren själv begärt (undantaget i 9:28 andra stycket). Bra diskussionsfall; informera gärna ändå.
+11. Inte tillåtet – rätten till registerutdrag (GDPR art. 15); svar ska normalt ges inom en månad.
+12. Bryter mot DOS-lagen (krav på WCAG 2.1 AA).
+
+**Facit till instuderingsfrågorna**
+
+1. Personuppgiftslagen (PUL), ersatt 2018 av GDPR och dataskyddslagen.
+2. Information som kan kopplas till en levande person: namn, e-post, telefon, IP-adress, kak-id, bild, det någon skrivit i ett formulär.
+3. Ansvarig bestämmer ändamål och medel; biträdet behandlar uppgifterna åt den ansvarige (t.ex. webbhotell, formulärtjänst).
+4. Minimering: samla bara in det som behövs (inte personnummer för bordsbokning). Ändamålsbegränsning: använd bara för det syfte de samlades in för (inte bokningsuppgifter till nyhetsbrev).
+5. Samtycke, avtal, rättslig förpliktelse, intresseavvägning (även myndighetsutövning, allmänt intresse, grundläggande intressen). Nyhetsbrev: samtycke. Leverans: avtal.
+6. Frivilligt, specifikt, informerat, otvetydigt (aktiv handling); lika lätt att återkalla.
+7. Information, tillgång (registerutdrag), rättelse, radering, begränsning, invändning, dataportabilitet.
+8. Vem som är ansvarig och kontaktuppgifter, vilka uppgifter, ändamål, rättslig grund, lagringstid, mottagare/biträden, eventuell överföring utanför EU, rättigheter, rätt att klaga hos IMY.
+9. Integritetsskydd ska byggas in från början och vara standardinställning. Exempel: bara nödvändiga formulärfält; typsnitt på egen server; ingen spårning som standard; HTTPS.
+10. Lagring/läsning i användarens enhet kräver information och samtycke, utom när det är nödvändigt för en tjänst användaren uttryckligen begärt (eller för att överföra ett meddelande).
+11. IMY (GDPR), PTS (kakreglerna i LEK).
+12. Verk – texter, bilder, musik, film, kod med mera. 70 år efter upphovspersonens död (fotografiska bilder 50 år). Nej, skyddet uppstår automatiskt.
+13. Rätt att citera en kort del av ett offentliggjort verk i den omfattning som motiveras av ändamålet, med källa. Ja, att länka till fritt tillgängligt innehåll är tillåtet.
+14. Personen kan identifieras. Rättslig grund (oftast samtycke), information, särskild försiktighet med barn; i reklam krävs tillstånd.
+15. Den som tillhandahåller en elektronisk anslutningstavla (kommentarsfält, forum) ska ha uppsikt och ta bort uppenbart olagligt innehåll. Gäller när användare kan publicera inlägg på webbplatsen.
+16. Lag är bindande regler med sanktioner; etik handlar om vad som är rätt. Exempel: dark patterns som pressar användaren att köpa mer, spårning som är tekniskt laglig men oväntad, otillgänglig design hos privat aktör som inte omfattas av lagkrav.
+:::
+:::

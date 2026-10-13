@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="sv" xml:lang="sv"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; HTML – struktur och semantik – Webbutveckling 1 (lärarversion)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../del2/k04-teckenkodning.html" rel="next">
+<link href="../del1/k02-hur-webben-fungerar.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-969ddfa49e00a70eb3423444dbc81f6c.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5994e4a247c6531813b20d3cce7a044d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-bf9a886b062c6921f432e6eb6dea0e3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-5994e4a247c6531813b20d3cce7a044d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Inget resultat",
+    "search-matching-documents-text": "matchande dokument",
+    "search-copy-link-title": "Kopiera länk för att söka",
+    "search-hide-matches-text": "Göm ytterligare resultat",
+    "search-more-match-text": "annat resultat i detta dokument",
+    "search-more-matches-text": "fler resultat i detta dokument",
+    "search-clear-button-title": "Rensa",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Avbryt",
+    "search-submit-button-title": "Verkställ",
+    "search-label": "Sök"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del2/k03-html.html">Del 2 – Bygga webbsidor</a></li><li class="breadcrumb-item"><a href="../del2/k03-html.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Skifta sidonavigering" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Sök" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Webbutveckling 1 (lärarversion)</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Skifta mörkt läge"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Sök"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Välkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../kursoversikt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kursöversikt</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 1 – Webben</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k01-webbens-historia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Webben som plattform</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del1/k02-hur-webben-fungerar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 2 – Bygga webbsidor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k03-html.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k04-teckenkodning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Teckenkodning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k05-css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CSS – grunderna</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k06-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Typsnitt, färg och layoutprinciper</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k07-layout.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Layout och responsiv design</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del2/k08-bilder-media.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bilder och media</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 3 – Kvalitet</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k09-tillganglighet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Tillgänglighet</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k10-kvalitet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Kvalitet, interoperabilitet och optimering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k11-javascript-dom.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">JavaScript och DOM</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del3/k12-sakerhet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Säkerhet</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Del 4 – Publicering, ansvar och process</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k13-publicering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Publicering</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k14-lagar-etik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lagar, regler och etik</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k15-processen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Webbutvecklingsprocessen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../del4/k16-slutprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Slutprojekt</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bilagor</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Skifta sektion">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/a-verktyg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Verktyg och kom igång</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/b-ordlista.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Ordlista</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/c-fusklapp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Fusklapp: HTML och CSS</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/d-mallar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Mallar</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bilagor/e-bedomning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Bedömning</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Innehållsförteckning</h2>
+   
+  <ul>
+  <li><a href="#märkspråk" id="toc-märkspråk" class="nav-link active" data-scroll-target="#märkspråk"><span class="header-section-number">3.1</span> Märkspråk</a>
+  <ul class="collapse">
+  <li><a href="#tre-språk-tre-roller" id="toc-tre-språk-tre-roller" class="nav-link" data-scroll-target="#tre-språk-tre-roller"><span class="header-section-number">3.1.1</span> Tre språk, tre roller</a></li>
+  <li><a href="#andra-märkspråk" id="toc-andra-märkspråk" class="nav-link" data-scroll-target="#andra-märkspråk"><span class="header-section-number">3.1.2</span> Andra märkspråk</a></li>
+  <li><a href="#standarden" id="toc-standarden" class="nav-link" data-scroll-target="#standarden"><span class="header-section-number">3.1.3</span> Standarden</a></li>
+  </ul></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax"><span class="header-section-number">3.2</span> Syntax</a></li>
+  <li><a href="#grundstrukturen" id="toc-grundstrukturen" class="nav-link" data-scroll-target="#grundstrukturen"><span class="header-section-number">3.3</span> Grundstrukturen</a></li>
+  <li><a href="#text" id="toc-text" class="nav-link" data-scroll-target="#text"><span class="header-section-number">3.4</span> Text</a></li>
+  <li><a href="#länkar" id="toc-länkar" class="nav-link" data-scroll-target="#länkar"><span class="header-section-number">3.5</span> Länkar</a></li>
+  <li><a href="#bilder" id="toc-bilder" class="nav-link" data-scroll-target="#bilder"><span class="header-section-number">3.6</span> Bilder</a></li>
+  <li><a href="#listor" id="toc-listor" class="nav-link" data-scroll-target="#listor"><span class="header-section-number">3.7</span> Listor</a></li>
+  <li><a href="#tabeller" id="toc-tabeller" class="nav-link" data-scroll-target="#tabeller"><span class="header-section-number">3.8</span> Tabeller</a></li>
+  <li><a href="#semantisk-struktur" id="toc-semantisk-struktur" class="nav-link" data-scroll-target="#semantisk-struktur"><span class="header-section-number">3.9</span> Semantisk struktur</a></li>
+  <li><a href="#formulär" id="toc-formulär" class="nav-link" data-scroll-target="#formulär"><span class="header-section-number">3.10</span> Formulär</a>
+  <ul class="collapse">
+  <li><a href="#vad-formuläret-faktiskt-skickar" id="toc-vad-formuläret-faktiskt-skickar" class="nav-link" data-scroll-target="#vad-formuläret-faktiskt-skickar"><span class="header-section-number">3.10.1</span> Vad formuläret faktiskt skickar</a></li>
+  </ul></li>
+  <li><a href="#labbar" id="toc-labbar" class="nav-link" data-scroll-target="#labbar"><span class="header-section-number">3.11</span> Labbar</a></li>
+  <li><a href="#bygg-vidare-din-egen-webbplats" id="toc-bygg-vidare-din-egen-webbplats" class="nav-link" data-scroll-target="#bygg-vidare-din-egen-webbplats"><span class="header-section-number">3.12</span> Bygg vidare: din egen webbplats</a></li>
+  <li><a href="#instuderingsfrågor" id="toc-instuderingsfrågor" class="nav-link" data-scroll-target="#instuderingsfrågor"><span class="header-section-number">3.13</span> Instuderingsfrågor</a></li>
+  <li><a href="#nyckelbegrepp" id="toc-nyckelbegrepp" class="nav-link" data-scroll-target="#nyckelbegrepp"><span class="header-section-number">3.14</span> Nyckelbegrepp</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../del2/k03-html.html">Del 2 – Bygga webbsidor</a></li><li class="breadcrumb-item"><a href="../del2/k03-html.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-html" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">HTML – struktur och semantik</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="ci">
+<p>Märkspråk och deras inbördes roller, syntax och semantik med fokus på HTML. Skapande av webbsidor.</p>
+</div>
+<div class="mal">
+<p><strong>Kapitlets mål</strong> – efter kapitlet kan du:</p>
+<ul>
+<li>förklara vad ett märkspråk är och vilka roller HTML, CSS och JavaScript har,</li>
+<li>skriva ett korrekt HTML-dokument med rätt grundstruktur,</li>
+<li>använda element för rubriker, text, länkar, bilder, listor och tabeller,</li>
+<li>välja <em>semantiskt</em> rätt element,</li>
+<li>bygga ett formulär med etiketter,</li>
+<li>starta din egen webbplats med flera sidor som länkar till varandra.</li>
+</ul>
+</div>
+<section id="märkspråk" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="märkspråk"><span class="header-section-number">3.1</span> Märkspråk</h2>
+<p>Ett <strong>märkspråk</strong> (<em>markup language</em>) är ett sätt att <em>märka upp</em> text, alltså tala om vad olika delar av texten är. Märkningen skrivs med taggar inom <code>&lt; &gt;</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Kvarnens café<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Nybakat varje morgon sedan 1987.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>&lt;h1&gt;</code> säger: “det här är huvudrubriken”. <code>&lt;p&gt;</code> säger: “det här är ett stycke” (<em>paragraph</em>). Märkspråket säger <em>vad</em> något är, inte hur det ska se ut.</p>
+<section id="tre-språk-tre-roller" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="tre-språk-tre-roller"><span class="header-section-number">3.1.1</span> Tre språk, tre roller</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Språk</th>
+<th>Typ</th>
+<th>Ansvar</th>
+<th>Fråga det svarar på</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>HTML</strong></td>
+<td>Märkspråk</td>
+<td>Innehåll och struktur</td>
+<td><em>Vad</em> är det här?</td>
+</tr>
+<tr class="even">
+<td><strong>CSS</strong></td>
+<td>Stilmallsspråk</td>
+<td>Utseende och layout</td>
+<td>Hur ska det <em>se ut</em>?</td>
+</tr>
+<tr class="odd">
+<td><strong>JavaScript</strong></td>
+<td>Programspråk</td>
+<td>Beteende och interaktivitet</td>
+<td>Vad ska <em>hända</em>?</td>
+</tr>
+</tbody>
+</table>
+<p>Att hålla isär rollerna kallas <strong>separation of concerns</strong>. Det gör koden lättare att underhålla och sidan mer tillgänglig: en skärmläsare bryr sig om HTML:en, inte om färgerna.</p>
+</section>
+<section id="andra-märkspråk" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="andra-märkspråk"><span class="header-section-number">3.1.2</span> Andra märkspråk</h3>
+<p>HTML är inte ensamt. Du kommer att stöta på:</p>
+<ul>
+<li><strong>XML</strong> – ett allmänt märkspråk för data, där man hittar på egna taggar. Används t.ex. i RSS-flöden och Office-filer.</li>
+<li><strong>SVG</strong> – XML för vektorbilder. Används för ikoner och logotyper (kapitel 8).</li>
+<li><strong>Markdown</strong> – ett enkelt märkspråk där <code># Rubrik</code> blir en rubrik och <code>**fet**</code> blir fet text. Används i README-filer, chattar och – den här boken.</li>
+</ul>
+</section>
+<section id="standarden" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="standarden"><span class="header-section-number">3.1.3</span> Standarden</h3>
+<p>HTML-standarden heter <strong>HTML Living Standard</strong> och underhålls av <strong>WHATWG</strong>. Den uppdateras löpande. Den bästa referensen för dig är <strong>MDN Web Docs</strong>: <a href="https://developer.mozilla.org/sv-SE/docs/Web/HTML" class="uri">https://developer.mozilla.org/sv-SE/docs/Web/HTML</a> (byt till engelska om något saknas på svenska).</p>
+</section>
+</section>
+<section id="syntax" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="syntax"><span class="header-section-number">3.2</span> Syntax</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"meny.html"</span><span class="ot"> title</span><span class="op">=</span><span class="st">"Vår meny"</span><span class="dt">&gt;</span>Se menyn<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>└┬┘└──────┬───────┘ └──────┬──────┘ └───┬───┘└┬─┘</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> │     attribut         attribut     innehåll  sluttagg</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>starttagg (med elementnamn a)</span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>En <strong>tagg</strong> är det inom <code>&lt; &gt;</code>. Ett <strong>element</strong> är starttagg + innehåll + sluttagg.</li>
+<li><strong>Attribut</strong> ger extra information. De skrivs i starttaggen: <code>namn="värde"</code>.</li>
+<li>Element kan <strong>nästlas</strong> i varandra. Det inre måste stängas först:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Prova vår <span class="dt">&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>kanelbulle<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span>!<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span>   <span class="co">&lt;!-- rätt --&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Prova vår <span class="dt">&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>kanelbulle<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span>!   <span class="co">&lt;!-- fel --&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Vissa element har inget innehåll och ingen sluttagg, s.k. <strong>tomma element</strong> (<em>void elements</em>): <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>.</li>
+<li><code>&lt;!-- kommentarer --&gt;</code> syns inte på sidan.</li>
+<li>HTML bryr sig inte om radbrytningar och extra mellanslag. Använd indrag för att göra koden läsbar.</li>
+<li>Skriv taggar och attribut med små bokstäver.</li>
+</ul>
+</section>
+<section id="grundstrukturen" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="grundstrukturen"><span class="header-section-number">3.3</span> Grundstrukturen</h2>
+<p>Varje HTML-sida börjar likadant. I VS Code skriver du <code>!</code> och trycker <code>Tab</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>index.html</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="index.html"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"sv"</span><span class="dt">&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"viewport"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"width=device-width, initial-scale=1"</span><span class="dt">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Kvarnens café – Malmö<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">"description"</span><span class="ot"> content</span><span class="op">=</span><span class="st">"Litet kafé i Malmö med nybakat och gott kaffe."</span><span class="dt">&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Kvarnens café<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rad</th>
+<th>Gör</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;!DOCTYPE html&gt;</code></td>
+<td>Talar om att det är modern HTML</td>
+</tr>
+<tr class="even">
+<td><code>&lt;html lang="sv"&gt;</code></td>
+<td>Roten. <code>lang</code> talar om språket för skärmläsare, översättning och sökmotorer</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;head&gt;</code></td>
+<td>Information <em>om</em> sidan – syns inte</td>
+</tr>
+<tr class="even">
+<td><code>&lt;meta charset="UTF-8"&gt;</code></td>
+<td>Teckenkodningen, så att å, ä och ö fungerar (kapitel 4)</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;meta name="viewport" …&gt;</code></td>
+<td>Gör att sidan inte krymps ihop i mobilen (kapitel 7)</td>
+</tr>
+<tr class="even">
+<td><code>&lt;title&gt;</code></td>
+<td>Texten i fliken, i bokmärken och i sökresultat</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;meta name="description"&gt;</code></td>
+<td>Beskrivning som sökmotorer kan visa</td>
+</tr>
+<tr class="even">
+<td><code>&lt;body&gt;</code></td>
+<td>Allt som syns</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="text" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="text"><span class="header-section-number">3.4</span> Text</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Kvarnens café<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span>              <span class="co">&lt;!-- en per sida --&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Om oss<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Ett litet kafé i en gammal kvarn.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Meny<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Kaffe<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Bakverk<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  Vi använder <span class="dt">&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>ekologiskt<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;</span> mjöl.        <span class="co">&lt;!-- viktigt --&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  Det är <span class="dt">&lt;</span><span class="kw">em</span><span class="dt">&gt;</span>verkligen<span class="dt">&lt;/</span><span class="kw">em</span><span class="dt">&gt;</span> gott.                       <span class="co">&lt;!-- betoning --&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">small</span><span class="dt">&gt;</span>Priser inklusive moms.<span class="dt">&lt;/</span><span class="kw">small</span><span class="dt">&gt;</span>                 <span class="co">&lt;!-- finstilt --&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">blockquote</span><span class="dt">&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Malmös bästa kanelbullar.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="dt">&gt;</span>— Sydsvenskan<span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">blockquote</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Rubrikerna <code>h1</code>–<code>h6</code> bildar sidans <strong>innehållsförteckning</strong>. Skärmläsaranvändare hoppar ofta mellan rubriker för att hitta. Välj nivå efter <em>struktur</em>, aldrig efter storlek – storleken styr du med CSS. Hoppa inte över nivåer.</p>
+</section>
+<section id="länkar" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="länkar"><span class="header-section-number">3.5</span> Länkar</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"meny.html"</span><span class="dt">&gt;</span>Meny<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>                              <span class="co">&lt;!-- annan sida, samma mapp --&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://www.malmo.se"</span><span class="dt">&gt;</span>Malmö stad<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>              <span class="co">&lt;!-- extern --&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"#oppettider"</span><span class="dt">&gt;</span>Öppettider<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>                       <span class="co">&lt;!-- ställe på samma sida --&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h2</span><span class="ot"> id</span><span class="op">=</span><span class="st">"oppettider"</span><span class="dt">&gt;</span>Öppettider<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"mailto:hej@kvarnenscafe.se"</span><span class="dt">&gt;</span>Mejla oss<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>         <span class="co">&lt;!-- e-post --&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"tel:+4640123456"</span><span class="dt">&gt;</span>040-12 34 56<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span>                 <span class="co">&lt;!-- ring (i mobilen) --&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Länktexten ska säga vart länken går. “Klicka här” och “Läs mer” säger ingenting när de läses upp utan sammanhang.</p>
+</section>
+<section id="bilder" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="bilder"><span class="header-section-number">3.6</span> Bilder</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">"bilder/kanelbulle.jpg"</span><span class="ot"> alt</span><span class="op">=</span><span class="st">"Nybakad kanelbulle med pärlsocker"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"800"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"600"</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>alt</code> beskriver bilden för den som inte ser den. Rent dekorativa bilder får <code>alt=""</code>.</li>
+<li><code>width</code> och <code>height</code> reserverar plats så att sidan inte hoppar när bilden laddas.</li>
+</ul>
+<p>Bilder får ett helt eget kapitel (8).</p>
+</section>
+<section id="listor" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="listor"><span class="header-section-number">3.7</span> Listor</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span>                         <span class="co">&lt;!-- oordnad: ordningen spelar ingen roll --&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Kaffe<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Te<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">ol</span><span class="dt">&gt;</span>                         <span class="co">&lt;!-- ordnad: ordningen spelar roll --&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Beställ i kassan<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Hitta ett bord<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Vi kommer med fikat<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">ol</span><span class="dt">&gt;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">dl</span><span class="dt">&gt;</span>                         <span class="co">&lt;!-- beskrivningslista: begrepp och förklaring --&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">dt</span><span class="dt">&gt;</span>Cortado<span class="dt">&lt;/</span><span class="kw">dt</span><span class="dt">&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">dd</span><span class="dt">&gt;</span>Espresso med lika mycket varm mjölk.<span class="dt">&lt;/</span><span class="kw">dd</span><span class="dt">&gt;</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">dl</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Menyer på webbplatser är listor med länkar.</p>
+</section>
+<section id="tabeller" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="tabeller"><span class="header-section-number">3.8</span> Tabeller</h2>
+<p>Tabeller är till för <strong>data i rader och kolumner</strong> – aldrig för layout.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">table</span><span class="dt">&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">caption</span><span class="dt">&gt;</span>Öppettider<span class="dt">&lt;/</span><span class="kw">caption</span><span class="dt">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">thead</span><span class="dt">&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> scope</span><span class="op">=</span><span class="st">"col"</span><span class="dt">&gt;</span>Dag<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> scope</span><span class="op">=</span><span class="st">"col"</span><span class="dt">&gt;</span>Tid<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">thead</span><span class="dt">&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">tbody</span><span class="dt">&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> scope</span><span class="op">=</span><span class="st">"row"</span><span class="dt">&gt;</span>Måndag–fredag<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>07–18<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">th</span><span class="ot"> scope</span><span class="op">=</span><span class="st">"row"</span><span class="dt">&gt;</span>Lördag–söndag<span class="dt">&lt;/</span><span class="kw">th</span><span class="dt">&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">td</span><span class="dt">&gt;</span>09–16<span class="dt">&lt;/</span><span class="kw">td</span><span class="dt">&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">tr</span><span class="dt">&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">tbody</span><span class="dt">&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">table</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>caption</code> ger tabellen en rubrik. <code>th</code> är rubrikceller, och <code>scope</code> talar om ifall de gäller en kolumn eller en rad – viktigt för skärmläsare.</p>
+</section>
+<section id="semantisk-struktur" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="semantisk-struktur"><span class="header-section-number">3.9</span> Semantisk struktur</h2>
+<p><strong>Semantik</strong> betyder <em>betydelse</em>. Semantisk HTML använder element som beskriver vad innehållet <em>är</em>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"index.html"</span><span class="dt">&gt;</span>Kvarnens café<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">nav</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">"Huvudmeny"</span><span class="dt">&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"index.html"</span><span class="ot"> aria-current</span><span class="op">=</span><span class="st">"page"</span><span class="dt">&gt;</span>Hem<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"meny.html"</span><span class="dt">&gt;</span>Meny<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"kontakt.html"</span><span class="dt">&gt;</span>Kontakt<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">nav</span><span class="dt">&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">header</span><span class="dt">&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Välkommen till Kvarnens café<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Veckans bakverk<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">article</span><span class="dt">&gt;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Kardemummaknut<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>…<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">aside</span><span class="dt">&gt;</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Följ oss<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>…<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">aside</span><span class="dt">&gt;</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">main</span><span class="dt">&gt;</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Kvarngatan 1, Malmö · 040-12 34 56<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">footer</span><span class="dt">&gt;</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Betydelse</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>header</code></td>
+<td>Sidhuvud</td>
+</tr>
+<tr class="even">
+<td><code>nav</code></td>
+<td>Navigering (en grupp viktiga länkar)</td>
+</tr>
+<tr class="odd">
+<td><code>main</code></td>
+<td>Huvudinnehållet. Ett per sida</td>
+</tr>
+<tr class="even">
+<td><code>section</code></td>
+<td>En tematisk del med egen rubrik</td>
+</tr>
+<tr class="odd">
+<td><code>article</code></td>
+<td>Innehåll som kan stå för sig självt: ett inlägg, en produkt, en recension</td>
+</tr>
+<tr class="even">
+<td><code>aside</code></td>
+<td>Sidoinnehåll</td>
+</tr>
+<tr class="odd">
+<td><code>footer</code></td>
+<td>Sidfot</td>
+</tr>
+<tr class="even">
+<td><code>div</code>, <code>span</code></td>
+<td>Ingen betydelse – används bara när inget annat passar</td>
+</tr>
+</tbody>
+</table>
+<p>Varför spelar det roll, när sidan ser likadan ut?</p>
+<ul>
+<li><strong>Tillgänglighet</strong> – skärmläsare kan hoppa direkt till <code>main</code> eller <code>nav</code>.</li>
+<li><strong>Sökmotorer</strong> förstår vad som är viktigt.</li>
+<li><strong>Underhåll</strong> – koden blir lättare att läsa.</li>
+</ul>
+<p><code>aria-current="page"</code> och <code>aria-label</code> är <strong>ARIA</strong>-attribut som ger skärmläsare extra information. Mer om det i kapitel 9.</p>
+</section>
+<section id="formulär" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="formulär"><span class="header-section-number">3.10</span> Formulär</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> action</span><span class="op">=</span><span class="st">"https://formspree.io/f/ditt-id"</span><span class="ot"> method</span><span class="op">=</span><span class="st">"post"</span><span class="dt">&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"namn"</span><span class="dt">&gt;</span>Namn<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">"namn"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"namn"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"text"</span><span class="ot"> autocomplete</span><span class="op">=</span><span class="st">"name"</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"epost"</span><span class="dt">&gt;</span>E-post<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">"epost"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"epost"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"email"</span><span class="ot"> autocomplete</span><span class="op">=</span><span class="st">"email"</span><span class="ot"> required</span><span class="dt">&gt;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">fieldset</span><span class="dt">&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">legend</span><span class="dt">&gt;</span>Antal personer<span class="dt">&lt;/</span><span class="kw">legend</span><span class="dt">&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"radio"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"antal"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"1-2"</span><span class="ot"> checked</span><span class="dt">&gt;</span> 1–2<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"radio"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"antal"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"3-6"</span><span class="dt">&gt;</span> 3–6<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="dt">&gt;&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"radio"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"antal"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"7+"</span><span class="dt">&gt;</span> 7 eller fler<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">fieldset</span><span class="dt">&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"datum"</span><span class="dt">&gt;</span>Datum<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">"datum"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"datum"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"date"</span><span class="dt">&gt;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"meddelande"</span><span class="dt">&gt;</span>Meddelande<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">textarea</span><span class="ot"> id</span><span class="op">=</span><span class="st">"meddelande"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"meddelande"</span><span class="ot"> rows</span><span class="op">=</span><span class="st">"4"</span><span class="dt">&gt;&lt;/</span><span class="kw">textarea</span><span class="dt">&gt;</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">"submit"</span><span class="dt">&gt;</span>Skicka bokning<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong><code>label for</code></strong> måste matcha fältets <strong><code>id</code></strong>. Då kan man klicka på texten, och skärmläsaren vet vad fältet heter.</li>
+<li><strong><code>name</code></strong> är namnet datan skickas under. Fält utan <code>name</code> skickas inte.</li>
+<li><strong><code>type</code></strong> ger rätt tangentbord i mobilen (<code>email</code>, <code>tel</code>, <code>number</code>) och inbyggd kontroll.</li>
+<li><strong><code>required</code></strong> gör fältet obligatoriskt.</li>
+<li><strong><code>autocomplete</code></strong> låter webbläsaren fylla i sparade uppgifter.</li>
+<li><strong><code>fieldset</code></strong> + <strong><code>legend</code></strong> grupperar radioknappar under en gemensam fråga.</li>
+<li><strong><code>action</code></strong> är vart datan skickas och <strong><code>method</code></strong> hur (<code>get</code> eller <code>post</code>, kapitel 2).</li>
+</ul>
+<p>En statisk webbplats har ingen server som kan ta emot formulär. Tjänster som <em>Formspree</em> eller <em>Netlify Forms</em> kan göra det åt dig. I kursen räcker det att formuläret är korrekt byggt.</p>
+<section id="vad-formuläret-faktiskt-skickar" class="level3" data-number="3.10.1">
+<h3 data-number="3.10.1" class="anchored" data-anchor-id="vad-formuläret-faktiskt-skickar"><span class="header-section-number">3.10.1</span> Vad formuläret faktiskt skickar</h3>
+<p>Med <code>method="get"</code> lägger webbläsaren fälten i adressen: varje fält med <code>name</code> blir ett par <code>name=värde</code>. Med <code>name="q"</code> och texten <em>kaffe</em> blir det <code>?q=kaffe</code>. Det är <strong>mottagaren</strong> som bestämmer vilka namn som gäller. Google letar till exempel efter <code>q</code>. Testa i labb 3.4.</p>
+</section>
+</section>
+<section id="labbar" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="labbar"><span class="header-section-number">3.11</span> Labbar</h2>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 3.1 – Kvarnens startsida
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Skapa mappen <code>kvarnen</code> och filen <code>index.html</code>. Bygg startsidan med:</p>
+<ul>
+<li>korrekt grundstruktur med <code>lang</code>, <code>charset</code>, <code>viewport</code>, <code>title</code> och <code>description</code>,</li>
+<li><code>header</code> med kaféets namn och en <code>nav</code> med länkar till <em>Hem</em>, <em>Meny</em> och <em>Kontakt</em>,</li>
+<li><code>main</code> med en <code>h1</code>, en introduktion, en sektion “Veckans bakverk” med två <code>article</code> och en tabell med öppettider,</li>
+<li><code>footer</code> med adress, en <code>tel:</code>-länk och en <code>mailto:</code>-länk.</li>
+</ul>
+<p>Öppna sidan med <strong>Live Server</strong> (högerklicka → <em>Open with Live Server</em>).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 3.2 – Från div-soppa till semantik
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Öppna <code>ovningsfiler/k03-divsoppa/index.html</code>. Sidan ser okej ut men består nästan bara av <code>div</code> och <code>span</code>, och rubriker är vanlig text i stor stil.</p>
+<ol type="1">
+<li>Byt ut elementen mot semantiskt rätt element: <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>footer</code>, rubriker, listor och tabell.</li>
+<li>Gör ingen ändring i CSS-filen. Hur ser sidan ut efteråt? Vad måste ändras i CSS:en för att det ska se ut som innan?</li>
+<li>Installera tillägget <strong>HeadingsMap</strong> (Chrome/Firefox) eller använd W3C-validatorns <em>outline</em>. Jämför sidans rubrikstruktur före och efter.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 3.3 – Flera sidor
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lägg till <code>meny.html</code> och <code>kontakt.html</code> i Kvarnen-mappen.</p>
+<ol type="1">
+<li>Samma <code>header</code> och <code>footer</code> på alla sidor. Länkarna i menyn ska fungera åt alla håll.</li>
+<li><code>meny.html</code>: en <code>h2</code> per kategori (Kaffe, Te, Bakverk) med en tabell eller <code>dl</code> per kategori.</li>
+<li><code>kontakt.html</code>: bokningsformuläret från genomgången.</li>
+<li>Sätt <code>aria-current="page"</code> på menylänken till den sida man står på.</li>
+<li>Lägg bilderna i en mapp <code>bilder/</code> och länka dem med relativa sökvägar.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tips</span>🔬 Labb 3.4 – Vad skickar ett formulär?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Skapa en ny fil med formuläret nedan och öppna den med Live Server.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> action</span><span class="op">=</span><span class="st">""</span><span class="ot"> method</span><span class="op">=</span><span class="st">"get"</span><span class="dt">&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"sok"</span><span class="dt">&gt;</span>Sök<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">"sok"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"q"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"search"</span><span class="dt">&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"typ"</span><span class="dt">&gt;</span>Typ<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"typ"</span><span class="ot"> name</span><span class="op">=</span><span class="st">"typ"</span><span class="dt">&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">""</span><span class="dt">&gt;</span>Alla<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"kaffe"</span><span class="dt">&gt;</span>Kaffe<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">option</span><span class="ot"> value</span><span class="op">=</span><span class="st">"te"</span><span class="dt">&gt;</span>Te<span class="dt">&lt;/</span><span class="kw">option</span><span class="dt">&gt;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">button</span><span class="dt">&gt;</span>Skicka<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code></pre></div><button title="Kopiera till urklipp" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="1">
+<li>Skriv <code>latte</code> och skicka. Titta i adressfältet. Vad har hänt?</li>
+<li>Byt <code>name="q"</code> mot <code>name="fraga"</code> och skicka igen. Ta sedan bort <code>name</code> helt.</li>
+<li>Skriv <code>te &amp; kaka</code> och skicka. Hur ser <code>&amp;</code> ut i adressen? Varför?</li>
+<li>Ändra <code>action</code> till <code>https://www.google.com/search</code> och skicka. Byt sedan tillbaka till <code>name="fraga"</code>. Varför slutar Google att söka?</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="bygg-vidare-din-egen-webbplats" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="bygg-vidare-din-egen-webbplats"><span class="header-section-number">3.12</span> Bygg vidare: din egen webbplats</h2>
+<p>Nu börjar du bygga <strong>din egen webbplats</strong>, som du arbetar med fram till kapitel 10 och publicerar i kapitel 13.</p>
+<ol type="1">
+<li><strong>Välj ämne.</strong> Något du kan och tycker om: en hobby, en idrott, ett spel, en artist, din hemstad, ett skolämne. Stäm av med läraren.</li>
+<li><strong>Planera tre till fem sidor</strong> på papper. Vad ska stå på varje sida?</li>
+<li><strong>Skapa mappen</strong> med <code>index.html</code> och minst två undersidor, och en <code>bilder/</code>-mapp.</li>
+<li><strong>Bygg strukturen:</strong> samma <code>header</code>, <code>nav</code> och <code>footer</code> på alla sidor, semantiska element, rubriker i rätt ordning.</li>
+<li>Webbplatsen ska innehålla minst: en lista, en tabell, en bild med <code>alt</code>, en extern länk och ett formulär.</li>
+</ol>
+<p>Ingen CSS än – den kommer i kapitel 5.</p>
+</section>
+<section id="instuderingsfrågor" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="instuderingsfrågor"><span class="header-section-number">3.13</span> Instuderingsfrågor</h2>
+<ol type="1">
+<li>Vad är ett märkspråk? Ge tre exempel på märkspråk.</li>
+<li>Beskriv rollerna för HTML, CSS och JavaScript. Varför håller man isär dem?</li>
+<li>Vad är skillnaden mellan en tagg, ett element och ett attribut?</li>
+<li>Vad är ett tomt element? Ge två exempel.</li>
+<li>Vad står i <code>&lt;head&gt;</code> och vad står i <code>&lt;body&gt;</code>? Ge två exempel på element i <code>head</code> och vad de gör.</li>
+<li>Varför ska man ange <code>lang</code> på <code>&lt;html&gt;</code>?</li>
+<li>Vad betyder <em>semantisk HTML</em>? Ge tre skäl till att använda semantiska element.</li>
+<li>När ska man använda <code>div</code>?</li>
+<li>Varför ska man inte välja rubriknivå efter hur stor texten ska bli?</li>
+<li>Vad gör <code>label for</code> och <code>id</code> i ett formulär? Vad händer med ett fält som saknar <code>name</code>?</li>
+<li>Varför ska tabeller inte användas för layout?</li>
+<li>Vem underhåller HTML-standarden, och var hittar du en pålitlig referens?</li>
+</ol>
+</section>
+<section id="nyckelbegrepp" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="nyckelbegrepp"><span class="header-section-number">3.14</span> Nyckelbegrepp</h2>
+<p>märkspråk · HTML · tagg · element · attribut · nästling · tomt element · <code>head</code> · <code>body</code> · doctype · <code>lang</code> · semantik · semantiska element · rubrikstruktur · länk · relativ sökväg · <code>alt</code>-text · formulär · <code>label</code> · <code>name</code> · separation of concerns · XML · SVG · Markdown · WHATWG · MDN</p>
+<div class="larare">
+<p><strong>Upplägg:</strong> Kapitlet räcker gott till 1,5 vecka (vecka 3 + början av 4). Lektion 1: märkspråk, syntax, grundstruktur, labb 3.1. Lektion 2: semantik, labb 3.2. Lektion 3: formulär, labb 3.3–3.4. Lektion 4: bygg vidare.</p>
+<p><strong>Vanliga fel</strong></p>
+<ul>
+<li>Filen heter <code>index.html.txt</code> (dolda filändelser i Windows).</li>
+<li>Bilder syns inte: fel sökväg eller versaler i filnamnet.</li>
+<li><code>label for</code> matchar inte <code>id</code>.</li>
+<li><code>&lt;a&gt;</code> runt block-element är tillåtet i HTML5 – elever som lärt sig annat kan bli förvirrade.</li>
+</ul>
+<p><strong>Facit till instuderingsfrågorna</strong></p>
+<ol type="1">
+<li>Ett språk som märker upp text med taggar för att beskriva dess struktur/betydelse. HTML, XML, SVG, Markdown, MathML.</li>
+<li>HTML: innehåll och struktur. CSS: utseende och layout. JS: beteende. Separation ger lättare underhåll, återanvändning av CSS, bättre tillgänglighet (innehållet fungerar utan CSS/JS) och tydligare ansvar.</li>
+<li>Tagg: <code>&lt;p&gt;</code> eller <code>&lt;/p&gt;</code>. Element: start + innehåll + slut. Attribut: extra information i starttaggen, <code>href="…"</code>.</li>
+<li>Element utan innehåll och utan sluttagg: <code>img</code>, <code>br</code>, <code>input</code>, <code>meta</code>, <code>link</code>, <code>hr</code>.</li>
+<li><code>head</code>: metadata – <code>title</code> (flikens titel), <code>meta charset</code> (teckenkodning), <code>meta viewport</code>, <code>link</code> (CSS), <code>meta description</code>. <code>body</code>: allt synligt innehåll.</li>
+<li>Skärmläsare väljer rätt uttal, webbläsare kan erbjuda översättning, sökmotorer förstår språket, avstavning/typografi i CSS.</li>
+<li>Element som beskriver innehållets betydelse. Skäl: tillgänglighet, sökmotoroptimering, läsbar och underhållbar kod.</li>
+<li>När inget semantiskt element passar, t.ex. som behållare för layout/styling.</li>
+<li>Rubrikerna bildar dokumentets struktur som används av skärmläsare och sökmotorer. Storlek styrs med CSS.</li>
+<li>Kopplar etiketten till fältet: klickbar etikett, skärmläsaren läser upp etiketten. Fält utan <code>name</code> skickas inte med.</li>
+<li>Tabeller betyder tabelldata; skärmläsare läser upp rader och kolumner, vilket blir obegripligt för layout. Svårt att göra responsivt. CSS (Grid/Flexbox) är rätt verktyg.</li>
+<li>WHATWG (HTML Living Standard). MDN Web Docs.</li>
+</ol>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopierat!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopierat!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../del1/k02-hur-webben-fungerar.html" class="pagination-link" aria-label="Hur webben fungerar">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Hur webben fungerar</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../del2/k04-teckenkodning.html" class="pagination-link" aria-label="Teckenkodning">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Teckenkodning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

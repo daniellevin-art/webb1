@@ -1,0 +1,273 @@
+# Teckenkodning {#sec-teckenkodning}
+
+::: ci
+Teckenkodning, begrepp, standarder och handhavande.
+:::
+
+::: mal
+**Kapitlets mål** – efter kapitlet kan du:
+
+- förklara hur en dator lagrar text som tal,
+- förklara begreppen teckenuppsättning, kodpunkt, Unicode och UTF-8,
+- känna igen och laga trasiga tecken (*mojibake*),
+- se till att dina egna filer och sidor använder rätt teckenkodning,
+- använda HTML-entiteter och procentkodning när det behövs.
+:::
+
+## Text är tal
+
+En dator kan bara lagra tal – egentligen bara ettor och nollor. För att lagra text måste varje tecken få ett nummer. En **teckenuppsättning** (*character set*) är en lista som säger vilket nummer varje tecken har:
+
+| Tecken | Nummer |
+|:-:|:-:|
+| A | 65 |
+| B | 66 |
+| a | 97 |
+| å | 229 |
+
+En **teckenkodning** (*encoding*) säger sedan hur numret ska lagras som **bytes**, alltså grupper om åtta bitar.
+
+Om den som *skriver* en fil och den som *läser* den använder olika kodning blir det fel. Det är därför du ibland ser `KÃ¶p` eller `K�p` istället för `Köp`.
+
+## Historien i korthet
+
+### ASCII (1963)
+
+Den första stora standarden. 128 tecken, ett per tal 0–127: engelska bokstäver, siffror, skiljetecken och några styrtecken. Inga å, ä eller ö.
+
+### Åttabitarskoder: ISO-8859-1 och Windows-1252
+
+En byte rymmer 256 värden. Talen 128–255 användes till extra tecken – men olika i olika länder. *ISO-8859-1* (Latin-1) och *Windows-1252* täckte västeuropeiska språk, inklusive svenska. Grekiska, ryska och arabiska hade andra tabeller med samma nummer. Ett dokument på ryska och svenska samtidigt gick inte att skriva.
+
+### Unicode
+
+**Unicode** är *en* gemensam lista över alla tecken i alla skriftsystem – över 150 000 tecken, inklusive emoji. Varje tecken har ett nummer som kallas **kodpunkt** och skrivs `U+` följt av numret i hexadecimal form:
+
+| Tecken | Kodpunkt | Namn |
+|:-:|---|---|
+| A | U+0041 | LATIN CAPITAL LETTER A |
+| å | U+00E5 | LATIN SMALL LETTER A WITH RING ABOVE |
+| € | U+20AC | EURO SIGN |
+| ش | U+0634 | ARABIC LETTER SHEEN |
+| 👍 | U+1F44D | THUMBS UP SIGN |
+
+### UTF-8
+
+Unicode säger *vilket nummer*. **UTF-8** säger hur numret lagras i bytes. Det är det smarta:
+
+| Kodpunkter | Antal bytes | Exempel | Bytes (hex) |
+|---|:-:|---|---|
+| U+0000–U+007F (ASCII) | 1 | `A` | `41` |
+| U+0080–U+07FF | 2 | `å` | `C3 A5` |
+| U+0800–U+FFFF | 3 | `€` | `E2 82 AC` |
+| U+10000 och uppåt | 4 | `👍` | `F0 9F 91 8D` |
+
+- Vanlig engelsk text tar lika lite plats som i ASCII, och gammal ASCII-text är automatiskt giltig UTF-8.
+- Alla tecken i världen får plats.
+- Över 98 % av alla webbsidor använder UTF-8. **Använd alltid UTF-8.**
+
+::: {.callout-note}
+## Unicode och UTF-8 är inte samma sak
+Unicode är *listan* med tecken och nummer. UTF-8 är *ett sätt att lagra* numren. Det finns andra, som UTF-16, som används internt i bland annat JavaScript och Windows.
+:::
+
+## Mojibake – trasiga tecken
+
+När text läses med fel kodning uppstår **mojibake** (japanska för ungefär "teckenförvandling"). Symptomen avslöjar orsaken:
+
+| Du ser | Orsak |
+|---|---|
+| `Ã¥ Ã¤ Ã¶` istället för `å ä ö` | Filen är **UTF-8**, men läses som Windows-1252/Latin-1. `å` är två bytes (`C3 A5`), som tolkas som två tecken: `Ã` och `¥` |
+| `� � �` (romb med frågetecken) | Filen är **Windows-1252/Latin-1**, men läses som UTF-8. Byten för `å` (`E5`) är ingen giltig UTF-8, så webbläsaren visar *ersättningstecknet* U+FFFD |
+| `?` istället för å | Texten har sparats i en kodning som saknar tecknet, och informationen är borta för alltid |
+
+## Så gör du rätt
+
+Kodningen måste stämma på **alla** ställen:
+
+1. **Spara filen som UTF-8.** I VS Code står kodningen i statusfältet längst ner till höger. Klicka på den för att *öppna om med kodning* (*Reopen with Encoding*) eller *spara med kodning* (*Save with Encoding*).
+2. **Deklarera kodningen i HTML:en**, som första element i `<head>`:
+
+   ```html
+   <meta charset="UTF-8">
+   ```
+
+   Den måste ligga tidigt, inom de första 1 024 bytesen, eftersom webbläsaren läser den innan resten av sidan tolkas.
+3. **Servern** kan skicka kodningen i en header: `Content-Type: text/html; charset=utf-8`. Om headern och `meta`-taggen säger olika saker vinner headern.
+4. **Databaser och formulär** följer med automatiskt om resten är UTF-8. (I databasen MySQL heter riktig UTF-8 `utf8mb4` – kuriosa du kan ha nytta av i nästa kurs.)
+
+## HTML-entiteter
+
+Vissa tecken betyder något särskilt i HTML. Ska du *visa* dem som text måste du skriva dem som **entiteter** (*character references*):
+
+| Tecken | Entitet | Varför |
+|:-:|---|---|
+| `<` | `&lt;` | Annars tror webbläsaren att en tagg börjar |
+| `>` | `&gt;` | För symmetrins skull |
+| `&` | `&amp;` | Annars tror webbläsaren att en entitet börjar |
+| `"` | `&quot;` | Inuti attributvärden med `"` |
+| (mellanslag som inte bryts) | `&nbsp;` | `10&nbsp;kr` – "10" och "kr" hamnar aldrig på olika rader |
+| (mjukt bindestreck) | `&shy;` | Talar om var ett långt ord *får* avstavas |
+
+Alla tecken kan också skrivas med nummer: `&#229;` eller `&#xE5;` blir `å`. Med UTF-8 behöver du inte det för vanliga tecken – skriv `å` direkt.
+
+```html
+<p>Rubriker skrivs med elementet &lt;h1&gt;.</p>
+<p>Fika &amp; prat – 45&nbsp;kr</p>
+<h2>Kardemumma&shy;knuts&shy;bakning</h2>
+```
+
+### Typografiska tecken
+
+Med UTF-8 kan du använda rätt tecken direkt:
+
+| Skriv | Inte | Används för |
+|---|---|---|
+| `–` (tankstreck) | `-` | Intervall och inskott: *07–18*, *kaffe – och kakor* |
+| `”…”` | `"…"` | Citattecken på svenska |
+| `…` | `...` | Ellips |
+| `×` | `x` | Mått: *1920 × 1080* |
+
+## Procentkodning i URL:er
+
+En URL får bara innehålla ett begränsat antal ASCII-tecken. Andra tecken **procentkodas**: tecknets UTF-8-bytes skrivs som `%` följt av två hexsiffror.
+
+| Text | I URL:en |
+|---|---|
+| `å` | `%C3%A5` (UTF-8-bytesen `C3 A5`) |
+| mellanslag | `%20` eller `+` (i query) |
+| `&` | `%26` |
+
+Det var därför `malm%C3%B6` stod i Google-adressen i labb 2.2.
+
+**Domännamn** med å, ä och ö (*IDN*) översätts till ASCII med ett system som heter **Punycode**: `räksmörgås.se` blir `xn--rksmrgs-5wao1o.se`. Det används ibland av bedragare – mer om det i kapitel 12.
+
+## Labbar
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 4.1 – Tecken, nummer och bytes
+Öppna utvecklarverktygen och fliken **Console**. Skriv varje rad och tryck Enter:
+
+```js
+"A".codePointAt(0)                  // kodpunkten som vanligt tal
+"å".codePointAt(0).toString(16)     // kodpunkten i hex
+new TextEncoder().encode("A")       // UTF-8-bytes
+new TextEncoder().encode("å")
+new TextEncoder().encode("€")
+new TextEncoder().encode("👍")
+"Malmö".length                      // antal tecken enligt JavaScript
+new TextEncoder().encode("Malmö").length   // antal bytes i UTF-8
+"👍".length
+```
+
+1. Fyll i en tabell: tecken, kodpunkt (hex), antal bytes i UTF-8.
+2. Stämmer det med tabellen i genomgången?
+3. Varför blir `"👍".length` lika med 2? Ledtråd: JavaScript räknar internt i UTF-16.
+4. Hur många bytes tar ordet `räksmörgås` i UTF-8? Räkna först i huvudet, kontrollera sedan.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 4.2 – Laga trasiga sidor
+I `ovningsfiler/k04-teckenkodning/` finns två trasiga sidor. Öppna dem med Live Server.
+
+**trasig1.html**
+
+1. Hur ser åäö ut? Använd tabellen i genomgången: vilken är orsaken?
+2. Titta i VS Codes statusfält. Vilken kodning *tror* VS Code att filen har?
+3. Laga sidan: *Reopen with Encoding* → *Western (Windows 1252)*. Ser texten rätt ut i VS Code nu? Spara sedan med *Save with Encoding* → *UTF-8*.
+
+**trasig2.html**
+
+4. Hur ser åäö ut nu? Vad är orsaken den här gången?
+5. Titta i `<head>`. Hitta felet och laga det.
+
+**Fundera**
+
+6. Varför syntes trasig1 *rätt* i VS Code första gången men fel i webbläsaren, eller tvärtom? Vem bestämde kodningen i varje fall?
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 4.3 – Entiteter och typografi
+Skapa `entiteter.html`:
+
+1. En sida med titeln "Så skriver du HTML" som visar koden `<p>Hej!</p>` *som text* på sidan.
+2. En prislista där belopp och "kr" aldrig hamnar på olika rader. Testa genom att göra fönstret smalt.
+3. En smal ruta (`<div style="width: 8rem; border: 1px solid">`) med ordet *Kanelbullsbakningstävlingsvinnare*. Lägg in `&shy;` så att ordet avstavas snyggt.
+4. Rätt typografi: tankstreck i öppettider, svenska citattecken, ellips.
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Labb 4.4 – Procentkodning och Punycode
+I konsolen:
+
+```js
+encodeURIComponent("kaffe & kaka i Malmö")
+decodeURIComponent("Kvarnens%20caf%C3%A9")
+new URL("https://räksmörgås.se").hostname
+```
+
+1. Vad blev `&`, mellanslag och `ö`?
+2. Vad står det i den avkodade texten?
+3. Vad blev domännamnet? Skriv ett eget svenskt ord med å, ä eller ö som domän och se vad det blir.
+4. Varför kan det vara ett säkerhetsproblem att domännamn kan innehålla tecken från alla skriftsystem? (Ledtråd: jämför kyrilliskt `а` och latinskt `a`.)
+:::
+
+::: {.callout-tip icon=false}
+## 🔬 Bygg vidare
+Kontrollera alla filer på din egen webbplats:
+
+- [ ] Varje fil är sparad som UTF-8 (statusfältet i VS Code).
+- [ ] `<meta charset="UTF-8">` är första raden i `<head>` på varje sida.
+- [ ] åäö visas rätt i två olika webbläsare.
+- [ ] Du använder tankstreck och `&nbsp;` där det passar.
+:::
+
+## Instuderingsfrågor
+
+1. Varför måste text omvandlas till tal i en dator?
+2. Vad är skillnaden mellan en teckenuppsättning och en teckenkodning?
+3. Vad var problemet med ASCII för svenska texter? Och med åttabitarskoderna?
+4. Vad är Unicode? Vad är en kodpunkt?
+5. Förklara skillnaden mellan Unicode och UTF-8.
+6. Varför är UTF-8 så praktiskt? Ge två skäl.
+7. Hur många bytes tar `a`, `å` och `€` i UTF-8?
+8. En sida visar `GÃ¶teborg`. Vad har hänt, och hur lagar man det?
+9. En sida visar `G�teborg`. Vad har hänt nu?
+10. Nämn tre ställen där teckenkodningen måste stämma för att en webbsida ska visas rätt.
+11. Varför ska `<meta charset>` ligga först i `<head>`?
+12. När behöver man använda HTML-entiteter? Ge tre exempel.
+13. Vad är procentkodning, och varför behövs den i URL:er?
+14. Vad är Punycode?
+
+## Nyckelbegrepp
+
+teckenuppsättning · teckenkodning · bit · byte · ASCII · ISO-8859-1 · Windows-1252 · Unicode · kodpunkt · UTF-8 · UTF-16 · mojibake · ersättningstecken · `meta charset` · `Content-Type` · HTML-entitet · `&nbsp;` · `&shy;` · procentkodning · IDN · Punycode
+
+::: {.content-visible when-profile="larare"}
+::: larare
+**Upplägg:** Kapitlet ryms i en vecka, gärna två lektioner tillsammans med slutet av kapitel 3. Lektion 1: genomgång + labb 4.1 och 4.2. Lektion 2: labb 4.3 och 4.4 + bygg vidare.
+
+**Övningsfilerna:** `trasig1.html` är sparad i Windows-1252 men deklarerar UTF-8 → romber. `trasig2.html` är sparad i UTF-8 men deklarerar `windows-1252` → `Ã¥`. Kontrollera att filerna inte "lagas" automatiskt när du kopierar dem (vissa molntjänster och e-post kan konvertera). VS Code kan ibland gissa kodning om `files.autoGuessEncoding` är påslaget – det är bra att visa.
+
+**Facit labb 4.1:** A U+41 1 byte; å U+E5 2 bytes; € U+20AC 3 bytes; 👍 U+1F44D 4 bytes. `"👍".length === 2` eftersom JS lagrar strängar i UTF-16, där tecken över U+FFFF kräver två 16-bitarsenheter (ett surrogatpar). `räksmörgås`: 10 tecken, varav 4 är åäö → 6 + 4×2 = 14 bytes.
+
+**Facit labb 4.4.4:** Homografattacker – `аpple.com` med kyrilliskt а ser identisk ut men är en annan domän. Webbläsare visar därför ibland Punycode-formen för blandade skriftsystem.
+
+**Facit till instuderingsfrågorna**
+
+1. Datorn lagrar bara binära tal; varje tecken måste därför representeras av ett nummer.
+2. Teckenuppsättningen bestämmer vilket nummer varje tecken har; kodningen bestämmer hur numret lagras som bytes.
+3. ASCII saknade å, ä, ö. Åttabitarskoderna rymde bara 256 tecken och olika länder använde samma nummer för olika tecken – texter blev fel mellan system, och flera skriftsystem gick inte att blanda.
+4. En gemensam standard som ger alla tecken i alla skriftsystem ett unikt nummer. Kodpunkt = tecknets nummer, t.ex. U+00E5.
+5. Unicode är listan/numren; UTF-8 är en kodning som lagrar numren som 1–4 bytes.
+6. Bakåtkompatibel med ASCII; rymmer alla tecken; kompakt för latinsk text; standard på webben.
+7. 1, 2 och 3 bytes.
+8. UTF-8-text tolkas som Windows-1252/Latin-1. Laga genom att deklarera rätt kodning (`meta charset="UTF-8"` / korrekt server-header).
+9. Text i Latin-1/Windows-1252 tolkas som UTF-8. Laga genom att spara om filen som UTF-8.
+10. Filens kodning när den sparas, `meta charset` i HTML:en, `Content-Type`-headern från servern (även databas och formulär).
+11. Webbläsaren behöver veta kodningen innan den tolkar resten; deklarationen måste finnas inom de första 1 024 bytesen.
+12. När tecken har specialbetydelse eller är osynliga: `&lt;` för `<`, `&amp;` för `&`, `&nbsp;`, `&shy;`, `&quot;` i attribut.
+13. Tecken utanför tillåtna ASCII-tecken (och reserverade tecken som `&`, `?`, mellanslag) skrivs som `%` + bytens hexvärde. URL:er får bara innehålla vissa ASCII-tecken.
+14. Ett sätt att skriva internationella domännamn (med t.ex. åäö) med bara ASCII-tecken, t.ex. `xn--rksmrgs-5wao1o.se`.
+:::
+:::

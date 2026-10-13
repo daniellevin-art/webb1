@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  line-height: 1.6;
+  background: #f4f1ea;
+  color: #222;
+}
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.tidslinje {
+  list-style: none;
+  padding: 0;
+  border-left: 4px solid #2b5c8a;
+}
+.tidslinje li {
+  position: relative;
+  padding: 0 0 1.5rem 1.5rem;
+}
+.tidslinje li::before {
+  content: "";
+  position: absolute;
+  left: -0.7rem;
+  top: 0.4rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: #2b5c8a;
+}
+.tidslinje h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #2b5c8a;
+}
+.tidslinje p { margin: 0.25rem 0 0; }

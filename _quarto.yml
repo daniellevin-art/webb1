@@ -1,0 +1,67 @@
+project:
+  type: book
+  output-dir: _book
+  render:
+    - "*.qmd"
+    - "del1/*.qmd"
+    - "del2/*.qmd"
+    - "del3/*.qmd"
+    - "del4/*.qmd"
+    - "bilagor/*.qmd"
+
+lang: sv
+
+book:
+  title: "Webbutveckling 1"
+  subtitle: "En praktisk kursbok – från första taggen till publicerad webbplats"
+  author: "Daniel"
+  date: "2026-10-13"
+  date-format: "D MMMM YYYY"
+  search: true
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - kursoversikt.qmd
+    - part: "Del 1 – Webben"
+      chapters:
+        - del1/k01-webbens-historia.qmd
+        - del1/k02-hur-webben-fungerar.qmd
+    - part: "Del 2 – Bygga webbsidor"
+      chapters:
+        - del2/k03-html.qmd
+        - del2/k04-teckenkodning.qmd
+        - del2/k05-css.qmd
+        - del2/k06-design.qmd
+        - del2/k07-layout.qmd
+        - del2/k08-bilder-media.qmd
+    - part: "Del 3 – Kvalitet"
+      chapters:
+        - del3/k09-tillganglighet.qmd
+        - del3/k10-kvalitet.qmd
+        - del3/k11-javascript-dom.qmd
+        - del3/k12-sakerhet.qmd
+    - part: "Del 4 – Publicering, ansvar och process"
+      chapters:
+        - del4/k13-publicering.qmd
+        - del4/k14-lagar-etik.qmd
+        - del4/k15-processen.qmd
+        - del4/k16-slutprojekt.qmd
+  appendices:
+    - bilagor/a-verktyg.qmd
+    - bilagor/b-ordlista.qmd
+    - bilagor/c-fusklapp.qmd
+    - bilagor/d-mallar.qmd
+    - bilagor/e-bedomning.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-copy: true
+    code-overflow: wrap
+    highlight-style: github
